@@ -1,0 +1,20 @@
+{
+  "source_repository": "https://github.com/AntoniosMalak/Predicting-Hit-Songs-Using-Repeated-Chorus",
+  "source_commit": "838e76f96f7aa755a882b4d2581afe1e0ad3f8a9",
+  "source_file": "Devolp/Final Data.csv",
+  "source_url": "https://raw.githubusercontent.com/AntoniosMalak/Predicting-Hit-Songs-Using-Repeated-Chorus/838e76f96f7aa755a882b4d2581afe1e0ad3f8a9/Devolp/Final%20Data.csv",
+  "source_sha256": "b1e12d084dc503bf5e71c28c406bbc33e30bcc1f9000250b293d1b2b32851f0a",
+  "prepared_sha256": "79951ffc393fc836405509326d1ee03efd96434327d800711c4b8ed817ef44ce",
+  "license": "Apache-2.0, retained in licenses/DATASET_APACHE_2_0.txt",
+  "rows": 751,
+  "audio_features": 518,
+  "changes": [
+    "Removed source audio paths",
+    "Renamed Artist/Title/Label",
+    "Added stable track_id"
+  ],
+  "label_1": "Year-end Hot-100-Songs entries collected by upstream notebook for 2006-2021",
+  "label_0": "Weekly hot-100 entries from sampled dates in 2006-2021, excluding titles already collected",
+  "critical_limitation": "Both labels can be charting songs. This is a year-end-hit proxy, not never-charted versus charted. Labels have not been independently re-audited against every chart.",
+  "feature_provenance": "Upstream states pychorus 15-second extraction followed by librosa statistics. Original audio and the exact library environment are unavailable here."
+}

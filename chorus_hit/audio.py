@@ -1,0 +1,126 @@
+"""15-second segment selection and the source-compatible 518-feature schema.
+
+The automatic selector is a transparent repetition heuristic, not pychorus and
+not a verified musical chorus detector. Users can choose the chorus start.
+"""
+from dataclasses import dataclass
+import warnings
+
+import librosa
+import numpy as np
+import pandas as pd
+from scipy.stats import kurtosis, skew
+
+from .config import (CHORUS_SECONDS, FEATURE_COLUMNS, FEATURE_GROUPS, MAX_AUDIO_SECONDS,
+                     SAMPLE_RATE, STATISTICS)
+
+
+@dataclass
+class Segment:
+    audio: np.ndarray
+    start_seconds: float
+    method: str
+    repetition_similarity: float | None = None
+
+
+def load_audio(path):
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore", UserWarning)
+        y, sr = librosa.load(path, sr=SAMPLE_RATE, mono=True, duration=MAX_AUDIO_SECONDS+1)
+    if len(y) > MAX_AUDIO_SECONDS * sr:
+        raise ValueError(f"Choose an audio file no longer than {MAX_AUDIO_SECONDS//60} minutes.")
+    if len(y) < CHORUS_SECONDS * sr:
+        raise ValueError("At least 15 seconds of audio is needed.")
+    if not np.isfinite(y).all():
+        raise ValueError("The audio contains invalid samples.")
+    if np.sqrt(np.mean(y.astype(float)**2)) < 1e-5:
+        raise ValueError("The audio is silent or too quiet to analyze.")
+    return y, sr
+
+
+def select_segment(y, sr=SAMPLE_RATE, start_seconds=None):
+    size = int(CHORUS_SECONDS * sr)
+    if len(y) < size:
+        raise ValueError("At least 15 seconds of audio is needed.")
+    if start_seconds is not None:
+        start = int(round(float(start_seconds)*sr))
+        if start < 0 or start + size > len(y):
+            raise ValueError("The selected 15-second segment extends outside the audio.")
+        return Segment(y[start:start+size], start/sr, "Manual 15-second selection")
+    if len(y) < 35 * sr:
+        start = (len(y)-size)//2
+        return Segment(y[start:start+size], start/sr, "Centered excerpt (too short to verify repetition)")
+    # Chroma represents pitch classes. Compare the same 15-second pitch sequence
+    # at different times, requiring non-overlap. This may also select a verse.
+    hop = 2205
+    chroma = librosa.feature.chroma_stft(y=y, sr=sr, hop_length=hop, n_fft=4096)
+    width = int(round(CHORUS_SECONDS * sr/hop))
+    starts = np.arange(int(5*sr/hop), chroma.shape[1]-width+1, int(2*sr/hop))
+    if len(starts) < 2:
+        start = (len(y)-size)//2
+        return Segment(y[start:start+size], start/sr, "Centered excerpt (few candidates)")
+    windows = np.stack([chroma[:, s:s+width].reshape(-1) for s in starts])
+    windows -= windows.mean(axis=1, keepdims=True)
+    norm = np.linalg.norm(windows, axis=1, keepdims=True)
+    windows = windows / np.maximum(norm, 1e-10)
+    similarity = windows @ windows.T
+    overlap = np.abs(starts[:, None]-starts[None, :]) < width
+    similarity[overlap] = -np.inf
+    a, _ = np.unravel_index(np.argmax(similarity), similarity.shape)
+    score = float(np.max(similarity))
+    if not np.isfinite(score):
+        start = (len(y)-size)//2
+        return Segment(y[start:start+size], start/sr, "Centered excerpt (no separated repeat)")
+    start = min(int(starts[a]*hop), len(y)-size)
+    return Segment(y[start:start+size], start/sr, "Automatic repeated-segment candidate", score)
+
+
+def summarize(matrix):
+    values = []
+    for row in np.atleast_2d(matrix):
+        constant = np.std(row) < 1e-10
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore", RuntimeWarning)
+            values.extend([0.0 if constant else float(skew(row)), float(np.min(row)),
+                           float(np.max(row)), float(np.std(row)), float(np.mean(row)),
+                           float(np.median(row)), 0.0 if constant else float(kurtosis(row))])
+    return values
+
+
+def extract_features(segment, sr=SAMPLE_RATE):
+    y = np.asarray(segment, dtype=np.float32)
+    if sr != SAMPLE_RATE:
+        y = librosa.resample(y, orig_sr=sr, target_sr=SAMPLE_RATE)
+        sr = SAMPLE_RATE
+    if len(y) != CHORUS_SECONDS * sr:
+        raise ValueError("Feature extraction requires an exact 15-second segment.")
+    if not np.isfinite(y).all() or np.sqrt(np.mean(y.astype(float)**2)) < 1e-5:
+        raise ValueError("Choose a non-silent segment with finite samples.")
+    # Explicit legacy padding reduces drift from the upstream librosa 0.8-era code.
+    common = {"y": y, "sr": sr, "hop_length": 512}
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore", UserWarning)
+        arrays = {
+            "chroma_stft": librosa.feature.chroma_stft(**common, pad_mode="reflect"),
+            "chroma_cqt": librosa.feature.chroma_cqt(**common),
+            "chroma_cens": librosa.feature.chroma_cens(**common),
+            "mfcc": librosa.feature.mfcc(**common, n_mfcc=20, pad_mode="reflect"),
+            "rms": librosa.feature.rms(y=y, frame_length=2048, hop_length=512, pad_mode="reflect"),
+            "spectral_centroid": librosa.feature.spectral_centroid(**common, pad_mode="reflect"),
+            "spectral_bandwidth": librosa.feature.spectral_bandwidth(**common, pad_mode="reflect"),
+            "spectral_contrast": librosa.feature.spectral_contrast(**common, pad_mode="reflect"),
+            "spectral_rolloff": librosa.feature.spectral_rolloff(**common, pad_mode="reflect"),
+            "tonnetz": librosa.feature.tonnetz(y=y, sr=sr),
+            # The upstream positional call zero_crossing_rate(x, sr) used sr as
+            # frame_length. Reproduce it deliberately to match the trained data.
+            "zero_crossing_rate": librosa.feature.zero_crossing_rate(y, frame_length=sr, hop_length=512),
+        }
+    values = []
+    for family, width in FEATURE_GROUPS.items():
+        if arrays[family].shape[0] != width:
+            raise ValueError(f"Unexpected feature dimensions for {family}")
+        values.extend(summarize(arrays[family]))
+    result = pd.DataFrame([values], columns=FEATURE_COLUMNS)
+    if not np.isfinite(result.to_numpy()).all():
+        raise ValueError("Audio produced non-finite features. Try a different chorus.")
+    return result
