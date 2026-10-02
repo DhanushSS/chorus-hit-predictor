@@ -9,6 +9,22 @@
 
 A reproducible study of whether 15-second chorus audio features distinguish stronger chart success, with a working Streamlit demo, model comparisons, an executed notebook, reports, and presentation.
 
+## October 2 audit and research update
+
+The original run and submission exports remain preserved. **Start with [the V2 handoff](docs/AUDIT_HANDOFF.md)** and [reproduction commands](docs/REPRODUCE_V2.md). Updated report/presentation: `docs/v2/`; executed walkthrough: `notebooks/v2/Project_Walkthrough.ipynb`.
+
+- All original scores and predictions reproduced in a disposable copy.
+- Actual-file provenance, stable alternate imports, compatible artifact loading, immutable runs and resumable grouped searches implemented.
+- 35 predeclared settings evaluated using the original 597-song development partition.
+- Nested procedure balanced accuracy **52.85%** (approximate 95% artist-bootstrap interval **48.26%-57.34%**).
+- Frozen V2 candidate (`lr_mi_50`: logistic regression with 50 MI-selected features) historical balanced accuracy **55.16%**, versus V1 **46.63%**, on the same 154 songs. Paired change interval **-1.59 to +16.86 percentage points** includes zero.
+- Accuracy, balanced accuracy, positive-class precision, recall and F1 all remain below the strict **>75%** target. No fresh test exists. Historical improvement is not reliable confirmation.
+- Original demo remains active (`configs/active_run.json`). The sidebar offers the V2 candidate as a research option.
+- Audio/embedding interfaces have software tests. Real embedding experiments remain blocked by missing recordings, rights and verified identities/labels. See [required inputs](docs/AUDIO_DATA_REQUIREMENTS.md).
+- Local branch `audit/chorus-v2`; this update has **not been pushed or merged**. CI configuration is included but has not run on GitHub.
+
+The numerical section titled **Original V1 results** below describes the preserved baseline only.
+
 ## What this experiment predicts
 
 The project follows the idea in [Eric Liu's 2021 CS229 report](https://cs229.stanford.edu/proj2021spr/report2/81974051.pdf). The available licensed dataset has a different operational target:
@@ -43,11 +59,11 @@ The dataset and trained model are included, so the basic demo works offline afte
 
 1. **Held-out song:** choose a song from the test partition and compare its predicted class with the dataset label. The artist and song were excluded from model training.
 2. **Upload audio:** upload a 15-second chorus or up to eight minutes of local audio, choose a manual start or automatic repeated segment, listen to the excerpt, and inspect the prediction.
-3. **Results & evidence:** inspect all models, test errors, the confusion matrix, and the uncertainty interval.
+3. **Results & evidence:** inspect recorded model comparisons, predictions, target checks and uncertainty intervals.
 
 Uploaded-audio inference is exploratory. The upstream source audio and exact library environment are unavailable, and our automatic selector is a transparent repetition heuristic rather than the source's pychorus implementation. The app states this limitation. It outputs a model score, not a calibrated probability of future commercial success.
 
-## Actual results
+## Original V1 results
 
 - Dataset: **751 songs, 71 artist names, 518 audio features**.
 - Labels: **366 year-end-hit / 385 other-chart-song**.
@@ -68,10 +84,10 @@ Some other candidates have higher test scores. They were not selected after look
 From the project root with the environment activated:
 
 ```bash
-python -m chorus_hit.train
+python -m chorus_hit.train --output-dir work/v1_reproduction_new
 python -m pip install -r requirements-dev.txt
 python -m pytest -q
-python scripts/build_reports.py
+python scripts/build_reports.py --run-id v2_nested_001 --out work/reports_new --historical results/evaluations/v2_nested_001_historical
 ```
 
 The fixed seed is 42. Training evaluates nine candidates: a majority baseline, logistic regression, LDA, linear/RBF/polynomial SVM, random forest, gradient boosting, and a 64/32-unit neural network. Model settings are recorded in `results/metrics.json`, and every CV trial appears in `results/cross_validation.csv`.

@@ -1,184 +1,98 @@
-"""Generate the one-page and two-page write-ups from measured results."""
-import json
+"""Build new one/two-page PDFs from a validated run without replacing V1."""
+import argparse
+from datetime import datetime
+from zoneinfo import ZoneInfo
 from pathlib import Path
+import json,sys
 from xml.sax.saxutils import escape
-
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
+from chorus_hit.config import ROOT
+from chorus_hit.reporting import report_context
+from chorus_hit.artifacts import load_run
+from chorus_hit.audit import atomic_json,sha256_file
 from reportlab.lib import colors
-from reportlab.lib.enums import TA_LEFT
 from reportlab.lib.pagesizes import A4
-from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, PageBreak
+from reportlab.lib.styles import getSampleStyleSheet,ParagraphStyle
+from reportlab.platypus import SimpleDocTemplate,Paragraph,Spacer,Table,TableStyle,PageBreak
+from pypdf import PdfReader
 
-ROOT = Path(__file__).resolve().parents[1]
-M = json.loads((ROOT / "results/metrics.json").read_text())
-PROJECT = json.loads((ROOT / "project.json").read_text())
-WIN = next(r for r in M["models"] if r["selected"])
-BASE = next(r for r in M["models"] if r["model"] == "Majority baseline")
-TEAL = colors.HexColor("#127C80")
-INK = colors.HexColor("#172D37")
-PALE = colors.HexColor("#EFF5F5")
-S = getSampleStyleSheet()
-S.add(ParagraphStyle(name="ProjectTitle", fontName="Helvetica-Bold", fontSize=20, leading=23, textColor=INK, spaceAfter=8))
-S.add(ParagraphStyle(name="ProjectSub", fontName="Helvetica", fontSize=9.2, leading=13, textColor=INK, spaceAfter=9))
-S.add(ParagraphStyle(name="H", fontName="Helvetica-Bold", fontSize=11, leading=14, textColor=TEAL, spaceBefore=11, spaceAfter=5))
-S.add(ParagraphStyle(name="B", fontName="Helvetica", fontSize=10, leading=13.5, textColor=INK, spaceAfter=6))
-S.add(ParagraphStyle(name="SmallB", fontName="Helvetica", fontSize=8.2, leading=10.8, textColor=INK, spaceAfter=4))
+STYLES=getSampleStyleSheet()
+STYLES.add(ParagraphStyle(name='ProjectTitle',fontName='Helvetica-Bold',fontSize=20,leading=24,textColor=colors.HexColor('#17323C'),spaceAfter=10))
+STYLES.add(ParagraphStyle(name='Section',fontName='Helvetica-Bold',fontSize=11.5,leading=15,spaceBefore=9,spaceAfter=5,textColor=colors.HexColor('#127C80')))
+STYLES.add(ParagraphStyle(name='Copy',fontName='Helvetica',fontSize=9.5,leading=13,spaceAfter=7))
+STYLES.add(ParagraphStyle(name='Note',fontName='Helvetica',fontSize=8,leading=11,spaceAfter=5,textColor=colors.HexColor('#52666E')))
 
 
-def p(text, style="B"):
-    return Paragraph(text, S[style])
+def p(text,style='Copy'):return Paragraph(text,STYLES[style])
 
-
-def header(one_page=False):
-    names = "<br/>".join(f"{a['name']} - {a['usn']}" for a in PROJECT["authors"])
-    return [p(PROJECT["title"], "ProjectTitle"),
-            p(f"{names}<br/>{PROJECT['course']} | September 2026", "ProjectSub")]
-
-
-def table(rows, widths):
-    t = Table([[p(str(v), "SmallB") for v in row] for row in rows], colWidths=widths, repeatRows=1, hAlign="LEFT")
-    t.setStyle(TableStyle([
-        ("BACKGROUND", (0,0), (-1,0), PALE), ("VALIGN", (0,0), (-1,-1), "TOP"),
-        ("LINEBELOW", (0,0), (-1,0), .8, TEAL),
-        ("LINEBELOW", (0,1), (-1,-1), .3, colors.HexColor("#DCE5E6")),
-        ("LEFTPADDING", (0,0), (-1,-1), 7), ("RIGHTPADDING", (0,0), (-1,-1), 7),
-        ("TOPPADDING", (0,0), (-1,-1), 5), ("BOTTOMPADDING", (0,0), (-1,-1), 5),
-    ]))
+def table(rows,widths):
+    t=Table([[p(escape(str(x)),'Note') for x in row] for row in rows],colWidths=widths,hAlign='LEFT',repeatRows=1)
+    t.setStyle(TableStyle([('BACKGROUND',(0,0),(-1,0),colors.HexColor('#EFF5F5')),('LINEBELOW',(0,0),(-1,0),.6,colors.HexColor('#127C80')),
+        ('VALIGN',(0,0),(-1,-1),'TOP'),('LEFTPADDING',(0,0),(-1,-1),7),('RIGHTPADDING',(0,0),(-1,-1),7),('TOPPADDING',(0,0),(-1,-1),6),('BOTTOMPADDING',(0,0),(-1,-1),4)]))
     return t
 
 
-def footer(canvas, doc):
-    canvas.saveState()
-    canvas.setStrokeColor(TEAL); canvas.setLineWidth(.6)
-    canvas.line(42, 37, A4[0]-42, 37)
-    canvas.setFont("Helvetica", 8); canvas.setFillColor(INK)
-    canvas.drawString(42, 24, "Chorus-based classification | Reproducible experiment")
-    canvas.drawRightString(A4[0]-42, 24, str(doc.page))
-    canvas.restoreState()
+def render(path,story,date):
+    def footer(canvas,doc):
+        canvas.setFont('Helvetica',8);canvas.setFillColor(colors.HexColor('#52666E'))
+        canvas.drawString(42,24,f'Chorus Hit Predictor | Audit and research update | {date}')
+        canvas.drawRightString(A4[0]-42,24,str(doc.page))
+    SimpleDocTemplate(str(path),pagesize=A4,rightMargin=42,leftMargin=42,topMargin=36,bottomMargin=40,
+        title='Predicting Hit Songs Using Repeated Chorus',author='Dhanush Sai Suprapadha; Deepthi V').build(story,onFirstPage=footer,onLaterPages=footer)
 
 
-def build(path, story):
-    SimpleDocTemplate(str(path), pagesize=A4, leftMargin=42, rightMargin=42, topMargin=36,
-                      bottomMargin=48, title=PROJECT["title"],
-                      author="; ".join(a["name"] for a in PROJECT["authors"])).build(
-                          story, onFirstPage=footer, onLaterPages=footer)
+def build(run_id,out,date,historical=None):
+    out=Path(out)
+    if out.exists():raise FileExistsError('Report directory exists; preserve exports and choose a new directory')
+    c=report_context(run_id,historical);s=c['summary'];t=c['text'];d=c['data'];h=c['historical'];baseline=load_run('v1_baseline').summary
+    header=[p('Predicting Hit Songs Using Repeated Chorus','ProjectTitle'),p('Dhanush Sai Suprapadha - PES2UG24CS154<br/>Deepthi V - PES2UG24CS150<br/>UE24CS352A - Machine Learning','Note')]
+    counts=s['counts'];features=s['feature_count'];groups=d.artist.nunique();labels=d.label.value_counts()
+    intro=f'Can a 15-second chorus distinguish a source year-end Billboard hit (class 1) from another chart song (class 0)? Both classes can have charted. The public feature-table task differs from the supplied reference paper. This update preserves its labels and original historical-test membership.'
+    dataset=f'The audited table contains {len(d)} songs, {groups} provided artist names and {features} raw audio features. Class counts are {int(labels.get(0,0))} other-chart songs and {int(labels.get(1,0))} year-end hits. Original recordings are unavailable. Names are grouping metadata, never model inputs.'
+    config_path=ROOT/'results/v2'/run_id/'config.json'
+    config=json.loads(config_path.read_text()) if config_path.is_file() else None
+    if config:
+        protocol=f"The original development partition has {counts['train_songs']} songs from {counts['train_artists']} artist-name groups. We compare {len(config['candidates'])} predeclared settings with fixed seeds. {config['outer_folds']} outer folds each use {config['inner_folds']} inner folds for nested selection. The full development partition then selects the final candidate using inner-fold balanced accuracy. Historical labels never tune it."
+    else:protocol='The preserved V1 model uses its original grouped development cross-validation and original historical-test evaluation.'
+    if config and config['mode']=='quick':
+        protocol=f"The original development partition has {counts['train_songs']} songs from {counts['train_artists']} artist-name groups. {config['inner_folds']} grouped folds compare {len(config['candidates'])} declared configurations. These are tuning scores, with no outer evaluation. Historical labels never select the candidate."
+    transforms='All learned imputation, filtering, scaling, PCA and supervised selection fit inside training folds. The bounded search retains the original classifier controls, adds Extra Trees, and compares unreduced features, PCA, ANOVA selection, seeded mutual information and a declared feature-family subset. Native estimator thresholds remain fixed.' if config else t['method']
+    changes='The audit reproduced all original recorded metrics. Repairs bind audits to actual input bytes, require honest alternate-source provenance, preserve stable identities and isolate experiment outputs. One validated loader checks run IDs, data/model hashes, ordered schemas, labels and score contracts. Completed runs preserve every fold, warning and failed trial.'
+    limitations='Artist strings do not fully resolve aliases or guest performers. Three sampled positive labels have secondary corroboration, while primary chart/recording verification remains incomplete. No labels changed. Waveform-feature parity remains unverified. The new audio and embedding interfaces have software tests, but no real-song embedding experiment has run.'
+    target_rows=[['Metric',s['evaluation_status'].replace('_',' ').title(),'Strict >75%']]+[[k.replace('_',' ').title(),f"{v['value']:.1%}",'Pass' if v['passed'] else 'Fail'] for k,v in s['target_status']['metrics'].items()]
+    matched=[['Historical benchmark','V1 original','V2 candidate']]
+    if h:
+        for k in ['accuracy','balanced_accuracy','precision','recall','f1']:
+            matched.append([k.replace('_',' ').title(),f"{baseline['metrics'][k]:.1%}",f"{h['metrics'][k]:.1%}"])
+    result=f"Run <b>{escape(run_id)}</b>. Final development candidate: <b>{escape(s['model_name'])}</b>. {escape(t['result'])} Full-development mean tuning balanced accuracy: {s['tuning_balanced_accuracy']:.1%}. Nested predictions assess the selection procedure, rather than the single final refit."
+    if s['evaluation_status']!='nested_development':result=f"Run <b>{escape(run_id)}</b>. {escape(t['result'])} {escape(t['method'])}"
+    historical_text='No historical comparison requested for this export.'
+    if h:
+        delta=h['paired_vs_v1'];delta_interpretation='This interval includes zero.' if delta['ci95'][0]<=0<=delta['ci95'][1] else 'This interval excludes zero in this historical comparison.'
+        historical_text=f"The frozen candidate scored {h['metrics']['balanced_accuracy']:.1%} balanced accuracy on the same {h['metrics']['n']} historical songs from {h['groups']} groups. The paired change from V1 is {100*delta['balanced_accuracy_difference']:+.1f} percentage points, with a group-bootstrap interval of {100*delta['ci95'][0]:+.1f} to {100*delta['ci95'][1]:+.1f} points. {delta_interpretation} These already known records provide a historical comparison, not fresh confirmation."
+    references='[1] Eric Liu, CS229, 2021: <link href="https://cs229.stanford.edu/proj2021spr/report2/81974051.pdf" color="#127C80">reference report</link>.<br/>[2] <link href="https://github.com/AntoniosMalak/Predicting-Hit-Songs-Using-Repeated-Chorus" color="#127C80">Antonios Malak feature dataset</link>, pinned commit 838e76f, Apache-2.0.<br/>[3] <link href="https://scikit-learn.org/stable/auto_examples/model_selection/plot_nested_cross_validation_iris.html" color="#127C80">Scikit-learn nested cross-validation</link>. Local run manifests and predictions supply all reported metrics.'
+    story=header+[p('Question and dataset','Section'),p(intro),p(dataset),p('Controlled evaluation','Section'),p(protocol),p(transforms),
+        p('Audit and implementation','Section'),p(changes),p('Data and audio limits','Section'),p(limitations),
+        p('Reproducibility','Section'),p(f'Run identity: {escape(run_id)}. Configuration, folds, trials, predictions, uncertainty, package versions and model hashes are preserved in its immutable directory. The baseline archive and exact executed CSV-run source snapshot are retained. Implementation and materials use Codex assistance.'),
+        PageBreak(),p('Measured results and interpretation','ProjectTitle'),p(result),table(target_rows,[195,155,161]),p(t['uncertainty']),p(t['conclusion']),
+        p('Matched historical comparison','Section'),table(matched,[195,155,161]) if h else Spacer(1,1),p(historical_text),
+        p('Demonstration and next inputs','Section'),p('The demo keeps the original model active and labels the V2 option as a research candidate. It shows run identity, evaluation status and strict target checks. Uploaded audio stays exploratory. Next work needs permitted recordings, verified chart/recording identities and a genuinely fresh, locked evaluation collection. A new feature or population study requires its own baseline.'),
+        p('References','Section'),p(references,'Note')]
+    short=header+[p('Question and evidence','Section'),p(intro),p(dataset),p('Method','Section'),p(protocol),p(t['method']),p('Measured outcome','Section'),
+        p(result),table(target_rows,[195,155,161]),p(t['uncertainty']),p(t['conclusion']),p('Historical comparison and limits','Section'),p(historical_text),
+        p('The baseline demo remains active. New audio predictions are exploratory. No fresh test or real-song embedding results exist. Full data provenance, trial records and the exact software checks accompany the project.','Note'),p(references,'Note')]
+    out.mkdir(parents=True);render(out/'Project_Report_2_Pages.pdf',story,date);render(out/'Project_Summary_1_Page.pdf',short,date)
+    for file,n in [('Project_Report_2_Pages.pdf',2),('Project_Summary_1_Page.pdf',1)]:
+        actual=len(PdfReader(out/file).pages)
+        if actual!=n:raise ValueError(f'Layout requires repair: {file} has {actual} pages, expected {n}')
+    atomic_json(out/'report_source.json',{'run_id':run_id,'run_manifest_sha256':sha256_file(ROOT/'results/v2'/run_id/'manifest.json'),
+        'date':date,'summary':s,'historical':h,'files':{p.name:sha256_file(p) for p in out.glob('*.pdf')}})
+    print(out)
 
 
 def main():
-    out = ROOT / "docs"
-    out.mkdir(exist_ok=True)
-    split = M["split"]
-    interval = M["selected_test_ci95_artist_bootstrap"]["balanced_accuracy"]
-    story = header()
-    story += [p("Problem statement and scope", "H"),
-              p("Can 15-second chorus audio features distinguish songs with greater chart success? "
-                "This project implements the chorus-based classification idea in Eric Liu's 2021 CS229 report [1]. "
-                "It compares six model families and tests whether learned patterns transfer to unfamiliar artists."),
-              p("The available public dataset uses a <b>year-end-hit proxy</b>: label 1 contains source year-end Hot 100 selections, "
-                "while label 0 contains other songs sampled from weekly Hot 100 charts. Both classes can have charted. "
-                "This differs from the reference paper's charted versus uncharted definition and is not an exact replication."),
-              p("Dataset and audio features", "H"),
-              p("We reuse Antonios Malak's Apache-2.0 feature dataset [2], pinned to commit 838e76f. "
-                "It contains <b>751 songs, 71 artist names, and 518 numerical features</b>: 366 label-1 and 385 label-0 songs. "
-                "The upstream collection spans 2006-2021. The local audit found no missing feature values, constant columns, "
-                "or exact duplicate feature vectors. We remove audio paths and exclude all metadata from model inputs."),
-              table([["Feature family", "Channels", "Summary values"],
-                     ["Chroma STFT, CQT, CENS", "12 each", "252 total"],
-                     ["MFCC (timbre)", "20", "140"],
-                     ["Spectral contrast; tonnetz", "7; 6", "49; 42"],
-                     ["RMS, centroid, bandwidth, rolloff, zero-crossing rate", "1 each", "35 total"],
-                     ["Total", "74", "518"]], [330,70,111]),
-              p("Each channel contributes skewness, minimum, maximum, standard deviation, mean, median, and kurtosis. "
-                "The source states that pychorus selected 15-second excerpts. Original recordings are not bundled, so "
-                "the extraction and label assignments cannot be fully re-audited here.", "SmallB"),
-              p("Approach and implementation", "H"),
-              p(f"A fixed artist-grouped split allocates <b>{split['train_songs']} songs from {split['train_artists']} artists</b> "
-                f"to training and <b>{split['test_songs']} songs from {split['test_artists']} different artists</b> to testing. "
-                "Five artist-disjoint folds inside training select hyperparameters and the model by mean balanced accuracy. "
-                "The seed is 42. No test scores guide selection."),
-              p("A scikit-learn Pipeline fits median imputation, variance filtering, and standardization within each training fold. "
-                "PCA retains 95% of training variance for logistic regression, LDA, three SVM kernels, and a neural network. "
-                "Random forest and gradient boosting retain the original features. A majority-class classifier provides a baseline. "
-                "The saved model remains fitted on training data only."),
-              p("Python modules cover data checks, training, evaluation, inference, and audio processing. A Streamlit interface "
-                "supports held-out song prediction, results inspection, and experimental uploaded-audio inference. "
-                "A notebook and README explain the workflow."),
-              PageBreak(),
-              p("Measured results and interpretation", "ProjectTitle"),
-              p("Balanced accuracy averages recall across both labels. F1 refers to the year-end-hit class. "
-                "Every test score below uses the same unseen-artist holdout."),
-              table([["Model", "CV BA", "Test BA", "Accuracy", "F1", "AUC"]] +
-                    [[r["model"] + (" *" if r["selected"] else ""),
-                      f"{r['cv_balanced_accuracy']:.3f}", f"{r['test_balanced_accuracy']:.3f}",
-                      f"{r['test_accuracy']:.3f}", f"{r['test_f1']:.3f}", f"{r['test_roc_auc']:.3f}"]
-                     for r in M["models"]], [166,69,69,69,69,69]),
-              p("* Selected using training cross-validation. Other test results are descriptive comparisons, not a reason to switch models after viewing the holdout.", "SmallB"),
-              p("Conclusion", "H"),
-              p(f"The selected {M['selected_model']} achieved <b>{WIN['test_balanced_accuracy']:.1%} test balanced accuracy</b> "
-                f"and {WIN['test_f1']:.3f} F1, compared with {BASE['test_balanced_accuracy']:.1%} balanced accuracy for the baseline. "
-                f"The approximate 95% interval is {interval[0]:.1%}-{interval[1]:.1%}, obtained by resampling whole test artists "
-                "2,000 times. It includes 50%. <b>This experiment provides no reliable evidence that these chorus features "
-                "predict year-end-hit status for unfamiliar artists.</b> The result does not establish that chorus quality causes popularity."),
-              p("Limitations and improvements", "H"),
-              p("The dataset is small and historically sampled, and its labels are a proxy inherited from upstream collection code. "
-                "Artist grouping uses provided names and cannot fully resolve collaborations. Original audio is unavailable, "
-                "so feature-to-recording correctness remains unverified. The upload demo uses a new repetition heuristic or manual "
-                "selection with current librosa, rather than exactly reproducing the old extraction environment."),
-              p("A stronger follow-up would independently verify chart labels, collect licensed recordings for charted and "
-                "uncharted tracks under a fixed time window, re-extract every clip consistently, and evaluate on later release dates. "
-                "Further model tuning should use a new evaluation split or nested cross-validation."),
-              p("Demonstration and reproducibility", "H"),
-              p("Run the local app, choose a held-out song, compare prediction with its dataset label, then inspect the "
-                "results table and error analysis. Uploaded audio can demonstrate segment selection and feature extraction, "
-                "but its predictions are exploratory. The repository includes a pinned data source, dependency versions, "
-                "split manifest, all CV trials, test predictions, tests, and the training-only model."),
-              p("References", "H"),
-              p('[1] Eric Liu. <i>Predicting Hit Songs Using Repeated Chorus</i>, CS229, 2021. '
-                '<link href="https://cs229.stanford.edu/proj2021spr/report2/81974051.pdf" color="#127C80">Stanford report</link>.<br/>'
-                '[2] Antonios Malak. <i>Predicting-Hit-Songs-Using-Repeated-Chorus</i>, commit 838e76f. '
-                '<link href="https://github.com/AntoniosMalak/Predicting-Hit-Songs-Using-Repeated-Chorus" color="#127C80">Dataset and collection notebooks</link>. Apache-2.0.<br/>'
-                '[3] Scikit-learn documentation, <i>Common pitfalls and recommended practices</i>. '
-                '<link href="https://scikit-learn.org/stable/common_pitfalls.html" color="#127C80">Data leakage and pipelines</link>.', "SmallB")]
-    build(out / "Project_Report_2_Pages.pdf", story)
-    short = header(True) + [
-        p("Problem and dataset", "H"),
-        p("We test whether 15-second chorus features can distinguish stronger chart success, following Eric Liu's CS229 project. "
-          "The experiment uses a public Apache-2.0 dataset of <b>751 songs from 71 artists</b>, with 518 numerical audio features. "
-          "There are 366 year-end-hit labels and 385 other-chart-song labels. This public dataset defines a hit proxy "
-          "different from the paper's charted/uncharted target. Its original audio is unavailable."),
-        p("Method and implementation", "H"),
-        p("Eleven audio feature families produce 74 channels, each summarized by seven statistics. A fixed split holds out "
-          "154 songs from 19 artists, leaving 597 songs from 52 artists for training. Five artist-disjoint training folds "
-          "select model settings by balanced accuracy. Preprocessing fits inside each fold. PCA keeps 95% of training variance "
-          "for non-tree models. We compare logistic regression, LDA, three SVM kernels, random forest, gradient boosting, "
-          "a neural network, and a majority-class baseline."),
-        p("Measured results", "H"),
-        table([["Metric", "Selected polynomial SVM", "Majority baseline"],
-               ["Training CV balanced accuracy", f"{WIN['cv_balanced_accuracy']:.1%}", "50.0%"],
-               ["Test balanced accuracy", f"{WIN['test_balanced_accuracy']:.1%}", "50.0%"],
-               ["Test accuracy", f"{WIN['test_accuracy']:.1%}", f"{BASE['test_accuracy']:.1%}"],
-               ["Test F1 / ROC-AUC", f"{WIN['test_f1']:.3f} / {WIN['test_roc_auc']:.3f}", "0.000 / 0.500"]], [191,175,145]),
-        p(f"The 95% interval for selected-model balanced accuracy is {interval[0]:.1%}-{interval[1]:.1%}, "
-          "using 2,000 bootstrap resamples of test artists. The selected model stays unchanged after test evaluation.", "SmallB"),
-        p("Conclusion and demonstration", "H"),
-        p("The experiment finds <b>no reliable predictive advantage over the baseline for unfamiliar artists</b>. "
-          "This is an empirical limitation of the current data and features, not proof about all music. Historical sampling, "
-          "inherited proxy labels, and unavailable original recordings limit interpretation. Future work should verify labels "
-          "and consistently re-extract licensed audio before further modeling."),
-        p("The working Streamlit demo predicts held-out songs, displays model comparisons and errors, and supports exploratory "
-          "audio uploads with automatic or manual 15-second selection. The repository includes the code, notebook, dependency "
-          "versions, trained model, data provenance, split manifest, and reproducible results."),
-        p("Sources", "H"),
-        p('<link href="https://cs229.stanford.edu/proj2021spr/report2/81974051.pdf" color="#127C80">Eric Liu, CS229 report (2021)</link>. '
-          '<link href="https://github.com/AntoniosMalak/Predicting-Hit-Songs-Using-Repeated-Chorus" color="#127C80">Antonios Malak, dataset and notebooks</link> '
-          '(Apache-2.0, commit 838e76f). Full provenance and method details appear in the repository.', "SmallB")]
-    build(out / "Project_Summary_1_Page.pdf", short)
-    from pypdf import PdfReader
-    for name, expected in [("Project_Report_2_Pages.pdf", 2), ("Project_Summary_1_Page.pdf", 1)]:
-        actual = len(PdfReader(out / name).pages)
-        assert actual == expected, f"{name}: expected {expected} pages, got {actual}"
-        print(name, actual, "pages")
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--run-id',required=True);p.add_argument('--out',type=Path,required=True)
+    p.add_argument('--historical',type=Path);p.add_argument('--date',default=datetime.now(ZoneInfo('Asia/Kolkata')).date().isoformat())
+    a=p.parse_args();build(a.run_id,a.out,a.date,a.historical)
 
-
-if __name__ == "__main__":
-    main()
+if __name__=='__main__':main()

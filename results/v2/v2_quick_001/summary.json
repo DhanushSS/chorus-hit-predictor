@@ -1,0 +1,178 @@
+{
+  "run_id": "v2_quick_001",
+  "model_name": "lr_mi_50",
+  "candidate": {
+    "id": "lr_mi_50",
+    "family": "logistic",
+    "params": {
+      "C": 0.1
+    },
+    "representation": {
+      "kind": "mi",
+      "value": 50
+    },
+    "role": "paired representation ablation; fixed C=0.1"
+  },
+  "feature_count": 518,
+  "retained_dimensions": 50,
+  "evaluation_status": "tuning_development",
+  "metrics": {
+    "accuracy": 0.5293132328308208,
+    "balanced_accuracy": 0.5284061552285746,
+    "precision": 0.5161290322580645,
+    "recall": 0.496551724137931,
+    "f1": 0.5061511423550088,
+    "class_0_recall": 0.5602605863192183,
+    "macro_f1": 0.5282755711775045,
+    "roc_auc": 0.535403796473099,
+    "confusion_matrix": [
+      [
+        172,
+        135
+      ],
+      [
+        146,
+        144
+      ]
+    ],
+    "n": 597,
+    "support": {
+      "0": 307,
+      "1": 290
+    },
+    "undefined": []
+  },
+  "ci95": {
+    "accuracy": [
+      0.48841482223439137,
+      0.5697131667680477
+    ],
+    "balanced_accuracy": [
+      0.48522085400142073,
+      0.5704396348571258
+    ],
+    "precision": [
+      0.43150192568602563,
+      0.5947301729278471
+    ],
+    "recall": [
+      0.40868952847519907,
+      0.5754723700478417
+    ],
+    "f1": [
+      0.42796001845947307,
+      0.5714285714285714
+    ],
+    "class_0_recall": [
+      0.49805306998399534,
+      0.618597027972028
+    ],
+    "macro_f1": [
+      0.48362320289892385,
+      0.5691937166599115
+    ],
+    "roc_auc": [
+      0.477321129181843,
+      0.5875074543633542
+    ]
+  },
+  "uncertainty": {
+    "intervals": {
+      "accuracy": [
+        0.48841482223439137,
+        0.5697131667680477
+      ],
+      "balanced_accuracy": [
+        0.48522085400142073,
+        0.5704396348571258
+      ],
+      "precision": [
+        0.43150192568602563,
+        0.5947301729278471
+      ],
+      "recall": [
+        0.40868952847519907,
+        0.5754723700478417
+      ],
+      "f1": [
+        0.42796001845947307,
+        0.5714285714285714
+      ],
+      "class_0_recall": [
+        0.49805306998399534,
+        0.618597027972028
+      ],
+      "macro_f1": [
+        0.48362320289892385,
+        0.5691937166599115
+      ],
+      "roc_auc": [
+        0.477321129181843,
+        0.5875074543633542
+      ]
+    },
+    "method": "percentile bootstrap of whole artist-string groups; fixed predictions, conditional on fitted procedure",
+    "requested_resamples": 2000,
+    "one_class_resamples_skipped": 0,
+    "groups": 52,
+    "limitations": "Few groups and model-selection uncertainty are not fully captured; nested folds are dependent."
+  },
+  "target_status": {
+    "threshold": 0.75,
+    "comparison": "strictly_greater",
+    "evaluation_status": "tuning_development",
+    "metrics": {
+      "accuracy": {
+        "value": 0.5293132328308208,
+        "passed": false
+      },
+      "balanced_accuracy": {
+        "value": 0.5284061552285746,
+        "passed": false
+      },
+      "precision": {
+        "value": 0.5161290322580645,
+        "passed": false
+      },
+      "recall": {
+        "value": 0.496551724137931,
+        "passed": false
+      },
+      "f1": {
+        "value": 0.5061511423550088,
+        "passed": false
+      }
+    },
+    "target_met_in_this_evaluation": false,
+    "fresh_test_available": false,
+    "fresh_test_target_met": null
+  },
+  "tuning_balanced_accuracy": 0.5287898626544125,
+  "selection_metric": "3-fold development balanced accuracy; predeclared ID tie break",
+  "fold_mean_balanced_accuracy": null,
+  "fold_std_balanced_accuracy": null,
+  "counts": {
+    "train_songs": 597,
+    "train_artists": 52,
+    "evaluation_songs": 597,
+    "evaluation_artists": 52,
+    "historical_songs_reserved": 154
+  },
+  "dataset_rows": 751,
+  "evidence_status": "candidate_not_validated",
+  "task_version": "year-end-v-other-chart-v1",
+  "group_version": "normalized-artist-string-v1",
+  "label_definition": "1: source year-end Hot 100 hit; 0: other sampled weekly Hot 100 song",
+  "historical_test_evaluated": false,
+  "fresh_test_available": false,
+  "final_fit_warnings": [],
+  "promotion": {
+    "promoted": false,
+    "decision": "Keep baseline demo. Candidate is for research; no fresh confirmation."
+  },
+  "notes": [
+    "Thresholds are native estimator defaults; no calibration or threshold search.",
+    "Nested scores evaluate the declared selection procedure; final candidate uses full-development tuning.",
+    "Learning curves are retrospective diagnostics for the selected configuration."
+  ]
+}

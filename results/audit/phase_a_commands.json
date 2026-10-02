@@ -1,0 +1,40 @@
+[
+  {
+    "name": "environment_install",
+    "command": [
+      "/Users/dhanushss/Documents/Codex/2026-09-30/what/outputs/chorus-hit-predictor/.venv/bin/python",
+      "-m",
+      "pip",
+      "install",
+      "-r",
+      "requirements-dev.txt"
+    ],
+    "exit_code": 0,
+    "seconds": 0.3715893339976901,
+    "log": "results/audit/environment_install.log"
+  },
+  {
+    "name": "pip_check",
+    "command": [
+      "/Users/dhanushss/Documents/Codex/2026-09-30/what/outputs/chorus-hit-predictor/.venv/bin/python",
+      "-m",
+      "pip",
+      "check"
+    ],
+    "exit_code": 0,
+    "seconds": 0.1676606670007459,
+    "log": "results/audit/pip_check.log"
+  },
+  {
+    "name": "v1_tests",
+    "command": [
+      "/Users/dhanushss/Documents/Codex/2026-09-30/what/outputs/chorus-hit-predictor/.venv/bin/python",
+      "-m",
+      "pytest",
+      "-q"
+    ],
+    "exit_code": 0,
+    "seconds": 4.971546458000375,
+    "log": "results/audit/v1_tests.log"
+  }
+]

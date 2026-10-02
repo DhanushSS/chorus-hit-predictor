@@ -1,4 +1,8 @@
 """Run the reproducible experiment: python -m chorus_hit.train."""
+import argparse
+from pathlib import Path
+import os
+import tempfile
 import json
 import platform
 import time
@@ -99,6 +103,17 @@ def artist_bootstrap(y, predictions, scores, groups, repeats=2000):
 
 
 def main():
+    global RESULTS, MODEL_PATH
+    parser = argparse.ArgumentParser(description="Reproduce V1 into a NEW directory; baseline is never overwritten")
+    parser.add_argument("--output-dir", type=Path, required=True)
+    args = parser.parse_args()
+    destination = args.output_dir.resolve()
+    if destination.exists():
+        parser.error("Output directory must not exist")
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    staging = Path(tempfile.mkdtemp(prefix=".v1-reproduction-", dir=destination.parent))
+    RESULTS = staging / "results"
+    MODEL_PATH = staging / "models" / "selected_model.joblib"
     started = time.time()
     RESULTS.mkdir(parents=True, exist_ok=True)
     MODEL_PATH.parent.mkdir(parents=True, exist_ok=True)
@@ -183,8 +198,9 @@ def main():
                  "data_sha256": summary["data_audit"]["sha256"], "versions": summary["versions"],
                  "schema": "antonios-518-v1", "score_type": score_type}, MODEL_PATH, compress=3)
     from .plots import make_plots
-    make_plots(summary, frame, winner, X_train, test_records)
-    print(f"Selected {selected} using training CV. Results: {RESULTS}", flush=True)
+    make_plots(summary, frame, winner, X_train, test_records, directory=RESULTS / "figures")
+    os.rename(staging, destination)
+    print(f"Selected {selected} using training CV. Results: {destination}", flush=True)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,444 @@
+{
+  "protocol_version": "bounded-csv-v2.1",
+  "data": "data/chorus_features.csv",
+  "data_sha256": "79951ffc393fc836405509326d1ee03efd96434327d800711c4b8ed817ef44ce",
+  "dataset_version": "chorus-chart-proxy-v1",
+  "group_version": "normalized-artist-string-v1",
+  "split_manifest": "results/split_manifest.csv",
+  "split_sha256": "e8be2658ec1cdd33c89009e72e987c2d139336d96efc306fa6065b34ae29b3e4",
+  "seed": 42,
+  "inner_seed": 43,
+  "outer_seed": 44,
+  "inner_folds": 3,
+  "outer_folds": 5,
+  "parallelism": 2,
+  "max_trials": 35,
+  "max_trials_per_family": 13,
+  "fit_timeout_seconds": 180,
+  "bootstrap_repeats": 2000,
+  "learning_curve_fractions": [
+    0.25,
+    0.5,
+    1.0
+  ],
+  "evaluation_mode": "development_only",
+  "threshold_policy": "estimator_default",
+  "embeddings": false,
+  "candidates": [
+    {
+      "id": "control_dummy",
+      "family": "dummy",
+      "params": {},
+      "representation": {
+        "kind": "none"
+      },
+      "role": "V1 preprocessing and V1 development-chosen setting; re-evaluated on new grouped folds"
+    },
+    {
+      "id": "control_logistic",
+      "family": "logistic",
+      "params": {
+        "C": 0.01
+      },
+      "representation": {
+        "kind": "pca",
+        "value": 0.95
+      },
+      "role": "V1 preprocessing and V1 development-chosen setting; re-evaluated on new grouped folds"
+    },
+    {
+      "id": "control_lda",
+      "family": "lda",
+      "params": {
+        "shrinkage": 0.7
+      },
+      "representation": {
+        "kind": "pca",
+        "value": 0.95
+      },
+      "role": "V1 preprocessing and V1 development-chosen setting; re-evaluated on new grouped folds"
+    },
+    {
+      "id": "control_linear_svm",
+      "family": "linear_svm",
+      "params": {
+        "C": 0.1
+      },
+      "representation": {
+        "kind": "pca",
+        "value": 0.95
+      },
+      "role": "V1 preprocessing and V1 development-chosen setting; re-evaluated on new grouped folds"
+    },
+    {
+      "id": "control_rbf_svm",
+      "family": "rbf_svm",
+      "params": {
+        "C": 1.0,
+        "gamma": 0.001
+      },
+      "representation": {
+        "kind": "pca",
+        "value": 0.95
+      },
+      "role": "V1 preprocessing and V1 development-chosen setting; re-evaluated on new grouped folds"
+    },
+    {
+      "id": "control_poly_svm",
+      "family": "poly_svm",
+      "params": {
+        "C": 1.0
+      },
+      "representation": {
+        "kind": "pca",
+        "value": 0.95
+      },
+      "role": "V1 preprocessing and V1 development-chosen setting; re-evaluated on new grouped folds"
+    },
+    {
+      "id": "control_random_forest",
+      "family": "random_forest",
+      "params": {
+        "max_depth": null,
+        "min_samples_leaf": 5
+      },
+      "representation": {
+        "kind": "none"
+      },
+      "role": "V1 preprocessing and V1 development-chosen setting; re-evaluated on new grouped folds"
+    },
+    {
+      "id": "control_gradient_boosting",
+      "family": "gradient_boosting",
+      "params": {
+        "learning_rate": 0.03,
+        "max_depth": 1
+      },
+      "representation": {
+        "kind": "none"
+      },
+      "role": "V1 preprocessing and V1 development-chosen setting; re-evaluated on new grouped folds"
+    },
+    {
+      "id": "control_mlp",
+      "family": "mlp",
+      "params": {
+        "alpha": 1.0
+      },
+      "representation": {
+        "kind": "pca",
+        "value": 0.95
+      },
+      "role": "V1 preprocessing and V1 development-chosen setting; re-evaluated on new grouped folds"
+    },
+    {
+      "id": "lr_none_None",
+      "family": "logistic",
+      "params": {
+        "C": 0.1
+      },
+      "representation": {
+        "kind": "none"
+      },
+      "role": "paired representation ablation; fixed C=0.1"
+    },
+    {
+      "id": "lr_pca_30",
+      "family": "logistic",
+      "params": {
+        "C": 0.1
+      },
+      "representation": {
+        "kind": "pca",
+        "value": 30
+      },
+      "role": "paired representation ablation; fixed C=0.1"
+    },
+    {
+      "id": "lr_pca_50",
+      "family": "logistic",
+      "params": {
+        "C": 0.1
+      },
+      "representation": {
+        "kind": "pca",
+        "value": 50
+      },
+      "role": "paired representation ablation; fixed C=0.1"
+    },
+    {
+      "id": "lr_pca_100",
+      "family": "logistic",
+      "params": {
+        "C": 0.1
+      },
+      "representation": {
+        "kind": "pca",
+        "value": 100
+      },
+      "role": "paired representation ablation; fixed C=0.1"
+    },
+    {
+      "id": "lr_pca_0p9",
+      "family": "logistic",
+      "params": {
+        "C": 0.1
+      },
+      "representation": {
+        "kind": "pca",
+        "value": 0.9
+      },
+      "role": "paired representation ablation; fixed C=0.1"
+    },
+    {
+      "id": "lr_pca_0p95",
+      "family": "logistic",
+      "params": {
+        "C": 0.1
+      },
+      "representation": {
+        "kind": "pca",
+        "value": 0.95
+      },
+      "role": "paired representation ablation; fixed C=0.1"
+    },
+    {
+      "id": "lr_anova_30",
+      "family": "logistic",
+      "params": {
+        "C": 0.1
+      },
+      "representation": {
+        "kind": "anova",
+        "value": 30
+      },
+      "role": "paired representation ablation; fixed C=0.1"
+    },
+    {
+      "id": "lr_anova_100",
+      "family": "logistic",
+      "params": {
+        "C": 0.1
+      },
+      "representation": {
+        "kind": "anova",
+        "value": 100
+      },
+      "role": "paired representation ablation; fixed C=0.1"
+    },
+    {
+      "id": "lr_mi_50",
+      "family": "logistic",
+      "params": {
+        "C": 0.1
+      },
+      "representation": {
+        "kind": "mi",
+        "value": 50
+      },
+      "role": "paired representation ablation; fixed C=0.1"
+    },
+    {
+      "id": "lr_mfcc_spectral_None",
+      "family": "logistic",
+      "params": {
+        "C": 0.1
+      },
+      "representation": {
+        "kind": "mfcc_spectral"
+      },
+      "role": "paired representation ablation; fixed C=0.1"
+    },
+    {
+      "id": "lr_none_c0p01",
+      "family": "logistic",
+      "params": {
+        "C": 0.01
+      },
+      "representation": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "lr_none_c1p0",
+      "family": "logistic",
+      "params": {
+        "C": 1.0
+      },
+      "representation": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "linear_anova_c0p01",
+      "family": "linear_svm",
+      "params": {
+        "C": 0.01
+      },
+      "representation": {
+        "kind": "anova",
+        "value": 100
+      }
+    },
+    {
+      "id": "linear_anova_c0p1",
+      "family": "linear_svm",
+      "params": {
+        "C": 0.1
+      },
+      "representation": {
+        "kind": "anova",
+        "value": 100
+      }
+    },
+    {
+      "id": "rbf_none_c1",
+      "family": "rbf_svm",
+      "params": {
+        "C": 1.0,
+        "gamma": "scale",
+        "class_weight": "balanced"
+      },
+      "representation": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "rbf_anova_c1",
+      "family": "rbf_svm",
+      "params": {
+        "C": 1.0,
+        "gamma": "scale",
+        "class_weight": "balanced"
+      },
+      "representation": {
+        "kind": "anova",
+        "value": 50
+      }
+    },
+    {
+      "id": "rbf_none_c10",
+      "family": "rbf_svm",
+      "params": {
+        "C": 10.0,
+        "gamma": "scale",
+        "class_weight": "balanced"
+      },
+      "representation": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "rbf_anova_c10",
+      "family": "rbf_svm",
+      "params": {
+        "C": 10.0,
+        "gamma": "scale",
+        "class_weight": "balanced"
+      },
+      "representation": {
+        "kind": "anova",
+        "value": 50
+      }
+    },
+    {
+      "id": "poly_anova",
+      "family": "poly_svm",
+      "params": {
+        "C": 1.0
+      },
+      "representation": {
+        "kind": "anova",
+        "value": 100
+      }
+    },
+    {
+      "id": "forest_leaf2",
+      "family": "random_forest",
+      "params": {
+        "max_depth": 8,
+        "min_samples_leaf": 2,
+        "class_weight": "balanced"
+      },
+      "representation": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "forest_leaf8",
+      "family": "random_forest",
+      "params": {
+        "max_depth": 8,
+        "min_samples_leaf": 8,
+        "class_weight": "balanced"
+      },
+      "representation": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "boost_anova",
+      "family": "gradient_boosting",
+      "params": {
+        "max_depth": 1,
+        "learning_rate": 0.03
+      },
+      "representation": {
+        "kind": "anova",
+        "value": 50
+      }
+    },
+    {
+      "id": "mlp_pca30",
+      "family": "mlp",
+      "params": {
+        "alpha": 10.0
+      },
+      "representation": {
+        "kind": "pca",
+        "value": 30
+      }
+    },
+    {
+      "id": "extra_leaf2",
+      "family": "extra_trees",
+      "params": {
+        "max_depth": null,
+        "min_samples_leaf": 2,
+        "max_features": "sqrt",
+        "class_weight": "balanced"
+      },
+      "representation": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "extra_leaf5",
+      "family": "extra_trees",
+      "params": {
+        "max_depth": null,
+        "min_samples_leaf": 5,
+        "max_features": "sqrt",
+        "class_weight": "balanced"
+      },
+      "representation": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "extra_leaf10",
+      "family": "extra_trees",
+      "params": {
+        "max_depth": null,
+        "min_samples_leaf": 10,
+        "max_features": "sqrt",
+        "class_weight": "balanced"
+      },
+      "representation": {
+        "kind": "none"
+      }
+    }
+  ],
+  "mode": "quick",
+  "timeout_seconds": 1200
+}
