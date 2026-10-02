@@ -83,3 +83,10 @@
 - Preservation verified: 26 protected baseline files, the complete baseline archive, 857 previously tracked V2 run/report/notebook files and all four completed run manifests. Original active demo remains `v1_baseline`.
 - Added reproducible comparison script, exact executed-source archive, figures, paired evidence and written findings. Local branch `research/chorus-v3`; no V3 publication claimed. Earlier GitHub authentication failure remains unresolved.
 - **Next unblocked action:** review the V3 findings and demo. For a new audio study, assemble permitted recordings with verified recording identities, performer links and labels, then reserve new evaluation data before model selection. Restored GitHub authentication is needed to upload this local update.
+
+## 2026-10-03 — GitHub access restored and V3 uploaded
+
+- User restored GitHub authentication and requested another check. Verified the active account as DhanushSS and successfully pushed `research/chorus-v3` to the existing `DhanushSS/chorus-hit-predictor` repository.
+- Initial uploaded V3 commit: `36d403d5ae2d5840931fc9ed9dc7e09f274dbcee`. The update includes the V2 audit, V3 source/configuration, completed trials, model artifacts, demo and measured findings. Main remains at the preserved baseline.
+- Updated publication notes to reflect the successful upload. Prior package receipts describe their creation-time state; experimental evidence is unchanged.
+- **Next unblocked action:** open the review pull request and verify GitHub Actions for the uploaded update. A new accuracy study still needs the recording and label inputs described in the V3 findings.

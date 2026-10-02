@@ -18,7 +18,7 @@ A reproducible study of whether 15-second chorus audio features distinguish stro
 - The final selected classifier has the same configuration and inspected learned parameters as V2. The expanded selection procedure has not established a better final model.
 - This is exploratory reuse of previously inspected development data. No fresh test exists, and the strict >75% target remains unmet.
 - **24 tests passed**. The V3 research option was verified in the running demo; original results and exports passed preservation checks.
-- Local branch: `research/chorus-v3`. **V3 is not uploaded to GitHub**; the earlier authentication blocker remains unresolved.
+- Uploaded branch: [`research/chorus-v3`](https://github.com/DhanushSS/chorus-hit-predictor/tree/research/chorus-v3). GitHub access was restored on October 3. This update is available for review and has not been merged into `main`.
 - Matching song recordings are still missing. The reviewed sources do not supply the matched audio needed for the planned richer-representation study.
 
 ## October 2 audit and research update
@@ -33,7 +33,7 @@ The original run and submission exports remain preserved. **Start with [the V2 h
 - Accuracy, balanced accuracy, positive-class precision, recall and F1 all remain below the strict **>75%** target. No fresh test exists. Historical improvement is not reliable confirmation.
 - Original demo remains active (`configs/active_run.json`). The sidebar offers the V2 candidate as a research option.
 - Audio/embedding interfaces have software tests. Real embedding experiments remain blocked by missing recordings, rights and verified identities/labels. See [required inputs](docs/AUDIO_DATA_REQUIREMENTS.md).
-- Review branch: [`audit/chorus-v2`](https://github.com/DhanushSS/chorus-hit-predictor/tree/audit/chorus-v2). The update is uploaded and is not merged into `main`. [GitHub Actions passed](https://github.com/DhanushSS/chorus-hit-predictor/actions/runs/36970412334) for publication commit `2dfe0ee`. Pull-request creation currently requires restoring GitHub authentication/write permission. See [GitHub checks](https://github.com/DhanushSS/chorus-hit-predictor/actions) for the latest status.
+- Review branch: [`audit/chorus-v2`](https://github.com/DhanushSS/chorus-hit-predictor/tree/audit/chorus-v2). The update is uploaded and is not merged into `main`. [GitHub Actions passed](https://github.com/DhanushSS/chorus-hit-predictor/actions/runs/36970412334) for publication commit `2dfe0ee`. The earlier authentication blocker was resolved on October 3; the V3 branch includes this V2 work. See [GitHub checks](https://github.com/DhanushSS/chorus-hit-predictor/actions) for the latest status.
 
 The numerical section titled **Original V1 results** below describes the preserved baseline only.
 
