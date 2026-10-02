@@ -21,7 +21,7 @@ The original run and submission exports remain preserved. **Start with [the V2 h
 - Accuracy, balanced accuracy, positive-class precision, recall and F1 all remain below the strict **>75%** target. No fresh test exists. Historical improvement is not reliable confirmation.
 - Original demo remains active (`configs/active_run.json`). The sidebar offers the V2 candidate as a research option.
 - Audio/embedding interfaces have software tests. Real embedding experiments remain blocked by missing recordings, rights and verified identities/labels. See [required inputs](docs/AUDIO_DATA_REQUIREMENTS.md).
-- Review branch: [`audit/chorus-v2`](https://github.com/DhanushSS/chorus-hit-predictor/tree/audit/chorus-v2). The update is submitted for review; it is not merged into `main`. See [GitHub checks](https://github.com/DhanushSS/chorus-hit-predictor/actions) for the latest automated test status.
+- Review branch: [`audit/chorus-v2`](https://github.com/DhanushSS/chorus-hit-predictor/tree/audit/chorus-v2). The update is uploaded and is not merged into `main`. [GitHub Actions passed](https://github.com/DhanushSS/chorus-hit-predictor/actions/runs/36970412334) for publication commit `2dfe0ee`. Pull-request creation currently requires restoring GitHub authentication/write permission. See [GitHub checks](https://github.com/DhanushSS/chorus-hit-predictor/actions) for the latest status.
 
 The numerical section titled **Original V1 results** below describes the preserved baseline only.
 

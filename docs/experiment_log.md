@@ -57,3 +57,10 @@
 - Prepared branch `audit/chorus-v2` for upload and a review pull request. Main remains unchanged; model promotion remains unchanged. Original measured run files and initial handoff evidence are preserved.
 - Updated current navigation to distinguish the initial local handoff from the subsequent GitHub update.
 - **Next unblocked action:** verify the uploaded branch and pull request, inspect GitHub Actions, and resolve any concrete CI failure before reporting completion.
+
+### GitHub publication verified
+
+- Uploaded branch `audit/chorus-v2`; remote commit `2dfe0ee29aaa77bf0b24ec0701cc4ec6b01165e6` matched the local checkout. `main` remained at `0e9e4628d0a72af79694bc555d64a562e83dcfa2`.
+- GitHub Actions run `36970412334` completed successfully for that publication commit: https://github.com/DhanushSS/chorus-hit-predictor/actions/runs/36970412334 . Local tests and empirical results are unchanged.
+- No pull request was created: GitHub CLI returned HTTP 401 (invalid stored login); the connector returned HTTP 403 (integration cannot create pull requests); the browser requires sign-in. No credentials or permission settings were changed.
+- **Next unblocked action:** review the uploaded branch and use the existing viva guide. Opening a pull request requires a restored GitHub login with pull-request write permission, or manual creation through GitHub. Main is not merged and no model is promoted.
