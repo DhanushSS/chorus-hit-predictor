@@ -9,6 +9,18 @@
 
 A reproducible study of whether 15-second chorus audio features distinguish stronger chart success, with a working Streamlit demo, model comparisons, an executed notebook, reports, and presentation.
 
+## Latest: V3 robustness study (completed October 3)
+
+[Read the V3 findings](docs/V3_RESEARCH_RESULTS.md) and [data-source review](docs/V3_DATA_SOURCE_REVIEW.md).
+
+- Expanded to **55 model settings**, completing **1,059 recorded fits** with no failed trials.
+- Nested balanced accuracy: **53.25%**, compared with V2 **52.85%**. The paired change is **+0.40 percentage points**, with an approximate 95% interval of **−2.71 to +3.04 points**. This is an inconclusive change.
+- The final selected classifier has the same configuration and inspected learned parameters as V2. The expanded selection procedure has not established a better final model.
+- This is exploratory reuse of previously inspected development data. No fresh test exists, and the strict >75% target remains unmet.
+- **24 tests passed**. The V3 research option was verified in the running demo; original results and exports passed preservation checks.
+- Local branch: `research/chorus-v3`. **V3 is not uploaded to GitHub**; the earlier authentication blocker remains unresolved.
+- Matching song recordings are still missing. The reviewed sources do not supply the matched audio needed for the planned richer-representation study.
+
 ## October 2 audit and research update
 
 The original run and submission exports remain preserved. **Start with [the V2 handoff](docs/AUDIT_HANDOFF.md)** and [reproduction commands](docs/REPRODUCE_V2.md). Updated report/presentation: `docs/v2/`; executed walkthrough: `notebooks/v2/Project_Walkthrough.ipynb`.

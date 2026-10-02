@@ -52,3 +52,15 @@ def test_invalid_preprocessing_and_random_early_stopping_rejected():
         with pytest.raises(ValueError):make_estimator({'family':'logistic','representation':representation},FEATURE_COLUMNS)
     with pytest.raises(ValueError,match='early stopping'):
         make_estimator({'family':'hist_gradient_boosting','params':{'early_stopping':True},'representation':{'kind':'none'}},FEATURE_COLUMNS)
+
+
+@pytest.mark.integration
+def test_v3_app_identifies_exploratory_study():
+    from streamlit.testing.v1 import AppTest
+    app=AppTest.from_file(str(ROOT/'app.py')).run(timeout=60)
+    app.sidebar.selectbox[0].set_value('v3_nested_001').run(timeout=60)
+    assert not app.exception
+    assert any('Exploratory follow-up' in c.value for c in app.caption)
+    assert any('55 declared settings' in m.value for m in app.markdown)
+    app.button[0].click().run(timeout=60)
+    assert not app.exception

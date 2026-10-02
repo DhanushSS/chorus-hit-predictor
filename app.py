@@ -27,12 +27,14 @@ try:
     default=active_run();available=[p.name for p in RUNS.iterdir() if p.is_dir() and not p.name.startswith('.') and (p/'manifest.json').is_file()]
     available=[default]+sorted(x for x in available if x!=default and x!='v2_quick_001')
     with st.sidebar:
-        run_id=st.selectbox('Demo run',available,format_func=lambda v: 'Original model (active)' if v==default else 'V2 research candidate')
+        run_id=st.selectbox('Demo run',available,format_func=lambda v: 'Original model (active)' if v==default else {'v2_nested_001':'V2 research candidate','v3_nested_001':'V3 robustness study'}.get(v,v))
         st.caption('The original model remains active. Selecting a research candidate here does not promote it.')
     key=run_cache_key(run_id);a=assets(*key);s=a.summary;bundle=a.bundle
 except Exception as error:
     st.error(f'Project files are incompatible or incomplete: {error}');st.stop()
 features=bundle['features'];labels=bundle['labels'];predictions=a.predictions
+config_path=a.path/'config.json'
+selected_config=json.loads(config_path.read_text()) if config_path.exists() else None
 st.info('Class 1 means a source year-end Billboard hit. Class 0 contains other charting songs. This retrospective experiment does not establish future-hit prediction.')
 status=s['evaluation_status'].replace('_',' ')
 status_short={'historical_test':'Historical','nested_development':'Nested CV','tuning_development':'Tuning CV'}.get(s['evaluation_status'],status.title())
@@ -40,6 +42,8 @@ cols=st.columns(4)
 for c,label,value in zip(cols,['Dataset songs','Raw audio features','Evaluation','Balanced accuracy'],
                         [str(len(a.data)),str(len(features)),status_short,f"{s['metrics']['balanced_accuracy']:.1%}"]):c.metric(label,value)
 st.caption(f"Run: {run_id} · Model: {bundle['model_name']} · Evidence: {s['evidence_status'].replace('_',' ')}")
+if selected_config and selected_config.get('study_note'):
+    st.caption('Exploratory follow-up: these development folds were already inspected. The result requires confirmation on new data.')
 
 demo,results_tab,method=st.tabs(['Try the model','Results & evidence','How the project works'])
 with demo:
@@ -94,7 +98,7 @@ with results_tab:
         st.caption('Nested predictions assess the selection procedure across outer folds. The final candidate fits all original development songs. These are different fitted models.')
         st.write(f"Full-development tuning BA: {s['tuning_balanced_accuracy']:.1%}. Tuning scores can be optimistic.")
         st.dataframe(pd.read_csv(a.path/'final_development_ranking.csv').sort_values('mean_balanced_accuracy',ascending=False),hide_index=True,use_container_width=True)
-    with st.expander('V2 research comparison'):
+    with st.expander('Historical V2 comparison'):
         research=assets(*run_cache_key('v2_nested_001'));h=load_historical(ROOT/'results/evaluations/v2_nested_001_historical')
         st.write(f"V2 nested development BA: **{research.summary['metrics']['balanced_accuracy']:.1%}**. V2 historical BA: **{h['metrics']['balanced_accuracy']:.1%}**.")
         d=h['paired_vs_v1'];st.write(f"Matched historical change: {100*d['balanced_accuracy_difference']:+.1f} percentage points; approximate paired interval {100*d['ci95'][0]:+.1f} to {100*d['ci95'][1]:+.1f} percentage points.")
@@ -111,8 +115,9 @@ with method:
 3. Fit preprocessing and a classifier using only each training fold.
 4. Use separate artist groups for model selection and assessment.
 5. Report errors, uncertainty and the evaluation's limits.''')
-    research_config=json.loads((research.path/'config.json').read_text())
-    st.write(f"V2 compares {len(research_config['candidates'])} declared settings, including original controls, feature selection and Extra Trees. Nested evaluation uses {research_config['outer_folds']} outer and {research_config['inner_folds']} inner grouped folds. Historical labels never tune the V2 candidate.")
+    research_config=selected_config or json.loads((research.path/'config.json').read_text())
+    study_name='This research study' if selected_config else 'The V2 research study'
+    st.write(f"{study_name} compares {len(research_config['candidates'])} declared settings, including the original controls. Nested evaluation uses {research_config['outer_folds']} outer and {research_config['inner_folds']} inner grouped folds. Historical labels do not tune the research candidate.")
     st.write('The task is year-end hit versus other chart song. Artist names, song titles, file paths and chart positions never enter the predictor.')
     st.write('We have verified the software, data hashes and recorded metrics. Label/recording identity coverage and audio extraction equivalence remain incomplete.')
     st.markdown('[Reference paper](https://cs229.stanford.edu/proj2021spr/report2/81974051.pdf) · [Feature dataset](https://github.com/AntoniosMalak/Predicting-Hit-Songs-Using-Repeated-Chorus)')

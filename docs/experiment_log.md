@@ -72,3 +72,14 @@
 - Locked `configs/v3_robust.json`: all 35 V2 controls plus 20 fixed new settings (quantile transforms, core statistics, shrinkage LDA, regularized histogram boosting, small MI subsets and reduced-space neighbors). Same seeds, outer/inner folds, labels and native thresholds; 55 candidates, 2 workers, 1,800-second budget.
 - Reusing previously inspected development folds means this follow-up is exploratory. There is no independent confirmation. No historical re-evaluation is planned for this study.
 - **Next unblocked action:** verify transformation isolation and serialization, then execute this one declared nested study and compare paired development predictions.
+
+## 2026-10-03 — V3 completed and verified
+
+- Executed the declared 55-setting nested study as `v3_nested_001`, using source commit `542413979fad33217f228a35d4801c61ac5348aa`. All 1,059 trial records completed, with zero trial warnings/failures; 129.87 seconds wall time.
+- Nested balanced accuracy 0.5325227451 (V2 0.5285016287). Paired change +0.0040211165, approximate artist-bootstrap 95% interval [-0.0270901427, 0.0304199863]. This does not establish a reliable gain; all five >75% checks remain false and fresh-test status remains unavailable.
+- Final selection again chose `lr_mi_50`. Inspected imputation, variance, scaling, MI scores, coefficients and intercept exactly match V2, as do all 597 development predictions and decision scores. Serialized model hashes differ; numerical equivalence is based on the recorded state checks. No historical evaluation was repeated.
+- Source audit found no audio paths in the complete pinned upstream tree. The reviewed ISMIR/MSD release has features and different labels. No audio or substitute dataset was acquired. User confirmed no recordings are available.
+- Full suite: 24 passed, four dependency/decoder deprecation warnings; 13.60 seconds pytest / 13.94 seconds wall. Browser verified V3 identity, 53.3% display, uncertainty interval, exploratory qualifier and unmet target. Screenshot and structured checks are saved under `results/research_v3/`.
+- Preservation verified: 26 protected baseline files, the complete baseline archive, 857 previously tracked V2 run/report/notebook files and all four completed run manifests. Original active demo remains `v1_baseline`.
+- Added reproducible comparison script, exact executed-source archive, figures, paired evidence and written findings. Local branch `research/chorus-v3`; no V3 publication claimed. Earlier GitHub authentication failure remains unresolved.
+- **Next unblocked action:** review the V3 findings and demo. For a new audio study, assemble permitted recordings with verified recording identities, performer links and labels, then reserve new evaluation data before model selection. Restored GitHub authentication is needed to upload this local update.
