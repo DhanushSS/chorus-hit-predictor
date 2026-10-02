@@ -9,6 +9,10 @@
 
 A reproducible study of whether 15-second chorus audio features distinguish stronger chart success, with a working Streamlit demo, model comparisons, an executed notebook, reports, and presentation.
 
+## Local Hugging Face assisted pilot (October 3)
+
+[Measured findings and limitations](docs/HUGGING_FACE_PILOT_RESULTS.md): on 340 candidate-linked development songs, balanced accuracy was 50.79% for the matched legacy baseline, 52.09% for published musicnn features and 54.17% for combined inputs. The combined paired gain interval (-0.22 to +7.21 percentage points) includes zero. Recording/chorus equivalence is unverified. This subset pilot does not replace the V3 result or the active demo, and it has not been uploaded.
+
 ## Latest: V3 robustness study (completed October 3)
 
 [Read the V3 findings](docs/V3_RESEARCH_RESULTS.md) and [data-source review](docs/V3_DATA_SOURCE_REVIEW.md).

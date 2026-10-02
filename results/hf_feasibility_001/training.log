@@ -1,0 +1,138 @@
+{"arm": "legacy_mi50", "fold": 0, "fit_rows": 268, "validation_rows": 72, "status": "complete", "seconds": 0.315907583993976, "warnings": []}
+{"arm": "legacy_mi50", "fold": 1, "fit_rows": 278, "validation_rows": 62, "status": "complete", "seconds": 0.32161762499890756, "warnings": []}
+{"arm": "legacy_mi50", "fold": 2, "fit_rows": 259, "validation_rows": 81, "status": "complete", "seconds": 0.299672166001983, "warnings": []}
+{"arm": "legacy_mi50", "fold": 3, "fit_rows": 292, "validation_rows": 48, "status": "complete", "seconds": 0.30879350000759587, "warnings": []}
+{"arm": "legacy_mi50", "fold": 4, "fit_rows": 263, "validation_rows": 77, "status": "complete", "seconds": 0.2972759170079371, "warnings": []}
+{"arm": "musicnn", "fold": 0, "fit_rows": 268, "validation_rows": 72, "status": "complete", "seconds": 0.004248208002536558, "warnings": []}
+{"arm": "musicnn", "fold": 1, "fit_rows": 278, "validation_rows": 62, "status": "complete", "seconds": 0.004351584007963538, "warnings": []}
+{"arm": "musicnn", "fold": 2, "fit_rows": 259, "validation_rows": 81, "status": "complete", "seconds": 0.004009083000710234, "warnings": []}
+{"arm": "musicnn", "fold": 3, "fit_rows": 292, "validation_rows": 48, "status": "complete", "seconds": 0.004129000008106232, "warnings": []}
+{"arm": "musicnn", "fold": 4, "fit_rows": 263, "validation_rows": 77, "status": "complete", "seconds": 0.00407466699834913, "warnings": []}
+{"arm": "combined", "fold": 0, "fit_rows": 268, "validation_rows": 72, "status": "complete", "seconds": 0.3089856669976143, "warnings": []}
+{"arm": "combined", "fold": 1, "fit_rows": 278, "validation_rows": 62, "status": "complete", "seconds": 0.31870829200488515, "warnings": []}
+{"arm": "combined", "fold": 2, "fit_rows": 259, "validation_rows": 81, "status": "complete", "seconds": 0.3041202079912182, "warnings": []}
+{"arm": "combined", "fold": 3, "fit_rows": 292, "validation_rows": 48, "status": "complete", "seconds": 0.3196824589977041, "warnings": []}
+{"arm": "combined", "fold": 4, "fit_rows": 263, "validation_rows": 77, "status": "complete", "seconds": 0.30875145801110193, "warnings": []}
+{
+  "evaluation": "exploratory_linkage_development_pilot",
+  "rows": 340,
+  "artist_groups": 46,
+  "class_counts": {
+    "1": 201,
+    "0": 139
+  },
+  "excluded_cross_group_duplicates": 0,
+  "external_dimensions": 50,
+  "metrics": {
+    "legacy_mi50": {
+      "accuracy": 0.5441176470588235,
+      "balanced_accuracy": 0.5079100898385769,
+      "precision": 0.5966386554621849,
+      "recall": 0.7064676616915423,
+      "f1": 0.6469248291571754,
+      "class_0_recall": 0.30935251798561153,
+      "macro_f1": 0.5018856510931106,
+      "roc_auc": null,
+      "confusion_matrix": [
+        [
+          43,
+          96
+        ],
+        [
+          59,
+          142
+        ]
+      ],
+      "n": 340,
+      "support": {
+        "0": 139,
+        "1": 201
+      },
+      "undefined": [],
+      "balanced_accuracy_ci95": [
+        0.46083757738651976,
+        0.5564183657309736
+      ]
+    },
+    "musicnn": {
+      "accuracy": 0.5647058823529412,
+      "balanced_accuracy": 0.5208847847095458,
+      "precision": 0.6047430830039525,
+      "recall": 0.7611940298507462,
+      "f1": 0.6740088105726872,
+      "class_0_recall": 0.2805755395683453,
+      "macro_f1": 0.5095707769677595,
+      "roc_auc": null,
+      "confusion_matrix": [
+        [
+          39,
+          100
+        ],
+        [
+          48,
+          153
+        ]
+      ],
+      "n": 340,
+      "support": {
+        "0": 139,
+        "1": 201
+      },
+      "undefined": [],
+      "balanced_accuracy_ci95": [
+        0.4778425960114166,
+        0.56399221193625
+      ]
+    },
+    "combined": {
+      "accuracy": 0.5735294117647058,
+      "balanced_accuracy": 0.5416621926339525,
+      "precision": 0.6206896551724138,
+      "recall": 0.7164179104477612,
+      "f1": 0.6651270207852193,
+      "class_0_recall": 0.3669064748201439,
+      "macro_f1": 0.539041243186132,
+      "roc_auc": null,
+      "confusion_matrix": [
+        [
+          51,
+          88
+        ],
+        [
+          57,
+          144
+        ]
+      ],
+      "n": 340,
+      "support": {
+        "0": 139,
+        "1": 201
+      },
+      "undefined": [],
+      "balanced_accuracy_ci95": [
+        0.48998760805356334,
+        0.5922395620835034
+      ]
+    }
+  },
+  "paired_vs_matched_legacy": {
+    "musicnn": {
+      "balanced_accuracy_difference": 0.012974694870968917,
+      "paired_ci95": [
+        -0.04198331464343594,
+        0.07301665955306488
+      ]
+    },
+    "combined": {
+      "balanced_accuracy_difference": 0.03375210279537566,
+      "paired_ci95": [
+        -0.00215431382753348,
+        0.07208940496482849
+      ]
+    }
+  },
+  "identity_verified": false,
+  "chorus_segment_equivalence_verified": false,
+  "fresh_test_available": false,
+  "model_promoted": false
+}

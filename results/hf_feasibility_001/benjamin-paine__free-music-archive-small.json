@@ -1,0 +1,474 @@
+{
+  "_id": "66d24ab4b2302a63f2a049a1",
+  "id": "benjamin-paine/free-music-archive-small",
+  "author": "benjamin-paine",
+  "sha": "d291bdb4c842bd5f007c60f9d3d6ba73199cd1c0",
+  "lastModified": "2024-09-07T03:30:53.000Z",
+  "private": false,
+  "gated": false,
+  "disabled": false,
+  "tags": [
+    "task_categories:audio-classification",
+    "task_categories:audio-to-audio",
+    "license:cc",
+    "size_categories:1K<n<10K",
+    "format:parquet",
+    "modality:audio",
+    "modality:text",
+    "library:datasets",
+    "library:dask",
+    "library:mlcroissant",
+    "library:polars",
+    "arxiv:1612.01840",
+    "arxiv:1803.05337",
+    "region:us",
+    "fma",
+    "free-music-archive"
+  ],
+  "description": "\n\t\n\t\t\n\t\n\t\n\t\tFMA: A Dataset for Music Analysis\n\t\n\nMicha\u00ebl Defferrard, Kirell Benzi, Pierre Vandergheynst, Xavier Bresson.\nInternational Society for Music Information Retrieval Conference (ISMIR), 2017.\n\nWe introduce the Free Music Archive (FMA), an open and easily accessible dataset suitable for evaluating several tasks in MIR, a field concerned with browsing, searching, and organizing large music collections. The community's growing interest in feature and end-to-end learning is however\u2026 See the full description on the dataset page: https://huggingface.co/datasets/benjamin-paine/free-music-archive-small.",
+  "downloads": 1335,
+  "likes": 7,
+  "cardData": {
+    "license": "cc",
+    "size_categories": [
+      "1K<n<10K"
+    ],
+    "task_categories": [
+      "audio-classification",
+      "audio-to-audio"
+    ],
+    "pretty_name": "Free Music Archive - Small",
+    "dataset_info": [
+      {
+        "config_name": "default",
+        "features": [
+          {
+            "name": "audio",
+            "dtype": "audio"
+          },
+          {
+            "name": "title",
+            "dtype": "string"
+          },
+          {
+            "name": "url",
+            "dtype": "string"
+          },
+          {
+            "name": "artist",
+            "dtype": "string"
+          },
+          {
+            "name": "composer",
+            "dtype": "string"
+          },
+          {
+            "name": "lyricist",
+            "dtype": "string"
+          },
+          {
+            "name": "publisher",
+            "dtype": "string"
+          },
+          {
+            "name": "genres",
+            "sequence": {
+              "class_label": {
+                "names": {
+                  "0": "20th Century Classical",
+                  "1": "Abstract Hip-Hop",
+                  "2": "African",
+                  "3": "Afrobeat",
+                  "4": "Alternative Hip-Hop",
+                  "5": "Ambient",
+                  "6": "Ambient Electronic",
+                  "7": "Americana",
+                  "8": "Asia-Far East",
+                  "9": "Audio Collage",
+                  "10": "Avant-Garde",
+                  "11": "Balkan",
+                  "12": "Banter",
+                  "13": "Be-Bop",
+                  "14": "Big Band/Swing",
+                  "15": "Bigbeat",
+                  "16": "Black-Metal",
+                  "17": "Bluegrass",
+                  "18": "Blues",
+                  "19": "Bollywood",
+                  "20": "Brazilian",
+                  "21": "Breakbeat",
+                  "22": "Breakcore - Hard",
+                  "23": "British Folk",
+                  "24": "Celtic",
+                  "25": "Chamber Music",
+                  "26": "Chill-out",
+                  "27": "Chip Music",
+                  "28": "Chiptune",
+                  "29": "Choral Music",
+                  "30": "Christmas",
+                  "31": "Classical",
+                  "32": "Comedy",
+                  "33": "Compilation",
+                  "34": "Composed Music",
+                  "35": "Contemporary Classical",
+                  "36": "Country",
+                  "37": "Country & Western",
+                  "38": "Cumbia",
+                  "39": "Dance",
+                  "40": "Death-Metal",
+                  "41": "Deep Funk",
+                  "42": "Disco",
+                  "43": "Downtempo",
+                  "44": "Drone",
+                  "45": "Drum & Bass",
+                  "46": "Dubstep",
+                  "47": "Easy Listening",
+                  "48": "Easy Listening: Vocal",
+                  "49": "Electro-Punk",
+                  "50": "Electroacoustic",
+                  "51": "Electronic",
+                  "52": "Europe",
+                  "53": "Experimental",
+                  "54": "Experimental Pop",
+                  "55": "Fado",
+                  "56": "Field Recordings",
+                  "57": "Flamenco",
+                  "58": "Folk",
+                  "59": "Freak-Folk",
+                  "60": "Free-Folk",
+                  "61": "Free-Jazz",
+                  "62": "French",
+                  "63": "Funk",
+                  "64": "Garage",
+                  "65": "Glitch",
+                  "66": "Gospel",
+                  "67": "Goth",
+                  "68": "Grindcore",
+                  "69": "Hardcore",
+                  "70": "Hip-Hop",
+                  "71": "Hip-Hop Beats",
+                  "72": "Holiday",
+                  "73": "House",
+                  "74": "IDM",
+                  "75": "Improv",
+                  "76": "Indian",
+                  "77": "Indie-Rock",
+                  "78": "Industrial",
+                  "79": "Instrumental",
+                  "80": "International",
+                  "81": "Interview",
+                  "82": "Jazz",
+                  "83": "Jazz: Out",
+                  "84": "Jazz: Vocal",
+                  "85": "Jungle",
+                  "86": "Kid-Friendly",
+                  "87": "Klezmer",
+                  "88": "Krautrock",
+                  "89": "Latin",
+                  "90": "Latin America",
+                  "91": "Lo-Fi",
+                  "92": "Loud-Rock",
+                  "93": "Lounge",
+                  "94": "Metal",
+                  "95": "Middle East",
+                  "96": "Minimal Electronic",
+                  "97": "Minimalism",
+                  "98": "Modern Jazz",
+                  "99": "Musical Theater",
+                  "100": "Musique Concrete",
+                  "101": "N. Indian Traditional",
+                  "102": "Nerdcore",
+                  "103": "New Age",
+                  "104": "New Wave",
+                  "105": "No Wave",
+                  "106": "Noise",
+                  "107": "Noise-Rock",
+                  "108": "North African",
+                  "109": "Novelty",
+                  "110": "Nu-Jazz",
+                  "111": "Old-Time / Historic",
+                  "112": "Opera",
+                  "113": "Pacific",
+                  "114": "Poetry",
+                  "115": "Polka",
+                  "116": "Pop",
+                  "117": "Post-Punk",
+                  "118": "Post-Rock",
+                  "119": "Power-Pop",
+                  "120": "Progressive",
+                  "121": "Psych-Folk",
+                  "122": "Psych-Rock",
+                  "123": "Punk",
+                  "124": "Radio",
+                  "125": "Radio Art",
+                  "126": "Radio Theater",
+                  "127": "Rap",
+                  "128": "Reggae - Dancehall",
+                  "129": "Reggae - Dub",
+                  "130": "Rock",
+                  "131": "Rock Opera",
+                  "132": "Rockabilly",
+                  "133": "Romany (Gypsy)",
+                  "134": "Salsa",
+                  "135": "Shoegaze",
+                  "136": "Singer-Songwriter",
+                  "137": "Skweee",
+                  "138": "Sludge",
+                  "139": "Soul-RnB",
+                  "140": "Sound Art",
+                  "141": "Sound Collage",
+                  "142": "Sound Effects",
+                  "143": "Sound Poetry",
+                  "144": "Soundtrack",
+                  "145": "South Indian Traditional",
+                  "146": "Space-Rock",
+                  "147": "Spanish",
+                  "148": "Spoken",
+                  "149": "Spoken Weird",
+                  "150": "Spoken Word",
+                  "151": "Surf",
+                  "152": "Symphony",
+                  "153": "Synth Pop",
+                  "154": "Talk Radio",
+                  "155": "Tango",
+                  "156": "Techno",
+                  "157": "Thrash",
+                  "158": "Trip-Hop",
+                  "159": "Turkish",
+                  "160": "Unclassifiable",
+                  "161": "Western Swing",
+                  "162": "Wonky",
+                  "163": "hiphop"
+                }
+              }
+            }
+          },
+          {
+            "name": "tags",
+            "sequence": "string"
+          },
+          {
+            "name": "released",
+            "dtype": "timestamp[s]"
+          },
+          {
+            "name": "language",
+            "dtype": "string"
+          },
+          {
+            "name": "listens",
+            "dtype": "uint64"
+          },
+          {
+            "name": "artist_url",
+            "dtype": "string"
+          },
+          {
+            "name": "artist_website",
+            "dtype": "string"
+          },
+          {
+            "name": "album_title",
+            "dtype": "string"
+          },
+          {
+            "name": "album_url",
+            "dtype": "string"
+          },
+          {
+            "name": "license",
+            "dtype": {
+              "class_label": {
+                "names": {
+                  "0": "CC-BY 1.0",
+                  "1": "CC-BY 2.0",
+                  "2": "CC-BY 2.5",
+                  "3": "CC-BY 3.0",
+                  "4": "CC-BY 4.0",
+                  "5": "CC-BY-NC 2.0",
+                  "6": "CC-BY-NC 2.1",
+                  "7": "CC-BY-NC 2.5",
+                  "8": "CC-BY-NC 3.0",
+                  "9": "CC-BY-NC 4.0",
+                  "10": "CC-BY-NC-ND 2.0",
+                  "11": "CC-BY-NC-ND 2.1",
+                  "12": "CC-BY-NC-ND 2.5",
+                  "13": "CC-BY-NC-ND 3.0",
+                  "14": "CC-BY-NC-ND 4.0",
+                  "15": "CC-BY-NC-SA 2.0",
+                  "16": "CC-BY-NC-SA 2.1",
+                  "17": "CC-BY-NC-SA 2.5",
+                  "18": "CC-BY-NC-SA 3.0",
+                  "19": "CC-BY-NC-SA 4.0",
+                  "20": "CC-BY-ND 2.0",
+                  "21": "CC-BY-ND 2.5",
+                  "22": "CC-BY-ND 3.0",
+                  "23": "CC-BY-ND 4.0",
+                  "24": "CC-BY-SA 2.0",
+                  "25": "CC-BY-SA 2.5",
+                  "26": "CC-BY-SA 3.0",
+                  "27": "CC-BY-SA 4.0",
+                  "28": "CC-NC-Sampling+ 1.0",
+                  "29": "CC-Sampling+ 1.0",
+                  "30": "CC0 1.0",
+                  "31": "FMA Sound Recording Common Law",
+                  "32": "Free Art License",
+                  "33": "Free Music Philosophy (FMP)"
+                }
+              }
+            }
+          },
+          {
+            "name": "copyright",
+            "dtype": "string"
+          },
+          {
+            "name": "explicit",
+            "dtype": {
+              "class_label": {
+                "names": {
+                  "0": "No",
+                  "1": "Yes"
+                }
+              }
+            }
+          },
+          {
+            "name": "instrumental",
+            "dtype": {
+              "class_label": {
+                "names": {
+                  "0": "No",
+                  "1": "Yes"
+                }
+              }
+            }
+          },
+          {
+            "name": "allow_commercial_use",
+            "dtype": {
+              "class_label": {
+                "names": {
+                  "0": "No",
+                  "1": "Yes"
+                }
+              }
+            }
+          },
+          {
+            "name": "allow_derivatives",
+            "dtype": {
+              "class_label": {
+                "names": {
+                  "0": "No",
+                  "1": "Yes"
+                }
+              }
+            }
+          },
+          {
+            "name": "require_attribution",
+            "dtype": {
+              "class_label": {
+                "names": {
+                  "0": "No",
+                  "1": "Yes"
+                }
+              }
+            }
+          },
+          {
+            "name": "require_share_alike",
+            "dtype": {
+              "class_label": {
+                "names": {
+                  "0": "No",
+                  "1": "Yes"
+                }
+              }
+            }
+          }
+        ],
+        "splits": [
+          {
+            "name": "train",
+            "num_bytes": 7086184548.46,
+            "num_examples": 7916
+          }
+        ],
+        "download_size": 7709610864,
+        "dataset_size": 7086184548.46
+      }
+    ],
+    "configs": [
+      {
+        "config_name": "default",
+        "data_files": [
+          {
+            "split": "train",
+            "path": "data/train-*"
+          }
+        ]
+      }
+    ],
+    "tags": [
+      "fma",
+      "free-music-archive"
+    ]
+  },
+  "siblings": [
+    {
+      "rfilename": ".gitattributes"
+    },
+    {
+      "rfilename": "README.md"
+    },
+    {
+      "rfilename": "data/train-00000-of-00015.parquet"
+    },
+    {
+      "rfilename": "data/train-00001-of-00015.parquet"
+    },
+    {
+      "rfilename": "data/train-00002-of-00015.parquet"
+    },
+    {
+      "rfilename": "data/train-00003-of-00015.parquet"
+    },
+    {
+      "rfilename": "data/train-00004-of-00015.parquet"
+    },
+    {
+      "rfilename": "data/train-00005-of-00015.parquet"
+    },
+    {
+      "rfilename": "data/train-00006-of-00015.parquet"
+    },
+    {
+      "rfilename": "data/train-00007-of-00015.parquet"
+    },
+    {
+      "rfilename": "data/train-00008-of-00015.parquet"
+    },
+    {
+      "rfilename": "data/train-00009-of-00015.parquet"
+    },
+    {
+      "rfilename": "data/train-00010-of-00015.parquet"
+    },
+    {
+      "rfilename": "data/train-00011-of-00015.parquet"
+    },
+    {
+      "rfilename": "data/train-00012-of-00015.parquet"
+    },
+    {
+      "rfilename": "data/train-00013-of-00015.parquet"
+    },
+    {
+      "rfilename": "data/train-00014-of-00015.parquet"
+    }
+  ],
+  "createdAt": "2024-08-30T22:41:56.000Z",
+  "usedStorage": 33606896007
+}
