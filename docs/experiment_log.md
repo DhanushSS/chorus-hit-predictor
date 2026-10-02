@@ -64,3 +64,11 @@
 - GitHub Actions run `36970412334` completed successfully for that publication commit: https://github.com/DhanushSS/chorus-hit-predictor/actions/runs/36970412334 . Local tests and empirical results are unchanged.
 - No pull request was created: GitHub CLI returned HTTP 401 (invalid stored login); the connector returned HTTP 403 (integration cannot create pull requests); the browser requires sign-in. No credentials or permission settings were changed.
 - **Next unblocked action:** review the uploaded branch and use the existing viva guide. Opening a pull request requires a restored GitHub login with pull-request write permission, or manual creation through GitHub. Main is not merged and no model is promoted.
+
+## 2026-10-02 — V3 robustness study declared before execution
+
+- User authorized further accuracy work and confirmed they have no recordings. Inspected upstream repository and a public ISMIR/MSD dataset; neither supplied matched source recordings under the current task. No external data were silently substituted.
+- Development-only diagnostic: 11 raw features have an observed extreme more than 20 interquartile ranges from the median. This motivates robust transformations without proving that outliers caused low performance.
+- Locked `configs/v3_robust.json`: all 35 V2 controls plus 20 fixed new settings (quantile transforms, core statistics, shrinkage LDA, regularized histogram boosting, small MI subsets and reduced-space neighbors). Same seeds, outer/inner folds, labels and native thresholds; 55 candidates, 2 workers, 1,800-second budget.
+- Reusing previously inspected development folds means this follow-up is exploratory. There is no independent confirmation. No historical re-evaluation is planned for this study.
+- **Next unblocked action:** verify transformation isolation and serialization, then execute this one declared nested study and compare paired development predictions.

@@ -5,13 +5,14 @@ from sklearn.base import BaseEstimator,TransformerMixin
 from sklearn.decomposition import PCA
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.dummy import DummyClassifier
-from sklearn.ensemble import RandomForestClassifier,ExtraTreesClassifier,GradientBoostingClassifier
+from sklearn.ensemble import RandomForestClassifier,ExtraTreesClassifier,GradientBoostingClassifier,HistGradientBoostingClassifier
 from sklearn.feature_selection import SelectKBest,f_classif,mutual_info_classif,VarianceThreshold
 from sklearn.impute import SimpleImputer
 from sklearn.linear_model import LogisticRegression
 from sklearn.neural_network import MLPClassifier
+from sklearn.neighbors import KNeighborsClassifier
 from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import StandardScaler,QuantileTransformer
 from sklearn.svm import SVC
 
 
@@ -47,17 +48,29 @@ def make_estimator(spec,features,seed=42):
         'random_forest':lambda:RandomForestClassifier(n_estimators=250,random_state=seed,n_jobs=1),
         'extra_trees':lambda:ExtraTreesClassifier(n_estimators=250,random_state=seed,n_jobs=1),
         'gradient_boosting':lambda:GradientBoostingClassifier(n_estimators=100,random_state=seed),
+        'hist_gradient_boosting':lambda:HistGradientBoostingClassifier(max_iter=100,early_stopping=False,random_state=seed),
+        'knn':lambda:KNeighborsClassifier(n_jobs=1),
         'mlp':lambda:MLPClassifier(hidden_layer_sizes=(64,32),max_iter=800,early_stopping=False,random_state=seed,tol=1e-4)}
     if family not in constructors: raise ValueError(f'Unknown candidate family: {family}')
     model=constructors[family]().set_params(**params)
     if getattr(model,'early_stopping',False): raise ValueError('Internal random early stopping violates grouped protocol')
     steps=[]
+    subset=representation.get('columns','all')
+    if subset not in {'all','core_statistics'}: raise ValueError('Unknown feature subset')
+    if subset=='core_statistics':
+        columns=[c for c in features if c.rsplit('_',2)[-2] in {'mean','median','std'}]
+        if not columns: raise ValueError('Core statistics require named audio features')
+        steps.append(('columns',FamilyColumns(columns)))
     if representation['kind']=='mfcc_spectral':
         prefixes=('mfcc_','rms_','spectral_','zero_crossing_rate_')
         columns=[c for c in features if c.startswith(prefixes)]
         if not columns: raise ValueError('Family ablation requires named audio features')
         steps.append(('family',FamilyColumns(columns)))
-    steps.extend([('imputer',SimpleImputer(strategy='median')),('variance',VarianceThreshold()),('scale',StandardScaler())])
+    scaling=representation.get('scaling','standard')
+    if scaling not in {'standard','quantile'}: raise ValueError('Unknown feature scaling')
+    scaler=StandardScaler() if scaling=='standard' else QuantileTransformer(
+        n_quantiles=50,output_distribution='normal',subsample=None,random_state=seed)
+    steps.extend([('imputer',SimpleImputer(strategy='median')),('variance',VarianceThreshold()),('scale',scaler)])
     kind=representation['kind']
     if kind=='pca': steps.append(('reduce',PCA(n_components=representation['value'],svd_solver='full')))
     elif kind in {'anova','mi'}:
