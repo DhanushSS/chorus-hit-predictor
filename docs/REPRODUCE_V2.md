@@ -47,7 +47,7 @@ python -m pytest -q -m integration
 
 Use IDs in the original `results/test_predictions.csv` for historical examples. Other IDs may be training examples, and the CLI labels them accordingly. App/CLI/report loading verifies hashes, software versions, run identity, labels and the ordered raw input schema. Inputs with missing, extra, reordered or nonfinite features are rejected; there is no silent reordering. Upload extraction must match the bundle's extractor contract. CSV provenance hashes identify the stored dataset, not newly uploaded audio.
 
-The unchanged six V1 tests are marked `baseline`; audio/app/process tests are marked `integration` from `tests/conftest.py`. The CI workflow runs the same full suite on Python 3.12 but has not been pushed or executed remotely.
+The unchanged six V1 tests are marked `baseline`; audio/app/process tests are marked `integration` from `tests/conftest.py`. The CI workflow runs the same full suite on Python 3.12. Its current remote status is shown in the repository Actions tab and the review pull request; local handoff records describe the earlier pre-publication state.
 
 ## Safe V1 reproduction and exact executed V2 source
 

@@ -1,5 +1,7 @@
 # Audit and experiment handoff — 2 October 2026
 
+> Publication note: this document records the initial local handoff. The user subsequently authorized a GitHub update. See the repository review branch and its pull request for current publication and CI status; the original execution records below remain unchanged.
+
 **Students:** Dhanush Sai Suprapadha (PES2UG24CS154) and Deepthi V (PES2UG24CS150).
 
 The supplied brief was followed in order: preserve and reproduce V1; run the declared development experiments; implement and audit audio interfaces; perform the explicit historical comparison; integrate and verify the demo and deliverables. All work possible with the available feature data is complete. **The strict >75% target was not achieved. No fresh-test result exists.**

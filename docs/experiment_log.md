@@ -50,3 +50,10 @@
 - Baseline data, models, scores, exports, notebook and attribution remain byte-identical; complete baseline archive verified. Exact source producing the V2 experiments preserved separately. See `preservation_check.json`, `v2_executed_code_identity.json`, `export_manifest.json` and `session_manifest.json`.
 - Full handoff: `docs/AUDIT_HANDOFF.md`; local review branch `audit/chorus-v2`. Package and patch are prepared for review; no push/merge/publication. Neither nested nor historical evaluation meets any of the five strict >75% checks. Fresh status remains unavailable/null. No promotion.
 - **Next unblocked action:** review the package and rehearse the supplied demo using `docs/VIVA_V2.md`. Complete the permitted recording, identity and label evidence in `docs/AUDIO_DATA_REQUIREMENTS.md` before a new matched audio study; the missing inputs block real embedding and fresh-test work.
+
+## GitHub update authorized — 2026-10-02
+
+- The user requested uploading the completed update to their existing GitHub repository. Verified `origin` as `DhanushSS/chorus-hit-predictor`, with write access and `main` still at the preserved baseline.
+- Prepared branch `audit/chorus-v2` for upload and a review pull request. Main remains unchanged; model promotion remains unchanged. Original measured run files and initial handoff evidence are preserved.
+- Updated current navigation to distinguish the initial local handoff from the subsequent GitHub update.
+- **Next unblocked action:** verify the uploaded branch and pull request, inspect GitHub Actions, and resolve any concrete CI failure before reporting completion.
