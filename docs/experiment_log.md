@@ -90,3 +90,12 @@
 - Initial uploaded V3 commit: `36d403d5ae2d5840931fc9ed9dc7e09f274dbcee`. The update includes the V2 audit, V3 source/configuration, completed trials, model artifacts, demo and measured findings. Main remains at the preserved baseline.
 - Updated publication notes to reflect the successful upload. Prior package receipts describe their creation-time state; experimental evidence is unchanged.
 - **Next unblocked action:** open the review pull request and verify GitHub Actions for the uploaded update. A new accuracy study still needs the recording and label inputs described in the V3 findings.
+
+## 2026-10-03 — Hugging Face feature pilot declared
+
+- User requested measured results using Hugging Face. Hub repository inspection and public Dataset Viewer calls succeeded; the plugin dataset-search endpoint had earlier reported disabled by server configuration.
+- Pinned Music4All metadata from `Leon299/music4all` revision `a391160e3e17f351d5ab2d05439a7d3d7f0440eb`. Found 434 unique normalized artist/title candidate links across the complete existing table; these are NOT verified recording identities.
+- Located the authors' companion Music4All-Onion release, Zenodo record 15394646 (CC BY 4.0), containing a 50-dimensional musicnn feature table. Downloaded this file and verified publisher MD5 `080a17808e1e86c849f3a4d99ad72b64`. No audio, MERT weights, paid compute or private data uploaded.
+- Locked `configs/hf_feature_pilot.json` before fitting: three fixed logistic-regression arms (legacy MI50, musicnn, combined), C=0.1, native threshold, V3 outer-fold membership restricted to candidate-linked development rows, paired whole-artist bootstrap. No tuning, historical evaluation or promotion.
+- This is a linkage feasibility pilot. Different recording versions, segment coverage, external pretraining overlap and inherited label uncertainty prevent treating its numbers as verified repeated-chorus accuracy or a fresh confirmation. Artist/title metadata is used only for joining, never as model features. Spotify popularity and acoustic metadata are excluded.
+- **Next unblocked action:** run the declared pilot and report all three arms on the same rows; retain missing-input and source limitations. Current user preference is private study, so this new work will remain local.
