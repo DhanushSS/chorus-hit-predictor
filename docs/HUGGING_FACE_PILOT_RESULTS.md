@@ -34,7 +34,7 @@ The protocol and runner were committed before fitting at `6ce23201633608b1644f28
 
 The approximate paired bootstrap uses 2,000 whole-artist resamples of fixed predictions. It does not include all model-fitting uncertainty, correct for repeated inspection, or validate the recording links. The same development data were previously studied; these are exploratory findings. A single fixed protocol was run without adding settings after seeing scores.
 
-Evidence is in `results/hf_features_001/` (inputs, fold membership, predictions, models, immutable manifest and summary) and `results/hf_feasibility_001/` (source records, checksums, verification and log). Downloaded bulk source files are excluded from Git but available locally, with pinned URLs and hashes in `source_manifest.json`. This new study is local only, following the user's private-study preference.
+Evidence is in `results/hf_features_001/` (inputs, fold membership, predictions, models, immutable manifest and summary) and `results/hf_feasibility_001/` (source records, checksums, verification and log). Downloaded bulk source files are excluded from Git but available locally, with pinned URLs and hashes in `source_manifest.json`. Initially kept local; the user subsequently authorised its upload on October 3 to the existing repository review branch.
 
 ## Next useful step
 

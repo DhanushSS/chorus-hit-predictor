@@ -125,3 +125,9 @@
 - Full suite: 26 passed / 4 existing dependency/decoder warnings in 14.80 seconds. New evidence tests independently recompute BA, check development membership and artist separation, reload all 100 estimators, and verify training-only scaling. Preserved all 26 protected baseline files, V1/V2/V3 runs and HF pilot hashes.
 - Saved `docs/ACCURACY_REPORT_RECONCILIATION.md`, immutable run records, original supplied report, review inventory and logs. Current branch `research/evaluation-stability`; no public upload, historical re-evaluation or demo/model promotion.
 - **Next unblocked action:** review the corrected audit and resolve recording/performer/chart evidence for an authorised audio subset. The assigned task remains primary. Selection-aware permutation testing and optional additional models remain explicitly unrun; new matched-audio/fresh-test work still requires verified inputs.
+
+## 2026-10-03 — Latest studies uploaded and original-paper comparison
+
+- User explicitly requested uploading the latest local work. Verified the existing repository remains public and fast-forwarded `research/chorus-v3` to include the HF pilot, ten-seed stability study and report reconciliation. Existing PR #1 includes the update; main is not merged.
+- Inspected Eric Liu's original PDF, Table 2: preferred NN test accuracy 58%, highest listed test accuracy RF 68%, NN CV accuracy 62%. The different labels, datasets and evaluation protocols prevent a superiority claim. Added `docs/ERIC_LIU_COMPARISON.md`.
+- **Next unblocked action:** verify GitHub CI for the updated PR and review the comparison. Matching recording/label evidence remains necessary for further audio experiments.
