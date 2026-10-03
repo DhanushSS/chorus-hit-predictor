@@ -1,0 +1,1370 @@
+{
+  "key": "outer3_v4_lr_std74_quantile_0.003_1",
+  "stage": "outer3",
+  "fold": 1,
+  "spec": {
+    "id": "v4_lr_std74_quantile_0.003",
+    "family": "logistic",
+    "params": {
+      "C": 0.003,
+      "class_weight": "balanced"
+    },
+    "representation": {
+      "kind": "none",
+      "columns": "std_only",
+      "scaling": "quantile",
+      "n_quantiles": 100
+    },
+    "role": "Archive-inspired fixed 74-standard-deviation feature extension"
+  },
+  "fit_rows": 313,
+  "validation_rows": 161,
+  "fit_groups": 27,
+  "validation_groups": 14,
+  "status": "complete",
+  "train_metrics": {
+    "accuracy": 0.6325878594249201,
+    "balanced_accuracy": 0.6341113841113841,
+    "precision": 0.6012269938650306,
+    "recall": 0.6621621621621622,
+    "f1": 0.6302250803858521,
+    "class_0_recall": 0.6060606060606061,
+    "macro_f1": 0.6325728576532434,
+    "roc_auc": null,
+    "confusion_matrix": [
+      [
+        100,
+        65
+      ],
+      [
+        50,
+        98
+      ]
+    ],
+    "n": 313,
+    "support": {
+      "0": 165,
+      "1": 148
+    },
+    "undefined": []
+  },
+  "metrics": {
+    "accuracy": 0.5341614906832298,
+    "balanced_accuracy": 0.5373802903923386,
+    "precision": 0.5625,
+    "recall": 0.43373493975903615,
+    "f1": 0.4897959183673469,
+    "class_0_recall": 0.6410256410256411,
+    "macro_f1": 0.5306122448979591,
+    "roc_auc": 0.5557615075687364,
+    "confusion_matrix": [
+      [
+        50,
+        28
+      ],
+      [
+        47,
+        36
+      ]
+    ],
+    "n": 161,
+    "support": {
+      "0": 78,
+      "1": 83
+    },
+    "undefined": []
+  },
+  "dimensions": 74,
+  "predictions": [
+    {
+      "track_id": "CH0001",
+      "artist_group": "the weeknd",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.2190019445944338,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0008",
+      "artist_group": "ed sheeran",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.09824917313287013,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0015",
+      "artist_group": "doja cat",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.1541255505852189,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0018",
+      "artist_group": "doja cat",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.4068226689036829,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0022",
+      "artist_group": "the weeknd",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.5550584753657262,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0027",
+      "artist_group": "doja cat",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.11705380896326723,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0030",
+      "artist_group": "the weeknd",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.09778381166175568,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0046",
+      "artist_group": "juice wrld",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.2984960909115131,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0062",
+      "artist_group": "juice wrld",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.07081298739530059,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0070",
+      "artist_group": "juice wrld",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.15463397781294042,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0072",
+      "artist_group": "ed sheeran",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.0954595178527133,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0078",
+      "artist_group": "imagine dragons",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.33669153662145007,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0081",
+      "artist_group": "imagine dragons",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.1521829781804751,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0090",
+      "artist_group": "imagine dragons",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.11554620288825215,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0091",
+      "artist_group": "ed sheeran",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.10828517547895192,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0092",
+      "artist_group": "the weeknd",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.25246817757338447,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0097",
+      "artist_group": "imagine dragons",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.2822644185684696,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0106",
+      "artist_group": "ed sheeran",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.2771100375537218,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0121",
+      "artist_group": "twenty one pilots",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.24847020093232697,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0124",
+      "artist_group": "twenty one pilots",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.24370791578268014,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0129",
+      "artist_group": "the weeknd",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.5083854618078996,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0135",
+      "artist_group": "the weeknd",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.3660550277025033,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0138",
+      "artist_group": "the weeknd",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.00808696699815558,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0139",
+      "artist_group": "coldplay",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.1012292254431476,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0144",
+      "artist_group": "coldplay",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.002890748950973605,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0146",
+      "artist_group": "ed sheeran",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.2074698364339425,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0150",
+      "artist_group": "the weeknd",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.35097383440719604,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0156",
+      "artist_group": "ed sheeran",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.2909992429275907,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0164",
+      "artist_group": "ed sheeran",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.23760274980649823,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0168",
+      "artist_group": "imagine dragons",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.46125835771433904,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0174",
+      "artist_group": "katy perry",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.165880015801847,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0175",
+      "artist_group": "coldplay",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.12842460023440888,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0176",
+      "artist_group": "imagine dragons",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.6018050495078634,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0177",
+      "artist_group": "katy perry",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.12367097870468052,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0190",
+      "artist_group": "imagine dragons",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.43040889266144244,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0193",
+      "artist_group": "ke$ha",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.19172567058429216,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0198",
+      "artist_group": "ed sheeran",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.3536939275570502,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0200",
+      "artist_group": "ne-yo",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.24422284220179544,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0205",
+      "artist_group": "katy perry",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.3920663315224816,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0209",
+      "artist_group": "katy perry",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.5496486906703867,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0212",
+      "artist_group": "katy perry",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.034138884503873416,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0216",
+      "artist_group": "coldplay",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.5543678058784661,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0219",
+      "artist_group": "usher",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.13238192509876495,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0223",
+      "artist_group": "katy perry",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.08791740451734759,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0227",
+      "artist_group": "katy perry",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.10583125182374035,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0234",
+      "artist_group": "britney spears",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.062283283302180005,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0236",
+      "artist_group": "ke$ha",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.14456740738392324,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0237",
+      "artist_group": "ke$ha",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.5985557163707829,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0239",
+      "artist_group": "britney spears",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.2672145573830753,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0242",
+      "artist_group": "britney spears",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.14082180504543904,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0243",
+      "artist_group": "usher",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.801972842768604,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0247",
+      "artist_group": "katy perry",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.02637220148233669,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0252",
+      "artist_group": "ke$ha",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.3682607808207189,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0256",
+      "artist_group": "ke$ha",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.22358124313436237,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0261",
+      "artist_group": "ke$ha",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.355192040666602,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0267",
+      "artist_group": "britney spears",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.39629528472136266,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0269",
+      "artist_group": "usher",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.6963262120370418,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0273",
+      "artist_group": "daughtry",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.17434777031555215,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0282",
+      "artist_group": "katy perry",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.25692096390082997,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0283",
+      "artist_group": "britney spears",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.24130714083842472,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0285",
+      "artist_group": "katy perry",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.06924561069541393,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0287",
+      "artist_group": "britney spears",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.09028941144495756,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0288",
+      "artist_group": "ne-yo",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.33182656546244416,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0292",
+      "artist_group": "nickelback",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.13355015624825764,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0294",
+      "artist_group": "coldplay",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.36108395867580956,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0296",
+      "artist_group": "ne-yo",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.22226188812014702,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0297",
+      "artist_group": "daughtry",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.03138824350014673,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0298",
+      "artist_group": "nickelback",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.04928760441661908,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0299",
+      "artist_group": "britney spears",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.19106412309741772,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0310",
+      "artist_group": "katy perry",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.2510915251571199,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0312",
+      "artist_group": "ne-yo",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.7188009354262,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0322",
+      "artist_group": "britney spears",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.027473008414021872,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0324",
+      "artist_group": "daughtry",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.36697385461798493,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0330",
+      "artist_group": "daughtry",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.31551214670933275,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0334",
+      "artist_group": "daughtry",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.26319446423069826,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0337",
+      "artist_group": "nickelback",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.13490541753011154,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0339",
+      "artist_group": "nickelback",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.42429621178792076,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0340",
+      "artist_group": "ne-yo",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.7243957117677405,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0346",
+      "artist_group": "nickelback",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.191024492649562,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0351",
+      "artist_group": "ne-yo",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.35575680586314495,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0358",
+      "artist_group": "nickelback",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.08641941496787696,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0359",
+      "artist_group": "ne-yo",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.3415637269514584,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0365",
+      "artist_group": "ne-yo",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.2924831871120064,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0370",
+      "artist_group": "ed sheeran",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.22301738741421448,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0383",
+      "artist_group": "juice wrld",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.3364945527105283,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0386",
+      "artist_group": "doja cat",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.36951366609025993,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0393",
+      "artist_group": "doja cat",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.24610373786384335,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0408",
+      "artist_group": "ed sheeran",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.09197662925936358,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0428",
+      "artist_group": "juice wrld",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.067464132240209,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0429",
+      "artist_group": "juice wrld",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.2157644174638975,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0430",
+      "artist_group": "juice wrld",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.0024226946364547053,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0432",
+      "artist_group": "juice wrld",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.1200253250745478,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0433",
+      "artist_group": "juice wrld",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.39053369884366185,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0434",
+      "artist_group": "juice wrld",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.1852610514393753,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0436",
+      "artist_group": "juice wrld",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.174550834969752,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0437",
+      "artist_group": "juice wrld",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.14276809844360086,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0438",
+      "artist_group": "juice wrld",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.04667300368142855,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0439",
+      "artist_group": "juice wrld",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.06878547668460112,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0440",
+      "artist_group": "juice wrld",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.24546875311903374,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0441",
+      "artist_group": "the weeknd",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.06010287143737094,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0442",
+      "artist_group": "the weeknd",
+      "label": 0,
+      "prediction": 0,
+      "score": -1.1483770423842676,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0443",
+      "artist_group": "the weeknd",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.25525379670149584,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0444",
+      "artist_group": "the weeknd",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.5781557206058724,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0445",
+      "artist_group": "the weeknd",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.02301287488026934,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0447",
+      "artist_group": "the weeknd",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.3836912092669415,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0448",
+      "artist_group": "the weeknd",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.9828727765445544,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0449",
+      "artist_group": "the weeknd",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.31302877871072154,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0450",
+      "artist_group": "the weeknd",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.030154297557783608,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0451",
+      "artist_group": "the weeknd",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.41866829338131284,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0458",
+      "artist_group": "juice wrld",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.10686528616412533,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0459",
+      "artist_group": "doja cat",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.07858914448099559,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0462",
+      "artist_group": "katy perry",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.3601006637699442,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0469",
+      "artist_group": "imagine dragons",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.09778292522521011,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0472",
+      "artist_group": "juice wrld",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.12210891224394826,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0474",
+      "artist_group": "juice wrld",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.3769046356493643,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0476",
+      "artist_group": "katy perry",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.2381917219385069,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0482",
+      "artist_group": "juice wrld",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.09108545627295957,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0485",
+      "artist_group": "juice wrld",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.006168302864226933,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0487",
+      "artist_group": "twenty one pilots",
+      "label": 0,
+      "prediction": 0,
+      "score": -1.2037221605425743,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0513",
+      "artist_group": "the weeknd",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.026015560382528398,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0517",
+      "artist_group": "ed sheeran",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.03306108353930251,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0519",
+      "artist_group": "the weeknd",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.33453884491627367,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0520",
+      "artist_group": "ed sheeran",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.2670101614119964,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0522",
+      "artist_group": "the weeknd",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.039322287636215154,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0525",
+      "artist_group": "katy perry",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.21288959349340977,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0535",
+      "artist_group": "the weeknd",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.039051741600147245,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0565",
+      "artist_group": "twenty one pilots",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.3959818537931537,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0567",
+      "artist_group": "imagine dragons",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.2539634517683423,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0573",
+      "artist_group": "twenty one pilots",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.2409712157506723,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0577",
+      "artist_group": "the weeknd",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.2500034244711404,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0580",
+      "artist_group": "katy perry",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.5542981957192156,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0584",
+      "artist_group": "usher",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.30923707792106125,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0587",
+      "artist_group": "coldplay",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.13204046163830158,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0588",
+      "artist_group": "imagine dragons",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.40412029735532784,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0589",
+      "artist_group": "katy perry",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.21054818174858866,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0596",
+      "artist_group": "britney spears",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.03612100207912702,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0598",
+      "artist_group": "daughtry",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.3294413247941378,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0605",
+      "artist_group": "britney spears",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.10016876420188287,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0608",
+      "artist_group": "britney spears",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.041398642283077845,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0615",
+      "artist_group": "ke$ha",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.34423101745157625,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0620",
+      "artist_group": "the weeknd",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.09620804909869718,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0635",
+      "artist_group": "nickelback",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.0775640872284756,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0643",
+      "artist_group": "britney spears",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.31306748849577815,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0658",
+      "artist_group": "daughtry",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.012356960122815223,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0660",
+      "artist_group": "ne-yo",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.0008187158153169774,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0661",
+      "artist_group": "ne-yo",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.21285297260348615,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0662",
+      "artist_group": "nickelback",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.22106959712868784,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0664",
+      "artist_group": "ne-yo",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.018657211299185916,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0677",
+      "artist_group": "usher",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.018652275974928363,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0678",
+      "artist_group": "nickelback",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.46195169843256223,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0690",
+      "artist_group": "daughtry",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.49128202671189775,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0694",
+      "artist_group": "katy perry",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.8379262066590366,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0699",
+      "artist_group": "usher",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.09593112633748903,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0703",
+      "artist_group": "daughtry",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.8854208549944457,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0704",
+      "artist_group": "nickelback",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.24871319240298417,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0711",
+      "artist_group": "usher",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.13958143687872676,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0716",
+      "artist_group": "britney spears",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.01944274578475135,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0718",
+      "artist_group": "ne-yo",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.07067256986336218,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0719",
+      "artist_group": "daughtry",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.17282200065295358,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0722",
+      "artist_group": "britney spears",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.00451492483009775,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0730",
+      "artist_group": "ne-yo",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.40060124570215944,
+      "score_kind": "decision_margin"
+    }
+  ],
+  "warnings": [],
+  "seconds": 0.08394233297440223
+}

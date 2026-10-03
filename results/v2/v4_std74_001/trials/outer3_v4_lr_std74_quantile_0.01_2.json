@@ -1,0 +1,1330 @@
+{
+  "key": "outer3_v4_lr_std74_quantile_0.01_2",
+  "stage": "outer3",
+  "fold": 2,
+  "spec": {
+    "id": "v4_lr_std74_quantile_0.01",
+    "family": "logistic",
+    "params": {
+      "C": 0.01,
+      "class_weight": "balanced"
+    },
+    "representation": {
+      "kind": "none",
+      "columns": "std_only",
+      "scaling": "quantile",
+      "n_quantiles": 100
+    },
+    "role": "Archive-inspired fixed 74-standard-deviation feature extension"
+  },
+  "fit_rows": 318,
+  "validation_rows": 156,
+  "fit_groups": 25,
+  "validation_groups": 16,
+  "status": "complete",
+  "train_metrics": {
+    "accuracy": 0.6918238993710691,
+    "balanced_accuracy": 0.6918908227848102,
+    "precision": 0.6851851851851852,
+    "recall": 0.7025316455696202,
+    "f1": 0.69375,
+    "class_0_recall": 0.68125,
+    "macro_f1": 0.6918117088607595,
+    "roc_auc": null,
+    "confusion_matrix": [
+      [
+        109,
+        51
+      ],
+      [
+        47,
+        111
+      ]
+    ],
+    "n": 318,
+    "support": {
+      "0": 160,
+      "1": 158
+    },
+    "undefined": []
+  },
+  "metrics": {
+    "accuracy": 0.5384615384615384,
+    "balanced_accuracy": 0.5373824063376795,
+    "precision": 0.5066666666666667,
+    "recall": 0.5205479452054794,
+    "f1": 0.5135135135135135,
+    "class_0_recall": 0.5542168674698795,
+    "macro_f1": 0.5372445616348056,
+    "roc_auc": 0.5611487044066678,
+    "confusion_matrix": [
+      [
+        46,
+        37
+      ],
+      [
+        35,
+        38
+      ]
+    ],
+    "n": 156,
+    "support": {
+      "0": 83,
+      "1": 73
+    },
+    "undefined": []
+  },
+  "dimensions": 74,
+  "predictions": [
+    {
+      "track_id": "CH0009",
+      "artist_group": "luke combs",
+      "label": 1,
+      "prediction": 0,
+      "score": -1.0450432298672514,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0017",
+      "artist_group": "luke combs",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.8642420632226462,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0020",
+      "artist_group": "justin bieber",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.1276364078856285,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0026",
+      "artist_group": "maroon 5",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.07797517026843344,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0031",
+      "artist_group": "dababy",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.43448498735318547,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0035",
+      "artist_group": "travis scott",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.1475815622016144,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0037",
+      "artist_group": "justin bieber",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.8894659900941245,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0041",
+      "artist_group": "jonas brothers",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.4812149163823629,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0045",
+      "artist_group": "luke combs",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.027655832801800274,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0048",
+      "artist_group": "luke combs",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.20474176211887005,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0052",
+      "artist_group": "travis scott",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.07100709012628321,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0053",
+      "artist_group": "jonas brothers",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.08087451149829455,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0055",
+      "artist_group": "dababy",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.23218657415434757,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0061",
+      "artist_group": "luke combs",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.06806432539580112,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0064",
+      "artist_group": "luke combs",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.5511553558949877,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0076",
+      "artist_group": "camila cabello",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.5446736279956479,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0087",
+      "artist_group": "maroon 5",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.18782719908374346,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0096",
+      "artist_group": "luke combs",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.1649305394569306,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0098",
+      "artist_group": "bruno mars",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.01988121787675871,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0099",
+      "artist_group": "kendrick lamar",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.4321813890757205,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0100",
+      "artist_group": "future",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.803744240291993,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0101",
+      "artist_group": "bruno mars",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.12896855644903146,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0110",
+      "artist_group": "kendrick lamar",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.3173490431974309,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0112",
+      "artist_group": "travis scott",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.5181307019014051,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0113",
+      "artist_group": "luke combs",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.05871292830646508,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0119",
+      "artist_group": "justin bieber",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.48231170527628286,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0120",
+      "artist_group": "justin bieber",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.5339886574507593,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0128",
+      "artist_group": "justin bieber",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.7663336837683572,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0133",
+      "artist_group": "meghan trainor",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.062387514735421444,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0136",
+      "artist_group": "meghan trainor",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.4153858232849984,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0140",
+      "artist_group": "travis scott",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.22161751516168995,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0143",
+      "artist_group": "chris brown",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.4109469051631072,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0145",
+      "artist_group": "future",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.18439014252613595,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0148",
+      "artist_group": "maroon 5",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.5185336544843526,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0152",
+      "artist_group": "meghan trainor",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.02446701840778549,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0154",
+      "artist_group": "meghan trainor",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.17159548386125767,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0157",
+      "artist_group": "maroon 5",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.15974205290924504,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0163",
+      "artist_group": "meghan trainor",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.28330993035639357,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0167",
+      "artist_group": "pharrell williams",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.4566366763758467,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0170",
+      "artist_group": "maroon 5",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.10257442113325231,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0181",
+      "artist_group": "bruno mars",
+      "label": 1,
+      "prediction": 0,
+      "score": -1.0390991971686734,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0182",
+      "artist_group": "bruno mars",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.038274652031222316,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0187",
+      "artist_group": "maroon 5",
+      "label": 1,
+      "prediction": 0,
+      "score": -1.5015128905101836,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0189",
+      "artist_group": "maroon 5",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.8078596543789158,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0191",
+      "artist_group": "maroon 5",
+      "label": 1,
+      "prediction": 1,
+      "score": 1.1974598700645966,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0199",
+      "artist_group": "kendrick lamar",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.38637793357414685,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0207",
+      "artist_group": "bruno mars",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.19979717916872958,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0208",
+      "artist_group": "justin bieber",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.3103570189866451,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0214",
+      "artist_group": "chris brown",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.41405252479988824,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0221",
+      "artist_group": "chris brown",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.3819164571459935,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0224",
+      "artist_group": "bruno mars",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.9034019210713679,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0228",
+      "artist_group": "bruno mars",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.982623862927474,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0233",
+      "artist_group": "bruno mars",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.2850651771795717,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0240",
+      "artist_group": "chris brown",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.8168137960345576,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0244",
+      "artist_group": "avril lavigne",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.6404646952339277,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0251",
+      "artist_group": "chris brown",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.3563547457972145,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0263",
+      "artist_group": "maroon 5",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.00016493664914967148,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0295",
+      "artist_group": "akon",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.3495660880455499,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0303",
+      "artist_group": "justin bieber",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.3361268493638996,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0307",
+      "artist_group": "chris brown",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.19716910630598733,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0308",
+      "artist_group": "chris brown",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.24605061726167865,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0313",
+      "artist_group": "fergie",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.01691250770388465,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0320",
+      "artist_group": "jonas brothers",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.43089928708845965,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0321",
+      "artist_group": "fergie",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.3357738234217186,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0327",
+      "artist_group": "akon",
+      "label": 1,
+      "prediction": 1,
+      "score": 1.1167118083889636,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0328",
+      "artist_group": "avril lavigne",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.584313405425376,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0329",
+      "artist_group": "maroon 5",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.1874023786920972,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0331",
+      "artist_group": "fergie",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.46887658164057694,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0342",
+      "artist_group": "avril lavigne",
+      "label": 1,
+      "prediction": 0,
+      "score": -1.0786383751408524,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0350",
+      "artist_group": "chris brown",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.4877128860828507,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0353",
+      "artist_group": "fergie",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.3563091309151759,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0356",
+      "artist_group": "chris brown",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.3944294664847528,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0363",
+      "artist_group": "chris brown",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.15962165052553168,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0375",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.045698345858010754,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0379",
+      "artist_group": "luke combs",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.03849854521279176,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0387",
+      "artist_group": "luke combs",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.4601506781934553,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0389",
+      "artist_group": "travis scott",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.5889341403330363,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0390",
+      "artist_group": "jonas brothers",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.06786672547966446,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0394",
+      "artist_group": "camila cabello",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.3356161076448925,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0395",
+      "artist_group": "dababy",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.25466180930722965,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0398",
+      "artist_group": "dababy",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.9521536273149055,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0401",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.47794580402960224,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0402",
+      "artist_group": "dababy",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.14984082189779074,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0403",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.3139504425589826,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0405",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.18918556847600748,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0410",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.6590937692397572,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0452",
+      "artist_group": "jonas brothers",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.19870438881871705,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0454",
+      "artist_group": "jonas brothers",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.21745938614578442,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0457",
+      "artist_group": "dababy",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.6005881116462476,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0465",
+      "artist_group": "jonas brothers",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.15944144092456025,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0473",
+      "artist_group": "chris brown",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.4361156278269164,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0477",
+      "artist_group": "luke combs",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.09609013724427394,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0481",
+      "artist_group": "camila cabello",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.76468258046718,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0492",
+      "artist_group": "meghan trainor",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.9330914036547877,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0494",
+      "artist_group": "chris brown",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.060489246244644516,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0500",
+      "artist_group": "luke combs",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.568031063366983,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0504",
+      "artist_group": "chris brown",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.5381071708746392,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0506",
+      "artist_group": "bruno mars",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.6499692058561768,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0507",
+      "artist_group": "travis scott",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.41723617691343723,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0509",
+      "artist_group": "camila cabello",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.2447430092612545,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0510",
+      "artist_group": "chris brown",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.08877766679070163,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0514",
+      "artist_group": "kendrick lamar",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.17259338788614373,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0518",
+      "artist_group": "future",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.057834116322583694,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0529",
+      "artist_group": "fergie",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.7714769309022013,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0536",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.09190309232872695,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0541",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 0,
+      "score": -1.155168461864013,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0546",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 0,
+      "score": -1.8092289572824711,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0547",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.973489478006029,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0548",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.24730482826273384,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0549",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.3870389826310719,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0550",
+      "artist_group": "chris brown",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.8007769848063393,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0551",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.19744830997493365,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0554",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.20723507593092472,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0558",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.20465780373753067,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0560",
+      "artist_group": "maroon 5",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.4471612114013111,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0562",
+      "artist_group": "future",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.4510585017202703,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0564",
+      "artist_group": "kendrick lamar",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.06642479575998272,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0569",
+      "artist_group": "kendrick lamar",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.12652590970982308,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0571",
+      "artist_group": "kendrick lamar",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.33009362135379366,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0575",
+      "artist_group": "fergie",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.4233779216588572,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0578",
+      "artist_group": "kendrick lamar",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.23977752792368545,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0583",
+      "artist_group": "pharrell williams",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.31827664139714634,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0585",
+      "artist_group": "bruno mars",
+      "label": 0,
+      "prediction": 0,
+      "score": -1.1094421726961885,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0593",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.046264188284744046,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0595",
+      "artist_group": "future",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.7596047558883503,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0603",
+      "artist_group": "bruno mars",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.6000364159247769,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0609",
+      "artist_group": "avril lavigne",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.6120706003863772,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0610",
+      "artist_group": "chris brown",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.6232610528636459,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0614",
+      "artist_group": "future",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.25363687572238797,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0616",
+      "artist_group": "kendrick lamar",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.1306386328066565,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0621",
+      "artist_group": "chris brown",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.2876059084302797,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0625",
+      "artist_group": "future",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.19937947884789012,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0633",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.13507201230509192,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0636",
+      "artist_group": "avril lavigne",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.5216469696499372,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0648",
+      "artist_group": "maroon 5",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.027128011577758602,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0650",
+      "artist_group": "avril lavigne",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.2071331584364717,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0654",
+      "artist_group": "chris brown",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.41467440255312743,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0659",
+      "artist_group": "akon",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.796754335585173,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0666",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.5691944824729912,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0671",
+      "artist_group": "avril lavigne",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.46010250684404147,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0676",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.1757794198105935,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0680",
+      "artist_group": "chris brown",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.3364860896927756,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0683",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.6412958837921958,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0685",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.5412612948602346,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0705",
+      "artist_group": "jonas brothers",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.19437786686389186,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0706",
+      "artist_group": "jonas brothers",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.18242963159518766,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0708",
+      "artist_group": "chris brown",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.5014240124796633,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0712",
+      "artist_group": "jonas brothers",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.3280767204734463,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0713",
+      "artist_group": "jonas brothers",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.20832731600982313,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0717",
+      "artist_group": "maroon 5",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.33440880247382726,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0720",
+      "artist_group": "maroon 5",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.22422197281187478,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0721",
+      "artist_group": "chris brown",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.07013020054816806,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0726",
+      "artist_group": "jonas brothers",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.0935658792652156,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0729",
+      "artist_group": "akon",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.0380752035708924,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0731",
+      "artist_group": "avril lavigne",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.29641382358192997,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0738",
+      "artist_group": "jonas brothers",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.14039219119926222,
+      "score_kind": "decision_margin"
+    }
+  ],
+  "warnings": [],
+  "seconds": 0.08487658301601186
+}

@@ -9,6 +9,16 @@
 
 A reproducible study of whether 15-second chorus audio features distinguish stronger chart success, with a working Streamlit demo, model comparisons, an executed notebook, reports, and presentation.
 
+## Latest: 74-feature experiment (October 4, local)
+
+[Read the complete V4 results](docs/V4_STD74_RESULTS.md). The archive-inspired study retained all 55 V3 candidates and added eight logistic regressions using 74 chorus-variation features.
+
+- On the same 597 development songs and outer folds, nested balanced accuracy increased from **53.25% to 54.66%**; ordinary accuracy increased from **53.27% to 54.61%**.
+- The paired gain is **+1.41 percentage points**, with an approximate 95% interval of **-4.29 to +7.33 points**. A reliable improvement is not established, and the five-metric >75% target remains unmet.
+- Final selection changed to standard-scaled, balanced logistic regression (C=0.1) using 74 standard-deviation features. The separate predeclared archive-model diagnostic scored 56.51% balanced accuracy; it is not the nested procedure estimate.
+- **1,203 recorded fold fits plus one final refit**, ten diagnostic fits, and **29 passing tests**. No failed study fits. Previously inspected development data remain exploratory; no new historical or fresh-test evaluation occurred.
+- The demo offers **V4 chorus-variation study** as a research option. Original model remains active. This new update is local on `research/std74-evaluation`; it has not been uploaded.
+
 ## Local evaluation audit (October 3)
 
 [Corrected accuracy report and remaining work](docs/ACCURACY_REPORT_RECONCILIATION.md). The assigned target is unchanged. A fixed-candidate stability check across ten grouped partitions averaged **53.05% balanced accuracy** (range **49.03%–54.26%**); this is descriptive reuse of the development data, not a new independent score. All 100 fits completed and **26 tests passed**. V3/demo results remain unchanged; this audit is uploaded on the review branch linked below.
@@ -17,7 +27,7 @@ A reproducible study of whether 15-second chorus audio features distinguish stro
 
 [Measured findings and limitations](docs/HUGGING_FACE_PILOT_RESULTS.md): on 340 candidate-linked development songs, balanced accuracy was 50.79% for the matched legacy baseline, 52.09% for published musicnn features and 54.17% for combined inputs. The combined paired gain interval (-0.22 to +7.21 percentage points) includes zero. Recording/chorus equivalence is unverified. This subset pilot does not replace the V3 result or the active demo, and it is now included in the review branch.
 
-## Latest: V3 robustness study (completed October 3)
+## V3 robustness study (completed October 3)
 
 [Read the V3 findings](docs/V3_RESEARCH_RESULTS.md) and [data-source review](docs/V3_DATA_SOURCE_REVIEW.md).
 

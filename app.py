@@ -27,7 +27,7 @@ try:
     default=active_run();available=[p.name for p in RUNS.iterdir() if p.is_dir() and not p.name.startswith('.') and (p/'manifest.json').is_file()]
     available=[default]+sorted(x for x in available if x!=default and x!='v2_quick_001')
     with st.sidebar:
-        run_id=st.selectbox('Demo run',available,format_func=lambda v: 'Original model (active)' if v==default else {'v2_nested_001':'V2 research candidate','v3_nested_001':'V3 robustness study'}.get(v,v))
+        run_id=st.selectbox('Demo run',available,format_func=lambda v: 'Original model (active)' if v==default else {'v2_nested_001':'V2 research candidate','v3_nested_001':'V3 robustness study','v4_std74_001':'V4 chorus-variation study'}.get(v,v))
         st.caption('The original model remains active. Selecting a research candidate here does not promote it.')
     key=run_cache_key(run_id);a=assets(*key);s=a.summary;bundle=a.bundle
 except Exception as error:

@@ -1,0 +1,1376 @@
+{
+  "key": "outer4_v3_lr_core_quantile_0.01_1",
+  "stage": "outer4",
+  "fold": 1,
+  "spec": {
+    "id": "v3_lr_core_quantile_0.01",
+    "family": "logistic",
+    "params": {
+      "C": 0.01
+    },
+    "representation": {
+      "kind": "none",
+      "scaling": "quantile",
+      "columns": "core_statistics"
+    },
+    "role": "V3 hypothesis-driven extension"
+  },
+  "fit_rows": 315,
+  "validation_rows": 162,
+  "fit_groups": 29,
+  "validation_groups": 14,
+  "status": "complete",
+  "train_metrics": {
+    "accuracy": 0.7396825396825397,
+    "balanced_accuracy": 0.7360414306522091,
+    "precision": 0.746268656716418,
+    "recall": 0.6756756756756757,
+    "f1": 0.7092198581560284,
+    "class_0_recall": 0.7964071856287425,
+    "macro_f1": 0.7367938371239913,
+    "roc_auc": null,
+    "confusion_matrix": [
+      [
+        133,
+        34
+      ],
+      [
+        48,
+        100
+      ]
+    ],
+    "n": 315,
+    "support": {
+      "0": 167,
+      "1": 148
+    },
+    "undefined": []
+  },
+  "metrics": {
+    "accuracy": 0.48148148148148145,
+    "balanced_accuracy": 0.4775641025641026,
+    "precision": 0.453125,
+    "recall": 0.3717948717948718,
+    "f1": 0.4084507042253521,
+    "class_0_recall": 0.5833333333333334,
+    "macro_f1": 0.4734561213434453,
+    "roc_auc": 0.4755799755799756,
+    "confusion_matrix": [
+      [
+        49,
+        35
+      ],
+      [
+        49,
+        29
+      ]
+    ],
+    "n": 162,
+    "support": {
+      "0": 84,
+      "1": 78
+    },
+    "undefined": []
+  },
+  "dimensions": 222,
+  "predictions": [
+    {
+      "track_id": "CH0008",
+      "artist_group": "ed sheeran",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.10432311218633386,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0026",
+      "artist_group": "maroon 5",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.13232786327489218,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0031",
+      "artist_group": "dababy",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.1682827317939297,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0046",
+      "artist_group": "juice wrld",
+      "label": 1,
+      "prediction": 0,
+      "score": -1.8464941197199218,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0055",
+      "artist_group": "dababy",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.22596754583187165,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0062",
+      "artist_group": "juice wrld",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.2907495354103431,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0070",
+      "artist_group": "juice wrld",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.6724019740002917,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0072",
+      "artist_group": "ed sheeran",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.5811132977394157,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0076",
+      "artist_group": "camila cabello",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.1736776425952841,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0087",
+      "artist_group": "maroon 5",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.5302614335803016,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0091",
+      "artist_group": "ed sheeran",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.23593444646552705,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0098",
+      "artist_group": "bruno mars",
+      "label": 1,
+      "prediction": 1,
+      "score": 1.0770789422495648,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0101",
+      "artist_group": "bruno mars",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.08184737347320964,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0106",
+      "artist_group": "ed sheeran",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.19039421805148157,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0121",
+      "artist_group": "twenty one pilots",
+      "label": 1,
+      "prediction": 0,
+      "score": -1.2661086107254054,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0124",
+      "artist_group": "twenty one pilots",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.3725306415449327,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0146",
+      "artist_group": "ed sheeran",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.6773243895704056,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0148",
+      "artist_group": "maroon 5",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.6150396400203406,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0156",
+      "artist_group": "ed sheeran",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.7698245925598309,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0157",
+      "artist_group": "maroon 5",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.9056609386872462,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0160",
+      "artist_group": "beyonce",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.7060771783111415,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0161",
+      "artist_group": "one direction",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.5057557085817509,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0164",
+      "artist_group": "ed sheeran",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.6014380009971441,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0165",
+      "artist_group": "one direction",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.1753774245351354,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0169",
+      "artist_group": "one direction",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.5402249032535243,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0170",
+      "artist_group": "maroon 5",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.10787206263442534,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0171",
+      "artist_group": "nicki minaj",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.3583501512740018,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0178",
+      "artist_group": "beyonce",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.16079137909477817,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0181",
+      "artist_group": "bruno mars",
+      "label": 1,
+      "prediction": 0,
+      "score": -2.544092575907915,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0182",
+      "artist_group": "bruno mars",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.6373726825666455,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0187",
+      "artist_group": "maroon 5",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.7695773348871181,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0189",
+      "artist_group": "maroon 5",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.7105922580722454,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0191",
+      "artist_group": "maroon 5",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.014020953097981043,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0193",
+      "artist_group": "ke$ha",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.3427144035471925,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0197",
+      "artist_group": "one direction",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.25571037749715975,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0198",
+      "artist_group": "ed sheeran",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.7103304542285228,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0200",
+      "artist_group": "ne-yo",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.5672209580358181,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0201",
+      "artist_group": "nicki minaj",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.6795044809242228,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0202",
+      "artist_group": "one direction",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.909377178063965,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0207",
+      "artist_group": "bruno mars",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.38316279991019575,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0219",
+      "artist_group": "usher",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.42642357198978453,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0220",
+      "artist_group": "nicki minaj",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.916037731789073,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0224",
+      "artist_group": "bruno mars",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.06485853195177335,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0225",
+      "artist_group": "nicki minaj",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.4802741052985665,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0228",
+      "artist_group": "bruno mars",
+      "label": 1,
+      "prediction": 1,
+      "score": 1.0152047343724773,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0233",
+      "artist_group": "bruno mars",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.11376841685287739,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0234",
+      "artist_group": "britney spears",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.2635378875429911,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0236",
+      "artist_group": "ke$ha",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.15706172236896085,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0237",
+      "artist_group": "ke$ha",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.3768715383382484,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0239",
+      "artist_group": "britney spears",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.3838698267950118,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0242",
+      "artist_group": "britney spears",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.2083211315307444,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0243",
+      "artist_group": "usher",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.21582058569584237,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0250",
+      "artist_group": "beyonce",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.43684038178991436,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0252",
+      "artist_group": "ke$ha",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.3651867390549143,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0256",
+      "artist_group": "ke$ha",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.596742953049897,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0261",
+      "artist_group": "ke$ha",
+      "label": 1,
+      "prediction": 1,
+      "score": 1.3093521462093525,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0263",
+      "artist_group": "maroon 5",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.9228503119704522,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0265",
+      "artist_group": "nicki minaj",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.015716000879446662,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0267",
+      "artist_group": "britney spears",
+      "label": 1,
+      "prediction": 1,
+      "score": 1.0879703306562432,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0269",
+      "artist_group": "usher",
+      "label": 1,
+      "prediction": 0,
+      "score": -1.0296206675570316,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0271",
+      "artist_group": "beyonce",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.18102336894343454,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0277",
+      "artist_group": "beyonce",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.01854207497116861,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0281",
+      "artist_group": "beyonce",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.997351911244554,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0283",
+      "artist_group": "britney spears",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.5116174483771142,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0287",
+      "artist_group": "britney spears",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.09858602870467276,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0288",
+      "artist_group": "ne-yo",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.9816047304897803,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0291",
+      "artist_group": "beyonce",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.10420037756624523,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0296",
+      "artist_group": "ne-yo",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.29808832268818186,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0299",
+      "artist_group": "britney spears",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.3370105553269255,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0302",
+      "artist_group": "beyonce",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.3870874029165733,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0312",
+      "artist_group": "ne-yo",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.506434978634396,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0322",
+      "artist_group": "britney spears",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.5362780200067901,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0325",
+      "artist_group": "beyonce",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.821268018215049,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0329",
+      "artist_group": "maroon 5",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.5107778636747458,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0340",
+      "artist_group": "ne-yo",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.40321923196922715,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0351",
+      "artist_group": "ne-yo",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.17889874934958175,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0359",
+      "artist_group": "ne-yo",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.12124154726873876,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0365",
+      "artist_group": "ne-yo",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.14244946380635398,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0370",
+      "artist_group": "ed sheeran",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.558304074172578,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0383",
+      "artist_group": "juice wrld",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.53360096334656,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0394",
+      "artist_group": "camila cabello",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.34555368000819775,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0395",
+      "artist_group": "dababy",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.5153085616466091,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0398",
+      "artist_group": "dababy",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.6883064942584632,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0402",
+      "artist_group": "dababy",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.09684940515590132,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0408",
+      "artist_group": "ed sheeran",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.3045993384597565,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0428",
+      "artist_group": "juice wrld",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.08894599039386145,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0429",
+      "artist_group": "juice wrld",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.02599110593875567,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0430",
+      "artist_group": "juice wrld",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.31351796963880885,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0432",
+      "artist_group": "juice wrld",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.05310109790522194,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0433",
+      "artist_group": "juice wrld",
+      "label": 0,
+      "prediction": 1,
+      "score": 1.0835328824541977,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0434",
+      "artist_group": "juice wrld",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.4039935533489458,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0436",
+      "artist_group": "juice wrld",
+      "label": 0,
+      "prediction": 0,
+      "score": -1.7613221722143497,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0437",
+      "artist_group": "juice wrld",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.48221953991936517,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0438",
+      "artist_group": "juice wrld",
+      "label": 0,
+      "prediction": 0,
+      "score": -1.4442102796277074,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0439",
+      "artist_group": "juice wrld",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.5347862640469979,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0440",
+      "artist_group": "juice wrld",
+      "label": 0,
+      "prediction": 1,
+      "score": 1.2568249833935794,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0457",
+      "artist_group": "dababy",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.11005516499327192,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0458",
+      "artist_group": "juice wrld",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.681004085873557,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0466",
+      "artist_group": "beyonce",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.056543738267083005,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0468",
+      "artist_group": "nicki minaj",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.057719924675558906,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0472",
+      "artist_group": "juice wrld",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.46531401931446315,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0474",
+      "artist_group": "juice wrld",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.4411473788741872,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0481",
+      "artist_group": "camila cabello",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.6753923295954781,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0482",
+      "artist_group": "juice wrld",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.3120202182452385,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0485",
+      "artist_group": "juice wrld",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.7521069932537607,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0487",
+      "artist_group": "twenty one pilots",
+      "label": 0,
+      "prediction": 0,
+      "score": -1.0515749934363188,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0506",
+      "artist_group": "bruno mars",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.6300135652783281,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0509",
+      "artist_group": "camila cabello",
+      "label": 0,
+      "prediction": 1,
+      "score": 1.2068094333386117,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0516",
+      "artist_group": "nicki minaj",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.6201950293770297,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0517",
+      "artist_group": "ed sheeran",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.22387672615959336,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0520",
+      "artist_group": "ed sheeran",
+      "label": 0,
+      "prediction": 0,
+      "score": -1.6988774800452495,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0552",
+      "artist_group": "one direction",
+      "label": 0,
+      "prediction": 0,
+      "score": -1.3792831309476834,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0553",
+      "artist_group": "one direction",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.09680366853190081,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0555",
+      "artist_group": "one direction",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.33129665415096254,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0557",
+      "artist_group": "one direction",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.7144089218250146,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0559",
+      "artist_group": "one direction",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.3549225336593935,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0560",
+      "artist_group": "maroon 5",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.4973394753083604,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0561",
+      "artist_group": "nicki minaj",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.1883920246876876,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0565",
+      "artist_group": "twenty one pilots",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.16951633126351975,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0573",
+      "artist_group": "twenty one pilots",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.828065308443657,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0576",
+      "artist_group": "one direction",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.2380050986539767,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0581",
+      "artist_group": "one direction",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.14261942116866783,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0582",
+      "artist_group": "nicki minaj",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.5329289415881681,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0584",
+      "artist_group": "usher",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.13067187377092485,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0585",
+      "artist_group": "bruno mars",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.3414332846502239,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0590",
+      "artist_group": "beyonce",
+      "label": 0,
+      "prediction": 0,
+      "score": -1.0615080023635144,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0596",
+      "artist_group": "britney spears",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.23920019674048373,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0600",
+      "artist_group": "one direction",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.5364974221014873,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0601",
+      "artist_group": "one direction",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.6974830988945199,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0603",
+      "artist_group": "bruno mars",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.539738420763417,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0604",
+      "artist_group": "one direction",
+      "label": 0,
+      "prediction": 0,
+      "score": -1.3545905453087088,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0605",
+      "artist_group": "britney spears",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.2495290715403831,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0608",
+      "artist_group": "britney spears",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.6941441900765742,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0612",
+      "artist_group": "one direction",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.7992109357118408,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0615",
+      "artist_group": "ke$ha",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.8951101131270823,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0618",
+      "artist_group": "nicki minaj",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.11973914702504193,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0619",
+      "artist_group": "one direction",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.5912347655223641,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0623",
+      "artist_group": "one direction",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.6205514721664765,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0627",
+      "artist_group": "beyonce",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.27947808403633545,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0628",
+      "artist_group": "one direction",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.2895075349898123,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0638",
+      "artist_group": "beyonce",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.2532366412366027,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0639",
+      "artist_group": "nicki minaj",
+      "label": 0,
+      "prediction": 1,
+      "score": 2.958050619688082,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0643",
+      "artist_group": "britney spears",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.31672828374333195,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0648",
+      "artist_group": "maroon 5",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.30314842162997047,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0653",
+      "artist_group": "nicki minaj",
+      "label": 0,
+      "prediction": 1,
+      "score": 2.1771819403227277,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0655",
+      "artist_group": "nicki minaj",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.17907566901441255,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0660",
+      "artist_group": "ne-yo",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.7275324450232742,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0661",
+      "artist_group": "ne-yo",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.0658207351914559,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0664",
+      "artist_group": "ne-yo",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.27656957773385704,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0677",
+      "artist_group": "usher",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.41146478577491397,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0687",
+      "artist_group": "beyonce",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.353819210894647,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0699",
+      "artist_group": "usher",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.6599972458605364,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0711",
+      "artist_group": "usher",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.557105330784547,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0716",
+      "artist_group": "britney spears",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.3616797803755446,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0717",
+      "artist_group": "maroon 5",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.3652937722475049,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0718",
+      "artist_group": "ne-yo",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.12031875007912562,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0720",
+      "artist_group": "maroon 5",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.9395366974393046,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0722",
+      "artist_group": "britney spears",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.4063300992533351,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0730",
+      "artist_group": "ne-yo",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.7102424898546126,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0733",
+      "artist_group": "beyonce",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.5457594002994717,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0743",
+      "artist_group": "beyonce",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.012700370450338477,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0744",
+      "artist_group": "beyonce",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.13908195924113784,
+      "score_kind": "decision_margin"
+    }
+  ],
+  "warnings": [],
+  "seconds": 0.15334029198857024
+}

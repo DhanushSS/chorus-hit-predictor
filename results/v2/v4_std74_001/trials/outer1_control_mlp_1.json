@@ -1,0 +1,1367 @@
+{
+  "key": "outer1_control_mlp_1",
+  "stage": "outer1",
+  "fold": 1,
+  "spec": {
+    "id": "control_mlp",
+    "family": "mlp",
+    "params": {
+      "alpha": 1.0
+    },
+    "representation": {
+      "kind": "pca",
+      "value": 0.95
+    },
+    "role": "V1 preprocessing and V1 development-chosen setting; re-evaluated on new grouped folds"
+  },
+  "fit_rows": 317,
+  "validation_rows": 161,
+  "fit_groups": 28,
+  "validation_groups": 13,
+  "status": "complete",
+  "train_metrics": {
+    "accuracy": 1.0,
+    "balanced_accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "class_0_recall": 1.0,
+    "macro_f1": 1.0,
+    "roc_auc": null,
+    "confusion_matrix": [
+      [
+        159,
+        0
+      ],
+      [
+        0,
+        158
+      ]
+    ],
+    "n": 317,
+    "support": {
+      "0": 159,
+      "1": 158
+    },
+    "undefined": []
+  },
+  "metrics": {
+    "accuracy": 0.5217391304347826,
+    "balanced_accuracy": 0.5243506493506493,
+    "precision": 0.5,
+    "recall": 0.5844155844155844,
+    "f1": 0.5389221556886228,
+    "class_0_recall": 0.4642857142857143,
+    "macro_f1": 0.5210739810701178,
+    "roc_auc": 0.5435992578849722,
+    "confusion_matrix": [
+      [
+        39,
+        45
+      ],
+      [
+        32,
+        45
+      ]
+    ],
+    "n": 161,
+    "support": {
+      "0": 84,
+      "1": 77
+    },
+    "undefined": []
+  },
+  "dimensions": 131,
+  "predictions": [
+    {
+      "track_id": "CH0001",
+      "artist_group": "the weeknd",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.953055504197608,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0019",
+      "artist_group": "drake",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.5172423059615565,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0020",
+      "artist_group": "justin bieber",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.21442235967590365,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0022",
+      "artist_group": "the weeknd",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.00013513277764526632,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0030",
+      "artist_group": "the weeknd",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.9968886705203214,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0032",
+      "artist_group": "drake",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.9852941598373379,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0034",
+      "artist_group": "lil baby",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.8268929413452486,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0037",
+      "artist_group": "justin bieber",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.09948233763027,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0039",
+      "artist_group": "lil baby",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.9442598911361215,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0040",
+      "artist_group": "lil baby",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.9952111357430278,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0042",
+      "artist_group": "lil baby",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.8530893695008204,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0068",
+      "artist_group": "lil baby",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.9906156196923978,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0071",
+      "artist_group": "drake",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.4423989430066005,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0073",
+      "artist_group": "drake",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.012928961681100692,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0074",
+      "artist_group": "drake",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.010231724712418466,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0075",
+      "artist_group": "xxxtentacion",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.9117799508281096,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0078",
+      "artist_group": "imagine dragons",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.0018507308713512057,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0081",
+      "artist_group": "imagine dragons",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.9970983302476127,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0085",
+      "artist_group": "drake",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.8601081325260217,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0090",
+      "artist_group": "imagine dragons",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.0667365114442015,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0092",
+      "artist_group": "the weeknd",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.7205405446837884,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0093",
+      "artist_group": "drake",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.050924203790965836,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0094",
+      "artist_group": "xxxtentacion",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.9534867752346166,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0095",
+      "artist_group": "xxxtentacion",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.00015311645318104357,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0097",
+      "artist_group": "imagine dragons",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.8237441651973962,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0098",
+      "artist_group": "bruno mars",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.993553092930673,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0100",
+      "artist_group": "future",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.8437662639742347,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0101",
+      "artist_group": "bruno mars",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.4569423935311232,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0104",
+      "artist_group": "drake",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.9969837580277054,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0111",
+      "artist_group": "drake",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.9807112088791938,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0119",
+      "artist_group": "justin bieber",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.9641386679283509,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0120",
+      "artist_group": "justin bieber",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.7907308898774256,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0126",
+      "artist_group": "drake",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.7904946207284161,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0128",
+      "artist_group": "justin bieber",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.9759528359257433,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0129",
+      "artist_group": "the weeknd",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.9800690966851711,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0132",
+      "artist_group": "drake",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.13145599466988753,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0135",
+      "artist_group": "the weeknd",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.5507948124344064,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0138",
+      "artist_group": "the weeknd",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.9481606133702666,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0145",
+      "artist_group": "future",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.5484464520069381,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0150",
+      "artist_group": "the weeknd",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.40648992446813625,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0166",
+      "artist_group": "drake",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.989670527664409,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0167",
+      "artist_group": "pharrell williams",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.3649805229889046,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0168",
+      "artist_group": "imagine dragons",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.779724612126638,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0171",
+      "artist_group": "nicki minaj",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.18375282103442425,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0176",
+      "artist_group": "imagine dragons",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.4852290819633894,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0179",
+      "artist_group": "drake",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.0012171416150858782,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0181",
+      "artist_group": "bruno mars",
+      "label": 1,
+      "prediction": 0,
+      "score": 4.976558698744065e-06,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0182",
+      "artist_group": "bruno mars",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.31327550993269293,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0186",
+      "artist_group": "drake",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.9991546562966854,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0190",
+      "artist_group": "imagine dragons",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.7837805856622392,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0193",
+      "artist_group": "ke$ha",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.002156911408409821,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0201",
+      "artist_group": "nicki minaj",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.22548712057559514,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0207",
+      "artist_group": "bruno mars",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.03465725183945641,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0208",
+      "artist_group": "justin bieber",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.9998712112297661,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0220",
+      "artist_group": "nicki minaj",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.538385916714261,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0224",
+      "artist_group": "bruno mars",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.9992891737520531,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0225",
+      "artist_group": "nicki minaj",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.37722029080997455,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0228",
+      "artist_group": "bruno mars",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.9992287428214772,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0233",
+      "artist_group": "bruno mars",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.003603593867535221,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0236",
+      "artist_group": "ke$ha",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.9541067784968863,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0237",
+      "artist_group": "ke$ha",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.9987839218472695,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0249",
+      "artist_group": "drake",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.9494051762642551,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0252",
+      "artist_group": "ke$ha",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.14801412485526125,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0256",
+      "artist_group": "ke$ha",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.9973264528052357,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0257",
+      "artist_group": "drake",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.6482043271689847,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0261",
+      "artist_group": "ke$ha",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.5803881806013916,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0262",
+      "artist_group": "drake",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.040981410865868685,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0265",
+      "artist_group": "nicki minaj",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.012211606474080487,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0273",
+      "artist_group": "daughtry",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.7506188006439032,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0280",
+      "artist_group": "drake",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.425670808410671,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0297",
+      "artist_group": "daughtry",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.0018192258553408349,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0303",
+      "artist_group": "justin bieber",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.14113899838621513,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0324",
+      "artist_group": "daughtry",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.3995999514010372,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0330",
+      "artist_group": "daughtry",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.9962005282961783,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0334",
+      "artist_group": "daughtry",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.3488411855312662,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0348",
+      "artist_group": "sean paul",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.5842739110339021,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0362",
+      "artist_group": "sean paul",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.7544496789387223,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0375",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.9804444676313877,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0401",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.06360002130862676,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0403",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.8206346388152045,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0405",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.3341567064533048,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0410",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.5965522802089003,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0441",
+      "artist_group": "the weeknd",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.19429101943402757,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0442",
+      "artist_group": "the weeknd",
+      "label": 0,
+      "prediction": 0,
+      "score": 3.737204186320587e-05,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0443",
+      "artist_group": "the weeknd",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.9907752758862081,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0444",
+      "artist_group": "the weeknd",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.7502085706722823,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0445",
+      "artist_group": "the weeknd",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.9821113691520403,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0447",
+      "artist_group": "the weeknd",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.00349479421900252,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0448",
+      "artist_group": "the weeknd",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.0024078650618694158,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0449",
+      "artist_group": "the weeknd",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.9958973858661422,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0450",
+      "artist_group": "the weeknd",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.9301509438107982,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0451",
+      "artist_group": "the weeknd",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.9582839813225911,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0468",
+      "artist_group": "nicki minaj",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.4240865229117125,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0469",
+      "artist_group": "imagine dragons",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.007678111507242828,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0470",
+      "artist_group": "lil baby",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.7600367246178359,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0479",
+      "artist_group": "xxxtentacion",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.9836560723369081,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0484",
+      "artist_group": "drake",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.07679278068110856,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0490",
+      "artist_group": "drake",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.998562377447654,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0491",
+      "artist_group": "drake",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.08445629513696598,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0495",
+      "artist_group": "xxxtentacion",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.8648297328934702,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0498",
+      "artist_group": "lil baby",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.908058420736969,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0502",
+      "artist_group": "xxxtentacion",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.9961918843813513,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0506",
+      "artist_group": "bruno mars",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.010171630943170683,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0512",
+      "artist_group": "drake",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.9595803685901583,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0513",
+      "artist_group": "the weeknd",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.005699038280514881,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0516",
+      "artist_group": "nicki minaj",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.9959456574100671,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0518",
+      "artist_group": "future",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.08554414265575289,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0519",
+      "artist_group": "the weeknd",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.9993377772559667,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0522",
+      "artist_group": "the weeknd",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.7799677434901384,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0530",
+      "artist_group": "drake",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.1648509428999548,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0531",
+      "artist_group": "drake",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.03170905979222603,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0535",
+      "artist_group": "the weeknd",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.05946835880010215,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0536",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.5153734322610101,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0541",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.9964982875512194,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0544",
+      "artist_group": "drake",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.9630381109426195,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0546",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.008910167509391482,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0547",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.0037401457991781918,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0548",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.006604074573420612,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0549",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.9333129690791439,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0551",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.6886882805100459,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0554",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.948883888909981,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0558",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.0022607895294121804,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0561",
+      "artist_group": "nicki minaj",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.9968651791058409,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0562",
+      "artist_group": "future",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.10765621465091448,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0566",
+      "artist_group": "drake",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.5127647696248355,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0567",
+      "artist_group": "imagine dragons",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.9998716978713755,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0568",
+      "artist_group": "drake",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.9568833951920009,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0570",
+      "artist_group": "drake",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.8757068646070965,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0572",
+      "artist_group": "drake",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.90569361006477,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0577",
+      "artist_group": "the weeknd",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.7677188833652093,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0582",
+      "artist_group": "nicki minaj",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.9019389590729697,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0583",
+      "artist_group": "pharrell williams",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.0573363408002383,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0585",
+      "artist_group": "bruno mars",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.4704326495775841,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0588",
+      "artist_group": "imagine dragons",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.9124979690791005,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0591",
+      "artist_group": "drake",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.2397812473454212,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0593",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.8607272281527817,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0595",
+      "artist_group": "future",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.9978394480594439,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0597",
+      "artist_group": "drake",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.6531292905191167,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0598",
+      "artist_group": "daughtry",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.04167320631910974,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0603",
+      "artist_group": "bruno mars",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.00037075114304031435,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0614",
+      "artist_group": "future",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.9788644328719484,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0615",
+      "artist_group": "ke$ha",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.05153510915864447,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0618",
+      "artist_group": "nicki minaj",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.22531797185961228,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0620",
+      "artist_group": "the weeknd",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.7132733328383118,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0625",
+      "artist_group": "future",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.9930517236087818,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0633",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.07353769066562627,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0639",
+      "artist_group": "nicki minaj",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.9931855309864571,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0642",
+      "artist_group": "drake",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.0040659528068605535,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0644",
+      "artist_group": "drake",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.0015649585669061503,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0649",
+      "artist_group": "drake",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.11518678906801827,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0653",
+      "artist_group": "nicki minaj",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.01642355058933175,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0655",
+      "artist_group": "nicki minaj",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.5000744998312824,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0658",
+      "artist_group": "daughtry",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.06422475366147042,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0666",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.9968336190085373,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0676",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.0027903844375572104,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0683",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.8425339102123335,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0685",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.11430017281695673,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0688",
+      "artist_group": "sean paul",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.19662237979924496,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0690",
+      "artist_group": "daughtry",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.08110635939195765,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0703",
+      "artist_group": "daughtry",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.008347594633764624,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0719",
+      "artist_group": "daughtry",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.5899695482512135,
+      "score_kind": "uncalibrated_class_1_probability"
+    }
+  ],
+  "warnings": [],
+  "seconds": 0.26102545799221843
+}

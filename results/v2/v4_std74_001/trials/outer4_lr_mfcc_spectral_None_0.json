@@ -1,0 +1,1350 @@
+{
+  "key": "outer4_lr_mfcc_spectral_None_0",
+  "stage": "outer4",
+  "fold": 0,
+  "spec": {
+    "id": "lr_mfcc_spectral_None",
+    "family": "logistic",
+    "params": {
+      "C": 0.1
+    },
+    "representation": {
+      "kind": "mfcc_spectral"
+    },
+    "role": "paired representation ablation; fixed C=0.1"
+  },
+  "fit_rows": 318,
+  "validation_rows": 159,
+  "fit_groups": 29,
+  "validation_groups": 14,
+  "status": "complete",
+  "train_metrics": {
+    "accuracy": 0.8144654088050315,
+    "balanced_accuracy": 0.8136066547831253,
+    "precision": 0.8175675675675675,
+    "recall": 0.7908496732026143,
+    "f1": 0.8039867109634552,
+    "class_0_recall": 0.8363636363636363,
+    "macro_f1": 0.8139336539891903,
+    "roc_auc": null,
+    "confusion_matrix": [
+      [
+        138,
+        27
+      ],
+      [
+        32,
+        121
+      ]
+    ],
+    "n": 318,
+    "support": {
+      "0": 165,
+      "1": 153
+    },
+    "undefined": []
+  },
+  "metrics": {
+    "accuracy": 0.4968553459119497,
+    "balanced_accuracy": 0.4976107040458745,
+    "precision": 0.4567901234567901,
+    "recall": 0.5068493150684932,
+    "f1": 0.4805194805194805,
+    "class_0_recall": 0.4883720930232558,
+    "macro_f1": 0.49635730123535005,
+    "roc_auc": 0.5039821599235426,
+    "confusion_matrix": [
+      [
+        42,
+        44
+      ],
+      [
+        36,
+        37
+      ]
+    ],
+    "n": 159,
+    "support": {
+      "0": 86,
+      "1": 73
+    },
+    "undefined": []
+  },
+  "dimensions": 224,
+  "predictions": [
+    {
+      "track_id": "CH0005",
+      "artist_group": "bts",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.9035555516375288,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0014",
+      "artist_group": "bts",
+      "label": 1,
+      "prediction": 0,
+      "score": -1.0191260238967028,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0015",
+      "artist_group": "doja cat",
+      "label": 1,
+      "prediction": 0,
+      "score": -1.4139280090541213,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0018",
+      "artist_group": "doja cat",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.28461443530793323,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0024",
+      "artist_group": "post malone",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.7306621142298318,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0027",
+      "artist_group": "doja cat",
+      "label": 1,
+      "prediction": 0,
+      "score": -2.944067380195853,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0050",
+      "artist_group": "post malone",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.10358161787341454,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0057",
+      "artist_group": "post malone",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.31782792655658765,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0069",
+      "artist_group": "p!nk",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.5591668217444384,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0082",
+      "artist_group": "post malone",
+      "label": 1,
+      "prediction": 1,
+      "score": 1.0499018105315736,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0099",
+      "artist_group": "kendrick lamar",
+      "label": 1,
+      "prediction": 1,
+      "score": 3.61628688347691,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0110",
+      "artist_group": "kendrick lamar",
+      "label": 1,
+      "prediction": 0,
+      "score": -1.0396414444241473,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0114",
+      "artist_group": "p!nk",
+      "label": 1,
+      "prediction": 1,
+      "score": 2.5533589831938985,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0116",
+      "artist_group": "adele",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.13421496068556005,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0122",
+      "artist_group": "adele",
+      "label": 1,
+      "prediction": 0,
+      "score": -1.0136835197684682,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0127",
+      "artist_group": "adele",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.4090129007870371,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0130",
+      "artist_group": "p!nk",
+      "label": 1,
+      "prediction": 1,
+      "score": 3.209000996294102,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0133",
+      "artist_group": "meghan trainor",
+      "label": 1,
+      "prediction": 0,
+      "score": -2.582430304606231,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0136",
+      "artist_group": "meghan trainor",
+      "label": 1,
+      "prediction": 0,
+      "score": -3.3317537709994656,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0137",
+      "artist_group": "post malone",
+      "label": 1,
+      "prediction": 1,
+      "score": 1.2245818101300818,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0139",
+      "artist_group": "coldplay",
+      "label": 1,
+      "prediction": 0,
+      "score": -2.6215412785412475,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0142",
+      "artist_group": "adele",
+      "label": 1,
+      "prediction": 0,
+      "score": -1.1242533481123425,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0143",
+      "artist_group": "chris brown",
+      "label": 1,
+      "prediction": 0,
+      "score": -1.110867396486558,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0144",
+      "artist_group": "coldplay",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.04379180834448887,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0152",
+      "artist_group": "meghan trainor",
+      "label": 1,
+      "prediction": 1,
+      "score": 2.415091822004939,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0154",
+      "artist_group": "meghan trainor",
+      "label": 1,
+      "prediction": 0,
+      "score": -1.0936181382931753,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0163",
+      "artist_group": "meghan trainor",
+      "label": 1,
+      "prediction": 1,
+      "score": 1.3851397615270256,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0174",
+      "artist_group": "katy perry",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.9885828474584928,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0175",
+      "artist_group": "coldplay",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.2732565016105229,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0177",
+      "artist_group": "katy perry",
+      "label": 1,
+      "prediction": 0,
+      "score": -1.8863927086555168,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0192",
+      "artist_group": "p!nk",
+      "label": 1,
+      "prediction": 1,
+      "score": 4.430085641534093,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0199",
+      "artist_group": "kendrick lamar",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.8606510456677756,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0203",
+      "artist_group": "adele",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.7951767056283066,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0205",
+      "artist_group": "katy perry",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.9571577780696269,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0209",
+      "artist_group": "katy perry",
+      "label": 1,
+      "prediction": 1,
+      "score": 3.339475920116986,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0211",
+      "artist_group": "p!nk",
+      "label": 1,
+      "prediction": 1,
+      "score": 1.8803501582456628,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0212",
+      "artist_group": "katy perry",
+      "label": 1,
+      "prediction": 0,
+      "score": -1.337906252952496,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0213",
+      "artist_group": "adele",
+      "label": 1,
+      "prediction": 1,
+      "score": 1.52498326943992,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0214",
+      "artist_group": "chris brown",
+      "label": 1,
+      "prediction": 1,
+      "score": 1.5707085295656253,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0215",
+      "artist_group": "adele",
+      "label": 1,
+      "prediction": 0,
+      "score": -3.1267044480229726,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0216",
+      "artist_group": "coldplay",
+      "label": 1,
+      "prediction": 0,
+      "score": -1.220797142206337,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0218",
+      "artist_group": "adele",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.21464567202619877,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0221",
+      "artist_group": "chris brown",
+      "label": 1,
+      "prediction": 1,
+      "score": 2.069624308736372,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0223",
+      "artist_group": "katy perry",
+      "label": 1,
+      "prediction": 1,
+      "score": 2.3254871200064517,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0227",
+      "artist_group": "katy perry",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.8324195580226296,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0229",
+      "artist_group": "p!nk",
+      "label": 1,
+      "prediction": 1,
+      "score": 1.0540027259825004,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0231",
+      "artist_group": "p!nk",
+      "label": 1,
+      "prediction": 0,
+      "score": -2.04858768286605,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0232",
+      "artist_group": "lil wayne",
+      "label": 1,
+      "prediction": 0,
+      "score": -1.3234336393488313,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0240",
+      "artist_group": "chris brown",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.8171980418471776,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0244",
+      "artist_group": "avril lavigne",
+      "label": 1,
+      "prediction": 1,
+      "score": 1.2096004557104747,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0247",
+      "artist_group": "katy perry",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.3651512690503712,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0251",
+      "artist_group": "chris brown",
+      "label": 1,
+      "prediction": 0,
+      "score": -1.5741919411979173,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0282",
+      "artist_group": "katy perry",
+      "label": 1,
+      "prediction": 1,
+      "score": 1.2953829979472729,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0285",
+      "artist_group": "katy perry",
+      "label": 1,
+      "prediction": 0,
+      "score": -1.680624951637638,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0286",
+      "artist_group": "p!nk",
+      "label": 1,
+      "prediction": 1,
+      "score": 2.311571723942442,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0290",
+      "artist_group": "p!nk",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.33563947493753565,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0293",
+      "artist_group": "p!nk",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.8617089380330659,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0294",
+      "artist_group": "coldplay",
+      "label": 1,
+      "prediction": 0,
+      "score": -1.8691232698126425,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0307",
+      "artist_group": "chris brown",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.3338142863793345,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0308",
+      "artist_group": "chris brown",
+      "label": 1,
+      "prediction": 1,
+      "score": 1.7191225667109862,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0310",
+      "artist_group": "katy perry",
+      "label": 1,
+      "prediction": 1,
+      "score": 2.824896633412911,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0316",
+      "artist_group": "lil wayne",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.17345444153424416,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0328",
+      "artist_group": "avril lavigne",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.4430155279600815,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0336",
+      "artist_group": "p!nk",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.4463282743143634,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0342",
+      "artist_group": "avril lavigne",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.6831164752939228,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0343",
+      "artist_group": "p!nk",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.11239000540806328,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0344",
+      "artist_group": "gwen stefani",
+      "label": 1,
+      "prediction": 1,
+      "score": 2.25898045524027,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0350",
+      "artist_group": "chris brown",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.2518224373130088,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0354",
+      "artist_group": "rascal flatts",
+      "label": 1,
+      "prediction": 1,
+      "score": 2.923564072327955,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0356",
+      "artist_group": "chris brown",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.9329778284995677,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0360",
+      "artist_group": "rascal flatts",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.6332454885366242,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0363",
+      "artist_group": "chris brown",
+      "label": 1,
+      "prediction": 0,
+      "score": -0.5120989189886036,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0366",
+      "artist_group": "p!nk",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.2604938785782866,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0367",
+      "artist_group": "adele",
+      "label": 0,
+      "prediction": 1,
+      "score": 3.109224701826199,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0369",
+      "artist_group": "adele",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.6388772677247851,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0371",
+      "artist_group": "adele",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.40242985298695455,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0372",
+      "artist_group": "adele",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.9803812761024607,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0373",
+      "artist_group": "adele",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.1603412044056638,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0374",
+      "artist_group": "adele",
+      "label": 0,
+      "prediction": 1,
+      "score": 2.2300343890657888,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0376",
+      "artist_group": "adele",
+      "label": 0,
+      "prediction": 0,
+      "score": -7.8221405836126845,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0378",
+      "artist_group": "adele",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.453262503308398,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0380",
+      "artist_group": "adele",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.9284333140635085,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0381",
+      "artist_group": "adele",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.13439385547636346,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0382",
+      "artist_group": "adele",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.8955536463224204,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0386",
+      "artist_group": "doja cat",
+      "label": 0,
+      "prediction": 0,
+      "score": -1.214663617027134,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0391",
+      "artist_group": "bts",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.5558085073946566,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0392",
+      "artist_group": "post malone",
+      "label": 0,
+      "prediction": 1,
+      "score": 2.0324467671961415,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0393",
+      "artist_group": "doja cat",
+      "label": 0,
+      "prediction": 1,
+      "score": 1.3706593374978677,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0416",
+      "artist_group": "bts",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.0734159638854428,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0417",
+      "artist_group": "bts",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.021568405923726053,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0418",
+      "artist_group": "bts",
+      "label": 0,
+      "prediction": 1,
+      "score": 1.5010861066398236,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0422",
+      "artist_group": "bts",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.3899528711685387,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0423",
+      "artist_group": "bts",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.004166311114301546,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0424",
+      "artist_group": "bts",
+      "label": 0,
+      "prediction": 0,
+      "score": -2.170846191565016,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0459",
+      "artist_group": "doja cat",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.17728641218984104,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0462",
+      "artist_group": "katy perry",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.8970364393352498,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0473",
+      "artist_group": "chris brown",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.31930467275240737,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0476",
+      "artist_group": "katy perry",
+      "label": 0,
+      "prediction": 0,
+      "score": -1.5506552103761435,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0478",
+      "artist_group": "lil wayne",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.4256595526560898,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0492",
+      "artist_group": "meghan trainor",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.7023214185554024,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0493",
+      "artist_group": "p!nk",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.9166406707328129,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0494",
+      "artist_group": "chris brown",
+      "label": 0,
+      "prediction": 1,
+      "score": 2.4531360334176977,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0496",
+      "artist_group": "post malone",
+      "label": 0,
+      "prediction": 1,
+      "score": 2.1701805963974095,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0504",
+      "artist_group": "chris brown",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.3300369818195352,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0505",
+      "artist_group": "post malone",
+      "label": 0,
+      "prediction": 1,
+      "score": 2.944977698126254,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0508",
+      "artist_group": "rascal flatts",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.6455487436788556,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0510",
+      "artist_group": "chris brown",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.2691807109288208,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0514",
+      "artist_group": "kendrick lamar",
+      "label": 0,
+      "prediction": 1,
+      "score": 2.2634256030345687,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0525",
+      "artist_group": "katy perry",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.08265340558263568,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0533",
+      "artist_group": "rascal flatts",
+      "label": 0,
+      "prediction": 0,
+      "score": -1.0280080089903048,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0538",
+      "artist_group": "gwen stefani",
+      "label": 0,
+      "prediction": 0,
+      "score": -1.5115456209496525,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0542",
+      "artist_group": "gwen stefani",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.5185474065039927,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0550",
+      "artist_group": "chris brown",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.9932123613607827,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0564",
+      "artist_group": "kendrick lamar",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.8959781410460975,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0569",
+      "artist_group": "kendrick lamar",
+      "label": 0,
+      "prediction": 0,
+      "score": -2.2877152542890866,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0571",
+      "artist_group": "kendrick lamar",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.7646524234505995,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0578",
+      "artist_group": "kendrick lamar",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.5443691224772521,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0579",
+      "artist_group": "gwen stefani",
+      "label": 0,
+      "prediction": 0,
+      "score": -1.2195578594616698,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0580",
+      "artist_group": "katy perry",
+      "label": 0,
+      "prediction": 0,
+      "score": -1.4201297561308617,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0586",
+      "artist_group": "rascal flatts",
+      "label": 0,
+      "prediction": 1,
+      "score": 2.0935900018867835,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0587",
+      "artist_group": "coldplay",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.6997429302202145,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0589",
+      "artist_group": "katy perry",
+      "label": 0,
+      "prediction": 0,
+      "score": -3.572494971807681,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0609",
+      "artist_group": "avril lavigne",
+      "label": 0,
+      "prediction": 1,
+      "score": 1.7376032104328654,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0610",
+      "artist_group": "chris brown",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.47334404281541465,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0616",
+      "artist_group": "kendrick lamar",
+      "label": 0,
+      "prediction": 1,
+      "score": 1.7101560683414752,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0617",
+      "artist_group": "rascal flatts",
+      "label": 0,
+      "prediction": 1,
+      "score": 1.029530524631518,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0621",
+      "artist_group": "chris brown",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.198278323014473,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0622",
+      "artist_group": "adele",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.9558536327673702,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0626",
+      "artist_group": "rascal flatts",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.8409500783400615,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0631",
+      "artist_group": "rascal flatts",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.7209300597089702,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0636",
+      "artist_group": "avril lavigne",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.6779205167229828,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0637",
+      "artist_group": "lil wayne",
+      "label": 0,
+      "prediction": 1,
+      "score": 1.6332436128901278,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0650",
+      "artist_group": "avril lavigne",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.48327103990660736,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0652",
+      "artist_group": "rascal flatts",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.0663154987767437,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0654",
+      "artist_group": "chris brown",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.5671253785152807,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0657",
+      "artist_group": "rascal flatts",
+      "label": 0,
+      "prediction": 0,
+      "score": -2.3236833640708494,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0663",
+      "artist_group": "p!nk",
+      "label": 0,
+      "prediction": 0,
+      "score": -2.3033495305718876,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0669",
+      "artist_group": "rascal flatts",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.20831941267389775,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0671",
+      "artist_group": "avril lavigne",
+      "label": 0,
+      "prediction": 1,
+      "score": 2.837864674071137,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0680",
+      "artist_group": "chris brown",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.35532697325311513,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0681",
+      "artist_group": "lil wayne",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.06912248173792157,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0682",
+      "artist_group": "p!nk",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.09339452910434765,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0686",
+      "artist_group": "rascal flatts",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.7869793258413916,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0692",
+      "artist_group": "rascal flatts",
+      "label": 0,
+      "prediction": 1,
+      "score": 1.5085663846443098,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0693",
+      "artist_group": "lil wayne",
+      "label": 0,
+      "prediction": 0,
+      "score": -1.2661753413781422,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0694",
+      "artist_group": "katy perry",
+      "label": 0,
+      "prediction": 0,
+      "score": -1.4729150912767128,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0700",
+      "artist_group": "rascal flatts",
+      "label": 0,
+      "prediction": 1,
+      "score": 1.8570625072862956,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0708",
+      "artist_group": "chris brown",
+      "label": 0,
+      "prediction": 0,
+      "score": -2.3176248545863474,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0721",
+      "artist_group": "chris brown",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.20461792731939266,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0724",
+      "artist_group": "rascal flatts",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.8312284858227035,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0728",
+      "artist_group": "rascal flatts",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.5992298136771815,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0731",
+      "artist_group": "avril lavigne",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.3772125400725566,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0732",
+      "artist_group": "gwen stefani",
+      "label": 0,
+      "prediction": 1,
+      "score": 2.364705397249776,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0737",
+      "artist_group": "rascal flatts",
+      "label": 0,
+      "prediction": 1,
+      "score": 3.3678332342259205,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0739",
+      "artist_group": "rascal flatts",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.41753669682210837,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0745",
+      "artist_group": "rascal flatts",
+      "label": 0,
+      "prediction": 0,
+      "score": -0.5990888395346738,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0747",
+      "artist_group": "gwen stefani",
+      "label": 0,
+      "prediction": 0,
+      "score": -2.5681115766843985,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0748",
+      "artist_group": "gwen stefani",
+      "label": 0,
+      "prediction": 1,
+      "score": 1.1219340577979096,
+      "score_kind": "decision_margin"
+    },
+    {
+      "track_id": "CH0751",
+      "artist_group": "rascal flatts",
+      "label": 0,
+      "prediction": 0,
+      "score": -2.666542877725075,
+      "score_kind": "decision_margin"
+    }
+  ],
+  "warnings": [],
+  "seconds": 0.05237604200374335
+}

@@ -4,6 +4,7 @@ import json
 import joblib
 import numpy as np
 import pandas as pd
+import pytest
 from sklearn.impute import SimpleImputer
 from sklearn.feature_selection import VarianceThreshold
 from sklearn.linear_model import LogisticRegression
@@ -52,3 +53,17 @@ def test_v4_retains_all_prior_controls_and_evaluation_membership_rules():
                 'inner_folds','outer_folds','threshold_policy','evaluation_mode']:
         assert after[key]==before[key]
     assert {s['representation']['columns'] for s in after['candidates'][55:]}=={'std_only'}
+
+
+@pytest.mark.integration
+def test_v4_demo_uses_validated_run_and_exploratory_label():
+    from streamlit.testing.v1 import AppTest
+    from chorus_hit.artifacts import load_run
+    run=load_run('v4_std74_001')
+    app=AppTest.from_file(str(ROOT/'app.py')).run(timeout=60)
+    app.sidebar.selectbox[0].set_value('v4_std74_001').run(timeout=60)
+    assert not app.exception
+    assert any('v4_std74_001' in c.value for c in app.caption)
+    assert any('Exploratory follow-up' in c.value for c in app.caption)
+    assert any('63 declared settings' in m.value for m in app.markdown)
+    assert any(m.label=='Balanced accuracy' and m.value==f"{run.summary['metrics']['balanced_accuracy']:.1%}" for m in app.metric)

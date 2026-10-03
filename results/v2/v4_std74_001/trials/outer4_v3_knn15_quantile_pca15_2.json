@@ -1,0 +1,1330 @@
+{
+  "key": "outer4_v3_knn15_quantile_pca15_2",
+  "stage": "outer4",
+  "fold": 2,
+  "spec": {
+    "id": "v3_knn15_quantile_pca15",
+    "family": "knn",
+    "params": {
+      "n_neighbors": 15,
+      "weights": "distance"
+    },
+    "representation": {
+      "kind": "pca",
+      "scaling": "quantile",
+      "columns": "all",
+      "value": 15
+    },
+    "role": "V3 hypothesis-driven extension"
+  },
+  "fit_rows": 321,
+  "validation_rows": 156,
+  "fit_groups": 28,
+  "validation_groups": 15,
+  "status": "complete",
+  "train_metrics": {
+    "accuracy": 1.0,
+    "balanced_accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "class_0_recall": 1.0,
+    "macro_f1": 1.0,
+    "roc_auc": null,
+    "confusion_matrix": [
+      [
+        170,
+        0
+      ],
+      [
+        0,
+        151
+      ]
+    ],
+    "n": 321,
+    "support": {
+      "0": 170,
+      "1": 151
+    },
+    "undefined": []
+  },
+  "metrics": {
+    "accuracy": 0.5064102564102564,
+    "balanced_accuracy": 0.5009876543209877,
+    "precision": 0.48214285714285715,
+    "recall": 0.36,
+    "f1": 0.4122137404580153,
+    "class_0_recall": 0.6419753086419753,
+    "macro_f1": 0.49339968790856564,
+    "roc_auc": 0.47736625514403297,
+    "confusion_matrix": [
+      [
+        52,
+        29
+      ],
+      [
+        48,
+        27
+      ]
+    ],
+    "n": 156,
+    "support": {
+      "0": 81,
+      "1": 75
+    },
+    "undefined": []
+  },
+  "dimensions": 15,
+  "predictions": [
+    {
+      "track_id": "CH0002",
+      "artist_group": "olivia rodrigo",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.6013620106413596,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0003",
+      "artist_group": "olivia rodrigo",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.12953995794626014,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0006",
+      "artist_group": "olivia rodrigo",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.466361009029741,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0009",
+      "artist_group": "luke combs",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.3248308218979441,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0013",
+      "artist_group": "olivia rodrigo",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.5262885057862494,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0016",
+      "artist_group": "taylor swift",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.3443724877599106,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0017",
+      "artist_group": "luke combs",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.3171994980227939,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0020",
+      "artist_group": "justin bieber",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.4623640536537317,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0034",
+      "artist_group": "lil baby",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.33198880247695095,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0035",
+      "artist_group": "travis scott",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.18841556660008776,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0037",
+      "artist_group": "justin bieber",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.3426887134711723,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0039",
+      "artist_group": "lil baby",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.38908819238636044,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0040",
+      "artist_group": "lil baby",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.5182846368218029,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0041",
+      "artist_group": "jonas brothers",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.426388814238521,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0042",
+      "artist_group": "lil baby",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.31634432558360165,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0043",
+      "artist_group": "halsey",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.32398155878662105,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0045",
+      "artist_group": "luke combs",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.45888803628356617,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0048",
+      "artist_group": "luke combs",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.2553966882260603,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0049",
+      "artist_group": "halsey",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.6077038491586019,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0052",
+      "artist_group": "travis scott",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.27251932510362814,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0053",
+      "artist_group": "jonas brothers",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.7298452243382602,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0060",
+      "artist_group": "taylor swift",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.6006144702790205,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0061",
+      "artist_group": "luke combs",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.47901267838244543,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0064",
+      "artist_group": "luke combs",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.5670986180911513,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0068",
+      "artist_group": "lil baby",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.4496749336491376,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0079",
+      "artist_group": "taylor swift",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.5731648998200927,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0080",
+      "artist_group": "halsey",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.34738547536145903,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0096",
+      "artist_group": "luke combs",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.7421840217364222,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0105",
+      "artist_group": "taylor swift",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.5565404044978253,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0107",
+      "artist_group": "the chainsmokers",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.3218028985000145,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0109",
+      "artist_group": "halsey",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.3500771986709743,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0112",
+      "artist_group": "travis scott",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.51913900690634,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0113",
+      "artist_group": "luke combs",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.32315675174211617,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0119",
+      "artist_group": "justin bieber",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.4169198978143101,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0120",
+      "artist_group": "justin bieber",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.4648829363193155,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0128",
+      "artist_group": "justin bieber",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.41449819649742575,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0140",
+      "artist_group": "travis scott",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.4537053639832691,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0141",
+      "artist_group": "taylor swift",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.7311280660893872,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0149",
+      "artist_group": "taylor swift",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.4709301965770215,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0151",
+      "artist_group": "taylor swift",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.6274827156270457,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0155",
+      "artist_group": "taylor swift",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.5961588169854821,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0183",
+      "artist_group": "taylor swift",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.5090214456803718,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0196",
+      "artist_group": "taylor swift",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.46007405338790774,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0208",
+      "artist_group": "justin bieber",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.4535010703959203,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0210",
+      "artist_group": "taylor swift",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.6080799787195875,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0246",
+      "artist_group": "taylor swift",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.5459256833499422,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0259",
+      "artist_group": "taylor swift",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.333016582484435,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0260",
+      "artist_group": "taylor swift",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.5596297544757468,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0270",
+      "artist_group": "taylor swift",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.5751833643023746,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0273",
+      "artist_group": "daughtry",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.6100085732786706,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0276",
+      "artist_group": "taylor swift",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.4123252962654595,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0292",
+      "artist_group": "nickelback",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.4190721089715825,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0297",
+      "artist_group": "daughtry",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.3227962430542707,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0298",
+      "artist_group": "nickelback",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.5809072725308627,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0300",
+      "artist_group": "taylor swift",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.3947905435688377,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0303",
+      "artist_group": "justin bieber",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.2659554789511972,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0305",
+      "artist_group": "leona lewis",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.19899149854301906,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0313",
+      "artist_group": "fergie",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.39524874538677107,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0315",
+      "artist_group": "taylor swift",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.43969683114530955,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0318",
+      "artist_group": "taylor swift",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.26194870756921634,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0319",
+      "artist_group": "leona lewis",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.37794066951787303,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0320",
+      "artist_group": "jonas brothers",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.318349243703378,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0321",
+      "artist_group": "fergie",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.337370588252172,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0324",
+      "artist_group": "daughtry",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.5258097144975086,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0330",
+      "artist_group": "daughtry",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.5892822076119897,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0331",
+      "artist_group": "fergie",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.6752398522471404,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0334",
+      "artist_group": "daughtry",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.5962781370398518,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0337",
+      "artist_group": "nickelback",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.20800463380255124,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0339",
+      "artist_group": "nickelback",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.20481525314584031,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0346",
+      "artist_group": "nickelback",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.45003701463690593,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0348",
+      "artist_group": "sean paul",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.5315781177011742,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0353",
+      "artist_group": "fergie",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.4571218801926118,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0357",
+      "artist_group": "t.i.",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.4569456644579827,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0358",
+      "artist_group": "nickelback",
+      "label": 1,
+      "prediction": 0,
+      "score": 0.4130343641798445,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0362",
+      "artist_group": "sean paul",
+      "label": 1,
+      "prediction": 1,
+      "score": 0.5746856698119045,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0368",
+      "artist_group": "taylor swift",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.7459597190875283,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0375",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.5221333733823303,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0379",
+      "artist_group": "luke combs",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.5374296406221764,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0385",
+      "artist_group": "taylor swift",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.686093452009601,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0387",
+      "artist_group": "luke combs",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.8149651779342033,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0388",
+      "artist_group": "taylor swift",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.2441040346397321,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0389",
+      "artist_group": "travis scott",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.3979838431814145,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0390",
+      "artist_group": "jonas brothers",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.4290693645285795,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0396",
+      "artist_group": "olivia rodrigo",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.47301713293812436,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0397",
+      "artist_group": "olivia rodrigo",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.40143418304516854,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0400",
+      "artist_group": "olivia rodrigo",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.4674008089379688,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0401",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.4707652374339204,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0403",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.45861584228591246,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0405",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.46773752076437025,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0410",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.2641700321300187,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0412",
+      "artist_group": "taylor swift",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.3164730677875562,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0414",
+      "artist_group": "taylor swift",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.4536513226235052,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0452",
+      "artist_group": "jonas brothers",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.5501075994063978,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0454",
+      "artist_group": "jonas brothers",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.7387693341965085,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0455",
+      "artist_group": "taylor swift",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.25165028026531217,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0456",
+      "artist_group": "halsey",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.5259097998400736,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0463",
+      "artist_group": "taylor swift",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.5384336909970975,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0464",
+      "artist_group": "halsey",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.5896328171277676,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0465",
+      "artist_group": "jonas brothers",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.2743443290702397,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0470",
+      "artist_group": "lil baby",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.39187728784048614,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0477",
+      "artist_group": "luke combs",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.5486650839777271,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0497",
+      "artist_group": "taylor swift",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.6081617594517471,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0498",
+      "artist_group": "lil baby",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.5967624857764222,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0500",
+      "artist_group": "luke combs",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.5589954975066653,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0501",
+      "artist_group": "taylor swift",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.6016756200161729,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0503",
+      "artist_group": "taylor swift",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.39427728086879754,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0507",
+      "artist_group": "travis scott",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.4587462154484914,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0529",
+      "artist_group": "fergie",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.6565682237560804,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0534",
+      "artist_group": "taylor swift",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.792261215507871,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0536",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.5087222060723121,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0541",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.48584619579346733,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0543",
+      "artist_group": "halsey",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.6626813264523537,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0546",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.4476607455966274,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0547",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.32312220045940615,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0548",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.3350670003475246,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0549",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.5262530787549955,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0551",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.39677025629599166,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0554",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.7716996724198442,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0558",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.4589347204026327,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0575",
+      "artist_group": "fergie",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.6095150367168093,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0593",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.3280969365346853,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0598",
+      "artist_group": "daughtry",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.33126255393338666,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0624",
+      "artist_group": "taylor swift",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.2610423378090027,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0629",
+      "artist_group": "taylor swift",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.49490445765362057,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0630",
+      "artist_group": "taylor swift",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.3290687693240412,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0633",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.4106440810995767,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0635",
+      "artist_group": "nickelback",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.6912047538007473,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0640",
+      "artist_group": "taylor swift",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.2729161325663115,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0641",
+      "artist_group": "taylor swift",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.20319461752121065,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0646",
+      "artist_group": "taylor swift",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.6035748824887449,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0651",
+      "artist_group": "taylor swift",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.46442787858936335,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0658",
+      "artist_group": "daughtry",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.6579630064084452,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0662",
+      "artist_group": "nickelback",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.2488477231973636,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0666",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.2242514634108433,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0670",
+      "artist_group": "taylor swift",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.5987990360362699,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0672",
+      "artist_group": "taylor swift",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.4048165518591881,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0676",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.6029224060252051,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0678",
+      "artist_group": "nickelback",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.2639651908492531,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0683",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.42760508475044,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0685",
+      "artist_group": "justin bieber",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.45815909525820114,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0688",
+      "artist_group": "sean paul",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.4467903394861391,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0690",
+      "artist_group": "daughtry",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.4085311563854628,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0697",
+      "artist_group": "taylor swift",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.5461674925355237,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0702",
+      "artist_group": "leona lewis",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.3210477005232365,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0703",
+      "artist_group": "daughtry",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.4550810198619261,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0704",
+      "artist_group": "nickelback",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.35123268417061854,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0705",
+      "artist_group": "jonas brothers",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.4036957456272223,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0706",
+      "artist_group": "jonas brothers",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.3889389875743404,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0707",
+      "artist_group": "taylor swift",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.18778551057873144,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0712",
+      "artist_group": "jonas brothers",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.34445071387082477,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0713",
+      "artist_group": "jonas brothers",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.43356905770351784,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0715",
+      "artist_group": "taylor swift",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.4202149828990117,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0719",
+      "artist_group": "daughtry",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.4221120963028734,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0726",
+      "artist_group": "jonas brothers",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.390991017785578,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0738",
+      "artist_group": "jonas brothers",
+      "label": 0,
+      "prediction": 1,
+      "score": 0.5491034854837218,
+      "score_kind": "uncalibrated_class_1_probability"
+    },
+    {
+      "track_id": "CH0740",
+      "artist_group": "taylor swift",
+      "label": 0,
+      "prediction": 0,
+      "score": 0.26577475224069436,
+      "score_kind": "uncalibrated_class_1_probability"
+    }
+  ],
+  "warnings": [],
+  "seconds": 0.2990975839784369
+}
