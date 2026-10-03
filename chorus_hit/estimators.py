@@ -56,10 +56,11 @@ def make_estimator(spec,features,seed=42):
     if getattr(model,'early_stopping',False): raise ValueError('Internal random early stopping violates grouped protocol')
     steps=[]
     subset=representation.get('columns','all')
-    if subset not in {'all','core_statistics'}: raise ValueError('Unknown feature subset')
-    if subset=='core_statistics':
-        columns=[c for c in features if c.rsplit('_',2)[-2] in {'mean','median','std'}]
-        if not columns: raise ValueError('Core statistics require named audio features')
+    if subset not in {'all','core_statistics','std_only'}: raise ValueError('Unknown feature subset')
+    if subset in {'core_statistics','std_only'}:
+        statistics={'std'} if subset=='std_only' else {'mean','median','std'}
+        columns=[c for c in features if c.rsplit('_',2)[-2] in statistics]
+        if not columns: raise ValueError('Statistic subsets require named audio features')
         steps.append(('columns',FamilyColumns(columns)))
     if representation['kind']=='mfcc_spectral':
         prefixes=('mfcc_','rms_','spectral_','zero_crossing_rate_')
@@ -68,8 +69,10 @@ def make_estimator(spec,features,seed=42):
         steps.append(('family',FamilyColumns(columns)))
     scaling=representation.get('scaling','standard')
     if scaling not in {'standard','quantile'}: raise ValueError('Unknown feature scaling')
+    quantiles=representation.get('n_quantiles',50)
+    if type(quantiles) is not int or quantiles<2: raise ValueError('n_quantiles must be an integer >=2')
     scaler=StandardScaler() if scaling=='standard' else QuantileTransformer(
-        n_quantiles=50,output_distribution='normal',subsample=None,random_state=seed)
+        n_quantiles=quantiles,output_distribution='normal',subsample=None,random_state=seed)
     steps.extend([('imputer',SimpleImputer(strategy='median')),('variance',VarianceThreshold()),('scale',scaler)])
     kind=representation['kind']
     if kind=='pca': steps.append(('reduce',PCA(n_components=representation['value'],svd_solver='full')))
