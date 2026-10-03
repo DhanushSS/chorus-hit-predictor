@@ -87,7 +87,9 @@ def summarize(matrix):
     return values
 
 
-def extract_features(segment, sr=SAMPLE_RATE):
+def extract_features(segment, sr=SAMPLE_RATE, *, extractor_version="legacy-librosa-518-v1"):
+    if extractor_version not in {"legacy-librosa-518-v1", "shared-librosa-518-v2"}:
+        raise ValueError("Unknown extractor version")
     y = np.asarray(segment, dtype=np.float32)
     if sr != SAMPLE_RATE:
         y = librosa.resample(y, orig_sr=sr, target_sr=SAMPLE_RATE)
@@ -113,7 +115,7 @@ def extract_features(segment, sr=SAMPLE_RATE):
             "tonnetz": librosa.feature.tonnetz(y=y, sr=sr),
             # The upstream positional call zero_crossing_rate(x, sr) used sr as
             # frame_length. Reproduce it deliberately to match the trained data.
-            "zero_crossing_rate": librosa.feature.zero_crossing_rate(y, frame_length=sr, hop_length=512),
+            "zero_crossing_rate": librosa.feature.zero_crossing_rate(y, frame_length=sr if extractor_version == "legacy-librosa-518-v1" else 2048, hop_length=512),
         }
     values = []
     for family, width in FEATURE_GROUPS.items():
@@ -124,3 +126,33 @@ def extract_features(segment, sr=SAMPLE_RATE):
     if not np.isfinite(result.to_numpy()).all():
         raise ValueError("Audio produced non-finite features. Try a different chorus.")
     return result
+
+
+def extraction_config(extractor_version="legacy-librosa-518-v1"):
+    from importlib.metadata import version
+    from .audit import json_hash
+    if extractor_version not in {"legacy-librosa-518-v1", "shared-librosa-518-v2"}:
+        raise ValueError("Unknown extractor version")
+    config={"version":extractor_version,"sample_rate":SAMPLE_RATE,"mono":True,"duration_seconds":CHORUS_SECONDS,
+            "normalization":"none beyond decoder mono/resampling","dtype":"float32","hop_length":512,
+            "fft_length":2048,"center":True,"stft_padding":"reflect","mfcc_count":20,
+            "rms_frame_length":2048,"zcr_frame_length":SAMPLE_RATE if extractor_version.startswith("legacy") else 2048,
+            "chroma_channels":12,"contrast_bands":6,"rolloff_percent":.85,"cqt_bins_per_octave":12,
+            "skew_bias":True,"kurtosis_fisher":True,"constant_channel_higher_moments":0,
+            "remaining_parameters":"Pinned librosa defaults; implementation hash recorded below",
+            "repetition_selector":{"version":"chroma-repeat-v1","hop":2205,"fft":4096,"candidate_step_seconds":2,"initial_skip_seconds":5},
+            "versions":{p:version(p) for p in ["librosa","numpy","scipy","soundfile"]}}
+    config["config_sha256"]=json_hash(config)
+    return config
+
+
+def extract_record(path, start_seconds=None, extractor_version="legacy-librosa-518-v1"):
+    from .audit import sha256_file
+    from pathlib import Path
+    config=extraction_config(extractor_version)
+    y,sr=load_audio(path); segment=select_segment(y,sr,start_seconds)
+    features=extract_features(segment.audio,sr,extractor_version=extractor_version)
+    metadata={"audio_sha256":sha256_file(path),"extractor_config":config,
+              "implementation_sha256":sha256_file(Path(__file__)),"segment_start_seconds":segment.start_seconds,
+              "segment_duration_seconds":len(segment.audio)/sr,"selection":segment.method,"sample_rate":sr}
+    return features,segment,metadata

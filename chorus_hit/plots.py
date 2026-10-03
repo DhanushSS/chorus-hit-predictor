@@ -8,11 +8,13 @@ from sklearn.metrics import ConfusionMatrixDisplay, RocCurveDisplay
 from .config import RESULTS
 
 
-def make_plots(summary, frame, winner, X_train, records):
+def make_plots(summary, frame, winner, X_train, records, directory=None):
     plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 11,
                          "axes.spines.top": False, "axes.spines.right": False,
                          "figure.facecolor": "white", "savefig.facecolor": "white"})
-    directory = RESULTS / "figures"
+    directory = directory or RESULTS / "figures"
+    if directory.exists() and any(directory.iterdir()):
+        raise FileExistsError("Refusing to mix new plots with prior figures")
     directory.mkdir(exist_ok=True)
     ordered = sorted(summary["models"], key=lambda r: r["cv_balanced_accuracy"])
     fig, ax = plt.subplots(figsize=(9, 5.5))

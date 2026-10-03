@@ -1,0 +1,206 @@
+{
+  "status": "complete",
+  "config": {
+    "run_id": "hf_features_001",
+    "status": "declared_before_fit",
+    "date": "2026-10-03",
+    "purpose": "Exploratory artist/title-linkage pilot of published music features; not verified chorus performance",
+    "seed": 42,
+    "arms": [
+      "legacy_mi50",
+      "musicnn",
+      "combined"
+    ],
+    "logistic_C": 0.1,
+    "max_iter": 3000,
+    "threshold": 0.5,
+    "fold_policy": "Reuse V3 outer fold assignments restricted to unambiguous artist/title-matched DEVELOPMENT rows only",
+    "bootstrap_repeats": 2000,
+    "baseline": "Retrain original LR MI50 on exactly the same matched development rows and folds",
+    "inclusion": "NFKC + casefold + whitespace normalization of artist AND title; unique key in both sources; exclude feature duplicates crossing different artist groups; no fuzzy matching",
+    "source_hf_revision": "a391160e3e17f351d5ab2d05439a7d3d7f0440eb",
+    "source_zenodo_record": 15394646,
+    "source_file": "id_musicnn.tsv.bz2",
+    "source_md5": "080a17808e1e86c849f3a4d99ad72b64",
+    "source_license": "CC-BY-4.0 (Zenodo record)",
+    "identity_verified": false,
+    "segment_equivalence_verified": false,
+    "pretraining_overlap_verified": false,
+    "historical_test_evaluated": false,
+    "fresh_test_available": false,
+    "promotion_allowed": false,
+    "missing_features": "Exclude before fitting; report all counts",
+    "failures": "Record and stop; no new configurations or seeds after viewing scores"
+  },
+  "config_sha256": "5bf77d3c4ea3d45d3f22a4001b5bf799408965664002277c68c60622ab951a46",
+  "source_commit": "6ce23201633608b1644f28f03f4845961f5b8911",
+  "script_sha256": "60bc1cf58bcd8cce1d09b92506bf040ea026add65b14e6ed1c8f556f693a5817",
+  "trials": [
+    {
+      "arm": "legacy_mi50",
+      "fold": 0,
+      "fit_rows": 268,
+      "validation_rows": 72,
+      "status": "complete",
+      "seconds": 0.315907583993976,
+      "warnings": []
+    },
+    {
+      "arm": "legacy_mi50",
+      "fold": 1,
+      "fit_rows": 278,
+      "validation_rows": 62,
+      "status": "complete",
+      "seconds": 0.32161762499890756,
+      "warnings": []
+    },
+    {
+      "arm": "legacy_mi50",
+      "fold": 2,
+      "fit_rows": 259,
+      "validation_rows": 81,
+      "status": "complete",
+      "seconds": 0.299672166001983,
+      "warnings": []
+    },
+    {
+      "arm": "legacy_mi50",
+      "fold": 3,
+      "fit_rows": 292,
+      "validation_rows": 48,
+      "status": "complete",
+      "seconds": 0.30879350000759587,
+      "warnings": []
+    },
+    {
+      "arm": "legacy_mi50",
+      "fold": 4,
+      "fit_rows": 263,
+      "validation_rows": 77,
+      "status": "complete",
+      "seconds": 0.2972759170079371,
+      "warnings": []
+    },
+    {
+      "arm": "musicnn",
+      "fold": 0,
+      "fit_rows": 268,
+      "validation_rows": 72,
+      "status": "complete",
+      "seconds": 0.004248208002536558,
+      "warnings": []
+    },
+    {
+      "arm": "musicnn",
+      "fold": 1,
+      "fit_rows": 278,
+      "validation_rows": 62,
+      "status": "complete",
+      "seconds": 0.004351584007963538,
+      "warnings": []
+    },
+    {
+      "arm": "musicnn",
+      "fold": 2,
+      "fit_rows": 259,
+      "validation_rows": 81,
+      "status": "complete",
+      "seconds": 0.004009083000710234,
+      "warnings": []
+    },
+    {
+      "arm": "musicnn",
+      "fold": 3,
+      "fit_rows": 292,
+      "validation_rows": 48,
+      "status": "complete",
+      "seconds": 0.004129000008106232,
+      "warnings": []
+    },
+    {
+      "arm": "musicnn",
+      "fold": 4,
+      "fit_rows": 263,
+      "validation_rows": 77,
+      "status": "complete",
+      "seconds": 0.00407466699834913,
+      "warnings": []
+    },
+    {
+      "arm": "combined",
+      "fold": 0,
+      "fit_rows": 268,
+      "validation_rows": 72,
+      "status": "complete",
+      "seconds": 0.3089856669976143,
+      "warnings": []
+    },
+    {
+      "arm": "combined",
+      "fold": 1,
+      "fit_rows": 278,
+      "validation_rows": 62,
+      "status": "complete",
+      "seconds": 0.31870829200488515,
+      "warnings": []
+    },
+    {
+      "arm": "combined",
+      "fold": 2,
+      "fit_rows": 259,
+      "validation_rows": 81,
+      "status": "complete",
+      "seconds": 0.3041202079912182,
+      "warnings": []
+    },
+    {
+      "arm": "combined",
+      "fold": 3,
+      "fit_rows": 292,
+      "validation_rows": 48,
+      "status": "complete",
+      "seconds": 0.3196824589977041,
+      "warnings": []
+    },
+    {
+      "arm": "combined",
+      "fold": 4,
+      "fit_rows": 263,
+      "validation_rows": 77,
+      "status": "complete",
+      "seconds": 0.30875145801110193,
+      "warnings": []
+    }
+  ],
+  "development_title_matches": 340,
+  "seconds": 5.398997957992833,
+  "source_files": {
+    "configs/hf_feature_pilot.json": "5bf77d3c4ea3d45d3f22a4001b5bf799408965664002277c68c60622ab951a46",
+    "data/chorus_features.csv": "79951ffc393fc836405509326d1ee03efd96434327d800711c4b8ed817ef44ce",
+    "results/hf_feasibility_001/music4all_information.csv": "11b7638e54c6f1bbb69746a087dcc62622cc9f04a7d3de13e98ffd073685be59",
+    "results/hf_feasibility_001/onion_id_musicnn.tsv.bz2": "bddd4d0052f10f7bc6ce23230abc66c5a1337aea907fed774dad45dbaf4bd988",
+    "results/v2/v3_nested_001/predictions.csv": "0b9120f1ba306d68e455e95f31ed43039269ffef9ac2b7a20e658eac2d2681a4"
+  },
+  "files": {
+    "musicnn_fold0.joblib": "8a60868c9991569c2c728881042d7d843ab92053aa08b8373a189efa1b508e5f",
+    "summary.json": "98e267ce61beb293b37aa6d9b7ca63b410c6f5cdd9484d4a83fd533687fd600a",
+    "combined_fold3.joblib": "e85e650d304bb2d393e77b183cad6b73784b046cdb69a208c79896cb5ed0c0ae",
+    "legacy_mi50_fold3.joblib": "1b89f360c7460040deecba1ed176c9b927cb5d313dfea5264c9bb8b6880dca7c",
+    "legacy_mi50_fold1.joblib": "24ef6b677c2e7488629e4fe8c9cfdc47d89c5f83494774b119d3f0dc8f4315b0",
+    "combined_fold1.joblib": "bf7978a0323892e28b2997395cd172653dbc3204a2653b82e5ae6d13cf029bee",
+    "pilot_inputs.csv": "feedadb975f4b8beeaf6bff72d63783aed57a69bc640ccdcf9e5d1a9e8618772",
+    "musicnn_fold2.joblib": "3e0b8f7c17898bc2d7b4061f1570d20b30afd54ad6ee1104b4eb7708ac9fadf9",
+    "predictions.csv": "b6bfb1709cb64759303aaf050d44daaea85c891f442133afd510b3e215b4795a",
+    "musicnn_fold4.joblib": "1c3be7e356203053d539753289e086bb40639ce20837efbf150cb7927420e358",
+    "membership.csv": "f97b0224848042d4747281ec1aa47f3558184b5a8cb672f95c925c3be90912fb",
+    "combined_fold2.joblib": "d118d04aefee236e4a76378753f15e6612ca1bf9872680c3a49c7216c421eb60",
+    "legacy_mi50_fold2.joblib": "042bdd082fce93ea628a5ff6342f786401e110d265675b4f39e077e87acd88e8",
+    "musicnn_fold1.joblib": "94e482344f1f3ecb6bc8b27918ab73e0b6560da51f21278819025bf03907323e",
+    "excluded_duplicates.csv": "9e0209ac58b278dd83857879fbf6270e0cfce8d306c3ce39930a6e04f956cf5b",
+    "musicnn_fold3.joblib": "9048c9ace0b04e8059b653cffc3317be0ab0b98fffa2ed5c4702c4b65d4146e5",
+    "legacy_mi50_fold0.joblib": "64f0df933b443328a2d840f674b051589160ff9cd43b8784b8884bf49323398d",
+    "combined_fold0.joblib": "d5c8b31884e2ef6d5e5debde65fbf54c1f96c02ecbd950f8191c1e8adef59e38",
+    "combined_fold4.joblib": "127bd1757c42e414bc4c2794d785f98ccdc37296b2ec40974eab825ccba83069",
+    "legacy_mi50_fold4.joblib": "fd8a31f2a8f5c6e1fb150551db6e5be498a1ef779ded66bf580e48ba007c8d33"
+  }
+}

@@ -1,0 +1,174 @@
+[
+  {
+    "name": "final_tests",
+    "command": [
+      "/Users/dhanushss/Documents/Codex/2026-09-30/what/outputs/chorus-hit-predictor/.venv/bin/python",
+      "-m",
+      "pytest",
+      "-q"
+    ],
+    "exit_code": 0,
+    "seconds": 54.37569941699621,
+    "log": "results/audit/final_tests.log"
+  },
+  {
+    "name": "fast_tests",
+    "command": [
+      "/Users/dhanushss/Documents/Codex/2026-09-30/what/outputs/chorus-hit-predictor/.venv/bin/python",
+      "-m",
+      "pytest",
+      "-q",
+      "-m",
+      "not integration"
+    ],
+    "exit_code": 0,
+    "seconds": 19.11315441699844,
+    "log": "results/audit/fast_tests.log"
+  },
+  {
+    "name": "cli_v1",
+    "command": [
+      "/Users/dhanushss/Documents/Codex/2026-09-30/what/outputs/chorus-hit-predictor/.venv/bin/python",
+      "-m",
+      "chorus_hit.predict",
+      "--run-id",
+      "v1_baseline",
+      "--track-id",
+      "CH0001"
+    ],
+    "exit_code": 0,
+    "seconds": 5.124614542000927,
+    "log": "results/audit/cli_v1.log"
+  },
+  {
+    "name": "cli_v2",
+    "command": [
+      "/Users/dhanushss/Documents/Codex/2026-09-30/what/outputs/chorus-hit-predictor/.venv/bin/python",
+      "-m",
+      "chorus_hit.predict",
+      "--run-id",
+      "v2_nested_001",
+      "--track-id",
+      "CH0001"
+    ],
+    "exit_code": 0,
+    "seconds": 5.324379207995662,
+    "log": "results/audit/cli_v2.log"
+  },
+  {
+    "name": "audit_help",
+    "command": [
+      "/Users/dhanushss/Documents/Codex/2026-09-30/what/outputs/chorus-hit-predictor/.venv/bin/python",
+      "-m",
+      "chorus_hit.audit",
+      "--help"
+    ],
+    "exit_code": 0,
+    "seconds": 3.7589071659967885,
+    "log": "results/audit/audit_help.log"
+  },
+  {
+    "name": "train_v2_help",
+    "command": [
+      "/Users/dhanushss/Documents/Codex/2026-09-30/what/outputs/chorus-hit-predictor/.venv/bin/python",
+      "-m",
+      "chorus_hit.train_v2",
+      "--help"
+    ],
+    "exit_code": 0,
+    "seconds": 4.156860375005635,
+    "log": "results/audit/train_v2_help.log"
+  },
+  {
+    "name": "evaluate_run_help",
+    "command": [
+      "/Users/dhanushss/Documents/Codex/2026-09-30/what/outputs/chorus-hit-predictor/.venv/bin/python",
+      "-m",
+      "chorus_hit.evaluate_run",
+      "--help"
+    ],
+    "exit_code": 0,
+    "seconds": 3.9038605829991866,
+    "log": "results/audit/evaluate_run_help.log"
+  },
+  {
+    "name": "predict_help",
+    "command": [
+      "/Users/dhanushss/Documents/Codex/2026-09-30/what/outputs/chorus-hit-predictor/.venv/bin/python",
+      "-m",
+      "chorus_hit.predict",
+      "--help"
+    ],
+    "exit_code": 0,
+    "seconds": 3.951358499994967,
+    "log": "results/audit/predict_help.log"
+  },
+  {
+    "name": "embeddings_help",
+    "command": [
+      "/Users/dhanushss/Documents/Codex/2026-09-30/what/outputs/chorus-hit-predictor/.venv/bin/python",
+      "-m",
+      "chorus_hit.embeddings",
+      "--help"
+    ],
+    "exit_code": 0,
+    "seconds": 1.254305000002205,
+    "log": "results/audit/embeddings_help.log"
+  },
+  {
+    "name": "train_help",
+    "command": [
+      "/Users/dhanushss/Documents/Codex/2026-09-30/what/outputs/chorus-hit-predictor/.venv/bin/python",
+      "-m",
+      "chorus_hit.train",
+      "--help"
+    ],
+    "exit_code": 0,
+    "seconds": 4.582676792000711,
+    "log": "results/audit/train_help.log"
+  },
+  {
+    "name": "prepare_data_help",
+    "command": [
+      "/Users/dhanushss/Documents/Codex/2026-09-30/what/outputs/chorus-hit-predictor/.venv/bin/python",
+      "scripts/prepare_data.py",
+      "--help"
+    ],
+    "exit_code": 0,
+    "seconds": 3.790143124999304,
+    "log": "results/audit/prepare_data_help.log"
+  },
+  {
+    "name": "prepare_audio_dataset_help",
+    "command": [
+      "/Users/dhanushss/Documents/Codex/2026-09-30/what/outputs/chorus-hit-predictor/.venv/bin/python",
+      "scripts/prepare_audio_dataset.py",
+      "--help"
+    ],
+    "exit_code": 0,
+    "seconds": 3.111342666001292,
+    "log": "results/audit/prepare_audio_dataset_help.log"
+  },
+  {
+    "name": "build_reports_help",
+    "command": [
+      "/Users/dhanushss/Documents/Codex/2026-09-30/what/outputs/chorus-hit-predictor/.venv/bin/python",
+      "scripts/build_reports.py",
+      "--help"
+    ],
+    "exit_code": 0,
+    "seconds": 4.388701582996873,
+    "log": "results/audit/build_reports_help.log"
+  },
+  {
+    "name": "build_notebook_help",
+    "command": [
+      "/Users/dhanushss/Documents/Codex/2026-09-30/what/outputs/chorus-hit-predictor/.venv/bin/python",
+      "scripts/build_notebook.py",
+      "--help"
+    ],
+    "exit_code": 0,
+    "seconds": 4.55921337500331,
+    "log": "results/audit/build_notebook_help.log"
+  }
+]

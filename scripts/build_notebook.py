@@ -1,154 +1,48 @@
-"""Create and execute a readable project walkthrough."""
-import json
-import os
+"""Create and execute a new walkthrough from a validated immutable run."""
+import argparse,os,json,sys
 from pathlib import Path
-import sys
-
 import nbformat as nbf
 from nbclient import NotebookClient
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
+from chorus_hit.config import ROOT
+from chorus_hit.reporting import report_context
 
-ROOT = Path(__file__).resolve().parents[1]
-nb = nbf.v4.new_notebook()
-md, code = nbf.v4.new_markdown_cell, nbf.v4.new_code_cell
-nb.cells = [
-    md("""# Predicting Hit Songs Using Repeated Chorus
 
-**Dhanush Sai Suprapadha - PES2UG24CS154**
-
-**Deepthi V - PES2UG24CS150**
-
-UE24CS352A - Machine Learning
-
-This notebook explains the measured experiment. Run `python -m chorus_hit.train` from the project root to rebuild the model and results. Running this walkthrough inspects the existing artifacts and does not retrain or change the held-out evaluation.
-
-## Research question
-
-Can 15-second chorus audio features distinguish stronger chart success for unfamiliar artists?
-
-The public dataset's labels are **year-end hit (1)** and **other chart song (0)**. Both classes can have charted. This is a documented proxy, different from the reference paper's charted/uncharted target. The dataset is a separate public reproduction, not the original paper's 554-song sample.
-"""),
-    code("""from pathlib import Path
-import sys, json
-import numpy as np
+def build(run_id,out):
+    out=Path(out)
+    if out.exists():raise FileExistsError('Preserve the existing notebook; choose a new output')
+    context=report_context(run_id);t=context['text'];s=context['summary'];md=nbf.v4.new_markdown_cell;code=nbf.v4.new_code_cell
+    nb=nbf.v4.new_notebook();nb.cells=[
+        md('# Predicting Hit Songs Using Repeated Chorus\n\nDhanush Sai Suprapadha - PES2UG24CS154\n\nDeepthi V - PES2UG24CS150\n\nThis walkthrough reads validated experiment artifacts. It never retrains or tunes on historical labels.'),
+        code(f'''from pathlib import Path
+import sys,json
 import pandas as pd
-import joblib
-from IPython.display import display, Image, Markdown
+from IPython.display import display,Markdown
+ROOT=Path.cwd()
+sys.path.insert(0,str(ROOT))
+from chorus_hit.artifacts import load_run
+from chorus_hit.evaluation import classification_metrics
+from chorus_hit.reporting import summary_text
+RUN_ID={run_id!r}
+assets=load_run(RUN_ID)
+summary=assets.summary
+display(pd.Series({{'run_id':RUN_ID,'model':summary['model_name'],'raw_features':summary['feature_count'],'evaluation':summary['evaluation_status'],'source_hash':assets.manifest['dataset']['source_sha256']}}))'''),
+        md('## 1. Dataset and task\n\nClass 1 means a source year-end Billboard hit. Class 0 contains other chart songs. Both classes can have charted. Source recordings are unavailable. No artist/title/path or chart-position metadata enters the model.'),
+        code("display(assets.data[['track_id','artist','title','label']].head())\ndisplay(assets.data.label.value_counts().rename('songs'))\ndisplay(pd.Series(summary['counts']))"),
+        md('## 2. Grouped model selection\n\nAll learned preprocessing fits inside the training folds. V2 uses a fixed candidate list and separate outer folds to assess the selection procedure. The historical partition never tunes settings. Artist strings are the declared identity level; aliases and collaborations remain unresolved.'),
+        code("display(assets.bundle['pipeline'])\nconfig_path=assets.path/'config.json'\nif config_path.exists():\n    config=json.loads(config_path.read_text())\n    display(pd.DataFrame(config['candidates']))\n    display(pd.read_csv(assets.path/'final_development_ranking.csv').sort_values('mean_balanced_accuracy',ascending=False))"),
+        md('## 3. Recompute the reported evaluation\n\nNested rows come from models fitted without their outer-fold groups. The final saved candidate is a separate fit on all development rows. Comparing its training predictions to these nested predictions would be the wrong check. Different outer candidates can have incomparable score scales, so pooled nested ROC-AUC is omitted.'),
+        code("predictions=assets.predictions\nscores=None if summary['evaluation_status']=='nested_development' else predictions.score\nrecomputed=classification_metrics(predictions.label,predictions.prediction,scores)\nfor key in ['accuracy','balanced_accuracy','precision','recall','f1']:\n    assert abs(recomputed[key]-summary['metrics'][key])<1e-12\ndisplay(pd.Series(recomputed))\ndisplay(pd.DataFrame(summary['target_status']['metrics']).T)\ndisplay(pd.DataFrame(summary['ci95'],index=['lower','upper']).T)"),
+        md('## 4. Diagnostics\n\nTraining/validation gaps and learning curves describe this selected configuration. They are retrospective diagnostics, not a fresh evaluation or proof of a single performance bottleneck.'),
+        code("curve=assets.path/'learning_curves.csv'\nif curve.exists():\n    display(pd.read_csv(curve))\ndisplay(predictions.head(10))\nprint('All errors remain in the record:',int((predictions.label!=predictions.prediction).sum()))"),
+        md('## 5. Interpretation\n\n'+t['result']+'\n\n'+t['uncertainty']+'\n\n'+t['conclusion']),
+        code("text=summary_text(summary)\ndisplay(Markdown('**'+text['title']+'**\\n\\n'+text['method']+'\\n\\n'+text['result']+'\\n\\n'+text['uncertainty']+'\\n\\n'+text['conclusion']))"),
+        md('## 6. Demonstration and missing inputs\n\nStart the Streamlit app and inspect its run identity. The original demo remains active; the V2 candidate is a research option. Audio uploads use the versioned extractor, but waveform parity remains unverified.\n\nNew experiments require permitted recordings, verified label/recording identities and a new locked evaluation set. Embedding interfaces have only software-fixture tests, with no measured real-song embedding results.\n\nSources: [reference paper](https://cs229.stanford.edu/proj2021spr/report2/81974051.pdf), [public feature dataset](https://github.com/AntoniosMalak/Predicting-Hit-Songs-Using-Repeated-Chorus), and local immutable run manifests. Both students should run and understand the project before presenting it.')]
+    nb.metadata={'kernelspec':{'display_name':'Python 3 (ipykernel)','language':'python','name':'python3'},'language_info':{'name':'python','version':'3.12'}}
+    os.environ['PATH']=str(Path(sys.executable).parent)+os.pathsep+os.environ.get('PATH','')
+    NotebookClient(nb,timeout=180,kernel_name='python3',resources={'metadata':{'path':str(ROOT)}}).execute()
+    out.parent.mkdir(parents=True,exist_ok=True);nbf.write(nb,out);print(out)
 
-ROOT = Path.cwd()
-if ROOT.name == 'notebooks':
-    ROOT = ROOT.parent
-sys.path.insert(0, str(ROOT))
-from chorus_hit.config import FEATURE_COLUMNS, FEATURE_GROUPS, RESULTS, MODEL_PATH
-from chorus_hit.data import load_data, data_audit, split_data
-from chorus_hit.train import model_scores, metrics
-
-data = load_data()
-report = json.loads((RESULTS / 'metrics.json').read_text())
-bundle = joblib.load(MODEL_PATH)
-print(f'{len(data)} songs, {len(FEATURE_COLUMNS)} audio features')
-"""),
-    md("""## 1. Source and data quality
-
-The data come from Antonios Malak's Apache-2.0 repository, pinned to an immutable commit. The importer records source and prepared-file hashes. It removes source audio paths, which contain label clues. Artist and title are metadata for display and splitting, never model inputs.
-"""),
-    code("""provenance = json.loads((ROOT / 'data/provenance.json').read_text())
-display(pd.Series({key: provenance[key] for key in ['source_repository','source_commit','source_sha256','prepared_sha256']}))
-audit = data_audit(data)
-display(pd.Series(audit))
-display(data[['track_id','artist','title','label']].head())
-display(Image(filename=str(RESULTS / 'figures/class_balance.png')))
-"""),
-    md("""## 2. Why 518 features?
-
-There are 74 channels across 11 feature families. Seven summary statistics per channel give 518 values. Chroma describes pitch classes, MFCCs describe timbre, RMS describes energy, and spectral features describe the frequency distribution. The original CSV's `kew` suffix means skewness.
-"""),
-    code("""feature_table = pd.DataFrame([{'family': name, 'channels': channels, 'summary_values': channels*7}
-                              for name, channels in FEATURE_GROUPS.items()])
-display(feature_table)
-assert feature_table.summary_values.sum() == 518
-print('Statistics: skewness, min, max, standard deviation, mean, median, kurtosis')
-"""),
-    md("""## 3. Separate artists before training
-
-The first fold of shuffled five-fold StratifiedGroupKFold (seed 42) is the fixed test partition. The remaining songs enter five inner artist-disjoint folds (seed 43). No artist appears on both sides of either split. Exact duplicate feature vectors and artist/title pairs are rejected.
-
-Inside each fold, the Pipeline learns imputation, variance filtering, scaling, and optional PCA from training data only. PCA retains 95% variance for non-tree models. Tree models keep the original feature axes.
-"""),
-    code("""train_idx, test_idx, groups = split_data(data)
-assert set(groups[train_idx]).isdisjoint(groups[test_idx])
-display(pd.DataFrame([
-    {'partition':'train', 'songs':len(train_idx), 'artists':len(set(groups[train_idx]))},
-    {'partition':'test', 'songs':len(test_idx), 'artists':len(set(groups[test_idx]))}
-]))
-display(bundle['pipeline'])
-print('Scaler training samples:', bundle['pipeline'].named_steps['scale'].n_samples_seen_)
-if 'pca' in bundle['pipeline'].named_steps:
-    print('Training PCA components:', bundle['pipeline'].named_steps['pca'].n_components_)
-    display(Image(filename=str(RESULTS / 'figures/pca_variance.png')))
-"""),
-    md("""## 4. Compare models using training cross-validation
-
-We evaluate logistic regression, LDA, three SVM kernels, random forest, gradient boosting, and a neural network, plus a majority baseline. Hyperparameter grids appear in `chorus_hit/train.py`. The chosen model maximizes mean training CV balanced accuracy. Test performance does not determine the winner.
-
-Balanced accuracy averages both class recalls. A constant majority predictor scores 50%. F1 refers to class 1.
-"""),
-    code("""comparison = pd.DataFrame(report['models'])
-display(comparison[['model','cv_balanced_accuracy','cv_std','test_balanced_accuracy','test_accuracy','test_f1','test_roc_auc','selected']].round(3))
-selected = next(row for row in report['models'] if row['selected'])
-print('Selected model:', report['selected_model'])
-print('Chosen parameters:', selected['best_params'])
-display(Image(filename=str(RESULTS / 'figures/model_comparison.png')))
-"""),
-    md("""## 5. Recompute the holdout scores
-
-The saved model contains training track IDs. It remains fitted only on training songs so that the included test demonstration is genuine. The following cell recomputes the metrics directly from model predictions.
-"""),
-    code("""X_test = data.iloc[test_idx][FEATURE_COLUMNS]
-y_test = data.label.iloc[test_idx]
-pred = bundle['pipeline'].predict(X_test)
-score, score_type = model_scores(bundle['pipeline'], X_test)
-recomputed = metrics(y_test, pred, score)
-for key, value in recomputed.items():
-    assert np.isclose(value, selected['test_' + key])
-display(pd.Series(recomputed))
-display(Image(filename=str(RESULTS / 'figures/test_evaluation.png')))
-display(pd.DataFrame(report['selected_test_ci95_artist_bootstrap'], index=['2.5%','97.5%']).T.round(3))
-"""),
-    md("""## 6. Inspect successes and mistakes
-
-Every test prediction is included. The examples below are for explanation, not new evidence about performance. The model score is not a calibrated probability of commercial success.
-"""),
-    code("""test_predictions = pd.read_csv(RESULTS / 'test_predictions.csv')
-print('Correct predictions')
-display(test_predictions[test_predictions.correct].head(3))
-print('Incorrect predictions')
-display(test_predictions[~test_predictions.correct].head(3))
-"""),
-    md("""## 7. Audio demonstration
-
-Run `python -m streamlit run app.py`. The app can select a 15-second excerpt and compute 518 features from local audio. Automatic selection finds repeated chroma patterns and may choose a verse, so manual selection is available.
-
-The source recordings and exact original software environment are unavailable. New-audio predictions are exploratory and were not validated against the original recordings. No synthetic audio is included in training. Synthetic tones appear only in signal-processing tests.
-
-## Conclusion
-
-The selected polynomial SVM scores **46.6% balanced accuracy** on the held-out artists, versus **50.0%** for the baseline. The approximate artist-bootstrap interval is **38.7%-55.8%**, including chance performance. The experiment does not demonstrate reliable hit prediction for unfamiliar artists.
-
-A future study should verify chart labels, obtain licensed recordings, consistently re-extract every chorus, and evaluate on a new artist or temporal holdout. It should not optimize against the already inspected test partition.
-
-## References
-
-- [Eric Liu, CS229 report, 2021](https://cs229.stanford.edu/proj2021spr/report2/81974051.pdf)
-- [Antonios Malak, source dataset and notebooks](https://github.com/AntoniosMalak/Predicting-Hit-Songs-Using-Repeated-Chorus), Apache-2.0, commit 838e76f
-- [Scikit-learn: data leakage and pipelines](https://scikit-learn.org/stable/common_pitfalls.html)
-
-Implementation and materials prepared with OpenAI Codex assistance. Both team members should review the method and rehearse the demonstration.
-"""),
-]
-nb.metadata = {"kernelspec": {"display_name": "Python 3 (ipykernel)", "language": "python", "name": "python3"},
-               "language_info": {"name": "python", "version": "3.12"}}
-os.environ["PATH"] = str(Path(sys.executable).parent) + os.pathsep + os.environ.get("PATH", "")
-client = NotebookClient(nb, timeout=180, kernel_name="python3", resources={"metadata":{"path": str(ROOT)}})
-client.execute()
-nbf.write(nb, ROOT / "notebooks/Project_Walkthrough.ipynb")
-print("Saved executed walkthrough with", len(nb.cells), "cells")
+if __name__=='__main__':
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--run-id',required=True);p.add_argument('--out',type=Path,required=True)
+    a=p.parse_args();build(a.run_id,a.out)

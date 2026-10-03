@@ -1,0 +1,175 @@
+{
+  "run_id": "v4_std74_001",
+  "model_name": "v4_lr_std74_standard_0.1",
+  "candidate": {
+    "id": "v4_lr_std74_standard_0.1",
+    "family": "logistic",
+    "params": {
+      "C": 0.1,
+      "class_weight": "balanced"
+    },
+    "representation": {
+      "kind": "none",
+      "columns": "std_only",
+      "scaling": "standard"
+    },
+    "role": "Archive-inspired fixed 74-standard-deviation feature extension"
+  },
+  "feature_count": 518,
+  "retained_dimensions": 74,
+  "evaluation_status": "nested_development",
+  "metrics": {
+    "accuracy": 0.5460636515912898,
+    "balanced_accuracy": 0.5466022688981242,
+    "precision": 0.5307443365695793,
+    "recall": 0.5655172413793104,
+    "f1": 0.5475792988313857,
+    "class_0_recall": 0.5276872964169381,
+    "macro_f1": 0.546058556978718,
+    "roc_auc": null,
+    "confusion_matrix": [
+      [
+        162,
+        145
+      ],
+      [
+        126,
+        164
+      ]
+    ],
+    "n": 597,
+    "support": {
+      "0": 307,
+      "1": 290
+    },
+    "undefined": [],
+    "roc_auc_note": "Pooled ROC-AUC omitted: outer folds can select different score scales; see per-fold ROC-AUC."
+  },
+  "ci95": {
+    "accuracy": [
+      0.507687969924812,
+      0.5855492642034564
+    ],
+    "balanced_accuracy": [
+      0.5071858209459518,
+      0.5850427575058781
+    ],
+    "precision": [
+      0.45390070921985815,
+      0.6067073170731707
+    ],
+    "recall": [
+      0.5040943268361946,
+      0.6218893494897958
+    ],
+    "f1": [
+      0.4866667177068659,
+      0.6018836070431541
+    ],
+    "class_0_recall": [
+      0.45713861805849937,
+      0.5981093640984749
+    ],
+    "macro_f1": [
+      0.5054943789379155,
+      0.584274651187845
+    ],
+    "roc_auc": null
+  },
+  "uncertainty": {
+    "intervals": {
+      "accuracy": [
+        0.507687969924812,
+        0.5855492642034564
+      ],
+      "balanced_accuracy": [
+        0.5071858209459518,
+        0.5850427575058781
+      ],
+      "precision": [
+        0.45390070921985815,
+        0.6067073170731707
+      ],
+      "recall": [
+        0.5040943268361946,
+        0.6218893494897958
+      ],
+      "f1": [
+        0.4866667177068659,
+        0.6018836070431541
+      ],
+      "class_0_recall": [
+        0.45713861805849937,
+        0.5981093640984749
+      ],
+      "macro_f1": [
+        0.5054943789379155,
+        0.584274651187845
+      ],
+      "roc_auc": null
+    },
+    "method": "percentile bootstrap of whole artist-string groups; fixed predictions, conditional on fitted procedure",
+    "requested_resamples": 2000,
+    "one_class_resamples_skipped": 0,
+    "groups": 52,
+    "limitations": "Few groups and model-selection uncertainty are not fully captured; nested folds are dependent."
+  },
+  "target_status": {
+    "threshold": 0.75,
+    "comparison": "strictly_greater",
+    "evaluation_status": "nested_development",
+    "metrics": {
+      "accuracy": {
+        "value": 0.5460636515912898,
+        "passed": false
+      },
+      "balanced_accuracy": {
+        "value": 0.5466022688981242,
+        "passed": false
+      },
+      "precision": {
+        "value": 0.5307443365695793,
+        "passed": false
+      },
+      "recall": {
+        "value": 0.5655172413793104,
+        "passed": false
+      },
+      "f1": {
+        "value": 0.5475792988313857,
+        "passed": false
+      }
+    },
+    "target_met_in_this_evaluation": false,
+    "fresh_test_available": false,
+    "fresh_test_target_met": null
+  },
+  "tuning_balanced_accuracy": 0.5367194637378425,
+  "selection_metric": "3-fold development balanced accuracy; predeclared ID tie break",
+  "fold_mean_balanced_accuracy": 0.5453846806442145,
+  "fold_std_balanced_accuracy": 0.04219139783349263,
+  "counts": {
+    "train_songs": 597,
+    "train_artists": 52,
+    "evaluation_songs": 597,
+    "evaluation_artists": 52,
+    "historical_songs_reserved": 154
+  },
+  "dataset_rows": 751,
+  "evidence_status": "candidate_not_validated",
+  "task_version": "year-end-v-other-chart-v1",
+  "group_version": "normalized-artist-string-v1",
+  "label_definition": "1: source year-end Hot 100 hit; 0: other sampled weekly Hot 100 song",
+  "historical_test_evaluated": false,
+  "fresh_test_available": false,
+  "final_fit_warnings": [],
+  "promotion": {
+    "promoted": false,
+    "decision": "Keep baseline demo. Candidate is for research; no fresh confirmation."
+  },
+  "notes": [
+    "Thresholds are native estimator defaults; no calibration or threshold search.",
+    "Nested scores evaluate the declared selection procedure; final candidate uses full-development tuning.",
+    "Learning curves are retrospective diagnostics for the selected configuration."
+  ]
+}

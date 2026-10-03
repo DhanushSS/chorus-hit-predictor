@@ -1,0 +1,40 @@
+{
+  "run_id": "stability_001",
+  "seed_list": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "folds": 5,
+  "data": "data/chorus_features.csv",
+  "data_sha256": "79951ffc393fc836405509326d1ee03efd96434327d800711c4b8ed817ef44ce",
+  "split": "results/split_manifest.csv",
+  "partition": "train",
+  "fixed_model": {
+    "id": "lr_mi_50",
+    "family": "logistic",
+    "params": {
+      "C": 0.1
+    },
+    "representation": {
+      "kind": "mi",
+      "value": 50
+    }
+  },
+  "estimator_seed": 42,
+  "dummy": "training_partition_majority",
+  "purpose": "Descriptive sensitivity to grouped fold assignment of previously selected incumbent; not new model selection or independent confirmation",
+  "no_best_seed_selection": true,
+  "historical_evaluation": false,
+  "repeat_level_confidence_interval": null,
+  "repeat_interval_reason": "Repeated folds reuse the same songs; repeats are not independent samples",
+  "permutation_test_run": false,
+  "target": "year-end hit vs other charted song (unchanged)"
+}

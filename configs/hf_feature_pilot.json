@@ -1,0 +1,32 @@
+{
+  "run_id": "hf_features_001",
+  "status": "declared_before_fit",
+  "date": "2026-10-03",
+  "purpose": "Exploratory artist/title-linkage pilot of published music features; not verified chorus performance",
+  "seed": 42,
+  "arms": [
+    "legacy_mi50",
+    "musicnn",
+    "combined"
+  ],
+  "logistic_C": 0.1,
+  "max_iter": 3000,
+  "threshold": 0.5,
+  "fold_policy": "Reuse V3 outer fold assignments restricted to unambiguous artist/title-matched DEVELOPMENT rows only",
+  "bootstrap_repeats": 2000,
+  "baseline": "Retrain original LR MI50 on exactly the same matched development rows and folds",
+  "inclusion": "NFKC + casefold + whitespace normalization of artist AND title; unique key in both sources; exclude feature duplicates crossing different artist groups; no fuzzy matching",
+  "source_hf_revision": "a391160e3e17f351d5ab2d05439a7d3d7f0440eb",
+  "source_zenodo_record": 15394646,
+  "source_file": "id_musicnn.tsv.bz2",
+  "source_md5": "080a17808e1e86c849f3a4d99ad72b64",
+  "source_license": "CC-BY-4.0 (Zenodo record)",
+  "identity_verified": false,
+  "segment_equivalence_verified": false,
+  "pretraining_overlap_verified": false,
+  "historical_test_evaluated": false,
+  "fresh_test_available": false,
+  "promotion_allowed": false,
+  "missing_features": "Exclude before fitting; report all counts",
+  "failures": "Record and stop; no new configurations or seeds after viewing scores"
+}

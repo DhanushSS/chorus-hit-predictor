@@ -9,6 +9,52 @@
 
 A reproducible study of whether 15-second chorus audio features distinguish stronger chart success, with a working Streamlit demo, model comparisons, an executed notebook, reports, and presentation.
 
+## Latest: 74-feature experiment (October 4)
+
+[Read the complete V4 results](docs/V4_STD74_RESULTS.md). The archive-inspired study retained all 55 V3 candidates and added eight logistic regressions using 74 chorus-variation features.
+
+- On the same 597 development songs and outer folds, nested balanced accuracy increased from **53.25% to 54.66%**; ordinary accuracy increased from **53.27% to 54.61%**.
+- The paired gain is **+1.41 percentage points**, with an approximate 95% interval of **-4.29 to +7.33 points**. A reliable improvement is not established, and the five-metric >75% target remains unmet.
+- Final selection changed to standard-scaled, balanced logistic regression (C=0.1) using 74 standard-deviation features. The separate predeclared archive-model diagnostic scored 56.51% balanced accuracy; it is not the nested procedure estimate.
+- **1,203 recorded fold fits plus one final refit**, ten diagnostic fits, and **29 passing tests**. No failed study fits. Previously inspected development data remain exploratory; no new historical or fresh-test evaluation occurred.
+- The demo offers **V4 chorus-variation study** as a research option. Original model remains active. This update is uploaded on [`research/chorus-v3`](https://github.com/DhanushSS/chorus-hit-predictor/tree/research/chorus-v3) in [PR #1](https://github.com/DhanushSS/chorus-hit-predictor/pull/1); it has not been merged into `main`.
+
+## Local evaluation audit (October 3)
+
+[Corrected accuracy report and remaining work](docs/ACCURACY_REPORT_RECONCILIATION.md). The assigned target is unchanged. A fixed-candidate stability check across ten grouped partitions averaged **53.05% balanced accuracy** (range **49.03%–54.26%**); this is descriptive reuse of the development data, not a new independent score. All 100 fits completed and **26 tests passed**. V3/demo results remain unchanged; this audit is uploaded on the review branch linked below.
+
+## Local Hugging Face assisted pilot (October 3)
+
+[Measured findings and limitations](docs/HUGGING_FACE_PILOT_RESULTS.md): on 340 candidate-linked development songs, balanced accuracy was 50.79% for the matched legacy baseline, 52.09% for published musicnn features and 54.17% for combined inputs. The combined paired gain interval (-0.22 to +7.21 percentage points) includes zero. Recording/chorus equivalence is unverified. This subset pilot does not replace the V3 result or the active demo, and it is now included in the review branch.
+
+## V3 robustness study (completed October 3)
+
+[Read the V3 findings](docs/V3_RESEARCH_RESULTS.md) and [data-source review](docs/V3_DATA_SOURCE_REVIEW.md).
+
+- Expanded to **55 model settings**, completing **1,059 recorded fits** with no failed trials.
+- Nested balanced accuracy: **53.25%**, compared with V2 **52.85%**. The paired change is **+0.40 percentage points**, with an approximate 95% interval of **−2.71 to +3.04 points**. This is an inconclusive change.
+- The final selected classifier has the same configuration and inspected learned parameters as V2. The expanded selection procedure has not established a better final model.
+- This is exploratory reuse of previously inspected development data. No fresh test exists, and the strict >75% target remains unmet.
+- **24 tests passed**. The V3 research option was verified in the running demo; original results and exports passed preservation checks.
+- Uploaded branch: [`research/chorus-v3`](https://github.com/DhanushSS/chorus-hit-predictor/tree/research/chorus-v3). GitHub access was restored on October 3. This update is available for review and has not been merged into `main`.
+- Matching song recordings are still missing. The reviewed sources do not supply the matched audio needed for the planned richer-representation study.
+
+## October 2 audit and research update
+
+The original run and submission exports remain preserved. **Start with [the V2 handoff](docs/AUDIT_HANDOFF.md)** and [reproduction commands](docs/REPRODUCE_V2.md). Updated report/presentation: `docs/v2/`; executed walkthrough: `notebooks/v2/Project_Walkthrough.ipynb`.
+
+- All original scores and predictions reproduced in a disposable copy.
+- Actual-file provenance, stable alternate imports, compatible artifact loading, immutable runs and resumable grouped searches implemented.
+- 35 predeclared settings evaluated using the original 597-song development partition.
+- Nested procedure balanced accuracy **52.85%** (approximate 95% artist-bootstrap interval **48.26%-57.34%**).
+- Frozen V2 candidate (`lr_mi_50`: logistic regression with 50 MI-selected features) historical balanced accuracy **55.16%**, versus V1 **46.63%**, on the same 154 songs. Paired change interval **-1.59 to +16.86 percentage points** includes zero.
+- Accuracy, balanced accuracy, positive-class precision, recall and F1 all remain below the strict **>75%** target. No fresh test exists. Historical improvement is not reliable confirmation.
+- Original demo remains active (`configs/active_run.json`). The sidebar offers the V2 candidate as a research option.
+- Audio/embedding interfaces have software tests. Real embedding experiments remain blocked by missing recordings, rights and verified identities/labels. See [required inputs](docs/AUDIO_DATA_REQUIREMENTS.md).
+- Review branch: [`audit/chorus-v2`](https://github.com/DhanushSS/chorus-hit-predictor/tree/audit/chorus-v2). The update is uploaded and is not merged into `main`. [GitHub Actions passed](https://github.com/DhanushSS/chorus-hit-predictor/actions/runs/36970412334) for publication commit `2dfe0ee`. The earlier authentication blocker was resolved on October 3; the V3 branch includes this V2 work. See [GitHub checks](https://github.com/DhanushSS/chorus-hit-predictor/actions) for the latest status.
+
+The numerical section titled **Original V1 results** below describes the preserved baseline only.
+
 ## What this experiment predicts
 
 The project follows the idea in [Eric Liu's 2021 CS229 report](https://cs229.stanford.edu/proj2021spr/report2/81974051.pdf). The available licensed dataset has a different operational target:
@@ -43,11 +89,11 @@ The dataset and trained model are included, so the basic demo works offline afte
 
 1. **Held-out song:** choose a song from the test partition and compare its predicted class with the dataset label. The artist and song were excluded from model training.
 2. **Upload audio:** upload a 15-second chorus or up to eight minutes of local audio, choose a manual start or automatic repeated segment, listen to the excerpt, and inspect the prediction.
-3. **Results & evidence:** inspect all models, test errors, the confusion matrix, and the uncertainty interval.
+3. **Results & evidence:** inspect recorded model comparisons, predictions, target checks and uncertainty intervals.
 
 Uploaded-audio inference is exploratory. The upstream source audio and exact library environment are unavailable, and our automatic selector is a transparent repetition heuristic rather than the source's pychorus implementation. The app states this limitation. It outputs a model score, not a calibrated probability of future commercial success.
 
-## Actual results
+## Original V1 results
 
 - Dataset: **751 songs, 71 artist names, 518 audio features**.
 - Labels: **366 year-end-hit / 385 other-chart-song**.
@@ -68,10 +114,10 @@ Some other candidates have higher test scores. They were not selected after look
 From the project root with the environment activated:
 
 ```bash
-python -m chorus_hit.train
+python -m chorus_hit.train --output-dir work/v1_reproduction_new
 python -m pip install -r requirements-dev.txt
 python -m pytest -q
-python scripts/build_reports.py
+python scripts/build_reports.py --run-id v2_nested_001 --out work/reports_new --historical results/evaluations/v2_nested_001_historical
 ```
 
 The fixed seed is 42. Training evaluates nine candidates: a majority baseline, logistic regression, LDA, linear/RBF/polynomial SVM, random forest, gradient boosting, and a 64/32-unit neural network. Model settings are recorded in `results/metrics.json`, and every CV trial appears in `results/cross_validation.csv`.
