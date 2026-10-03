@@ -36,7 +36,7 @@ These data and earlier archive results have already been inspected. Bootstrap in
 
 - Implemented and run: 74-feature pipelines, bounded nested search, paired comparison, fixed-candidate diagnostic, reload and input-boundary checks.
 - Blocked: matched-audio representations and independent confirmation need verified matching recordings, credited-performer/recording identities, chart evidence and new evaluation songs.
-- Not attempted: changing the target, new historical scoring, automatic model promotion, or publishing this update.
+- Not attempted: changing the target, new historical scoring, or automatic model promotion.
 - Commands: `.venv/bin/python -m chorus_hit.train_v2 --config configs/v4_std74.json --run-id v4_std74_001`; `.venv/bin/python scripts/summarize_std74.py`; `.venv/bin/python -m pytest -q`.
 - The completed run refuses overwriting; reproduce in a disposable checkout with this run absent or choose a new run ID and adapt the comparison script. Pinned dependencies are unchanged. Final test evidence is in `results/research_v4/final_tests.log`.
 - Evidence: `results/v2/v4_std74_001/`, `results/research_v4/comparison.json`, fixed-candidate predictions/models, training log, executed-source archive and preservation hashes. Current local branch: `research/std74-evaluation`.
@@ -45,4 +45,4 @@ Next action: use this result to decide whether this representation merits testin
 
 ## Final verification
 
-The complete suite passed **29 tests** in **15.19 seconds**, with four existing audio dependency/deprecation warnings. The V4 demo option displays the validated run's score, 63-setting method and exploratory qualifier. All 2,202 protected pre-existing file hashes remain unchanged. Local source and evidence are saved on `research/std74-evaluation`; this update has not been uploaded. The original active model remains unchanged.
+The complete suite passed **29 tests** in **15.19 seconds**, with four existing audio dependency/deprecation warnings. The V4 demo option displays the validated run's score, 63-setting method and exploratory qualifier. All 2,202 protected pre-existing file hashes remain unchanged. Source and evidence were uploaded on 4 October to [`research/chorus-v3`](https://github.com/DhanushSS/chorus-hit-predictor/tree/research/chorus-v3) in [PR #1](https://github.com/DhanushSS/chorus-hit-predictor/pull/1), without merging into `main`. The local working branch is `research/std74-evaluation`. The original active model remains unchanged.

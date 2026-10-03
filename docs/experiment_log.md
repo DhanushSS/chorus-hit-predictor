@@ -163,3 +163,10 @@
 - Verified identical V3/V4 outer and inner folds, held-out artist separation, metric recomputation, all ten diagnostic model reloads and training-only imputation/quantile boundaries. All 2,202 pre-existing file identities and active model pointer preserved. Repaired the comparison inventory to exclude its live command-output log; exact executed summary script retained. No predictions or fitted study artifacts were changed by this metadata repair.
 - Full suite: 29 passed, four existing audio/deprecation warnings, 15.19 seconds. New V4 app test confirms validated score, 63-setting method and exploratory label. Added a named V4 research option; baseline remains active. Study report, figure, comparison, all fits, source archive, config and logs saved locally. No new historical scoring, target substitution or public upload.
 - **Next unblocked action:** review the V4 result and candidate as exploratory evidence. For meaningful independent progress, build a versioned recording/artist/chart audit subset and seek matching permitted audio plus new evaluation songs. Avoid another seed search on the same records as a substitute for new evidence.
+
+## 2026-10-04 - V4 uploaded to the existing GitHub review branch
+
+- User explicitly requested uploading the V4 update to their repository. Verified `DhanushSS/chorus-hit-predictor` and the existing open PR #1 targeting `main`.
+- Fast-forwarded remote `research/chorus-v3` from `b1c1632` to `54955a8`, containing the archive review, declared 63-setting V4 study, all study artifacts, paired/fixed-candidate results, 74-feature estimator support, demo option and tests. Confirmed the remote commit. No main merge or force push.
+- Published numbers remain 54.66% nested balanced accuracy and 54.61% accuracy; the +1.41-point paired gain remains inconclusive. Preserved the experiment's creation-time verification receipt and all old result files. Updated live documentation to reflect successful publication.
+- **Next unblocked action:** update the existing PR summary and verify GitHub Actions against the final publication commit. Further model confirmation still requires the inputs recorded in the V4 report.

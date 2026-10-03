@@ -9,7 +9,7 @@
 
 A reproducible study of whether 15-second chorus audio features distinguish stronger chart success, with a working Streamlit demo, model comparisons, an executed notebook, reports, and presentation.
 
-## Latest: 74-feature experiment (October 4, local)
+## Latest: 74-feature experiment (October 4)
 
 [Read the complete V4 results](docs/V4_STD74_RESULTS.md). The archive-inspired study retained all 55 V3 candidates and added eight logistic regressions using 74 chorus-variation features.
 
@@ -17,7 +17,7 @@ A reproducible study of whether 15-second chorus audio features distinguish stro
 - The paired gain is **+1.41 percentage points**, with an approximate 95% interval of **-4.29 to +7.33 points**. A reliable improvement is not established, and the five-metric >75% target remains unmet.
 - Final selection changed to standard-scaled, balanced logistic regression (C=0.1) using 74 standard-deviation features. The separate predeclared archive-model diagnostic scored 56.51% balanced accuracy; it is not the nested procedure estimate.
 - **1,203 recorded fold fits plus one final refit**, ten diagnostic fits, and **29 passing tests**. No failed study fits. Previously inspected development data remain exploratory; no new historical or fresh-test evaluation occurred.
-- The demo offers **V4 chorus-variation study** as a research option. Original model remains active. This new update is local on `research/std74-evaluation`; it has not been uploaded.
+- The demo offers **V4 chorus-variation study** as a research option. Original model remains active. This update is uploaded on [`research/chorus-v3`](https://github.com/DhanushSS/chorus-hit-predictor/tree/research/chorus-v3) in [PR #1](https://github.com/DhanushSS/chorus-hit-predictor/pull/1); it has not been merged into `main`.
 
 ## Local evaluation audit (October 3)
 
