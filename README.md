@@ -9,6 +9,10 @@
 
 A reproducible study of whether 15-second chorus audio features distinguish stronger chart success, with a working Streamlit demo, model comparisons, an executed notebook, reports, and presentation.
 
+## Local evaluation audit (October 3)
+
+[Corrected accuracy report and remaining work](docs/ACCURACY_REPORT_RECONCILIATION.md). The assigned target is unchanged. A fixed-candidate stability check across ten grouped partitions averaged **53.05% balanced accuracy** (range **49.03%–54.26%**); this is descriptive reuse of the development data, not a new independent score. All 100 fits completed and **26 tests passed**. V3/demo results remain unchanged; this audit is local only.
+
 ## Local Hugging Face assisted pilot (October 3)
 
 [Measured findings and limitations](docs/HUGGING_FACE_PILOT_RESULTS.md): on 340 candidate-linked development songs, balanced accuracy was 50.79% for the matched legacy baseline, 52.09% for published musicnn features and 54.17% for combined inputs. The combined paired gain interval (-0.22 to +7.21 percentage points) includes zero. Recording/chorus equivalence is unverified. This subset pilot does not replace the V3 result or the active demo, and it has not been uploaded.
