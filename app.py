@@ -25,7 +25,7 @@ st.title('Can a chorus predict a hit?')
 st.write('Explore 15 seconds of music and inspect what the experiments actually found.')
 try:
     default=active_run();available=[p.name for p in RUNS.iterdir() if p.is_dir() and not p.name.startswith('.') and (p/'manifest.json').is_file()]
-    available=[default]+sorted(x for x in available if x!=default and x!='v2_quick_001')
+    available=[default]+sorted(x for x in available if x!=default)
     with st.sidebar:
         run_id=st.selectbox('Demo run',available,format_func=lambda v: 'Original model (active)' if v==default else {'v2_nested_001':'V2 research candidate','v3_nested_001':'V3 robustness study','v4_std74_001':'V4 chorus-variation study'}.get(v,v))
         st.caption('The original model remains active. Selecting a research candidate here does not promote it.')
