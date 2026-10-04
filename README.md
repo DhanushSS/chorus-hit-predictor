@@ -37,7 +37,7 @@ A local, single-thread benchmark fits three fixed pipelines on the same five art
 | MLP neural-network control with PCA | 50.6% | ~260 ms | ~1.4 ms | 1040 KiB |
 | Random-forest control | 51.1% | ~400 ms | ~7 ms | 479 KiB |
 
-Run `python -m scripts.benchmark_models` to repeat the comparison locally. These are measurements on one computer and our dataset, not timings for Eric Liu's implementation. The fixed V4 setting was chosen after earlier development work, so its benchmark accuracy is exploratory and does not replace the nested selection result above. Paired accuracy intervals versus both controls include zero.
+Run `python -m scripts.benchmark_models` to repeat the comparison locally. These are measurements on one computer and our dataset, not timings for Eric Liu's implementation. The fixed V4 setting was chosen after earlier development work, so its benchmark accuracy is exploratory and does not replace the nested selection result above. Paired artist-group bootstrap intervals for accuracy and precision versus both controls include zero.
 
 `app.py` and `chorus_hit/` contain the app and ML pipeline. `data/` holds the feature table and provenance; `configs/` holds experiment settings; `results/v2/` holds the saved baseline and V2–V4 models, predictions and verification manifests. The other small files in `results/` support the original baseline and historical comparison. Reports and slides are kept outside this code repository.
 

@@ -84,8 +84,38 @@ with threadpool_limits(limits=1), warnings.catch_warnings(record=True) as captur
     output["warnings"] = [str(w.message) for w in captured]
 destination = ROOT / "output/benchmarks"
 destination.mkdir(parents=True, exist_ok=True)
+saved = pd.DataFrame(rows)
+saved.to_csv(destination / "model_comparison_predictions.csv", index=False)
+wide = saved.pivot(index="track_id", columns="model", values="prediction")
+reference = saved.loc[saved.model == names[0]].set_index("track_id").loc[wide.index]
+y = reference.label.to_numpy()
+groups = reference.artist_group.to_numpy()
+unique_groups = np.unique(groups)
+baseline = wide[names[0]].to_numpy()
+
+def precision(labels, predictions):
+    positive = predictions.sum()
+    return float(((labels == 1) & (predictions == 1)).sum() / positive) if positive else 0.0
+
+output["paired_vs_controls"] = {}
+for rival_name in names[1:]:
+    rival = wide[rival_name].to_numpy()
+    random = np.random.default_rng(2026)
+    samples = {"accuracy": [], "precision": []}
+    for _ in range(2000):
+        indices = np.concatenate([np.flatnonzero(groups == group)
+                                  for group in random.choice(unique_groups, len(unique_groups), replace=True)])
+        samples["accuracy"].append(float(np.mean(baseline[indices] == y[indices])
+                                         - np.mean(rival[indices] == y[indices])))
+        samples["precision"].append(precision(y[indices], baseline[indices])
+                                          - precision(y[indices], rival[indices]))
+    output["paired_vs_controls"][rival_name] = {
+        key: {"observed_difference": (float(np.mean(baseline == y) - np.mean(rival == y))
+                                     if key == "accuracy" else precision(y, baseline) - precision(y, rival)),
+              "ci95": np.quantile(values, [0.025, 0.975]).tolist()}
+        for key, values in samples.items()
+    }
 (destination / "model_comparison.json").write_text(json.dumps(output, indent=2) + "\n")
-pd.DataFrame(rows).to_csv(destination / "model_comparison_predictions.csv", index=False)
 for name, result in output["results"].items():
     print(f"{name}: accuracy={result['accuracy']:.1%}, "
           f"fit={result['median_fold_fit_seconds'] * 1000:.1f} ms/fold, "
