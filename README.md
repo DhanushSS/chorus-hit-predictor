@@ -44,3 +44,11 @@ Run `python -m scripts.benchmark_models` to repeat the comparison locally. These
 Check the saved models and software with `python -m pytest -q`. For a labelled example, run `python -m chorus_hit.predict --run-id v4_std74_001 --track-id CH0001` and inspect whether that song was in training or held out.
 
 The features were adapted from the [repeated-chorus dataset](https://github.com/AntoniosMalak/Predicting-Hit-Songs-Using-Repeated-Chorus) under Apache-2.0; see `NOTICE`, `licenses/`, and `data/provenance.json`. Our class definition differs from [Eric Liu's study](https://cs229.stanford.edu/proj2021spr/report2/81974051.pdf), so its accuracy is not directly comparable.
+
+## Ceiling check: can any model reach 70%+?
+
+`scripts/leakage_demo.py` re-evaluates five model families with repeated 5-fold CV on all 751 songs, once with a leaky random split and once with artist-disjoint folds. Results are in `results/leakage_demo.csv`.
+
+- Best artist-disjoint balanced accuracy: **53.9%** (Extra trees). Best random-split score: **54.9%**.
+- Even when the same artists appear in train and test, no model gets near 70%. The 518 chorus statistics carry very little signal for this label, so tuning cannot fix it.
+- Higher numbers would need different information (pretrained audio embeddings, more songs, or a charted vs never-charted label), not a better classifier.
