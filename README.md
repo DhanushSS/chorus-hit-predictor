@@ -1,139 +1,62 @@
 # Predicting Hit Songs Using Repeated Chorus
 
-**UE24CS352A - Machine Learning mini-project**
+**UE24CS352A Machine Learning mini-project**
 
 | Student | USN |
 | --- | --- |
 | Dhanush Sai Suprapadha | PES2UG24CS154 |
 | Deepthi V | PES2UG24CS150 |
 
-A reproducible study of whether 15-second chorus audio features distinguish stronger chart success, with a working Streamlit demo, model comparisons, an executed notebook, reports, and presentation.
+Can measurements from a 15-second chorus help distinguish a Billboard year-end hit from another song that appeared on the weekly Hot 100? This project tests that question with artist-separated machine-learning evaluation. **Both classes contain charted songs.** The model does not establish that a chorus causes a song to become popular.
 
-## What this experiment predicts
+## Run the project
 
-The project follows the idea in [Eric Liu's 2021 CS229 report](https://cs229.stanford.edu/proj2021spr/report2/81974051.pdf). The available licensed dataset has a different operational target:
-
-- **1: Year-end hit** in the upstream Billboard year-end collection.
-- **0: Other chart song** from sampled weekly Billboard Hot 100 charts, excluding titles already collected as year-end hits.
-
-Both classes can have charted. This is a **year-end-hit proxy**, not an exact reproduction of the paper's charted/never-charted experiment. Labels are inherited from the source collection notebook and have not been independently checked against every chart. This distinction appears in the app, report, and presentation.
-
-## Run the demo
-
-On the prepared Mac, double-click **Run Demo.command**, or open a terminal in this folder and run:
-
-```bash
-.venv/bin/python -m streamlit run app.py
-```
-
-For a fresh machine, use **Python 3.12**:
+Use Python 3.12. From the repository root:
 
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
-python -m pip install -r requirements.txt
+python -m pip install -r requirements-dev.txt
 python -m streamlit run app.py
 ```
 
-On Windows, use `py -3.12 -m venv .venv`, activate `.venv\Scripts\activate`, and run the same pip and Streamlit commands. `run_demo.bat` automates these steps. The demo opens at `http://localhost:8501`.
+On Windows, activate `.venv\Scripts\activate` and use `run_demo.bat` if preferred. The app opens at `http://localhost:8501`. It starts with the original baseline model; select **V4 chorus-variation study** in the sidebar to inspect the latest research model. Audio uploads are exploratory because the original training recordings and exact extraction setup are unavailable.
 
-The dataset and trained model are included, so the basic demo works offline after installing dependencies. The audio formats WAV and FLAC work through SoundFile. MP3 decoding depends on codec availability; convert a problematic file to WAV with an installed audio converter.
+## Data and method
 
-### Demo modes
+The inherited feature table has **751 songs**, **71 normalized artist groups**, and **518 measurements** of timbre, pitch, energy and spectral structure. The original development partition has **597 songs**; **154** songs from different artists form a historical test partition. Names and titles are grouping/identification fields, never predictor inputs.
 
-1. **Held-out song:** choose a song from the test partition and compare its predicted class with the dataset label. The artist and song were excluded from model training.
-2. **Upload audio:** upload a 15-second chorus or up to eight minutes of local audio, choose a manual start or automatic repeated segment, listen to the excerpt, and inspect the prediction.
-3. **Results & evidence:** inspect all models, test errors, the confusion matrix, and the uncertainty interval.
+The latest study retained 55 earlier model settings and added eight logistic-regression settings using **74 chorus-variation features**. Five outer artist-separated folds estimate the selection procedure; three inner folds choose settings without using each outer validation fold. Imputation, scaling and feature selection are fitted only on training folds. The 154-song historical partition was not evaluated again for V4.
 
-Uploaded-audio inference is exploratory. The upstream source audio and exact library environment are unavailable, and our automatic selector is a transparent repetition heuristic rather than the source's pychorus implementation. The app states this limitation. It outputs a model score, not a calibrated probability of future commercial success.
+| Development result | V3 | V4 |
+| --- | ---: | ---: |
+| Ordinary accuracy | 53.27% | **54.61%** |
+| Balanced accuracy | 53.25% | **54.66%** |
+| F1 score | 52.31% | **54.76%** |
 
-## Actual results
-
-- Dataset: **751 songs, 71 artist names, 518 audio features**.
-- Labels: **366 year-end-hit / 385 other-chart-song**.
-- Training: **597 songs, 52 artists**. Test: **154 songs, 19 different artists**.
-- Five artist-disjoint folds inside training select models by **balanced accuracy**.
-- Selected model: **Polynomial SVM** (chosen by training CV, before test evaluation).
-- CV balanced accuracy: **53.6%**.
-- Test balanced accuracy: **46.6%**; majority baseline: **50.0%**.
-- Test accuracy: **46.8%**; positive-class F1: **0.406**; ROC-AUC: **0.456**.
-- Approximate 95% interval for test balanced accuracy: **38.7%-55.8%**, using 2,000 bootstrap resamples of whole test artists.
-
-**Conclusion:** these data and chorus features do not show a reliable predictive advantage for unfamiliar artists. A functional pipeline can produce a scientifically useful negative result. Do not claim high accuracy or that the experiment proves a catchy chorus causes popularity.
-
-Some other candidates have higher test scores. They were not selected after looking at the test set. Their results are included as descriptive comparisons.
-
-## Reproduce the experiment
-
-From the project root with the environment activated:
-
-```bash
-python -m chorus_hit.train
-python -m pip install -r requirements-dev.txt
-python -m pytest -q
-python scripts/build_reports.py
-```
-
-The fixed seed is 42. Training evaluates nine candidates: a majority baseline, logistic regression, LDA, linear/RBF/polynomial SVM, random forest, gradient boosting, and a 64/32-unit neural network. Model settings are recorded in `results/metrics.json`, and every CV trial appears in `results/cross_validation.csv`.
-
-Preprocessing is inside each scikit-learn Pipeline. Imputation, constant-feature filtering, scaling, and optional 95%-variance PCA fit only on training folds. Trees use the original feature space. Artist, title, path, label, and track ID never enter the predictor. The saved model remains trained on the training partition only, preserving the validity of the held-out demo.
-
-CPU training takes roughly a minute on the machine used to prepare this project; it can take longer elsewhere. No GPU or paid service is required. The pinned environment is recorded in `requirements.txt` and `environment-lock.txt`.
-
-To restore the prepared data from its pinned public source:
-
-```bash
-python scripts/prepare_data.py
-```
-
-The importer removes source paths, renames metadata fields, adds stable IDs, checks the 518-column feature order, and records SHA-256 hashes in `data/provenance.json`. It does not execute downloaded code.
-
-Command-line inference:
-
-```bash
-python -m chorus_hit.predict --track-id CH0001
-python -m chorus_hit.predict --audio /path/to/song.wav --start 45
-```
-
-The first command reports whether the chosen track was held out. Use IDs from `results/test_predictions.csv` for a genuine test demonstration. Omit `--start` for automatic repeated-segment selection.
+V4's paired balanced-accuracy change is **+1.41 percentage points**, with an approximate 95% interval of **-4.29 to +7.33 points**. The interval includes zero, so this is an exploratory improvement rather than reliable confirmation. The five-metric 75% target is unmet. A genuinely new collection with verified recording and chart identities is still needed.
 
 ## Project files
 
-| File / folder | Purpose |
+| Location | Purpose |
 | --- | --- |
-| `app.py` | Interactive demo |
-| `chorus_hit/data.py` | Data checks and grouped splits |
-| `chorus_hit/train.py` | CV, model selection, holdout evaluation, persistence |
-| `chorus_hit/audio.py` | Segment selection and 518 audio features |
-| `chorus_hit/predict.py` | Command-line inference |
-| `chorus_hit/plots.py` | Figures from measured results |
-| `data/chorus_features.csv` | Prepared real-song feature table |
-| `data/provenance.json` | Source, license, hashes, label limitations |
-| `models/selected_model.joblib` | Model trained locally on training data only |
-| `results/` | CV trials, split manifest, metrics, predictions, figures |
-| `notebooks/Project_Walkthrough.ipynb` | Executed explanation and result inspection |
-| `docs/Project_Report_2_Pages.pdf` | Main assignment write-up |
-| `docs/Project_Summary_1_Page.pdf` | Alternate length for the conflicting heading |
-| `docs/Project_Presentation.pptx` | Editable presentation with speaker notes |
-| `docs/START_HERE.md` | Short run and study guide |
-| `docs/VIVA_AND_DEMO.md` | Explanation, rehearsal, and likely questions |
-| `tests/` | Checks for data integrity, leakage, metrics, inference, and app behavior |
+| `app.py`, `chorus_hit/` | Demo, data checks, feature extraction, model loading and evaluation |
+| `data/chorus_features.csv`, `data/provenance.json` | Licensed input features and source/label limitations |
+| `configs/` | Recorded experiment settings and active-model choice |
+| `results/v2/` | Validated runs, predictions, models and compact trial archives |
+| `docs/Project_Report_2_Pages.pdf` | Current two-page assignment write-up |
+| `docs/Project_Summary_1_Page.pdf` | One-page version, supplied because the assignment gives conflicting lengths |
+| `docs/V4_STD74_RESULTS.md` | Detailed result and uncertainty discussion |
 
-The assignment heading says one page while its bullet says two pages. Both versions are supplied so the required one can be used without rewriting the project.
+The required presentation file is retained in `docs/` for later preparation. The complete earlier research history remains available in Git; individual training-trial JSON files are bundled in `trials.zip` within each completed run. The original per-trial hashes remain in each run's manifest and are checked whenever a run is loaded.
 
-## Data and feature details
+## Check the saved results
 
-The 11 feature families have 74 total channels: chroma STFT/CQT/CENS (12 each), MFCC (20), RMS (1), spectral centroid (1), bandwidth (1), contrast (7), rolloff (1), tonnetz (6), and zero-crossing rate (1). Each contributes skewness, minimum, maximum, standard deviation, mean, median, and kurtosis: **74 × 7 = 518**.
+```bash
+python -m pytest -q
+python -m chorus_hit.predict --run-id v4_std74_001 --track-id CH0001
+```
 
-The original CSV uses `kew` as the skewness column spelling. We retain it for compatibility. We also deliberately reproduce the upstream zero-crossing call's 22,050-sample frame length. Changes in library versions and unavailable original recordings mean exact waveform-to-feature equivalence is unverified. A fresh dataset should use one documented extraction configuration for all training and inference audio.
+The first command checks software and saved evidence. The second produces a labelled example prediction; inspect its training/test status before interpreting it as an evaluation case. Results can also be explored in the app. The latest tested suite passed **30 tests**. To rebuild the PDFs with the validated saved results, run `python scripts/build_submission_pdfs.py`.
 
-Artist grouping uses normalized artist strings. Collaborations and alternate names are not fully resolved. There is no release-date field suitable for a temporal holdout. Exact duplicate feature rows and artist/title pairs are rejected.
-
-## Attribution
-
-- Reference: Eric Liu, [Predicting Hit Songs Using Repeated Chorus](https://cs229.stanford.edu/proj2021spr/report2/81974051.pdf), CS229, 2021.
-- Dataset: [Antonios Malak's repository](https://github.com/AntoniosMalak/Predicting-Hit-Songs-Using-Repeated-Chorus), commit `838e76f96f7aa755a882b4d2581afe1e0ad3f8a9`. Source license retained in `licenses/DATASET_APACHE_2_0.txt`; see `NOTICE`.
-- Method guidance: [scikit-learn on pipelines and data leakage](https://scikit-learn.org/stable/common_pitfalls.html).
-- Implementation and explanatory materials were prepared with OpenAI Codex assistance. Both team members should run and understand the work before presenting it.
-
-No source audio or copyrighted recordings are redistributed in this repository. No faculty or TA access has been configured because those recipients were omitted at the user's request.
+The data were adapted from the [Predicting Hit Songs Using Repeated Chorus feature collection](https://github.com/AntoniosMalak/Predicting-Hit-Songs-Using-Repeated-Chorus) under Apache-2.0; see `NOTICE`, `licenses/`, and `data/provenance.json`. The class definition in this project differs from [Eric Liu's reference report](https://cs229.stanford.edu/proj2021spr/report2/81974051.pdf), so their accuracy numbers are not a controlled comparison.

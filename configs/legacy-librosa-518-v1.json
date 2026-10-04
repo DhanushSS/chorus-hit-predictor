@@ -1,0 +1,37 @@
+{
+  "version": "legacy-librosa-518-v1",
+  "sample_rate": 22050,
+  "mono": true,
+  "duration_seconds": 15,
+  "normalization": "none beyond decoder mono/resampling",
+  "dtype": "float32",
+  "hop_length": 512,
+  "fft_length": 2048,
+  "center": true,
+  "stft_padding": "reflect",
+  "mfcc_count": 20,
+  "rms_frame_length": 2048,
+  "zcr_frame_length": 22050,
+  "chroma_channels": 12,
+  "contrast_bands": 6,
+  "rolloff_percent": 0.85,
+  "cqt_bins_per_octave": 12,
+  "skew_bias": true,
+  "kurtosis_fisher": true,
+  "constant_channel_higher_moments": 0,
+  "remaining_parameters": "Pinned librosa defaults; implementation hash recorded below",
+  "repetition_selector": {
+    "version": "chroma-repeat-v1",
+    "hop": 2205,
+    "fft": 4096,
+    "candidate_step_seconds": 2,
+    "initial_skip_seconds": 5
+  },
+  "versions": {
+    "librosa": "0.11.0",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "soundfile": "0.14.0"
+  },
+  "config_sha256": "5345ef7dd86571ba0ee93768f3b0066c16c8ec383dc581222edac8e92f514e23"
+}
