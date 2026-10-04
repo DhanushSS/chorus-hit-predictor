@@ -15,7 +15,7 @@ from threadpoolctl import threadpool_limits
 
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
-from chorus_hit.artifacts import load_run
+from chorus_hit.artifacts import load_run,trial_records
 from chorus_hit.audit import atomic_json, sha256_file, json_hash
 from chorus_hit.data import normalize_artist
 from chorus_hit.estimators import make_estimator
@@ -40,7 +40,7 @@ def main():
     for stage in [*[f'outer{i}' for i in range(5)],'final_development']:
         assert json.loads((before.path/f'{stage}_folds.json').read_text())==json.loads((after.path/f'{stage}_folds.json').read_text())
     paired=paired_bootstrap(a.label,b.prediction,a.prediction,a.artist_group)
-    trials=[json.loads(p.read_text()) for p in (after.path/'trials').glob('*.json')]
+    trials=trial_records(after.path)
     statuses=dict(Counter(t['status'] for t in trials))
     warning_count=sum(len(t['warnings']) for t in trials)+len(after.summary['final_fit_warnings'])
     ranking=pd.read_csv(after.path/'final_development_ranking.csv')

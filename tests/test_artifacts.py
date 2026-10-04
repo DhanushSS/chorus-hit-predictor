@@ -2,7 +2,8 @@ import json
 import shutil
 import pandas as pd
 import pytest
-from chorus_hit.artifacts import load_run,run_location
+from zipfile import ZipFile
+from chorus_hit.artifacts import load_run,run_location,verify_files,trial_records
 from chorus_hit.audit import atomic_json,sha256_file
 from chorus_hit.evaluation import classification_metrics,target_status,grouped_folds,score_model
 from chorus_hit.estimators import make_estimator
@@ -49,3 +50,24 @@ def test_new_feature_schema_and_fold_support():
     with pytest.raises(ValueError,match='support'): grouped_folds(f,20,42,groups,['a','b','c'])
     bad=make_estimator({'family':'logistic','representation':{'kind':'anova','value':4}},['a','b','c'])
     with pytest.raises(ValueError,match='exceeds'): bad.fit(f[['a','b','c']],f.label)
+
+
+def test_compact_trial_archive_checks_original_hashes(tmp_path):
+    path=tmp_path/'run';path.mkdir()
+    trial=b'{"status":"complete","fold":0}'
+    (path/'model.joblib').write_bytes(b'model')
+    (path/'summary.json').write_bytes(b'{}')
+    from hashlib import sha256
+    manifest={'status':'complete','model_file':'model.joblib','summary_file':'summary.json',
+              'files':{'model.joblib':sha256(b'model').hexdigest(),
+                       'summary.json':sha256(b'{}').hexdigest(),
+                       'trials/fit_0.json':sha256(trial).hexdigest()}}
+    (path/'manifest.json').write_text(json.dumps(manifest))
+    with ZipFile(path/'trials.zip','w') as z:z.writestr('trials/fit_0.json',trial)
+    verify_files(path,manifest)
+    assert trial_records(path)==[json.loads(trial)]
+    (path/'trials').mkdir();(path/'trials/fit_0.json').write_bytes(trial)
+    with pytest.raises(ValueError,match='Duplicate'):verify_files(path,manifest)
+    (path/'trials/fit_0.json').unlink()
+    with ZipFile(path/'trials.zip','w') as z:z.writestr('trials/fit_0.json',b'{}')
+    with pytest.raises(ValueError,match='altered'):verify_files(path,manifest)

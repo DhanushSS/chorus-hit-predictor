@@ -6,6 +6,8 @@ import json
 from pathlib import Path
 import shutil
 import os
+from hashlib import sha256
+from zipfile import ZipFile, BadZipFile
 
 import joblib
 import numpy as np
@@ -41,12 +43,41 @@ def run_cache_key(run_id):
 
 def verify_files(path,manifest):
     if manifest['status']!='complete': raise ValueError('Run is incomplete and cannot serve predictions')
+    expected_trials={name:digest for name,digest in manifest['files'].items() if name.startswith('trials/')}
+    archive=path/'trials.zip'
+    if archive.exists():
+        if not archive.is_file() or not expected_trials: raise ValueError('Unexpected trial archive')
+        try:
+            with ZipFile(archive) as saved:
+                names=saved.namelist()
+                if len(names)!=len(expected_trials) or set(names)!=set(expected_trials):
+                    raise ValueError('Trial archive entries do not match the run manifest')
+                for name,digest in expected_trials.items():
+                    if sha256(saved.read(name)).hexdigest()!=digest:
+                        raise ValueError(f'Missing or altered run asset: {name}')
+        except (BadZipFile, OSError) as error:
+            raise ValueError('Corrupt trial archive') from error
     for file,digest in manifest['files'].items():
         p=(path/file).resolve()
         if not p.is_relative_to(path.resolve()): raise ValueError('Artifact path escapes run directory')
+        if archive.exists() and file in expected_trials:
+            if p.exists(): raise ValueError(f'Duplicate trial asset outside archive: {file}')
+            continue
         if not p.is_file() or sha256_file(p)!=digest: raise ValueError(f'Missing or altered run asset: {file}')
     for key in ['model_file','summary_file']:
         if manifest[key] not in manifest['files']: raise ValueError(f'Unverified {key}')
+
+
+def trial_records(path):
+    """Read saved trials from the compact archive or an unarchived run."""
+    path=Path(path)
+    manifest=json.loads((path/'manifest.json').read_text())
+    verify_files(path,manifest)
+    archive=path/'trials.zip'
+    if archive.is_file():
+        with ZipFile(archive) as saved:
+            return [json.loads(saved.read(name)) for name in sorted(saved.namelist())]
+    return [json.loads(p.read_text()) for p in sorted((path/'trials').glob('*.json'))]
 
 
 @dataclass

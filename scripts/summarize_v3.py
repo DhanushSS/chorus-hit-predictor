@@ -17,7 +17,7 @@ from threadpoolctl import threadpool_limits
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from chorus_hit.artifacts import load_run
+from chorus_hit.artifacts import load_run,trial_records
 from chorus_hit.audit import json_hash, sha256_file
 from chorus_hit.evaluation import paired_bootstrap, TARGET_METRICS
 
@@ -37,7 +37,7 @@ def main():
     comparison['manifest_sha256'] = {a.summary['run_id']: sha256_file(a.path / 'manifest.json') for a in [before, after]}
     (out / 'paired_comparison.json').write_text(json.dumps(comparison, indent=2) + '\n')
 
-    trials = [json.loads(p.read_text()) for p in (after.path / 'trials').glob('*.json')]
+    trials = trial_records(after.path)
     execution = json.loads((out / 'training_command.json').read_text())
     status = dict(Counter(t['status'] for t in trials))
     warning_count = sum(len(t.get('warnings', [])) for t in trials)
