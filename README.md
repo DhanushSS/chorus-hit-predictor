@@ -27,6 +27,18 @@ On Windows, activate `.venv\Scripts\activate`. The app starts with the original 
 
 V4 uses 74 chorus-variation features within the saved 518-feature input pipeline. Its paired balanced-accuracy increase over V3 is 1.41 percentage points, with an approximate 95% interval of -4.29 to +7.33 points. The interval includes zero, so the improvement is uncertain. The original 154-song test partition was examined in earlier work and was not reused to select V4. A new, independently checked collection is needed to evaluate generalization.
 
+## Compute efficiency
+
+A local, single-thread benchmark fits three fixed pipelines on the same five artist-separated development folds. It times only training and prediction, not feature extraction:
+
+| Pipeline | Exploratory accuracy | Median fit per fold | Predict 154 songs | Saved pipeline |
+| --- | ---: | ---: | ---: | ---: |
+| V4 logistic regression, 74 features | 56.6% | ~6 ms | ~0.6 ms | 6.6 KiB |
+| MLP neural-network control with PCA | 50.6% | ~260 ms | ~1.4 ms | 1040 KiB |
+| Random-forest control | 51.1% | ~400 ms | ~7 ms | 479 KiB |
+
+Run `python -m scripts.benchmark_models` to repeat the comparison locally. These are measurements on one computer and our dataset, not timings for Eric Liu's implementation. The fixed V4 setting was chosen after earlier development work, so its benchmark accuracy is exploratory and does not replace the nested selection result above. Paired artist-group bootstrap intervals for accuracy and precision versus both controls include zero.
+
 `app.py` and `chorus_hit/` contain the app and ML pipeline. `data/` holds the feature table and provenance; `configs/` holds experiment settings; `results/v2/` holds the saved baseline and V2–V4 models, predictions and verification manifests. The other small files in `results/` support the original baseline and historical comparison. Reports and slides are kept outside this code repository.
 
 Check the saved models and software with `python -m pytest -q`. For a labelled example, run `python -m chorus_hit.predict --run-id v4_std74_001 --track-id CH0001` and inspect whether that song was in training or held out.
