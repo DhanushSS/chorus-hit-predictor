@@ -39,10 +39,17 @@ def load_audio(path):
 
 
 def select_segment(y, sr=SAMPLE_RATE, start_seconds=None):
+    y = np.asarray(y)
+    if y.ndim != 1 or not np.isfinite(y).all() or not np.isfinite(sr) or sr <= 0:
+        raise ValueError("Audio must be a finite mono vector at a positive sample rate")
+    if np.sqrt(np.mean(y.astype(float)**2)) < 1e-5:
+        raise ValueError("Audio is silent or too quiet")
     size = int(CHORUS_SECONDS * sr)
     if len(y) < size:
         raise ValueError("At least 15 seconds of audio is needed.")
     if start_seconds is not None:
+        if not np.isfinite(float(start_seconds)):
+            raise ValueError("Start time must be finite")
         start = int(round(float(start_seconds)*sr))
         if start < 0 or start + size > len(y):
             raise ValueError("The selected 15-second segment extends outside the audio.")
@@ -154,5 +161,6 @@ def extract_record(path, start_seconds=None, extractor_version="legacy-librosa-5
     features=extract_features(segment.audio,sr,extractor_version=extractor_version)
     metadata={"audio_sha256":sha256_file(path),"extractor_config":config,
               "implementation_sha256":sha256_file(Path(__file__)),"segment_start_seconds":segment.start_seconds,
-              "segment_duration_seconds":len(segment.audio)/sr,"selection":segment.method,"sample_rate":sr}
+              "segment_duration_seconds":len(segment.audio)/sr,"selection":segment.method,"repetition_similarity":segment.repetition_similarity,"sample_rate":sr,
+              "schema_validated":True,"waveform_parity_verified":False}
     return features,segment,metadata

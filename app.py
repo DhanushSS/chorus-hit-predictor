@@ -52,19 +52,22 @@ with demo:
         st.subheader('Try a historical test song')
         st.write(f'These songs and their artist-name groups were excluded from model training. Predictions use {len(features)} audio features. This benchmark has already been inspected.')
         # Membership is checked against the validated run's training IDs and frozen baseline.
-        base=assets(*run_cache_key('v1_baseline'));ids=base.predictions.track_id
-        options=a.data.loc[a.data.track_id.isin(ids)].sort_values(['artist','title'])
-        if set(ids)&set(bundle['train_track_ids']):st.error('Evaluation membership overlaps training');st.stop()
-        lookup={r.track_id:f'{r.artist} — {r.title}' for r in options.itertuples()}
-        track_id=st.selectbox('Song',options.track_id.tolist(),format_func=lookup.get)
-        if st.button('Predict this song',type='primary'):
-            row=a.data.loc[a.data.track_id==track_id];prediction,score,semantics=a.predict(row[features]);p=int(prediction[0]);actual=int(row.label.iloc[0])
-            left,right=st.columns(2);left.metric('Model prediction',labels[str(p)]);right.metric('Dataset label',labels[str(actual)])
-            if p==actual:st.success('The prediction matches the dataset label for this song.')
-            else:st.warning('The model misclassified this song. Every error remains in the recorded evaluation.')
-            st.caption(f"Score: {score[0]:.3f} · {semantics['kind'].replace('_',' ')} · native threshold {semantics['threshold']}. This is not a calibrated chance of commercial success.")
-            with st.expander('Inspect the input features'):st.dataframe(row[features].T.rename(columns={row.index[0]:'Value'}),use_container_width=True)
-            st.caption('Stored chorus features are available. Playable source recordings are absent.')
+        try:
+            base=assets(*run_cache_key('v1_baseline'));ids=base.predictions.track_id
+            options=a.data.loc[a.data.track_id.isin(ids)].sort_values(['artist','title'])
+            if set(ids)&set(bundle['train_track_ids']):st.error('Evaluation membership overlaps training');st.stop()
+            lookup={r.track_id:f'{r.artist} — {r.title}' for r in options.itertuples()}
+            track_id=st.selectbox('Song',options.track_id.tolist(),format_func=lookup.get)
+            if st.button('Predict this song',type='primary'):
+                row=a.data.loc[a.data.track_id==track_id];prediction,score,semantics=a.predict(row[features]);p=int(prediction[0]);actual=int(row.label.iloc[0])
+                left,right=st.columns(2);left.metric('Model prediction',labels[str(p)]);right.metric('Dataset label',labels[str(actual)])
+                if p==actual:st.success('The prediction matches the dataset label for this song.')
+                else:st.warning('The model misclassified this song. Every error remains in the recorded evaluation.')
+                st.caption(f"Score: {score[0]:.3f} · {semantics['kind'].replace('_',' ')} · native threshold {semantics['threshold']}. This is not a calibrated chance of commercial success.")
+                with st.expander('Inspect the input features'):st.dataframe(row[features].T.rename(columns={row.index[0]:'Value'}),use_container_width=True)
+                st.caption('Stored chorus features are available. Playable source recordings are absent.')
+        except Exception as error:
+            st.warning(f'Historical song demo unavailable: {error}. Upload and selected-run evidence remain available.')
     else:
         st.subheader('Analyze your own audio')
         st.warning('Experimental: source recordings and their exact extraction environment are unavailable. New-audio predictions have no measured end-to-end validation.')
@@ -87,9 +90,10 @@ with demo:
 with results_tab:
     st.subheader('What the evaluation supports')
     ci=s['ci95']['balanced_accuracy']
-    st.write(f"**{status.title()}** balanced accuracy: **{s['metrics']['balanced_accuracy']:.1%}**. Approximate artist-bootstrap interval: **{ci[0]:.1%}–{ci[1]:.1%}**.")
+    if ci is None: st.info("Bootstrap interval unavailable: no usable two-class resamples.")
+    else: st.write(f"**{status.title()}** balanced accuracy: **{s['metrics']['balanced_accuracy']:.1%}**. Approximate artist-bootstrap interval: **{ci[0]:.1%}–{ci[1]:.1%}**.")
     st.write('Artist-name grouping keeps provided names separate. Aliases, guest performers and recording duplicates still need evidence-backed identity resolution.')
-    target=s['target_status'];st.write('**Strict >75% target:** '+('met in this evaluation only' if target['target_met_in_this_evaluation'] else 'not met')+'. Fresh-test confirmation: unavailable.')
+    target=s['target_status'];st.write('**Stretch >75% target (not an assignment requirement):** '+('met in this evaluation only' if target['target_met_in_this_evaluation'] else 'not met')+'. Fresh-test confirmation: unavailable.')
     st.dataframe(pd.DataFrame([{'Metric':k.replace('_',' ').title(),'Value':v['value'],'Above 75%':v['passed']} for k,v in target['metrics'].items()]),hide_index=True,use_container_width=True)
     if s['evaluation_status']=='historical_test':
         st.caption('Original selection used training cross-validation before the original test evaluation. The published test is now a historical benchmark.')
@@ -99,25 +103,31 @@ with results_tab:
         st.write(f"Full-development tuning BA: {s['tuning_balanced_accuracy']:.1%}. Tuning scores can be optimistic.")
         st.dataframe(pd.read_csv(a.path/'final_development_ranking.csv').sort_values('mean_balanced_accuracy',ascending=False),hide_index=True,use_container_width=True)
     with st.expander('Historical V2 comparison'):
-        research=assets(*run_cache_key('v2_nested_001'));h=load_historical(ROOT/'results/evaluations/v2_nested_001_historical')
-        st.write(f"V2 nested development BA: **{research.summary['metrics']['balanced_accuracy']:.1%}**. V2 historical BA: **{h['metrics']['balanced_accuracy']:.1%}**.")
-        d=h['paired_vs_v1'];st.write(f"Matched historical change: {100*d['balanced_accuracy_difference']:+.1f} percentage points; approximate paired interval {100*d['ci95'][0]:+.1f} to {100*d['ci95'][1]:+.1f} percentage points.")
-        st.caption('The paired interval includes zero. The original model stays active. New permitted recordings, verified identities/labels and a genuinely fresh set are still needed.')
+        try:
+            research=assets(*run_cache_key('v2_nested_001'));h=load_historical(ROOT/'results/evaluations/v2_nested_001_historical')
+            st.write(f"V2 nested development BA: **{research.summary['metrics']['balanced_accuracy']:.1%}**. V2 historical BA: **{h['metrics']['balanced_accuracy']:.1%}**.")
+            d=h['paired_vs_v1']
+            if d['ci95'] is None: st.info('Paired interval unavailable: no usable resamples.')
+            else: st.write(f"Matched historical change: {100*d['balanced_accuracy_difference']:+.1f} percentage points; approximate paired interval {100*d['ci95'][0]:+.1f} to {100*d['ci95'][1]:+.1f} percentage points.")
+            st.caption('The paired interval includes zero. The original model stays active. New permitted recordings, verified identities/labels and a genuinely fresh set are still needed.')
+        except Exception as error:
+            st.info(f'Optional V2 comparison unavailable: {error}')
     with st.expander('All recorded predictions'):
         st.dataframe(predictions,hide_index=True,use_container_width=True)
         st.download_button('Download predictions',predictions.to_csv(index=False),run_id+'_predictions.csv','text/csv')
     with st.expander('Model and input contract'):
-        st.json({'run_id':run_id,'input_features':len(features),'extractor':bundle['extractor_version'],'score':bundle['score_semantics'],'task':a.manifest['task_version'],'groups':a.manifest['group_version']})
+        st.json({'run_id':run_id,'input_features':len(features),'extractor':bundle['extractor_version'],'score':bundle['score_semantics'],'task':a.manifest['task_version'],'groups':a.manifest['group_version'],'schema_validated':True,'waveform_parity_verified':False})
 with method:
     st.subheader('Audio becomes measurements, then a prediction')
     st.markdown(f'''1. Choose a 15-second excerpt.
 2. Compute the model's ordered set of {len(features)} audio measurements.
 3. Fit preprocessing and a classifier using only each training fold.
-4. Use separate artist groups for model selection and assessment.
+4. Use separate normalized artist-name groups for model selection and assessment.
 5. Report errors, uncertainty and the evaluation's limits.''')
-    research_config=selected_config or json.loads((research.path/'config.json').read_text())
-    study_name='This research study' if selected_config else 'The V2 research study'
-    st.write(f"{study_name} compares {len(research_config['candidates'])} declared settings, including the original controls. Nested evaluation uses {research_config['outer_folds']} outer and {research_config['inner_folds']} inner grouped folds. Historical labels do not tune the research candidate.")
+    if selected_config:
+        st.write(f"This study compares {len(selected_config['candidates'])} declared settings. Evaluation uses {selected_config['outer_folds']} outer and {selected_config['inner_folds']} inner folds grouped by normalized artist names. Historical labels did not enter that training command.")
+    else:
+        st.write('The original baseline was selected using training cross-validation before its historical evaluation.')
     st.write('The task is year-end hit versus other chart song. Artist names, song titles, file paths and chart positions never enter the predictor.')
     st.write('We have verified the software, data hashes and recorded metrics. Label/recording identity coverage and audio extraction equivalence remain incomplete.')
     st.markdown('[Reference paper](https://cs229.stanford.edu/proj2021spr/report2/81974051.pdf) · [Feature dataset](https://github.com/AntoniosMalak/Predicting-Hit-Songs-Using-Repeated-Chorus)')

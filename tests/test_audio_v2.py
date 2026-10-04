@@ -50,3 +50,38 @@ def test_embedding_cache_and_sampling_rate(tmp_path):
     with pytest.raises(FileNotFoundError): cached_embedding(tmp_path/'absent',0,1,spec,tmp_path/'cache',fake_encoder)
     with pytest.raises(ValueError,match='complete'): cached_embedding(audio,0,2,spec,tmp_path/'cache',fake_encoder)
     with pytest.raises(ValueError,match='revision'): embedding_key('x',{}, {**spec,'revision':'main'})
+
+
+@pytest.mark.parametrize('start',[-1,float('nan'),float('inf'),1.01])
+def test_manual_boundaries(start):
+    y=.1*np.sin(2*np.pi*220*np.arange(16*SAMPLE_RATE)/SAMPLE_RATE)
+    with pytest.raises(ValueError):select_segment(y,start_seconds=start)
+
+
+def test_silence_short_and_centered_fallback():
+    with pytest.raises(ValueError,match='silent'):select_segment(np.zeros(15*SAMPLE_RATE))
+    with pytest.raises(ValueError,match='15 seconds'):select_segment(np.ones(14*SAMPLE_RATE)*.1)
+    y=.1*np.sin(2*np.pi*220*np.arange(16*SAMPLE_RATE)/SAMPLE_RATE)
+    s=select_segment(y);assert 'Centered excerpt' in s.method and s.start_seconds==.5
+    assert select_segment(y,start_seconds=1).start_seconds==1
+
+
+@pytest.mark.parametrize('extension,format,subtype',[('wav','WAV','PCM_16'),('flac','FLAC','PCM_16'),('ogg','OGG','VORBIS'),('mp3','MP3','MPEG_LAYER_III')])
+def test_supported_upload_codecs(tmp_path,extension,format,subtype):
+    import soundfile as sf
+    # Generated tones test decoding, never musical predictive validity.
+    assert format in sf.available_formats(),f'Pinned environment missing advertised {format} codec'
+    sr=22050;y=.1*np.sin(2*np.pi*220*np.arange(16*sr)/sr)
+    p=tmp_path/f'tone.{extension}';sf.write(p,y,sr,format=format,subtype=subtype)
+    decoded,rate=load_audio(p);assert rate==SAMPLE_RATE and len(decoded)>=15*rate
+
+
+@pytest.mark.parametrize('frames,method',[(100,'few candidates'),(260,'no separated repeat'),(600,'Automatic repeated-segment candidate')])
+def test_selector_fallback_metadata(monkeypatch,frames,method):
+    import chorus_hit.audio as module
+    chroma=np.tile(np.sin(np.arange(frames)*.1),(12,1))
+    monkeypatch.setattr(module.librosa.feature,'chroma_stft',lambda **kwargs:chroma)
+    segment=select_segment(np.ones(60*SAMPLE_RATE)*.1)
+    assert method in segment.method
+    if method.startswith('Automatic'):assert np.isfinite(segment.repetition_similarity)
+    else:assert segment.repetition_similarity is None
