@@ -52,7 +52,7 @@ def test_embedding_cache_and_sampling_rate(tmp_path):
     with pytest.raises(ValueError,match='revision'): embedding_key('x',{}, {**spec,'revision':'main'})
 
 
-@pytest.mark.parametrize('start',[-1,float('nan'),float('inf'),1.01])
+@pytest.mark.parametrize('start',[-1,-1e-9,float('nan'),float('inf'),1.01])
 def test_manual_boundaries(start):
     y=.1*np.sin(2*np.pi*220*np.arange(16*SAMPLE_RATE)/SAMPLE_RATE)
     with pytest.raises(ValueError):select_segment(y,start_seconds=start)

@@ -27,3 +27,17 @@ adaptation above defines this implementation's scope.
 **Later handoff:** the repository remains public at the user's instruction. The
 assignment's private-submission requirement is a later user/faculty handoff item.
 PDF write-up and slides are explicitly deferred and were not created here.
+
+## Current work scope — 2026-10-06
+
+The final bounded accuracy check is complete. A fixed equal-weight ensemble of
+the eight existing V4 std74 logistic settings scored 55.28% accuracy, versus
+56.62% for the fixed V4 control on identical development folds. No improvement
+was found. Accuracy experimentation is stopped, and the active baseline is
+preserved. These exploratory scores do not replace the nested V4 assessment or
+provide a fresh-test accuracy claim.
+
+Rehearsal, Q&A preparation, and further faculty/access confirmation are **deferred
+by the user**, outside the current work list. Faculty adaptation approval above
+remains recorded; no additional confirmation is requested. Reports/slides remain
+deferred until separately requested. The repository must remain public.

@@ -2,7 +2,7 @@
   "dataset_version": "chorus-chart-proxy-v1",
   "dataset_sha256": "79951ffc393fc836405509326d1ee03efd96434327d800711c4b8ed817ef44ce",
   "current_fresh_test_available": false,
-  "updated": "2026-10-05",
+  "updated": "2026-10-06",
   "memberships": {
     "development": [
       "CH0001",
@@ -1636,6 +1636,125 @@
         "output/benchmarks/remediation_check_001/model_comparison.json": "db12b0077bdc90fb824803ac83b0099261d80e142033f99f522b05066bdcf9dc",
         "output/benchmarks/remediation_check_001/protocol.json": "97aed19705134990d4ad12d938abec58b75f41c2d654a78018aa5297ce15b742",
         "output/benchmarks/remediation_check_001/execution.json": "1b3b4f30ad647ecf5d37886dd371791fc19d45d2c8aa0863d8d433d804fcd5d8"
+      }
+    },
+    {
+      "location": "output/experiments/final_ensemble_2026-10-06_001",
+      "purpose": "Final predeclared equal-weight eight-member ensemble versus fixed V4 control; no improvement; accuracy experimentation stopped",
+      "fit_membership": "development",
+      "evaluation_membership": "development",
+      "fresh_test": false,
+      "inspected_during_subsequent_development": true,
+      "availability": "local ignored evidence; reproducible script tracked",
+      "script": "scripts/final_accuracy_check.py",
+      "fit_count": 40,
+      "rows": 597,
+      "metrics": {
+        "control": {
+          "accuracy": 0.5661641541038526,
+          "balanced_accuracy": 0.5671964506346175,
+          "precision": 0.54858934169279,
+          "recall": 0.603448275862069,
+          "f1": 0.5747126436781609,
+          "class_0_recall": 0.5309446254071661,
+          "macro_f1": 0.5659888004715591,
+          "roc_auc": null,
+          "confusion_matrix": [
+            [
+              163,
+              144
+            ],
+            [
+              115,
+              175
+            ]
+          ],
+          "n": 597,
+          "support": {
+            "0": 307,
+            "1": 290
+          },
+          "undefined": []
+        },
+        "ensemble": {
+          "accuracy": 0.5527638190954773,
+          "balanced_accuracy": 0.5537852409300236,
+          "precision": 0.5360501567398119,
+          "recall": 0.5896551724137931,
+          "f1": 0.5615763546798029,
+          "class_0_recall": 0.5179153094462541,
+          "macro_f1": 0.5525830491347732,
+          "roc_auc": null,
+          "confusion_matrix": [
+            [
+              159,
+              148
+            ],
+            [
+              119,
+              171
+            ]
+          ],
+          "n": 597,
+          "support": {
+            "0": 307,
+            "1": 290
+          },
+          "undefined": []
+        }
+      },
+      "paired": {
+        "metrics": {
+          "accuracy": {
+            "difference": -0.01340033500837523,
+            "ci95": [
+              -0.0382421020446833,
+              0.008405141717703991
+            ]
+          },
+          "balanced_accuracy": {
+            "difference": -0.013411209704593974,
+            "ci95": [
+              -0.038785657382910704,
+              0.008057060870498508
+            ]
+          },
+          "precision": {
+            "difference": -0.01253918495297801,
+            "ci95": [
+              -0.03711539228313319,
+              0.00795386991788216
+            ]
+          },
+          "recall": {
+            "difference": -0.01379310344827589,
+            "ci95": [
+              -0.04743083003952564,
+              0.013334448160535086
+            ]
+          },
+          "f1": {
+            "difference": -0.013136288998357948,
+            "ci95": [
+              -0.038216556118414194,
+              0.008352685571191615
+            ]
+          }
+        },
+        "requested_resamples": 2000,
+        "valid_resamples": 2000,
+        "unavailable_reason": null,
+        "method": "Paired percentile bootstrap of whole normalized artist-name groups",
+        "limitations": "Conditional on fixed predictions; dependent folds and prior development reuse are not accounted for. This is not independent confirmation."
+      },
+      "promotion": false,
+      "files": {
+        "output/experiments/final_ensemble_2026-10-06_001/protocol.json": "ee5505b619dacd2a3375e0c06ee284c95241aa583f6fedcdc9ce1fa16c7caeec",
+        "output/experiments/final_ensemble_2026-10-06_001/predictions.csv": "55074eaa9de8a2409afcb70a6020797c815438d9b90b3aa72f9cba33c677428f",
+        "output/experiments/final_ensemble_2026-10-06_001/result.json": "074583df775dc95c028533dfdf618c994fbaa01531aa89dbd18c66d08837e084",
+        "output/experiments/final_ensemble_2026-10-06_001/execution.json": "3bc55fd77d91ac325bd30c7972070476f49e5c3a5e6187457d2cf8bdf7149644",
+        "output/experiments/final_ensemble_2026-10-06_001/verification.json": "7e6f613dc2bae8fbdbe01e951d7f522582e391c83cfcc309aa1559f48474857d",
+        "output/experiments/final_ensemble_2026-10-06_001/tests.txt": "8e7ca7c68b4c3cc0a6ee0eeafdb05923ae5a94e11a85a563c363a50356b73402"
       }
     }
   ]

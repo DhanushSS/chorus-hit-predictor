@@ -113,3 +113,70 @@ Keep the repository public. Faculty adaptation approval is recorded as reported
 by the user. Remaining completion boundaries: independent chart evidence,
 resolved identities/duplicates, source waveform parity, annotated chorus checks,
 a genuinely fresh collection, and actual review-device rehearsal.
+
+## Final follow-up — 2026-10-06
+
+Rehearsal, Q&A preparation and further faculty/access confirmation are deferred
+by the user and removed from the current work list. T02's actual-device step is
+therefore deferred, not completed. R01's already-recorded user-reported approval
+remains valid. PDFs and slides were not created or edited.
+
+A manual-start validation defect was reproduced: `start_seconds=-1e-9` was
+rounded to sample zero and accepted. `chorus_hit/audio.py` now rejects negative
+seconds before rounding; the existing boundary regression test includes this
+case. This software fix does not change saved-model metrics or extractor settings.
+
+One fixed, predeclared equal-weight ensemble of the eight V4 std74 logistic
+settings was tested against the fixed V4 control. Both used the same 597
+development rows and five artist-name-grouped folds (seed 44), with fold-local
+preprocessing, native control predictions, ensemble cutoff 0.5 (ties class 0),
+40 fits, one CPU thread and a 120-second whole-command budget. The protocol and
+code/data/config/fold identities were saved before the first fit. No weights,
+thresholds, seeds or member subsets were selected from the results. The 154
+historical rows were excluded from all new fits and scoring.
+
+| Metric | Fixed V4 control | Fixed ensemble |
+| --- | ---: | ---: |
+| Accuracy | 56.62% | 55.28% |
+| Balanced accuracy | 56.72% | 55.38% |
+| Precision | 54.86% | 53.61% |
+| Recall | 60.34% | 58.97% |
+| F1 | 57.47% | 56.16% |
+| Correct predictions / 597 | 338 | 330 |
+
+The ensemble's paired accuracy difference was -1.34 percentage points; its
+2,000-resample whole-group 95% bootstrap interval was [-3.82, +0.84] points.
+There is no demonstrated improvement. This is reused development data, and the
+interval does not account for prior model selection or dependent folds. These
+fixed-pipeline scores do not replace V4's 54.61% nested procedure assessment.
+The ensemble was not promoted; accuracy experimentation is stopped.
+
+Verification completed:
+
+- The control's track IDs, labels, folds, artist groups and predictions exactly
+  match the prior fixed-pipeline benchmark. All 40 fits completed without warnings.
+- Recomputed both sets of metrics from the new saved predictions; verified their
+  hashes and the pre-run protocol hash. All 105 tracked original artifacts and
+  17 earlier local evidence files match their preservation snapshots.
+- Focused checks: **18 passed in 4.38 seconds**. They cover historical exclusion,
+  fixed members, training/validation separation, one prediction per row, equal
+  weights/ties, invalid probabilities, deterministic paired bootstrap, protocol
+  persistence before fitting, overwrite refusal, import safety and negative starts.
+- Complete local suite: **157 passed, 4 existing deprecation warnings in 138.42
+  seconds**; no failures or skips. `pip check` found no broken requirements.
+- Public GitHub visibility was verified. The active run remains `v1_baseline`.
+  GitHub CI for this follow-up is separate from the local test result above.
+
+Exact executed test/experiment commands:
+
+```bash
+.venv/bin/python -m pytest -q tests/test_final_accuracy_check.py tests/test_audio_v2.py::test_manual_boundaries tests/test_diagnostics.py::test_imports_have_no_training_writes_or_warning_filter_effects
+.venv/bin/python -m scripts.final_accuracy_check --out output/experiments/final_ensemble_2026-10-06_001
+.venv/bin/python -m pytest -q
+.venv/bin/python -m pip check
+git diff --check
+```
+
+Full local evidence is in `output/experiments/final_ensemble_2026-10-06_001/`.
+The experiment script and exposure registry retain its method, metrics and hashes
+without adding generated reports or slides to the repository.

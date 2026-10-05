@@ -1,5 +1,8 @@
 # Demo rehearsal checklist
 
+**Deferred by the user on 2026-10-06.** Rehearsal and Q&A preparation are outside
+the current work list. This checklist is retained for later, with no completion claimed.
+
 Automated tests on this checkout exercise the app, selected-model prediction,
 missing optional assets, known metric display, malformed files, synthetic
 WAV/FLAC/OGG/MP3 decoding, manual boundaries and centered fallbacks. These are

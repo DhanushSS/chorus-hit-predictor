@@ -48,9 +48,12 @@ def select_segment(y, sr=SAMPLE_RATE, start_seconds=None):
     if len(y) < size:
         raise ValueError("At least 15 seconds of audio is needed.")
     if start_seconds is not None:
-        if not np.isfinite(float(start_seconds)):
+        requested_start = float(start_seconds)
+        if not np.isfinite(requested_start):
             raise ValueError("Start time must be finite")
-        start = int(round(float(start_seconds)*sr))
+        if requested_start < 0:
+            raise ValueError("Start time must be nonnegative")
+        start = int(round(requested_start*sr))
         if start < 0 or start + size > len(y):
             raise ValueError("The selected 15-second segment extends outside the audio.")
         return Segment(y[start:start+size], start/sr, "Manual 15-second selection")

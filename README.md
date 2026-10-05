@@ -56,6 +56,19 @@ A local, single-thread benchmark fits three fixed pipelines on the same five nor
 
 To explicitly rerun this diagnostic into a new directory, use `python -m scripts.benchmark_models --out output/benchmarks/new_run_001 --timeout-seconds 120`. Existing directories are refused. These are measurements on one computer and our dataset, not timings for Eric Liu's implementation. The fixed V4 setting was chosen after earlier development work, so its benchmark accuracy is exploratory and does not replace the nested selection result above. Paired artist-group bootstrap intervals for accuracy and precision versus both controls include zero.
 
+### Final accuracy experiment — 2026-10-06
+
+One predeclared equal-weight ensemble of the eight existing V4 std74 logistic
+settings was evaluated on the same 597 development songs and five artist-name
+grouped folds. There was no threshold, seed or weight search. The fixed V4 control
+reproduced **56.62% accuracy / 54.86% precision / 60.34% recall**; the ensemble
+reached **55.28% / 53.61% / 58.97%**, respectively. Its accuracy difference was
+-1.34 percentage points (paired group-bootstrap 95% interval: -3.82 to +0.84).
+The ensemble was not promoted. Accuracy experimentation is now stopped at the
+user's request. This exploratory check does not replace the **54.61% nested V4
+assessment** or establish new-song accuracy. Code: `scripts/final_accuracy_check.py`;
+protocol and evidence hashes are in [the exposure registry](docs/evaluation_registry.json).
+
 `app.py` and `chorus_hit/` contain the app and ML pipeline. `data/` holds the feature table and provenance; `configs/` holds experiment settings; `results/v2/` holds the saved baseline and V2–V4 models, predictions and verification manifests. The other small files in `results/` support the original baseline and historical comparison. Reports and slides are kept outside this code repository.
 
 Check the saved models and software with `python -m pytest -q`. For a labelled example, run `python -m chorus_hit.predict --run-id v4_std74_001 --track-id CH0001` and inspect whether that song was in training or held out.
@@ -174,4 +187,6 @@ recording identities remain unresolved. The new-record review template is
   as unavailable, never replaced by an invented confidence interval.
 
 Repository visibility remains public at the user's instruction. PDFs/slides and
-the actual review-device rehearsal are separate handoff tasks.
+the actual review-device rehearsal are deferred handoff tasks. Rehearsal, Q&A
+preparation and further faculty/access confirmation are outside the current work
+list at the user's request; adaptation approval is already recorded.

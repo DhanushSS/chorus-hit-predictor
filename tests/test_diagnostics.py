@@ -25,6 +25,7 @@ def fail(*args,**kwargs):raise AssertionError('import side effect')
 with patch.object(a,'load_run',fail), patch.object(Path,'mkdir',fail), patch.object(Path,'write_text',fail), patch.object(joblib,'dump',fail):
  import scripts.benchmark_models
  import scripts.leakage_demo
+ import scripts.final_accuracy_check
 assert warnings.filters==before
 '''
     subprocess.run([sys.executable,'-c',code],cwd=ROOT,check=True)
