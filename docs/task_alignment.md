@@ -26,7 +26,7 @@ adaptation above defines this implementation's scope.
 
 **Later handoff:** the repository remains public at the user's instruction. The
 assignment's private-submission requirement is a later user/faculty handoff item.
-PDF write-up and slides are explicitly deferred and were not created here.
+The final PDF write-up and slides are supplied separately from the code repository.
 
 ## Current work scope — 2026-10-06
 
@@ -39,5 +39,15 @@ provide a fresh-test accuracy claim.
 
 Rehearsal, Q&A preparation, and further faculty/access confirmation are **deferred
 by the user**, outside the current work list. Faculty adaptation approval above
-remains recorded; no additional confirmation is requested. Reports/slides remain
-deferred until separately requested. The repository must remain public.
+remains recorded; no additional confirmation is requested. The repository must
+remain public.
+
+## Final submission materials — 2026-10-07
+
+The user subsequently requested the final PDF and presentation, lifting their
+earlier deferral. The two-page write-up and 12-slide deck use the saved V4 nested
+result (54.61% accuracy), distinguish the exploratory fixed-control score
+(56.62%) and rejected ensemble (55.28%), and retain the data limitations. They
+remain outside GitHub to keep the repository focused on code and evidence.
+The tested fixes were merged into main through PR #5. Rehearsal, Q&A and further
+faculty/access confirmation remain deferred; no new accuracy search was run.

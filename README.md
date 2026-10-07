@@ -186,7 +186,9 @@ recording identities remain unresolved. The new-record review template is
 - **Missing intervals:** insufficient valid two-class bootstrap samples are reported
   as unavailable, never replaced by an invented confidence interval.
 
-Repository visibility remains public at the user's instruction. PDFs/slides and
-the actual review-device rehearsal are deferred handoff tasks. Rehearsal, Q&A
-preparation and further faculty/access confirmation are outside the current work
-list at the user's request; adaptation approval is already recorded.
+Repository visibility remains public at the user's instruction. The final
+two-page PDF write-up and 12-slide presentation are supplied separately from
+this code repository. Rehearsal, Q&A preparation and further faculty/access
+confirmation remain deferred at the user's request; adaptation approval is
+already recorded. The tested remediation and final experiment were merged into
+main through PR #5 on 7 October 2026. No further accuracy experiments are planned.
