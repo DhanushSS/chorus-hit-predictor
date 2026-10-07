@@ -35,8 +35,8 @@ def load_data(path=DATA_PATH, *, features=None):
     if set(frame.label.unique()) != {0, 1}:
         raise ValueError("Dataset must contain both binary labels 0 and 1")
     frame[features] = frame[features].apply(pd.to_numeric, errors="raise")
-    if np.isinf(frame[features].to_numpy()).any():
-        raise ValueError("Infinite audio feature values")
+    if not np.isfinite(frame[features].to_numpy()).all():
+        raise ValueError("Audio features must be finite; missing values are not accepted")
     if frame[features].duplicated().any():
         raise ValueError("Duplicate feature vectors: remove or group duplicates before splitting")
     if frame.assign(artist_key=frame.artist.map(normalize_artist)).duplicated(["artist_key", "title"]).any():

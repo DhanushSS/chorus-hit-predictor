@@ -7,8 +7,46 @@ from sklearn.model_selection import StratifiedGroupKFold
 TARGET_METRICS=('accuracy','balanced_accuracy','precision','recall','f1')
 
 
+def binary_vector(value, name):
+    """Accept numeric exact 0/1 (including floats); reject bools and strings."""
+    a = np.asarray(value)
+    if a.ndim != 1 or not a.size or a.dtype.kind not in 'iuf':
+        raise ValueError(f'{name} must be a nonempty 1D numeric binary vector (no bools/strings)')
+    if not np.isfinite(a).all() or not np.isin(a, [0, 1]).all():
+        raise ValueError(f'{name} must contain finite exact binary values 0 or 1')
+    return a.astype(int)
+
+
+def positive_integer(value, name):
+    if isinstance(value, (bool, np.bool_)) or not isinstance(value, (int, np.integer)) or value <= 0:
+        raise ValueError(f'{name} must be a positive integer')
+
+
+def bootstrap_inputs(y, predictions, groups, repeats, scores=None):
+    positive_integer(repeats, 'repeats')
+    y = binary_vector(y, 'labels')
+    ps = [binary_vector(p, 'predictions') for p in predictions]
+    if any(p.shape != y.shape for p in ps):
+        raise ValueError('Bootstrap labels/predictions must be aligned')
+    g = np.asarray(groups)
+    if g.ndim != 1 or g.shape != y.shape or pd.isna(g).any():
+        raise ValueError('Bootstrap groups must be aligned 1D non-null IDs')
+    if any(not isinstance(v, (str, int, float, np.integer, np.floating)) or
+           isinstance(v, (bool, np.bool_)) or (isinstance(v, str) and not v.strip()) or
+           (not isinstance(v, str) and not np.isfinite(v)) for v in g):
+        raise ValueError('Invalid bootstrap group ID')
+    # Factorization also permits mixed string/numeric IDs without sorting them.
+    g, _ = pd.factorize(g, sort=True)
+    if len(np.unique(g)) < 2 or len(np.unique(y)) < 2:
+        raise ValueError('Bootstrap requires two classes and at least two groups')
+    s = None if scores is None else np.asarray(scores, dtype=float)
+    if s is not None and (s.shape != y.shape or not np.isfinite(s).all()):
+        raise ValueError('Invalid score shape or values')
+    return y, ps, g, s
+
+
 def classification_metrics(y, prediction, scores=None):
-    y=np.asarray(y,int); p=np.asarray(prediction,int)
+    y=binary_vector(y, 'labels'); p=binary_vector(prediction, 'predictions')
     if len(y)==0 or len(y)!=len(p) or not set(y).issubset({0,1}) or not set(p).issubset({0,1}):
         raise ValueError('Binary nonempty aligned labels/predictions are required')
     tn=int(np.sum((y==0)&(p==0))); fp=int(np.sum((y==0)&(p==1)))
@@ -66,9 +104,8 @@ def grouped_folds(frame,n_splits,seed,groups,features):
 
 
 def bootstrap_intervals(y,prediction,groups,scores=None,repeats=2000,seed=42):
-    y=np.asarray(y); p=np.asarray(prediction); g=np.asarray(groups); unique=np.unique(g)
-    if len(unique)<2: raise ValueError('At least two groups needed for bootstrap')
-    s=None if scores is None else np.asarray(scores); rng=np.random.default_rng(seed)
+    y, (p,), g, s = bootstrap_inputs(y, [prediction], groups, repeats, scores)
+    unique=np.unique(g); rng=np.random.default_rng(seed)
     keys=[*TARGET_METRICS,'class_0_recall','macro_f1','roc_auc']; samples={k:[] for k in keys}; skipped=0
     for _ in range(repeats):
         ix=np.concatenate([np.flatnonzero(g==v) for v in rng.choice(unique,len(unique),replace=True)])
@@ -78,16 +115,19 @@ def bootstrap_intervals(y,prediction,groups,scores=None,repeats=2000,seed=42):
             if m[k] is not None: samples[k].append(m[k])
     return {'intervals':{k:np.quantile(v,[.025,.975]).tolist() if v else None for k,v in samples.items()},
         'method':'percentile bootstrap of whole artist-string groups; fixed predictions, conditional on fitted procedure',
-        'requested_resamples':repeats,'one_class_resamples_skipped':skipped,'groups':len(unique),
+        'requested_resamples':repeats,'valid_resamples':repeats-skipped,
+        'unavailable_reason':'No two-class resamples' if skipped==repeats else None,'one_class_resamples_skipped':skipped,'groups':len(unique),
         'limitations':'Few groups and model-selection uncertainty are not fully captured; nested folds are dependent.'}
 
 
 def paired_bootstrap(y,p1,p0,groups,repeats=2000,seed=42):
-    y=np.asarray(y); p1=np.asarray(p1); p0=np.asarray(p0); g=np.asarray(groups); unique=np.unique(g)
+    y, (p1, p0), g, _ = bootstrap_inputs(y, [p1,p0], groups, repeats)
+    unique=np.unique(g)
     rng=np.random.default_rng(seed); draws=[]
     for _ in range(repeats):
         ix=np.concatenate([np.flatnonzero(g==v) for v in rng.choice(unique,len(unique),True)])
         if len(set(y[ix]))<2: continue
         draws.append(classification_metrics(y[ix],p1[ix])['balanced_accuracy']-classification_metrics(y[ix],p0[ix])['balanced_accuracy'])
     return {'balanced_accuracy_difference':classification_metrics(y,p1)['balanced_accuracy']-classification_metrics(y,p0)['balanced_accuracy'],
-            'ci95':np.quantile(draws,[.025,.975]).tolist(),'valid_resamples':len(draws),'paired_by':'same rows and resampled whole groups'}
+            'ci95':np.quantile(draws,[.025,.975]).tolist() if draws else None,
+            'unavailable_reason':None if draws else 'No two-class resamples','valid_resamples':len(draws),'paired_by':'same rows and resampled whole groups'}

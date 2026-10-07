@@ -90,6 +90,7 @@ class RunAssets:
     predictions: pd.DataFrame | None
 
     def validate_input(self,X,extractor_version=None):
+        if len(X)==0: raise ValueError('Input must contain at least one row')
         if X.columns.tolist()!=self.bundle['features']: raise ValueError('Input feature schema/order mismatch')
         if not np.isfinite(X.to_numpy(dtype=float)).all(): raise ValueError('Input contains nonfinite features')
         if extractor_version is not None and extractor_version!=self.bundle['extractor_version']:
@@ -104,11 +105,17 @@ class RunAssets:
 
 def load_run(run_id=None, *, root=None):
     path=Path(root) if root is not None else run_location(run_id or active_run())
-    manifest=json.loads((path/'manifest.json').read_text()); verify_files(path,manifest)
+    manifest=json.loads((path/'manifest.json').read_text())
+    from .contracts import require_fields, validate_evaluation
+    require_fields(manifest, ['run_id','status','files','versions','dataset','model_file','summary_file','predictions_file','task_version','group_version','raw_schema','labels','extractor_version','score_semantics'], 'manifest')
+    verify_files(path,manifest)
     for package,pin in manifest['versions'].items():
         if version(package)!=pin: raise ValueError(f'Package mismatch for {package}: requires {pin}')
     # Load only the locally generated model after its bytes and environment were checked.
     bundle=joblib.load(path/manifest['model_file']); summary=json.loads((path/manifest['summary_file']).read_text())
+    require_fields(summary, ['run_id','evaluation_status','metrics','target_status','task_version','group_version','feature_count','model_name'], 'summary')
+    require_fields(bundle, ['run_id','features','labels','extractor_version','data_sha256','pipeline','score_semantics','train_track_ids','model_name'], 'model bundle')
+    require_fields(manifest['dataset'], ['path','dataset_version','source_sha256'], 'dataset')
     if not (manifest['run_id']==bundle['run_id']==summary['run_id']): raise ValueError('Mixed run identities')
     if bundle['features']!=manifest['raw_schema'] or bundle['labels']!=manifest['labels']:
         raise ValueError('Model schema/label contract mismatch')
@@ -126,30 +133,13 @@ def load_run(run_id=None, *, root=None):
     if manifest.get('predictions_file'):
         if manifest['predictions_file'] not in manifest['files']: raise ValueError('Unverified predictions')
         predictions=pd.read_csv(path/manifest['predictions_file'])
-        if predictions.track_id.duplicated().any(): raise ValueError('Duplicated evaluation rows')
-        actual=data.set_index('track_id').loc[predictions.track_id]
-        if not np.array_equal(actual.label,predictions.label): raise ValueError('Prediction labels are misaligned')
-        if summary['evaluation_status']=='historical_test':
-            if set(predictions.track_id)&set(train): raise ValueError('Historical evaluation overlaps training')
-            from .data import normalize_artist
-            if set(actual.artist.map(normalize_artist))&set(data.loc[data.track_id.isin(train)].artist.map(normalize_artist)):
-                raise ValueError('Historical artist overlap')
-            expected=manifest.get('evaluation_track_ids',[])
-            if set(predictions.track_id)!=set(expected): raise ValueError('Evaluation membership mismatch')
     if summary['task_version']!=manifest['task_version'] or summary['group_version']!=manifest['group_version']:
         raise ValueError('Summary task/group contract mismatch')
-    if predictions is not None:
-        scores=None if summary['evaluation_status']=='nested_development' else predictions.score
-        calculated=classification_metrics(predictions.label,predictions.prediction,scores)
-        for metric in ['accuracy','balanced_accuracy','precision','recall','f1','class_0_recall','macro_f1','roc_auc']:
-            actual=calculated[metric]; reported=summary['metrics'][metric]
-            if actual is None and reported is None: continue
-            if actual is None or reported is None or not np.isclose(actual,reported,rtol=0,atol=1e-12):
-                raise ValueError(f'Summary metric mismatch: {metric}')
-        if summary['target_status']!=target_status(summary['metrics'],summary['evaluation_status']):
-            raise ValueError('Target check mismatch')
     if summary['feature_count']!=len(bundle['features']) or summary['model_name']!=bundle['model_name']:
         raise ValueError('Summary/model mismatch')
+    if predictions is None: raise ValueError('Saved evaluation predictions required')
+    validate_evaluation(path,manifest,summary,bundle,data,predictions,
+                        trial_records(path) if summary['evaluation_status']!='historical_test' else [])
     return RunAssets(path,manifest,bundle,summary,data,predictions)
 
 

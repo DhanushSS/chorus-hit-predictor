@@ -47,6 +47,14 @@ def load_historical(path):
         if not f.is_relative_to(path.resolve()) or sha256_file(f)!=digest:raise ValueError('Historical artifact mismatch')
     s=json.loads((path/'summary.json').read_text());pred=pd.read_csv(path/'predictions.csv')
     if s['run_id']!=m['source_run'] or s['evaluation_status']!='historical_test':raise ValueError('Historical summary mismatch')
+    from .contracts import validate_rows, frozen_split, require_fields
+    require_fields(s, ['metrics','target_status','task_version','dataset_version','group_version','fresh_test_available','groups'], 'historical summary')
+    if not {'predictions.csv','summary.json'}.issubset(m['files']): raise ValueError('Unverified historical assets')
+    _,dev,ids=frozen_split(a.data)
+    validate_rows(pred,a.data,ids,groups_required=True)
+    if s['task_version']!=a.manifest['task_version'] or s['group_version']!=a.manifest['group_version'] or s['dataset_version']!=a.manifest['dataset']['dataset_version'] or s['fresh_test_available'] is not False:
+        raise ValueError('Historical task/evidence status mismatch')
+    if s['target_status']!=target_status(s['metrics'],'historical_test') or s['groups']!=pred.artist_group.nunique(): raise ValueError('Historical target/group mismatch')
     for k,v in classification_metrics(pred.label,pred.prediction,pred.score).items():
         if s['metrics'][k]!=v:raise ValueError(f'Historical metric mismatch: {k}')
     return s

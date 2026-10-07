@@ -12,6 +12,9 @@ import subprocess
 import time
 import traceback
 import warnings
+import queue
+from time import sleep as poll_pause
+from .supervision import require_supported_platform, supervise
 
 import joblib
 import numpy as np
@@ -23,14 +26,23 @@ from .artifacts import RUNS,EXTRACTOR_VERSION,finalize_run,run_location
 from .config import ROOT,LABELS
 from .data import normalize_artist
 from .estimators import make_estimator
-from .evaluation import classification_metrics,score_model,grouped_folds,target_status,bootstrap_intervals
+from .evaluation import classification_metrics,score_model,grouped_folds,target_status,bootstrap_intervals,positive_integer
 
 _WORKER=None
+_EVENTS=None
 
 
-def worker_init(frame,features,seed):
-    global _WORKER
+def worker_init(frame,features,seed,events=None):
+    global _WORKER, _EVENTS
     _WORKER=(frame,features,seed)
+    _EVENTS=events
+
+
+def timed_trial(task, worker):
+    started=time.monotonic()
+    _EVENTS.put((task['key'], started))
+    result=worker(task)
+    return result, time.monotonic()-started
 
 
 def fit_trial(task):
@@ -60,7 +72,8 @@ def fit_trial(task):
 
 
 class Runner:
-    def __init__(self,staging,frame,features,config,deadline):
+    def __init__(self,staging,frame,features,config,deadline,worker=fit_trial):
+        self.worker=worker
         self.staging=staging; self.frame=frame; self.features=features; self.config=config; self.deadline=deadline
         (staging/'trials').mkdir(exist_ok=True)
 
@@ -70,26 +83,41 @@ class Runner:
             path=self.staging/'trials'/f"{task['key']}.json"
             if path.exists():
                 r=json.loads(path.read_text())
-                if r['spec']!=task['spec']: raise ValueError('Resume trial/config mismatch')
+                if r['spec']!=task['spec'] or r.get('task_sha256')!=json_hash(task): raise ValueError('Resume trial/config mismatch')
                 completed.append(r)
             else: pending.append(task)
         if not pending: return completed
-        pool=mp.get_context('spawn').Pool(self.config['parallelism'],initializer=worker_init,
-            initargs=(self.frame,self.features,self.config['seed']))
-        jobs=[pool.apply_async(fit_trial,(task,)) for task in pending]
+        context=mp.get_context('spawn'); events=context.Queue(); starts={}
+        if time.monotonic()>=self.deadline: raise TimeoutError('Declared invocation wall-time budget exhausted')
+        pool=context.Pool(self.config['parallelism'],initializer=worker_init,
+            initargs=(self.frame,self.features,self.config['seed'],events))
+        jobs={task['key']:(task,pool.apply_async(timed_trial,(task,self.worker))) for task in pending}
         try:
-            for task,job in zip(pending,jobs):
-                remaining=self.deadline-time.monotonic()
-                if remaining<=0: raise TimeoutError('Declared wall-time budget exhausted')
-                try: result=job.get(timeout=min(remaining,self.config['fit_timeout_seconds']))
-                except mp.TimeoutError: raise TimeoutError('Fit or wall-time budget exhausted; unfinished trials remain unrun')
-                atomic_json(self.staging/'trials'/f"{task['key']}.json",result)
-                completed.append(result)
-                if len(completed)%10==0:
-                    print(f"{task['stage']}: {len(completed)}/{len(tasks)} fold fits recorded",flush=True)
+            while jobs:
+                while True:
+                    try:
+                        key,started=events.get_nowait(); starts[key]=started
+                    except queue.Empty: break
+                overdue=[]
+                for key,(task,job) in list(jobs.items()):
+                    if job.ready():
+                        result,seconds=job.get()
+                        if seconds>self.config['fit_timeout_seconds']:
+                            overdue.append(key); continue
+                        result['execution_seconds']=seconds
+                        result['task_sha256']=json_hash(task)
+                        atomic_json(self.staging/'trials'/f'{key}.json',result)
+                        completed.append(result); del jobs[key]
+                    elif key in starts and time.monotonic()-starts[key]>self.config['fit_timeout_seconds']:
+                        overdue.append(key)
+                if overdue: raise TimeoutError(f'Per-fit execution budget exhausted: {overdue}')
+                if time.monotonic()>=self.deadline: raise TimeoutError('Declared invocation wall-time budget exhausted')
+                if jobs: poll_pause(.01)
             pool.close(); pool.join()
         except BaseException:
             pool.terminate(); pool.join(); raise
+        finally:
+            events.close(); events.join_thread()
         return completed
 
     def search(self,stage,indices,fold_seed):
@@ -127,13 +155,16 @@ class Runner:
 
 
 def validate_config(c):
+    positive_integer(c['bootstrap_repeats'], 'bootstrap_repeats')
+    if c.get('budget_scope','per_invocation')!='per_invocation': raise ValueError('Supported budget_scope is per_invocation')
     if c['mode'] not in {'quick','nested'}: raise ValueError('mode must be quick or nested')
     if c['evaluation_mode']!='development_only': raise ValueError('Tuning runner accepts development_only; use evaluate_run for deliberate historical scoring')
     if c['group_version']!=GROUP_VERSION or c['dataset_version']!=LEGACY_DATASET:
         raise ValueError('Comparable runner requires the frozen legacy dataset and artist-string protocol')
     if c.get('embeddings',False): raise ValueError('Audio-backed dataset/embedding manifest needed before enabling embeddings')
     if c['threshold_policy']!='estimator_default': raise ValueError('Only predeclared native thresholds are implemented')
-    if not 1<=c['parallelism']<=4 or c['timeout_seconds']<=0 or c['fit_timeout_seconds']<=0:
+    positive_integer(c['parallelism'],'parallelism')
+    if c['parallelism']>4 or any(isinstance(c[k],bool) or not isinstance(c[k],(int,float)) or not np.isfinite(c[k]) or c[k]<=0 for k in ('timeout_seconds','fit_timeout_seconds')):
         raise ValueError('Invalid compute budget')
     specs=c['candidates']
     if len(specs)>c['max_trials'] or len({s['id'] for s in specs})!=len(specs): raise ValueError('Duplicate IDs or candidate budget exceeded')
@@ -142,7 +173,13 @@ def validate_config(c):
     if not any(s['family']=='dummy' for s in specs): raise ValueError('Dummy baseline is mandatory')
 
 
+def invocation_deadline(config, previous):
+    """Elapsed totals are telemetry; an explicit resume starts a new invocation budget."""
+    return time.monotonic()+config['timeout_seconds']
+
+
 def run(config_path,run_id,resume=False):
+    require_supported_platform()
     config=json.loads(Path(config_path).read_text()); validate_config(config)
     destination=run_location(run_id)
     if destination.exists(): raise FileExistsError('Completed run is immutable; choose a new ID')
@@ -168,9 +205,9 @@ def run(config_path,run_id,resume=False):
     else:
         if resume: raise FileNotFoundError('No partial run to resume')
         staging.mkdir(); previous={'elapsed_seconds':0,'attempts':0}
-    started=time.monotonic(); deadline=started+config['timeout_seconds']
+    started=time.monotonic(); deadline=invocation_deadline(config,previous)
     state={'run_id':run_id,'status':'running','identity':identity,'attempts':previous['attempts']+1,
-        'elapsed_seconds':previous['elapsed_seconds'],'started_utc':datetime.now(timezone.utc).isoformat()}
+        'elapsed_seconds':previous['elapsed_seconds'],'budget_scope':'per_invocation','invocation_budget_seconds':config['timeout_seconds'],'started_utc':datetime.now(timezone.utc).isoformat()}
     atomic_json(staging/'state.json',state); atomic_json(staging/'config.json',config)
     membership=split.copy(); membership['partition']=membership.partition.map({'train':'development','test':'historical_test'})
     membership.to_csv(staging/'membership.csv',index=False)
@@ -241,7 +278,7 @@ def run(config_path,run_id,resume=False):
         atomic_json(staging/'per_group_metrics.json',group_rows)
         fold_values=[r['balanced_accuracy'] for r in outer_rows]
         evidence='candidate_not_validated'
-        if evaluation=='nested_development' and ci['intervals']['balanced_accuracy'][0]<=.5: evidence='no_supported_improvement'
+        if evaluation=='nested_development' and ci['intervals']['balanced_accuracy'] is not None and ci['intervals']['balanced_accuracy'][0]<=.5: evidence='no_supported_improvement'
         summary={'run_id':run_id,'model_name':winner['candidate_id'],'candidate':selected,'feature_count':len(features),
             'retained_dimensions':int(model[:-1].transform(development[features].iloc[:1]).shape[1]),
             'evaluation_status':evaluation,'metrics':metrics,'ci95':ci['intervals'],'uncertainty':ci,
@@ -292,20 +329,16 @@ def main():
     p.add_argument('--run-id',required=True); p.add_argument('--resume',action='store_true')
     p.add_argument('--_worker',action='store_true',help=argparse.SUPPRESS)
     a=p.parse_args()
+    require_supported_platform()
     if a._worker:
         run(a.config,a.run_id,a.resume); return
     # An isolated process group also bounds final refitting/bootstrapping, not only CV fits.
     config=json.loads(a.config.read_text()); validate_config(config)
     command=[sys.executable,'-m','chorus_hit.train_v2','--config',str(a.config.resolve()),'--run-id',a.run_id,'--_worker']
     if a.resume: command.append('--resume')
-    child=subprocess.Popen(command,cwd=ROOT,start_new_session=True)
     try:
-        return_code=child.wait(timeout=config['timeout_seconds'])
+        return_code=supervise(command,config['timeout_seconds'],ROOT)
     except subprocess.TimeoutExpired:
-        os.killpg(child.pid,signal.SIGTERM)
-        try: child.wait(timeout=5)
-        except subprocess.TimeoutExpired:
-            os.killpg(child.pid,signal.SIGKILL); child.wait()
         partial=RUNS/f'.{a.run_id}.partial'; state_path=partial/'state.json'
         if state_path.exists():
             state=json.loads(state_path.read_text()); state.update(status='incomplete',error='Supervised wall-time budget exhausted')
