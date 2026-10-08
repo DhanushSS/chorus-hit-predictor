@@ -14,7 +14,8 @@ candidates and no cutoff. Old `data/chorus_features.csv` labels must not be impo
    accepted for auditing but never prove negatives. Wrong dates/ranks, duplicate identities and
    modified hashes fail closed.
 2. `candidates.json`: list of records satisfying `schema.json`. Include independent canonical IDs,
-   earliest release, album metadata, source/review evidence and synthetic=false. For training,
+   earliest release, album metadata, source/review evidence and synthetic=false. A pending/ambiguous
+   candidate may omit unresolved IDs/dates; it stays in the unknown review queue without fabricated IDs. For training,
    `audio_path` must resolve within the supplied root; `audio_sha256` must match; processing permission,
    rights basis/reviewer/evidence and duplicate review must be supplied. An annotated chorus additionally
    needs reviewer/evidence, is_chorus=true and a timestamp. Do not invent review fields.

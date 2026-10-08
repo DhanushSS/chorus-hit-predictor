@@ -25,6 +25,13 @@ def strings(values):
 
 def candidate(r):
     require(r.get('dataset_version') == TASK, 'Wrong dataset version; legacy rows cannot be relabeled')
+    require(r.get('identity_status') in {'verified', 'ambiguous', 'pending'}, 'Invalid identity status')
+    if r['identity_status'] != 'verified':
+        for key in ['recording_id', 'title', 'original_artist_credit']:
+            require(isinstance(r.get(key), str) and bool(r[key].strip()), f'Missing candidate field: {key}')
+        # Unresolved candidates may genuinely lack canonical IDs or precise dates.
+        # Keep them in the review queue rather than invent placeholder identities.
+        return r
     for key in TEXT_FIELDS:
         require(isinstance(r.get(key), str) and bool(r[key].strip()), f'Missing candidate evidence: {key}')
     require(strings(r.get('canonical_artist_ids')), 'Canonical artist IDs required')

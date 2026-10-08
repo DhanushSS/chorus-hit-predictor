@@ -11,13 +11,13 @@ def classify(r, archive, config, coverage=None):
     protocol(config)
     coverage = coverage or validate_archive(archive)
     cutoff = iso(config['chart_cutoff'])
-    release = iso(r['first_release_date'])
+    release = iso(r['first_release_date']) if r['identity_status'] == 'verified' else None
     out = {**r, 'label': None, 'label_status': 'unknown', 'label_rule_version': LABEL_VERSION,
            'chart_name': 'Billboard Hot 100', 'chart_region': 'US', 'archive_cutoff_date': cutoff.isoformat(),
-           'chart_coverage_snapshot_id': archive['snapshot_id'], 'chart_observation_start': release.isoformat(),
+           'chart_coverage_snapshot_id': archive['snapshot_id'], 'chart_observation_start': release.isoformat() if release else None,
            'chart_observation_end': cutoff.isoformat(), 'chart_coverage_complete': False,
            'chart_entry_dates': [], 'chart_entry_evidence_urls': [], 'negative_absence_evidence': None,
-           'label_reviewer': r['identity_reviewer'], 'label_reviewed_at': r['identity_reviewed_at'], 'excluded_reason': None}
+           'label_reviewer': r.get('identity_reviewer'), 'label_reviewed_at': r.get('identity_reviewed_at'), 'excluded_reason': None}
     def unknown(reason):
         out['excluded_reason'] = reason
         return out
@@ -70,7 +70,8 @@ def classify(r, archive, config, coverage=None):
 
 def label_all(records, archive, config):
     require(len({r['recording_id'] for r in records}) == len(records), 'Duplicate candidate ID')
-    require(len({r['canonical_recording_id'] for r in records}) == len(records), 'Duplicate canonical recording')
+    canonical_ids = [r['canonical_recording_id'] for r in records if r.get('canonical_recording_id')]
+    require(len(set(canonical_ids)) == len(canonical_ids), 'Duplicate canonical recording')
     coverage = validate_archive(archive)
     return [classify(r, archive, config, coverage) for r in sorted(records, key=lambda r: r['recording_id'])]
 

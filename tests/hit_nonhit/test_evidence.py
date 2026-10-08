@@ -117,3 +117,15 @@ def test_aliases_are_only_review_hints_and_log_is_append_only(tmp_path):
     one = append_decision(tmp_path, decision); two = append_decision(tmp_path, decision)
     assert two['previous_sha256'] == digest(one) and len(list(tmp_path.glob('*.json'))) == 2
     with pytest.raises(FileExistsError): write(next(tmp_path.glob('*.json')), {})
+
+
+def test_unresolved_candidate_needs_no_invented_identity_or_release(evidence):
+    rows, archive, cfg = evidence
+    pending = {'dataset_version':'hit_nonhit_v1','recording_id':'UNKNOWN_A','title':'Unresolved song','original_artist_credit':'Unresolved credit','identity_status':'pending','synthetic':True}
+    other = {**pending,'recording_id':'UNKNOWN_B'}
+    labeled = label_all(rows + [pending, other],archive,cfg)
+    matched = match_candidates(labeled)
+    unknown = [r for r in matched if r['label'] is None]
+    assert len(unknown) == 2 and all(r['chart_observation_start'] is None for r in unknown)
+    assert len(review_queue(unknown)) == 2
+    assert sum(r['label'] == 0 for r in matched) == 2

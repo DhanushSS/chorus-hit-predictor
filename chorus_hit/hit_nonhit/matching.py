@@ -6,6 +6,10 @@ def match_candidates(rows):
     hits = [r for r in rows if r['label'] == 1]
     result = []
     for row in rows:
+        if row['label'] is None:
+            result.append({**row, 'match_level': 'unmatched', 'matched_positive_ids': [], 'match_set_id': None,
+                           'release_year_delta': None, 'viable_matches': 0, 'selection_rule': 'unresolved_identity_excluded'})
+            continue
         artists = set(row['canonical_artist_ids'])
         viable = [h for h in hits if artists & set(h['canonical_artist_ids'])]
         same_album = [h for h in viable if row['album_id'] == h['album_id']]

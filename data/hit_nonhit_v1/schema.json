@@ -3,32 +3,6 @@
   "$id": "https://github.com/DhanushSS/chorus-hit-predictor/data/hit_nonhit_v1/schema.json",
   "title": "Candidate and normalized audio/evidence record; no inherited labels",
   "type": "object",
-  "required": [
-    "dataset_version",
-    "canonical_artist_ids",
-    "identity_evidence_urls",
-    "track_number",
-    "synthetic",
-    "recording_id",
-    "canonical_work_id",
-    "canonical_recording_id",
-    "album_id",
-    "track_id",
-    "title",
-    "original_artist_credit",
-    "recording_version",
-    "first_release_date",
-    "album_release_date",
-    "market",
-    "identity_source",
-    "identity_status",
-    "identity_reviewer",
-    "identity_reviewed_at",
-    "version_policy",
-    "source_license_snapshot",
-    "created_at",
-    "source_checked_at"
-  ],
   "properties": {
     "recording_id": {
       "type": "string",
@@ -330,5 +304,52 @@
     }
   },
   "additionalProperties": true,
-  "$comment": "candidate inputs require identity fields. Audio rights must pass runtime checks before inclusion. Derived chart/feature fields are created by pipeline, never accepted as label truth. Feature CSV is separately strict and ordered."
+  "$comment": "candidate inputs require identity fields. Audio rights must pass runtime checks before inclusion. Derived chart/feature fields are created by pipeline, never accepted as label truth. Feature CSV is separately strict and ordered.",
+  "required": [
+    "dataset_version",
+    "recording_id",
+    "title",
+    "original_artist_credit",
+    "identity_status",
+    "synthetic"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "identity_status": {
+            "const": "verified"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "dataset_version",
+          "canonical_artist_ids",
+          "identity_evidence_urls",
+          "track_number",
+          "synthetic",
+          "recording_id",
+          "canonical_work_id",
+          "canonical_recording_id",
+          "album_id",
+          "track_id",
+          "title",
+          "original_artist_credit",
+          "recording_version",
+          "first_release_date",
+          "album_release_date",
+          "market",
+          "identity_source",
+          "identity_status",
+          "identity_reviewer",
+          "identity_reviewed_at",
+          "version_policy",
+          "source_license_snapshot",
+          "created_at",
+          "source_checked_at"
+        ]
+      }
+    }
+  ]
 }

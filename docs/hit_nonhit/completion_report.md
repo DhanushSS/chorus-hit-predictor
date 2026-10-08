@@ -5,7 +5,7 @@ Branch: `feat/hit-vs-nonhit-v1`. Implementation commit:
 Base main: `853e1b88fbc6a10198bda9eff1529766f2201d83`.
 The report/log commits follow the implementation; see Git history for final branch HEAD.
 
-Repository remains **public**. The feature branch is for a **draft PR, not a merge**.
+Repository remains **public**. Draft pull request: [#6](https://github.com/DhanushSS/chorus-hit-predictor/pull/6), open and **not merged**.
 Active old model is unchanged: `configs/active_run.json` → `v4_std74_001`.
 All **54** protected file hashes match, including local existing reports/slides; no new PDF/deck was made.
 
@@ -27,7 +27,7 @@ No fixture score is presented as a research result.
 | 4 — leakage/split | PARTIAL | `audit.py`, `freeze_split.py`, `leakage_audit.md` | Transitive artist/work/album/match/audio isolation; fixed seeds/support; tamper rejection; no overwrite | No genuine dataset or real untouched test |
 | 5 — model development | PARTIAL | `modeling.py`, `train.py`, `fit_worker.py`, config | Synthetic nested dummy/logistic run; supervised fits for SVMs/forest/extra-trees/PCA; interrupted resume; hard worker timeout; fold-local transforms; nuisance/permutation code | No legitimate real fit, development score or locked score; conditional experiments deferred |
 | 6 — task/application | DONE (gated) | `artifacts.py`, `predict.py`, `evaluate_locked.py`, `ui.py`, `chorus_hit/task_artifacts.py`, `app.py` | Cross-task/synthetic rejection; finite/order checks; single-access ledger; headless app and legacy prediction succeed | New real prediction view intentionally unavailable until compatible genuine evaluated model exists |
-| 7 — regression/CI | DONE locally | `tests/hit_nonhit/`, `.github/workflows/tests.yml`, verification logs | **218 passed**, including **70 added tests**, 4 existing deprecation warnings; all checks below passed | Hosted CI reported separately in the PR |
+| 7 — regression/CI | DONE locally | `tests/hit_nonhit/`, `.github/workflows/tests.yml`, verification logs | **219 passed**, including **71 added tests**, 4 existing deprecation warnings; all checks below passed | Hosted CI reported separately in the PR |
 | 8 — package/document | DONE locally | README, eight requested research documents plus report/logs, data README/fixtures | Reviewable feature branch and draft PR; no merge/default change; all source limitations explicit | Scientific completion depends on data/permissions/approval above |
 
 All implementation paths are under `chorus_hit/hit_nonhit/` unless prefixed otherwise. All research
@@ -41,13 +41,13 @@ Commands run from the repository using the existing pinned Python 3.12.14 enviro
 |---|---|
 | `.venv/bin/python -m pytest -q` before implementation | 148 passed, 4 warnings, 87.79 s |
 | `.venv/bin/python -m pytest tests/hit_nonhit -q` (intermediate) | 43, then 57, then 64, then 65 tests passed as checks were added |
-| `.venv/bin/python -m pytest -q` (final implementation) | **218 passed, 4 warnings, 154.74 s** |
-| `.venv/bin/python -m pytest tests/hit_nonhit --collect-only -q` | 70 new tests inventoried; collection is not treated as execution |
+| `.venv/bin/python -m pytest -q` (final implementation) | **219 passed, 4 warnings, 155.67 s** |
+| `.venv/bin/python -m pytest tests/hit_nonhit --collect-only -q` | 71 new tests inventoried; collection is not treated as execution |
 | `.venv/bin/python -m pip check` | No broken requirements |
 | `.venv/bin/python -m chorus_hit.readiness` | software_ready=true; preserved model valid |
 | `.venv/bin/python -m chorus_hit.artifacts` | Active artifact validated |
 | `.venv/bin/python -m chorus_hit.predict --run-id v4_std74_001 --track-id CH0001` | Successful original-task training-example prediction |
-| `.venv/bin/python -m chorus_hit.hit_nonhit.smoke --out output/hit_nonhit/review_smoke_20261008` | Passed; synthetic=true; research_accuracy=null |
+| `.venv/bin/python -m chorus_hit.hit_nonhit.smoke --out output/hit_nonhit/final_unknown_guard_smoke` | Passed; synthetic=true; research_accuracy=null |
 | `.venv/bin/python -m compileall -q chorus_hit/hit_nonhit chorus_hit/task_artifacts.py` | Passed |
 | `git diff --check` and `git diff --cached --check` | Passed |
 | SHA-256 comparison against preservation manifest | 54 checked, 0 mismatches |
@@ -59,6 +59,7 @@ new genuine recording was classified in a browser. Old-model prediction of CH000
 The audio tests initially found two uncaught NaN/Inf decoder exceptions. The new extractor now checks
 finite decoded samples before resampling. Both regression cases pass. The four final warnings are
 existing `aifc`/`audioop`/`sunau` and librosa legacy decoder deprecations; no tests were weakened or removed.
+The final review also added a pending-identity case: candidates without known canonical IDs or precise release dates remain unknown without fabricated placeholders. Its regression passes.
 Signal-only fit interruption was strengthened to hard subprocess supervision, with an actual timeout test.
 
 Logs are in [verification](verification/). Tests do not require restricted data/audio or any credentials.
