@@ -33,7 +33,7 @@ def test_app_run_switch_uses_matching_artifacts():
     from streamlit.testing.v1 import AppTest
     app=AppTest.from_file(str(ROOT/'app.py')).run(timeout=60)
     assert not app.exception
-    assert any('v4_lr_std74_standard_0.1' in c.value for c in app.caption)
+    assert any('Chorus Hit Predictor' in c.value for c in app.caption)
     app.button[0].click().run(timeout=60)
     assert not app.exception
     assert app.success or app.warning

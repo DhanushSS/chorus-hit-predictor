@@ -31,10 +31,10 @@ The final PDF write-up and slides are supplied separately from the code reposito
 ## Current work scope — 2026-10-06
 
 The final bounded accuracy check is complete. A fixed equal-weight ensemble of
-the eight existing V4 std74 logistic settings scored 55.28% accuracy, versus
-56.62% for the fixed V4 control on identical development folds. No improvement
+the eight existing Chorus Hit Predictor std74 logistic settings scored 55.28% accuracy, versus
+56.62% for the fixed Chorus Hit Predictor control on identical development folds. No improvement
 was found. Accuracy experimentation is stopped, and the active baseline is
-preserved. These exploratory scores do not replace the nested V4 assessment or
+preserved. These exploratory scores do not replace the nested Chorus Hit Predictor assessment or
 provide a fresh-test accuracy claim.
 
 Rehearsal, Q&A preparation, and further faculty/access confirmation are **deferred
@@ -45,7 +45,7 @@ remain public.
 ## Final submission materials — 2026-10-07
 
 The user subsequently requested the final PDF and presentation, lifting their
-earlier deferral. The two-page write-up and 12-slide deck use the saved V4 nested
+earlier deferral. The two-page write-up and 12-slide deck use the saved Chorus Hit Predictor nested
 result (54.61% accuracy), distinguish the exploratory fixed-control score
 (56.62%) and rejected ensemble (55.28%), and retain the data limitations. They
 remain outside GitHub to keep the repository focused on code and evidence.

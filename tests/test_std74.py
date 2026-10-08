@@ -62,7 +62,7 @@ def test_v4_demo_uses_validated_run_and_exploratory_label():
     run=load_run('v4_std74_001')
     app=AppTest.from_file(str(ROOT/'app.py')).run(timeout=60)
     assert not app.exception
-    assert any('v4_std74_001' in c.value for c in app.caption)
+    assert any('Chorus Hit Predictor' in c.value for c in app.caption)
     assert any('Exploratory follow-up' in c.value for c in app.caption)
     assert any('63 declared settings' in m.value for m in app.markdown)
     assert any(m.label=='Balanced accuracy' and m.value==f"{run.summary['metrics']['balanced_accuracy']:.1%}" for m in app.metric)

@@ -17,7 +17,7 @@ where their software/documentation portions are implemented.
 | C03 | FIXED_AND_TESTED | `ingestion.py`; validation tests | Shared staged eligibility and strict validation; evidence URLs, canonical ID types, chart window/type, rights, file/container/hash, segment boundary, extractor checks. References are not independently authenticated. |
 | C04 | FIXED_AND_TESTED | `data.py`, `artifacts.py`; validation tests | Finite features required at loading and prediction; invalid missing/empty cases fail before training. Valid temporary data fit/save/reload/predict works. Original imputers retained. |
 | C05 | FIXED_AND_TESTED | `contracts.py`, `artifacts.py`, `evaluate_run.py`; `tests/test_semantic_artifacts.py` | Every original run loads. Rehashed label/group/fold/winner/membership/count/support/confusion/status mutations fail; source/frozen split, nested procedure folds/trials, target semantics checked. |
-| C06 | FIXED_AND_TESTED | `app.py`; `tests/test_app_resilience.py` | Optional V2 loss does not disable baseline/V4 prediction. Missing baseline disables historical demo gracefully. Selected-model corruption stops prediction. Methods use selected run. |
+| C06 | FIXED_AND_TESTED | `app.py`; `tests/test_app_resilience.py` | Optional V2 loss does not disable baseline/Chorus Hit Predictor prediction. Missing baseline disables historical demo gracefully. Selected-model corruption stops prediction. Methods use selected run. |
 | C07 | FIXED_AND_TESTED | `train_v2.py`, `supervision.py`; `tests/test_runner.py` | Actual fit start/runtime supervision, queued-time exclusion, later-fit timeout, checkpoint reuse, changed-task rejection, worker exception/interruption cleanup. Explicit per-invocation resume budget. |
 | C08 | FIXED_AND_TESTED | `supervision.py`, `train_v2.py`, README; runner tests | Early non-POSIX failure; bounded POSIX process-group cleanup tested. No Windows training support claimed. |
 | C09 | FIXED_AND_TESTED | `scripts/benchmark_models.py`, `diagnostics.py`; `tests/test_diagnostics.py` | Import has no training/writes; callable and guarded CLI; new outputs only; frozen split check and config/code/environment identity. Explicit CLI run into a new directory passed. |
@@ -29,7 +29,7 @@ where their software/documentation portions are implemented.
 | R05 | BLOCKED_DATA | `audio.py`, audio contract; `tests/test_audio_v2.py` | Manual/repeated/fallback metadata, similarity, boundaries, nonfinite/silence/short cases tested. Real annotated chorus review denominator is 0; musical selector accuracy unmeasured. |
 | R06 | FIXED_AND_TESTED | `docs/evaluation_registry.json`, README; readiness tests | Original memberships and hashes recorded, including ignored local threshold/historical work and subsequent all-data diagnostic. No fresh-test claim, seed-based independence claim or promotion. |
 | D01 | FIXED_AND_TESTED | README, `app.py`, diagnostic descriptions | Universal ceiling claims removed; conclusions bounded to evaluated settings. Original scores retained. Local benchmark is not Eric Liu's runtime or a matched paper comparison. |
-| D02 | FIXED_AND_TESTED | README, `docs/audio_contract.md` | Setup, offline dependencies, platform matrix, audit/prediction, new V1/V4 paths, partial resume, architecture, limits, troubleshooting; CLI help and representative commands executed. Full studies not needlessly rerun. |
+| D02 | FIXED_AND_TESTED | README, `docs/audio_contract.md` | Setup, offline dependencies, platform matrix, audit/prediction, new V1/Chorus Hit Predictor paths, partial resume, architecture, limits, troubleshooting; CLI help and representative commands executed. Full studies not needlessly rerun. |
 | T01 | FIXED_AND_TESTED | New validation, semantic-artifact, app, diagnostic, readiness tests; expanded audio/runner tests | Negative tests, hash-consistent semantic corruption, predictions through every run, format decoding, synthetic extraction, cleanup and preservation; existing assertions retained. |
 | T02 | HUMAN_REQUIRED | `readiness.py`, CI workflow, `docs/demo_checklist.md`; readiness tests | Local pinned environment and headless startup/HTTP health tested. Readiness detects missing/mismatched packages. Actual review-device and permitted-song live rehearsal still pending. |
 | X01 | DEFERRED_OPTIONAL | Audio contract / task alignment | No new approved suitable recording collection. Audio preparation is explicitly not a compatible connected-group training path. |
@@ -91,7 +91,7 @@ The server returned HTTP 200 and `ok` from `/_stcore/health`; the temporary serv
 was then stopped. AppTest exercises actual app rendering/buttons, separate from
 that server-health check. `CH0001` correctly reported `training_example`, not held
 out. The benchmark reproduced exploratory fixed-pipeline accuracy (56.6%, 50.6%,
-51.1%); it does not replace V4's 54.61% nested assessment. Detailed local logs are
+51.1%); it does not replace Chorus Hit Predictor's 54.61% nested assessment. Detailed local logs are
 in ignored `output/remediation/` and the benchmark's new output directory.
 
 ## Preservation and scientific semantics
@@ -100,11 +100,11 @@ in ignored `output/remediation/` and the benchmark's new output directory.
 snapshot. 17 pre-existing local experiment/benchmark evidence files also retain
 matching hashes. No original result, model, label, feature, grouping, threshold,
 candidate hyperparameter, metric definition or active-run configuration changed.
-The active run is `v1_baseline`; V4 remains selectable research.
+The active run is `v1_baseline`; Chorus Hit Predictor remains selectable research.
 
 Robustness changes reject invalid inputs and artifacts, enforce future execution
 budgets, isolate optional UI dependencies and version diagnostic outputs. They do
-not retrospectively alter valid stored metrics or imply old V4 exceeded its budget.
+not retrospectively alter valid stored metrics or imply old Chorus Hit Predictor exceeded its budget.
 New reproductions use new run/code identities. Metadata now records extraction
 verification boundaries explicitly. No original source audio was obtained, no new
 real-song accuracy was established, and no PDFs/slides were produced.
@@ -126,8 +126,8 @@ rounded to sample zero and accepted. `chorus_hit/audio.py` now rejects negative
 seconds before rounding; the existing boundary regression test includes this
 case. This software fix does not change saved-model metrics or extractor settings.
 
-One fixed, predeclared equal-weight ensemble of the eight V4 std74 logistic
-settings was tested against the fixed V4 control. Both used the same 597
+One fixed, predeclared equal-weight ensemble of the eight Chorus Hit Predictor std74 logistic
+settings was tested against the fixed Chorus Hit Predictor control. Both used the same 597
 development rows and five artist-name-grouped folds (seed 44), with fold-local
 preprocessing, native control predictions, ensemble cutoff 0.5 (ties class 0),
 40 fits, one CPU thread and a 120-second whole-command budget. The protocol and
@@ -135,7 +135,7 @@ code/data/config/fold identities were saved before the first fit. No weights,
 thresholds, seeds or member subsets were selected from the results. The 154
 historical rows were excluded from all new fits and scoring.
 
-| Metric | Fixed V4 control | Fixed ensemble |
+| Metric | Fixed Chorus Hit Predictor control | Fixed ensemble |
 | --- | ---: | ---: |
 | Accuracy | 56.62% | 55.28% |
 | Balanced accuracy | 56.72% | 55.38% |
@@ -148,7 +148,7 @@ The ensemble's paired accuracy difference was -1.34 percentage points; its
 2,000-resample whole-group 95% bootstrap interval was [-3.82, +0.84] points.
 There is no demonstrated improvement. This is reused development data, and the
 interval does not account for prior model selection or dependent folds. These
-fixed-pipeline scores do not replace V4's 54.61% nested procedure assessment.
+fixed-pipeline scores do not replace Chorus Hit Predictor's 54.61% nested procedure assessment.
 The ensemble was not promoted; accuracy experimentation is stopped.
 
 Verification completed:

@@ -1,4 +1,4 @@
-# Predicting hit songs from a repeated chorus
+# Chorus Hit Predictor
 
 Machine learning mini-project by Dhanush Sai Suprapadha (PES2UG24CS154) and Deepthi V (PES2UG24CS150).
 
@@ -22,20 +22,20 @@ Initial cloning/package installation needs internet. Saved-model prediction,
 training from the checked-in feature table and the app work offline; no account,
 Spotify connection, GPU, model download or Hugging Face token is needed.
 
-| Platform | Saved-run app/prediction | Supervised V2–V4 training and diagnostics |
+| Platform | Saved-run app/prediction | Supervised Model training and diagnostics |
 | --- | --- | --- |
 | macOS | Locally tested | Supported and tested |
 | Linux | CI environment | Supported; CI timeout tests |
 | Windows | Not tested; requires compatible package pins/codecs | Unsupported; fails early with an explanation |
 
 On Windows the venv activation command differs; there is no tested Windows training
-promise. Package guards must not be bypassed. The app uses **V4 (`v4_std74_001`) only**, for both stored-song and audio-upload predictions. There is no model selector.
+promise. Package guards must not be bypassed. The app uses **Chorus Hit Predictor**, for both stored-song and audio-upload predictions. There is no model selector.
 Uploaded audio is experimental: source waveform equivalence and new-song accuracy
 are unverified. See [audio contract](docs/audio_contract.md).
 
 ## Current result
 
-| Artist-grouped nested development evaluation | V4 |
+| Artist-grouped nested development evaluation | Chorus Hit Predictor |
 | --- | ---: |
 | Accuracy | 54.61% |
 | Balanced accuracy | 54.66% |
@@ -43,37 +43,37 @@ are unverified. See [audio contract](docs/audio_contract.md).
 | Recall | 56.55% |
 | F1 | 54.76% |
 
-V4 uses 74 chorus-variation features inside the saved 518-feature input pipeline.
+Chorus Hit Predictor uses 74 chorus-variation features inside the saved 518-feature input pipeline.
 The app's default was changed at the team's request, not because of a new test
 result. No untouched test set remains. Uploaded-audio accuracy is unverified.
 
 The older saved models and their run folders were removed from the current
-checkout. Earlier versions remain recoverable from Git history. V4's immutable
+checkout. Earlier versions remain recoverable from Git history. Chorus Hit Predictor's immutable
 configuration and trial records still document all candidates considered in its
 original selection procedure; these are evidence, not additional deployed models.
 
 ## Compute efficiency
 
-The exploratory fixed V4 benchmark recorded 56.62% accuracy, around 6 ms per
+The exploratory fixed Chorus Hit Predictor benchmark recorded 56.62% accuracy, around 6 ms per
 fold fit and 0.6 ms for 154 feature-row predictions. It excludes audio extraction
 and does not replace the 54.61% nested assessment. Timing is machine-dependent.
 
 ## Final accuracy experiment — 2026-10-06
 
-One predeclared equal-weight ensemble of the eight existing V4 std74 logistic
+One predeclared equal-weight ensemble of the eight existing Chorus Hit Predictor std74 logistic
 settings was evaluated on the same 597 development songs and five artist-name
-grouped folds. There was no threshold, seed or weight search. The fixed V4 control
+grouped folds. There was no threshold, seed or weight search. The fixed Chorus Hit Predictor control
 reproduced **56.62% accuracy / 54.86% precision / 60.34% recall**; the ensemble
 reached **55.28% / 53.61% / 58.97%**, respectively. Its accuracy difference was
 -1.34 percentage points (paired group-bootstrap 95% interval: -3.82 to +0.84).
 The ensemble was not promoted. Accuracy experimentation is now stopped at the
-user's request. This exploratory check does not replace the **54.61% nested V4
+user's request. This exploratory check does not replace the **54.61% nested Chorus Hit Predictor
 assessment** or establish new-song accuracy. Code: `scripts/final_accuracy_check.py`;
 protocol and evidence hashes are in [the exposure registry](docs/evaluation_registry.json).
 
-`app.py` and `chorus_hit/` contain the app and ML pipeline. `data/` holds the feature table and provenance; `configs/` holds experiment settings; `results/v2/` holds the saved baseline and V2–V4 models, predictions and verification manifests. The other small files in `results/` support the original baseline and historical comparison. Reports and slides are kept outside this code repository.
+`app.py` and `chorus_hit/` contain the app and ML pipeline. `data/` holds the feature table and provenance; `configs/` holds experiment settings; The saved run contains the sole deployed model, predictions and verification manifests. The frozen split in `results/` identifies historical songs. Reports and slides are kept outside this code repository.
 
-Check the saved models and software with `python -m pytest -q`. For a labelled example, run `python -m chorus_hit.predict --run-id v4_std74_001 --track-id CH0001` and inspect whether that song was in training or held out.
+Check the saved models and software with `python -m pytest -q`. For a labelled example, run `python -m chorus_hit.predict --track-id CH0001` and inspect whether that song was in training or held out.
 
 The features were adapted from the [repeated-chorus dataset](https://github.com/AntoniosMalak/Predicting-Hit-Songs-Using-Repeated-Chorus) under Apache-2.0; see `NOTICE`, `licenses/`, and `data/provenance.json`. Our class definition differs from [Eric Liu's study](https://cs229.stanford.edu/proj2021spr/report2/81974051.pdf), so its accuracy is not directly comparable.
 
@@ -105,31 +105,31 @@ full dataset during remediation**; software tests use synthetic fixtures.
 ## Reproduce and verify
 
 Use a new output/run name for each reproduction. Existing completed runs and the
-saved V4 evidence are immutable. These steps do not imply that rerunning inspected
+saved Chorus Hit Predictor evidence are immutable. These steps do not imply that rerunning inspected
 songs creates a fresh test.
 
 ```bash
 # Fast integrity/software checks; no full search.
 python -m pytest -q
 python -m chorus_hit.artifacts
-python -m chorus_hit.predict --run-id v4_std74_001 --track-id CH0001
+python -m chorus_hit.predict --track-id CH0001
 python -m chorus_hit.audit --out output/audits/my_audit_001
 python -m chorus_hit.readiness --evidence-only --out output/audits/my_evidence_001.json
 
 # Optional full reproductions, macOS/Linux; original outputs remain intact.
-python -m chorus_hit.train_v2 --config configs/v4_std74.json --run-id v4_my_repro_001
+python -m chorus_hit.train_v2 --config configs/chorus_hit_predictor.json --run-id chorus_repro_001
 ```
 
-`CH0001` is a development/training row for the V4 final model; its CLI result is an
-interface demonstration, not held-out accuracy. V4 reproduction produces
-`results/v2/v4_my_repro_001/` with model, predictions, fold/trial records, summary
+`CH0001` is a development/training row for the Chorus Hit Predictor final model; its CLI result is an
+interface demonstration, not held-out accuracy. Chorus Hit Predictor reproduction produces
+`results/v2/chorus_repro_001/` with model, predictions, fold/trial records, summary
 and verification manifest. The training command does not promote a model or modify
 `configs/active_run.json`.
 
-Only if `results/v2/.v4_my_repro_001.partial/` exists and code/config/data match:
+Only if `results/v2/.chorus_repro_001.partial/` exists and code/config/data match:
 
 ```bash
-python -m chorus_hit.train_v2 --config configs/v4_std74.json --run-id v4_my_repro_001 --resume
+python -m chorus_hit.train_v2 --config configs/chorus_hit_predictor.json --run-id chorus_repro_001 --resume
 ```
 
 Resume reuses completed matching checkpoints. The wall budget is **per invocation**;
@@ -140,7 +140,7 @@ bootstrap work. Final refitting has the invocation limit, not a separate fold-fi
 limit. Timeout/interrupt cleanup preserves completed checkpoints. A code change
 invalidates partial-run identity; choose a new ID rather than modifying old state.
 
-Full V4 training was not rerun merely for this software remediation: no labels,
+Full Chorus Hit Predictor training was not rerun merely for this software remediation: no labels,
 features, hyperparameters, thresholds, grouping or scientific metric definitions
 changed. CLI help and bounded training fixtures were checked. Exact new timing
 results will vary by machine, and a new code identity is recorded for reproductions.
@@ -155,8 +155,8 @@ results will vary by machine, and a new code identity is recorded for reproducti
 | `chorus_hit/estimators.py`, `evaluation.py` | Fold-local preprocessing, classifiers, metrics, group bootstrap |
 | `chorus_hit/train.py`, `train_v2.py`, `supervision.py` | Baseline and bounded/resumable development experiments |
 | `chorus_hit/artifacts.py`, `contracts.py` | Hash, environment and semantic result validation |
-| `configs/active_run.json` | V4 default; deployment choice only, not new scientific evidence |
-| `results/v2/v4_std74_001` | Original completed results, not reproduction destinations |
+| `configs/active_run.json` | Chorus Hit Predictor default; deployment choice only, not new scientific evidence |
+| Saved model directory | Original completed results, not reproduction destinations |
 | `scripts/benchmark_models.py`, `leakage_demo.py` | Optional exploratory diagnostics, never promotion/fresh-test evidence |
 | `docs/` | Task alignment, exposure registry, evidence counts, remediation and rehearsal notes |
 

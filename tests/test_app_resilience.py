@@ -12,7 +12,7 @@ def test_v4_is_only_distributed_model_and_demo_predicts():
     assert not (ROOT/'models/selected_model.joblib').exists()
     app = AppTest.from_file(str(ROOT/'app.py')).run(timeout=60)
     assert not app.exception and not app.sidebar.selectbox
-    assert any('v4_std74_001' in c.value for c in app.caption)
+    assert any('Chorus Hit Predictor' in c.value for c in app.caption)
     assert len(app.selectbox[0].options) == 154
     app.button[0].click().run(timeout=60)
     assert not app.exception and any(m.label == 'Model prediction' for m in app.metric)

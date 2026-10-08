@@ -11,7 +11,7 @@ from chorus_hit.config import ROOT
 from chorus_hit.artifacts import active_run,load_run,run_cache_key
 from chorus_hit.contracts import frozen_split
 
-st.set_page_config(page_title='Chorus Lab | Hit Song Prediction',page_icon='🎵',layout='wide')
+st.set_page_config(page_title='Chorus Hit Predictor',page_icon='🎵',layout='wide')
 st.markdown('<style>.block-container{max-width:1160px;padding-top:4rem;padding-bottom:3rem;}h1{letter-spacing:-1.4px;}[data-testid="stMetricValue"]{font-size:1.8rem;}</style>',unsafe_allow_html=True)
 
 
@@ -21,12 +21,12 @@ def assets(run_id,manifest_hash):
 
 
 st.caption('UE24CS352A · MACHINE LEARNING MINI-PROJECT')
-st.title('Can a chorus predict a hit?')
+st.title('Chorus Hit Predictor')
 st.write('Explore 15 seconds of music and inspect what the experiments actually found.')
 try:
     run_id=active_run()
     with st.sidebar:
-        st.subheader('V4 chorus-variation model')
+        st.subheader('Chorus Hit Predictor')
         st.caption('The sole model used for song and audio predictions. Experimental; no fresh-test validation.')
     key=run_cache_key(run_id);a=assets(*key);s=a.summary;bundle=a.bundle
 except Exception as error:
@@ -40,7 +40,7 @@ status_short={'historical_test':'Historical','nested_development':'Nested CV','t
 cols=st.columns(4)
 for c,label,value in zip(cols,['Dataset songs','Raw audio features','Evaluation','Balanced accuracy'],
                         [str(len(a.data)),str(len(features)),status_short,f"{s['metrics']['balanced_accuracy']:.1%}"]):c.metric(label,value)
-st.caption(f"Run: {run_id} · Model: {bundle['model_name']} · Evidence: {s['evidence_status'].replace('_',' ')}")
+st.caption(f"Model: Chorus Hit Predictor · Evidence: {s['evidence_status'].replace('_',' ')}")
 if selected_config and selected_config.get('study_note'):
     st.caption('Exploratory follow-up: these development folds were already inspected. The result requires confirmation on new data.')
 
@@ -100,12 +100,13 @@ with results_tab:
     else:
         st.caption('Nested predictions assess the selection procedure across outer folds. The final candidate fits all original development songs. These are different fitted models.')
         st.write(f"Full-development tuning BA: {s['tuning_balanced_accuracy']:.1%}. Tuning scores can be optimistic.")
-        st.dataframe(pd.read_csv(a.path/'final_development_ranking.csv').sort_values('mean_balanced_accuracy',ascending=False),hide_index=True,use_container_width=True)
+        ranking=pd.read_csv(a.path/'final_development_ranking.csv').sort_values('mean_balanced_accuracy',ascending=False)
+        st.dataframe(ranking.drop(columns=['candidate_id'],errors='ignore'),hide_index=True,use_container_width=True)
     with st.expander('All recorded predictions'):
-        st.dataframe(predictions,hide_index=True,use_container_width=True)
-        st.download_button('Download predictions',predictions.to_csv(index=False),run_id+'_predictions.csv','text/csv')
+        st.dataframe(predictions.drop(columns=['candidate_id'],errors='ignore'),hide_index=True,use_container_width=True)
+        st.download_button('Download predictions',predictions.to_csv(index=False),'chorus_hit_predictor_predictions.csv','text/csv')
     with st.expander('Model and input contract'):
-        st.json({'run_id':run_id,'input_features':len(features),'extractor':bundle['extractor_version'],'score':bundle['score_semantics'],'task':a.manifest['task_version'],'groups':a.manifest['group_version'],'schema_validated':True,'waveform_parity_verified':False})
+        st.json({'model':'Chorus Hit Predictor','input_features':len(features),'extractor':bundle['extractor_version'],'score':bundle['score_semantics'],'task':a.manifest['task_version'],'groups':a.manifest['group_version'],'schema_validated':True,'waveform_parity_verified':False})
 with method:
     st.subheader('Audio becomes measurements, then a prediction')
     st.markdown(f'''1. Choose a 15-second excerpt.
