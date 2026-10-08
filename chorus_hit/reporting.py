@@ -1,6 +1,5 @@
 """Run-derived wording shared by reports and notebooks, with no frozen conclusions."""
 from .artifacts import load_run
-from .evaluate_run import load_historical
 
 
 def summary_text(summary):
@@ -16,8 +15,6 @@ def summary_text(summary):
         'result':f'{name} records {metric:.1%} balanced accuracy for {status}.','uncertainty':uncertainty,'conclusion':conclusion}
 
 
-def report_context(run_id,historical_path=None):
+def report_context(run_id):
     a=load_run(run_id);s=a.summary
-    h=load_historical(historical_path) if historical_path else None
-    if h is not None and h['run_id']!=run_id:raise ValueError('Report historical/run mismatch')
-    return {'summary':s,'text':summary_text(s),'manifest':a.manifest,'historical':h,'data':a.data}
+    return {'summary':s,'text':summary_text(s),'manifest':a.manifest,'historical':None,'data':a.data}

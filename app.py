@@ -8,8 +8,8 @@ import pandas as pd
 import soundfile as sf
 import streamlit as st
 from chorus_hit.config import ROOT
-from chorus_hit.artifacts import active_run,load_run,run_cache_key,RUNS
-from chorus_hit.evaluate_run import load_historical
+from chorus_hit.artifacts import active_run,load_run,run_cache_key
+from chorus_hit.contracts import frozen_split
 
 st.set_page_config(page_title='Chorus Lab | Hit Song Prediction',page_icon='🎵',layout='wide')
 st.markdown('<style>.block-container{max-width:1160px;padding-top:4rem;padding-bottom:3rem;}h1{letter-spacing:-1.4px;}[data-testid="stMetricValue"]{font-size:1.8rem;}</style>',unsafe_allow_html=True)
@@ -24,11 +24,10 @@ st.caption('UE24CS352A · MACHINE LEARNING MINI-PROJECT')
 st.title('Can a chorus predict a hit?')
 st.write('Explore 15 seconds of music and inspect what the experiments actually found.')
 try:
-    default=active_run();available=[p.name for p in RUNS.iterdir() if p.is_dir() and not p.name.startswith('.') and (p/'manifest.json').is_file()]
-    available=[default]+sorted(x for x in available if x!=default)
+    run_id=active_run()
     with st.sidebar:
-        run_id=st.selectbox('Demo run',available,format_func=lambda v: 'Original model (active)' if v==default else {'v2_nested_001':'V2 research candidate','v3_nested_001':'V3 robustness study','v4_std74_001':'V4 chorus-variation study'}.get(v,v))
-        st.caption('The original model remains active. Selecting a research candidate here does not promote it.')
+        st.subheader('V4 chorus-variation model')
+        st.caption('The sole model used for song and audio predictions. Experimental; no fresh-test validation.')
     key=run_cache_key(run_id);a=assets(*key);s=a.summary;bundle=a.bundle
 except Exception as error:
     st.error(f'Project files are incompatible or incomplete: {error}');st.stop()
@@ -51,9 +50,9 @@ with demo:
     if mode=='Held-out song':
         st.subheader('Try a historical test song')
         st.write(f'These songs and their artist-name groups were excluded from model training. Predictions use {len(features)} audio features. This benchmark has already been inspected.')
-        # Membership is checked against the validated run's training IDs and frozen baseline.
+        # Read the verified historical partition without loading another model.
         try:
-            base=assets(*run_cache_key('v1_baseline'));ids=base.predictions.track_id
+            _,_,ids=frozen_split(a.data)
             options=a.data.loc[a.data.track_id.isin(ids)].sort_values(['artist','title'])
             if set(ids)&set(bundle['train_track_ids']):st.error('Evaluation membership overlaps training');st.stop()
             lookup={r.track_id:f'{r.artist} — {r.title}' for r in options.itertuples()}
@@ -102,16 +101,6 @@ with results_tab:
         st.caption('Nested predictions assess the selection procedure across outer folds. The final candidate fits all original development songs. These are different fitted models.')
         st.write(f"Full-development tuning BA: {s['tuning_balanced_accuracy']:.1%}. Tuning scores can be optimistic.")
         st.dataframe(pd.read_csv(a.path/'final_development_ranking.csv').sort_values('mean_balanced_accuracy',ascending=False),hide_index=True,use_container_width=True)
-    with st.expander('Historical V2 comparison'):
-        try:
-            research=assets(*run_cache_key('v2_nested_001'));h=load_historical(ROOT/'results/evaluations/v2_nested_001_historical')
-            st.write(f"V2 nested development BA: **{research.summary['metrics']['balanced_accuracy']:.1%}**. V2 historical BA: **{h['metrics']['balanced_accuracy']:.1%}**.")
-            d=h['paired_vs_v1']
-            if d['ci95'] is None: st.info('Paired interval unavailable: no usable resamples.')
-            else: st.write(f"Matched historical change: {100*d['balanced_accuracy_difference']:+.1f} percentage points; approximate paired interval {100*d['ci95'][0]:+.1f} to {100*d['ci95'][1]:+.1f} percentage points.")
-            st.caption('The paired interval includes zero. The original model stays active. New permitted recordings, verified identities/labels and a genuinely fresh set are still needed.')
-        except Exception as error:
-            st.info(f'Optional V2 comparison unavailable: {error}')
     with st.expander('All recorded predictions'):
         st.dataframe(predictions,hide_index=True,use_container_width=True)
         st.download_button('Download predictions',predictions.to_csv(index=False),run_id+'_predictions.csv','text/csv')

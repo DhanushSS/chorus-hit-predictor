@@ -6,7 +6,7 @@ from chorus_hit.config import ROOT
 def test_current_readiness_and_evidence_counts():
     r=check_readiness()
     assert r['software_ready'],r['errors']
-    assert r['active_run']=='v1_baseline' and len(r['runs'])==4
+    assert r['active_run']=='v4_std74_001' and set(r['runs'])=={'v4_std74_001'}
     e=r['evidence'];assert e['records']==e['inherited']==e['unresolved_recordings']==751
     assert e['verified_with_references']==e['strict_audio_study_eligible']==e['disputed']==0
     assert e['waveform_parity_verified'] is False

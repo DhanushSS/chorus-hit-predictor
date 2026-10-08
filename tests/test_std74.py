@@ -61,7 +61,6 @@ def test_v4_demo_uses_validated_run_and_exploratory_label():
     from chorus_hit.artifacts import load_run
     run=load_run('v4_std74_001')
     app=AppTest.from_file(str(ROOT/'app.py')).run(timeout=60)
-    app.sidebar.selectbox[0].set_value('v4_std74_001').run(timeout=60)
     assert not app.exception
     assert any('v4_std74_001' in c.value for c in app.caption)
     assert any('Exploratory follow-up' in c.value for c in app.caption)

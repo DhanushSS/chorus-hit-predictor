@@ -33,23 +33,21 @@ def test_no_artist_overlap_in_holdout_or_cv():
         assert set(groups[train][fit]).isdisjoint(groups[train][validation])
 
 
-def test_saved_model_and_metrics_are_from_the_holdout():
+def test_saved_v4_model_and_nested_metrics():
+    from chorus_hit.artifacts import load_run
+    from chorus_hit.evaluation import classification_metrics
+    a = load_run()
     data = load_data()
     train, test, _ = split_data(data)
-    bundle = joblib.load(MODEL_PATH)
-    report = json.loads((RESULTS / "metrics.json").read_text())
-    assert set(bundle["train_track_ids"]) == set(data.track_id.iloc[train])
-    assert bundle["pipeline"].named_steps["scale"].n_samples_seen_ == len(train)
-    assert bundle["pipeline"].feature_names_in_.tolist() == FEATURE_COLUMNS
-    X = data.iloc[test][FEATURE_COLUMNS]
-    pred = bundle["pipeline"].predict(X)
-    score, _ = model_scores(bundle["pipeline"], X)
-    computed = metrics(data.label.iloc[test], pred, score)
-    selected = next(r for r in report["models"] if r["selected"])
-    for key, value in computed.items():
-        assert selected[f"test_{key}"] == pytest.approx(value)
-    eligible = [r for r in report["models"] if r["model"] != "Majority baseline"]
-    assert selected["cv_balanced_accuracy"] == max(r["cv_balanced_accuracy"] for r in eligible)
+    assert a.manifest['run_id'] == 'v4_std74_001'
+    assert set(a.bundle['train_track_ids']) == set(data.track_id.iloc[train])
+    assert not set(a.bundle['train_track_ids']) & set(data.track_id.iloc[test])
+    assert a.bundle['pipeline'].named_steps['scale'].n_samples_seen_ == len(train)
+    assert a.bundle['pipeline'].feature_names_in_.tolist() == FEATURE_COLUMNS
+    pred = a.predictions
+    computed = classification_metrics(pred.label, pred.prediction)
+    for key in ['accuracy', 'balanced_accuracy', 'precision', 'recall', 'f1']:
+        assert a.summary['metrics'][key] == pytest.approx(computed[key])
 
 
 @pytest.fixture(scope="module")

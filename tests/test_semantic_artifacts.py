@@ -35,26 +35,7 @@ def test_nested_semantic_corruption(tmp_path,mutation):
     with pytest.raises(ValueError):load_run(root=p)
 
 
-@pytest.mark.parametrize('mutation',['group','label','rows','status','support'])
-def test_historical_semantic_corruption(tmp_path,mutation):
-    from chorus_hit.evaluate_run import load_historical
-    p=tmp_path/'history';shutil.copytree(ROOT/'results/evaluations/v2_nested_001_historical',p)
-    name='predictions.csv' if mutation in {'group','label','rows'} else 'summary.json'
-    if name.endswith('.csv'):
-        f=pd.read_csv(p/name)
-        if mutation=='rows':f=f.iloc[1:]
-        else:f.loc[0,'artist_group' if mutation=='group' else 'label']='wrong' if mutation=='group' else 1-f.loc[0,'label']
-        f.to_csv(p/name,index=False)
-    else:
-        s=json.loads((p/name).read_text())
-        if mutation=='status':s['fresh_test_available']=True
-        else:s['metrics']['support']['0']+=1
-        atomic_json(p/name,s)
-    m=json.loads((p/'manifest.json').read_text());m['files'][name]=sha256_file(p/name);atomic_json(p/'manifest.json',m)
-    with pytest.raises(ValueError):load_historical(p)
-
-
-@pytest.mark.parametrize('run',['v1_baseline','v2_nested_001','v3_nested_001','v4_std74_001'])
+@pytest.mark.parametrize('run',['v4_std74_001'])
 def test_each_saved_run_predicts_and_preserves_active(run):
     active=(ROOT/'configs/active_run.json').read_bytes()
     a=load_run(run);p,s,_=a.predict(a.data[a.bundle['features']].head(2))

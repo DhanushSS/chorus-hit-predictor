@@ -10,7 +10,7 @@ from chorus_hit.estimators import make_estimator
 
 
 def test_bundle_validation_and_input_order(tmp_path):
-    a=load_run('v1_baseline'); X=a.data[a.bundle['features']].head(2)
+    a=load_run('v4_std74_001'); X=a.data[a.bundle['features']].head(2)
     a.predict(X)
     with pytest.raises(ValueError,match='order'): a.predict(X.iloc[:,::-1])
     with pytest.raises(ValueError,match='schema'): a.predict(X.iloc[:,:-1])
@@ -24,7 +24,7 @@ def test_bundle_validation_and_input_order(tmp_path):
 
 
 def test_wrong_run_labels_even_with_updated_hash(tmp_path):
-    a=load_run('v1_baseline'); copy=tmp_path/'run'; shutil.copytree(a.path,copy)
+    a=load_run('v4_std74_001'); copy=tmp_path/'run'; shutil.copytree(a.path,copy)
     pred=pd.read_csv(copy/'predictions.csv'); pred.loc[0,'label']=1-pred.loc[0,'label']; pred.to_csv(copy/'predictions.csv',index=False)
     m=json.loads((copy/'manifest.json').read_text()); m['files']['predictions.csv']=sha256_file(copy/'predictions.csv'); atomic_json(copy/'manifest.json',m)
     with pytest.raises(ValueError,match='misaligned'): load_run(root=copy)

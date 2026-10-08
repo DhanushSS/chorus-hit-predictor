@@ -3,7 +3,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 DATA_PATH = ROOT / "data" / "chorus_features.csv"
 RESULTS = ROOT / "results"
-MODEL_PATH = ROOT / "models" / "selected_model.joblib"
+MODEL_PATH = ROOT / "results" / "v2" / "v4_std74_001" / "model.joblib"
 SEED = 42
 SAMPLE_RATE = 22050
 CHORUS_SECONDS = 15

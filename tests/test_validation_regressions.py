@@ -90,7 +90,7 @@ def test_missing_features_rejected_before_fit(tmp_path,case):
     else:f=f.iloc[:0]
     path=tmp_path/'data.csv';f.to_csv(path,index=False)
     with pytest.raises(ValueError):load_data(path,features=['a','b'])
-    a=load_run('v1_baseline');X=a.data[a.bundle['features']].head(1).copy()
+    a=load_run('v4_std74_001');X=a.data[a.bundle['features']].head(1).copy()
     if case=='no_rows':X=X.iloc[:0]
     else:X.iloc[0,0]=np.nan if case!='infinity' else np.inf
     with pytest.raises(ValueError):a.predict(X)

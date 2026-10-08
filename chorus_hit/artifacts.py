@@ -1,10 +1,8 @@
 """One validated artifact contract for the app, CLI, and report builders."""
-import argparse
 from dataclasses import dataclass
 from importlib.metadata import version
 import json
 from pathlib import Path
-import shutil
 import os
 from hashlib import sha256
 from zipfile import ZipFile, BadZipFile
@@ -13,9 +11,9 @@ import joblib
 import numpy as np
 import pandas as pd
 
-from .audit import atomic_json, sha256_file, LEGACY_DATASET, TASK_VERSION, GROUP_VERSION
-from .config import ROOT, FEATURE_COLUMNS, LABELS
-from .evaluation import classification_metrics, target_status, score_model
+from .audit import atomic_json, sha256_file
+from .config import ROOT
+from .evaluation import score_model
 
 RUNS=ROOT/'results/v2'
 ACTIVE=ROOT/'configs/active_run.json'
@@ -153,39 +151,6 @@ def finalize_run(staging,manifest,destination):
     os.rename(staging,destination)
 
 
-def preserve_legacy():
-    run_id='v1_baseline'; dest=run_location(run_id)
-    if dest.exists(): return load_run(run_id)
-    RUNS.mkdir(parents=True,exist_ok=True); staging=RUNS/'.v1_baseline.partial'; staging.mkdir(exist_ok=False)
-    old=json.loads((ROOT/'results/metrics.json').read_text()); b=joblib.load(ROOT/'models/selected_model.joblib')
-    pred=pd.read_csv(ROOT/'results/test_predictions.csv'); m=classification_metrics(pred.label,pred.prediction,pred.score)
-    b.update(run_id=run_id,labels={str(k):v for k,v in LABELS.items()},extractor_version=EXTRACTOR_VERSION)
-    from .data import load_data
-    _,semantics=score_model(b['pipeline'],load_data()[FEATURE_COLUMNS].head(1)); b['score_semantics']=semantics
-    row=next(x for x in old['models'] if x['selected'])
-    summary={'run_id':run_id,'model_name':b['model_name'],'feature_count':len(b['features']),
-        'evaluation_status':'historical_test','metrics':m,'ci95':old['selected_test_ci95_artist_bootstrap'],
-        'target_status':target_status(m,'historical_test'),'tuning_balanced_accuracy':row['cv_balanced_accuracy'],
-        'counts':old['split'],'dataset_rows':old['data_audit']['rows'],'evidence_status':'candidate_not_validated',
-        'selection_metric':old['selection_metric'],'task_version':TASK_VERSION,'group_version':GROUP_VERSION,
-        'label_definition':old['label_definition'],'historical_models':old['models'],
-        'notes':['Legacy model selected before its original holdout evaluation.','Old test is now a historical benchmark, not fresh confirmation.']}
-    joblib.dump(b,staging/'model.joblib',compress=3); atomic_json(staging/'summary.json',summary)
-    shutil.copy(ROOT/'results/test_predictions.csv',staging/'predictions.csv')
-    shutil.copy(ROOT/'results/split_manifest.csv',staging/'split_manifest.csv')
-    shutil.copytree(ROOT/'results/figures',staging/'figures')
-    manifest={'run_id':run_id,'dataset':{'path':'data/chorus_features.csv','source_sha256':b['data_sha256'],'dataset_version':LEGACY_DATASET},
-        'raw_schema':b['features'],'labels':b['labels'],'extractor_version':EXTRACTOR_VERSION,
-        'model_file':'model.joblib','summary_file':'summary.json','predictions_file':'predictions.csv',
-        'score_semantics':semantics,'versions':b['versions'],'task_version':TASK_VERSION,'group_version':GROUP_VERSION,
-        'evaluation_track_ids':pred.track_id.tolist(),'baseline_commit':'0e9e4628d0a72af79694bc555d64a562e83dcfa2'}
-    finalize_run(staging,manifest,dest)
-    if not ACTIVE.exists(): atomic_json(ACTIVE,{'run_id':run_id,'decision':'Preserve baseline demo; new candidates need development evidence before promotion'})
-    return load_run(run_id)
-
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser(description=__doc__); p.add_argument('--preserve-legacy',action='store_true')
-    a=p.parse_args()
-    if a.preserve_legacy: print(preserve_legacy().path)
-    else: print(load_run().summary['run_id'])
+    print(load_run().summary['run_id'])

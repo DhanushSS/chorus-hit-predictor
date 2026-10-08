@@ -10,12 +10,11 @@ software checks. A live review-device and permitted-song rehearsal is still requ
 
 - [ ] On the actual review device, install the pinned Python 3.12 environment.
 - [ ] Run `python -m chorus_hit.readiness`, `python -m pip check` and the tests.
-- [ ] Start `python -m streamlit run app.py`; confirm **Original model (active)**.
-- [ ] Select **V4 chorus-variation study** intentionally. Explain 54.61% accuracy
+- [ ] Start `python -m streamlit run app.py`; confirm **V4 chorus-variation model**.
+- [ ] Explain V4 54.61% accuracy
       / 54.66% balanced accuracy as nested development procedure assessment.
 - [ ] Use one correct and one incorrect historical example. Pick IDs by filtering
       the selected run's already-recorded historical predictions when available;
-      for the original baseline use `results/v2/v1_baseline/predictions.csv`.
       Demonstrate the error honestly. This is an inspected historical set.
 - [ ] Show the evidence status and uncertainty; explain that labels are inherited
       and both classes contain charted songs. No fresh-test result is available.

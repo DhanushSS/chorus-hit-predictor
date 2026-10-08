@@ -158,7 +158,7 @@ def validate_config(c):
     positive_integer(c['bootstrap_repeats'], 'bootstrap_repeats')
     if c.get('budget_scope','per_invocation')!='per_invocation': raise ValueError('Supported budget_scope is per_invocation')
     if c['mode'] not in {'quick','nested'}: raise ValueError('mode must be quick or nested')
-    if c['evaluation_mode']!='development_only': raise ValueError('Tuning runner accepts development_only; use evaluate_run for deliberate historical scoring')
+    if c['evaluation_mode']!='development_only': raise ValueError('Tuning runner accepts development_only; historical scoring is not part of this runner')
     if c['group_version']!=GROUP_VERSION or c['dataset_version']!=LEGACY_DATASET:
         raise ValueError('Comparable runner requires the frozen legacy dataset and artist-string protocol')
     if c.get('embeddings',False): raise ValueError('Audio-backed dataset/embedding manifest needed before enabling embeddings')
