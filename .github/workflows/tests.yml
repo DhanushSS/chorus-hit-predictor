@@ -24,3 +24,4 @@ jobs:
       - run: python -m pip check
       - run: python -m pytest -q
       - run: python -m chorus_hit.readiness
+      - run: python -m chorus_hit.hit_nonhit.smoke --out output/hit_nonhit/ci_smoke

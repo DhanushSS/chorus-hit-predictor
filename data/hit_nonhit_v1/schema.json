@@ -1,0 +1,334 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/DhanushSS/chorus-hit-predictor/data/hit_nonhit_v1/schema.json",
+  "title": "Candidate and normalized audio/evidence record; no inherited labels",
+  "type": "object",
+  "required": [
+    "dataset_version",
+    "canonical_artist_ids",
+    "identity_evidence_urls",
+    "track_number",
+    "synthetic",
+    "recording_id",
+    "canonical_work_id",
+    "canonical_recording_id",
+    "album_id",
+    "track_id",
+    "title",
+    "original_artist_credit",
+    "recording_version",
+    "first_release_date",
+    "album_release_date",
+    "market",
+    "identity_source",
+    "identity_status",
+    "identity_reviewer",
+    "identity_reviewed_at",
+    "version_policy",
+    "source_license_snapshot",
+    "created_at",
+    "source_checked_at"
+  ],
+  "properties": {
+    "recording_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "canonical_work_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "canonical_recording_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "album_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "track_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "original_artist_credit": {
+      "type": "string",
+      "minLength": 1
+    },
+    "recording_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "first_release_date": {
+      "type": "string",
+      "format": "date",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "album_release_date": {
+      "type": "string",
+      "format": "date",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "market": {
+      "const": "US"
+    },
+    "identity_source": {
+      "type": "string",
+      "minLength": 1
+    },
+    "identity_status": {
+      "enum": [
+        "verified",
+        "ambiguous",
+        "pending"
+      ]
+    },
+    "identity_reviewer": {
+      "type": "string",
+      "minLength": 1
+    },
+    "identity_reviewed_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "version_policy": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_license_snapshot": {
+      "type": "string",
+      "minLength": 1
+    },
+    "created_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_checked_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "dataset_version": {
+      "const": "hit_nonhit_v1"
+    },
+    "canonical_artist_ids": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "identity_evidence_urls": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "track_number": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "synthetic": {
+      "type": "boolean"
+    },
+    "audio_source_type": {
+      "type": "string",
+      "minLength": 1
+    },
+    "audio_rights_basis": {
+      "type": "string",
+      "minLength": 1
+    },
+    "audio_permission_evidence": {
+      "type": "string",
+      "minLength": 1
+    },
+    "audio_rights_reviewer": {
+      "type": "string",
+      "minLength": 1
+    },
+    "audio_path": {
+      "type": "string",
+      "minLength": 1
+    },
+    "audio_sha256": {
+      "type": "string",
+      "minLength": 1
+    },
+    "duplicate_review_status": {
+      "type": "string",
+      "minLength": 1
+    },
+    "duplicate_review_evidence": {
+      "type": "string",
+      "minLength": 1
+    },
+    "dedupe_group_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "perceptual_duplicate_group": {
+      "type": "string",
+      "minLength": 1
+    },
+    "audio_processing_authorized": {
+      "type": "boolean"
+    },
+    "segment_start_seconds": {
+      "type": "number",
+      "minimum": 0
+    },
+    "chorus_annotation": {
+      "type": "object",
+      "required": [
+        "reviewer",
+        "evidence",
+        "is_chorus",
+        "start_seconds"
+      ],
+      "properties": {
+        "reviewer": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence": {
+          "type": "string",
+          "minLength": 1
+        },
+        "is_chorus": {
+          "type": "boolean"
+        },
+        "start_seconds": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    },
+    "chart_name": {
+      "type": "string"
+    },
+    "chart_region": {
+      "type": "string"
+    },
+    "chart_observation_start": {
+      "type": "string"
+    },
+    "chart_observation_end": {
+      "type": "string"
+    },
+    "archive_cutoff_date": {
+      "type": "string"
+    },
+    "chart_coverage_snapshot_id": {
+      "type": "string"
+    },
+    "label_status": {
+      "type": "string"
+    },
+    "label_rule_version": {
+      "type": "string"
+    },
+    "label_reviewer": {
+      "type": "string"
+    },
+    "label_reviewed_at": {
+      "type": "string"
+    },
+    "extractor_version": {
+      "type": "string"
+    },
+    "extractor_config_hash": {
+      "type": "string"
+    },
+    "feature_row_hash": {
+      "type": "string"
+    },
+    "features_schema_hash": {
+      "type": "string"
+    },
+    "software_commit_sha": {
+      "type": "string"
+    },
+    "selection_method": {
+      "type": "string"
+    },
+    "chorus_annotation_status": {
+      "type": "string"
+    },
+    "label": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "enum": [
+        0,
+        1,
+        null
+      ]
+    },
+    "chart_coverage_complete": {
+      "type": "boolean"
+    },
+    "negative_absence_evidence": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "excluded_reason": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "chart_entry_dates": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "date"
+      }
+    },
+    "chart_entry_evidence_urls": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "match_level": {
+      "enum": [
+        "same_album",
+        "same_artist_era",
+        "unmatched"
+      ]
+    },
+    "matched_positive_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "match_set_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "segment_length_seconds": {
+      "const": 15
+    },
+    "segment_samples": {
+      "const": 330750
+    },
+    "sample_rate": {
+      "const": 22050
+    }
+  },
+  "additionalProperties": true,
+  "$comment": "candidate inputs require identity fields. Audio rights must pass runtime checks before inclusion. Derived chart/feature fields are created by pipeline, never accepted as label truth. Feature CSV is separately strict and ordered."
+}

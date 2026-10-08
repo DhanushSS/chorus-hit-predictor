@@ -23,6 +23,8 @@ def assets(run_id,manifest_hash):
 st.caption('UE24CS352A · MACHINE LEARNING MINI-PROJECT')
 st.title('Chorus Hit Predictor')
 st.write('Explore 15 seconds of music and inspect what the experiments actually found.')
+from chorus_hit.hit_nonhit.ui import render as render_new_task
+render_new_task(st)
 try:
     run_id=active_run()
     with st.sidebar:

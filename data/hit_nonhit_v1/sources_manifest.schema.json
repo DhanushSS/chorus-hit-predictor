@@ -1,0 +1,173 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Normalized authorized weekly archive",
+  "type": "object",
+  "required": [
+    "chart_name",
+    "chart_region",
+    "snapshot_id",
+    "start",
+    "end",
+    "synthetic",
+    "source",
+    "weeks"
+  ],
+  "properties": {
+    "chart_name": {
+      "const": "Billboard Hot 100"
+    },
+    "chart_region": {
+      "const": "US"
+    },
+    "snapshot_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "start": {
+      "type": "string",
+      "format": "date"
+    },
+    "end": {
+      "type": "string",
+      "format": "date"
+    },
+    "synthetic": {
+      "type": "boolean"
+    },
+    "source": {
+      "type": "object",
+      "required": [
+        "provider",
+        "license",
+        "license_snapshot",
+        "permission_evidence",
+        "research_use_authorized",
+        "reviewer",
+        "checked_at",
+        "export_sha256",
+        "synthetic"
+      ],
+      "properties": {
+        "provider": {
+          "type": "string",
+          "minLength": 1
+        },
+        "license": {
+          "type": "string",
+          "minLength": 1
+        },
+        "license_snapshot": {
+          "type": "string",
+          "minLength": 1
+        },
+        "permission_evidence": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reviewer": {
+          "type": "string",
+          "minLength": 1
+        },
+        "checked_at": {
+          "type": "string",
+          "minLength": 1
+        },
+        "export_sha256": {
+          "type": "string",
+          "minLength": 1
+        },
+        "research_use_authorized": {
+          "const": true
+        },
+        "synthetic": {
+          "type": "boolean"
+        }
+      }
+    },
+    "weeks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "date",
+          "evidence_url",
+          "reviewer",
+          "entries_sha256",
+          "entries"
+        ],
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "evidence_url": {
+            "type": "string"
+          },
+          "reviewer": {
+            "type": "string"
+          },
+          "entries_sha256": {
+            "type": "string"
+          },
+          "entries": {
+            "type": "array",
+            "maxItems": 100,
+            "items": {
+              "type": "object",
+              "required": [
+                "rank",
+                "title",
+                "artist_credit",
+                "identity_status"
+              ],
+              "properties": {
+                "rank": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 100
+                },
+                "title": {
+                  "type": "string"
+                },
+                "artist_credit": {
+                  "type": "string"
+                },
+                "identity_status": {
+                  "enum": [
+                    "verified",
+                    "unresolved"
+                  ]
+                },
+                "canonical_work_id": {
+                  "type": "string"
+                },
+                "canonical_recording_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "canonical_artist_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "identity_evidence": {
+                  "type": "string"
+                },
+                "identity_reviewer": {
+                  "type": "string"
+                },
+                "version_reviewed": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$comment": "Runtime additionally verifies week continuity, all ranks for completeness, hashes, identity reviews, dates, canonical collisions and rights. Source permissions are review assertions, not authenticated signatures."
+}

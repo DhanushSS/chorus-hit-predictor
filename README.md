@@ -192,3 +192,34 @@ this code repository. Rehearsal, Q&A preparation and further faculty/access
 confirmation remain deferred at the user's request; adaptation approval is
 already recorded. The tested remediation and final experiment were merged into
 main through PR #5 on 7 October 2026. No further accuracy experiments are planned.
+
+## Separate research: charted vs verified non-charted
+
+A new `hit_nonhit_v1` research pipeline follows the requested US weekly Hot 100 target.
+A negative requires complete release-to-cutoff chart coverage and reviewed recording identity.
+This is a different task from the preserved year-end/other-charted model above.
+
+**Current status: data blocked; no genuine new-target model or accuracy result.** Authorized complete
+chart history, matched lawful audio, canonical identity/chorus review and separate faculty confirmation
+are still needed. The exact historical cutoff is pending. No existing dataset, configuration, result,
+model, report or presentation was replaced. The default app model remains unchanged.
+
+Implemented: local evidence import, coverage/label verification, matching, shared 15-second extraction,
+connected artist/work/album/audio groups, immutable holdout, bounded nested model search, one-time test
+access, strict task-specific inference, and an optional Streamlit research section. The section reports
+missing data until a genuine compatible evaluated bundle exists. Synthetic tests validate software only.
+
+- [Research protocol](docs/hit_nonhit/protocol.md)
+- [Data formats and working CLI commands](data/hit_nonhit_v1/README.md)
+- [Feasibility and exact blockers](docs/hit_nonhit/data_feasibility.md)
+- [Results: no valid new test yet](docs/hit_nonhit/results.md)
+- [Migration and preservation](docs/hit_nonhit/migration.md)
+
+```bash
+python -m chorus_hit.hit_nonhit.smoke --out output/hit_nonhit/unique_smoke_run
+python -m pytest tests/hit_nonhit -q
+```
+
+The smoke uses invented chart/feature fixtures and prints no research accuracy. Never relabel old
+weekly-chart songs as non-hits, bypass the locked-test ledger, or compare this changed target to the
+old 54.61% as a like-for-like accuracy improvement.
