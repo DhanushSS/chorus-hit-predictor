@@ -15,6 +15,9 @@ def weeks_between(start, end):
 
 
 def validate_archive(a):
+    if a.get('resolution_policy') == 'public_song_query_v1':
+        from .academic_evidence import validate_public_archive
+        return validate_public_archive(a)
     require(a.get('chart_name') == 'Billboard Hot 100' and a.get('chart_region') == 'US', 'Wrong chart/region')
     require(type(a.get('synthetic')) is bool, 'Declare synthetic true/false')
     source(a['source'], digest(a['weeks']), a['synthetic'])

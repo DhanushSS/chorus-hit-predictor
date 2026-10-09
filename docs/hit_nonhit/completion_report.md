@@ -1,5 +1,9 @@
 # Implementation completion report — 2026-10-08
 
+> Historical October 8 status/strict-import policy. The October 9 academic revision
+> uses public metadata and a fixed cutoff; see [current workflow](academic_workflow.md).
+> Faculty confirmation is a submission checkpoint. Preserved results below are historical.
+
 Branch: `feat/hit-vs-nonhit-v1`. Implementation commit:
 `ab70d60b442822fec1c6ea825ee8f931de9408d6`.
 Base main: `853e1b88fbc6a10198bda9eff1529766f2201d83`.

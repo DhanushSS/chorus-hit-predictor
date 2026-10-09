@@ -37,3 +37,15 @@ accuracy experimentation had stopped referred to the old task; a separately labe
 section now describes this requested branch. No historical score, label or config was revised.
 No original source recordings, licensed weekly chart export or verified negative cohort was found
 in the current dataset directory. Readiness confirms zero independently verified legacy labels.
+
+## Academic continuation verified 10 October 2026
+
+Main remains `853e1b88fbc6a10198bda9eff1529766f2201d83`; work continues on
+`feat/hit-vs-nonhit-v1` from `b4f64e79ff6fe8fada665cd6e0e25d161d3f34f8`.
+The repository is public and PR #6 remains an open draft. All 54 protected file
+hashes were rechecked without mismatches. The old artifact loader and CH0001
+training-row demonstration pass; that demonstration is not new test evidence.
+Public chart metadata and 278 balanced acquisition candidates are now available.
+See [current completion report](academic_completion_20261010.md) for exact source,
+model, audio and verification boundaries; older blocked-source findings above
+are historical.

@@ -1,5 +1,9 @@
 # Remaining blockers
 
+> Historical October 8 status/strict-import policy. The October 9 academic revision
+> uses public metadata and a fixed cutoff; see [current workflow](academic_workflow.md).
+> Faculty confirmation is a submission checkpoint. Preserved results below are historical.
+
 1. **Authorized, complete weekly chart archive:** supply an export whose research-use permissions can
    be recorded, with all US Hot 100 issues from candidate earliest releases to an exact chosen cutoff,
    issue dates/ranks and source evidence. Missing weeks cannot be filled by assuming absence. Also

@@ -7,6 +7,9 @@ from .sources import validate_archive, weeks_between
 
 
 def classify(r, archive, config, coverage=None):
+    if archive.get('resolution_policy') == 'public_song_query_v1':
+        from .academic_evidence import public_label_all
+        return public_label_all([r], archive, config)[0]
     candidate(r)
     protocol(config)
     coverage = coverage or validate_archive(archive)
@@ -69,6 +72,9 @@ def classify(r, archive, config, coverage=None):
 
 
 def label_all(records, archive, config):
+    if archive.get('resolution_policy') == 'public_song_query_v1':
+        from .academic_evidence import public_label_all
+        return public_label_all(records, archive, config)
     require(len({r['recording_id'] for r in records}) == len(records), 'Duplicate candidate ID')
     canonical_ids = [r['canonical_recording_id'] for r in records if r.get('canonical_recording_id')]
     require(len(set(canonical_ids)) == len(canonical_ids), 'Duplicate canonical recording')

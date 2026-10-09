@@ -1,0 +1,207 @@
+{
+  "task_id": "hit_nonhit_v1",
+  "label_definition_version": "us_hot100_release_to_cutoff_v1",
+  "chart_name": "Billboard Hot 100",
+  "chart_region": "US",
+  "chart_cutoff": "2023-12-30",
+  "minimum_followup_months": 24,
+  "faculty_target_approval": "submission_checkpoint",
+  "real_data_training_status": "awaiting_permitted_audio",
+  "minimum_reviewed_per_class": 5,
+  "matching": "all_same_album_else_same_artist_within_2_years_v1",
+  "evaluation": {
+    "seed": 20261008,
+    "test_fraction": 0.2,
+    "outer_folds": 5,
+    "inner_folds": 3,
+    "minimum_test_groups_per_class": 5
+  },
+  "per_fit_seconds": 30,
+  "total_fit_budget_seconds": 18000,
+  "permutation_repeats": 3,
+  "candidates": [
+    {
+      "id": "dummy_prior",
+      "family": "dummy",
+      "representation": "all518"
+    },
+    {
+      "id": "lr_all518_0p1_none",
+      "family": "logistic",
+      "representation": "all518",
+      "C": 0.1,
+      "class_weight": null
+    },
+    {
+      "id": "lr_all518_0p1_balanced",
+      "family": "logistic",
+      "representation": "all518",
+      "C": 0.1,
+      "class_weight": "balanced"
+    },
+    {
+      "id": "lr_all518_1p0_none",
+      "family": "logistic",
+      "representation": "all518",
+      "C": 1.0,
+      "class_weight": null
+    },
+    {
+      "id": "lr_all518_1p0_balanced",
+      "family": "logistic",
+      "representation": "all518",
+      "C": 1.0,
+      "class_weight": "balanced"
+    },
+    {
+      "id": "linear_svm_all518_0p1",
+      "family": "linear_svm",
+      "representation": "all518",
+      "C": 0.1,
+      "class_weight": "balanced"
+    },
+    {
+      "id": "linear_svm_all518_1p0",
+      "family": "linear_svm",
+      "representation": "all518",
+      "C": 1.0,
+      "class_weight": "balanced"
+    },
+    {
+      "id": "rbf_svm_all518_0p1",
+      "family": "rbf_svm",
+      "representation": "all518",
+      "C": 0.1,
+      "class_weight": "balanced"
+    },
+    {
+      "id": "rbf_svm_all518_1p0",
+      "family": "rbf_svm",
+      "representation": "all518",
+      "C": 1.0,
+      "class_weight": "balanced"
+    },
+    {
+      "id": "random_forest_all518",
+      "family": "random_forest",
+      "representation": "all518",
+      "min_samples_leaf": 3,
+      "class_weight": "balanced"
+    },
+    {
+      "id": "extra_trees_all518",
+      "family": "extra_trees",
+      "representation": "all518",
+      "min_samples_leaf": 3,
+      "class_weight": "balanced"
+    },
+    {
+      "id": "lr_std74_0p1_none",
+      "family": "logistic",
+      "representation": "std74",
+      "C": 0.1,
+      "class_weight": null
+    },
+    {
+      "id": "lr_std74_0p1_balanced",
+      "family": "logistic",
+      "representation": "std74",
+      "C": 0.1,
+      "class_weight": "balanced"
+    },
+    {
+      "id": "lr_std74_1p0_none",
+      "family": "logistic",
+      "representation": "std74",
+      "C": 1.0,
+      "class_weight": null
+    },
+    {
+      "id": "lr_std74_1p0_balanced",
+      "family": "logistic",
+      "representation": "std74",
+      "C": 1.0,
+      "class_weight": "balanced"
+    },
+    {
+      "id": "linear_svm_std74_0p1",
+      "family": "linear_svm",
+      "representation": "std74",
+      "C": 0.1,
+      "class_weight": "balanced"
+    },
+    {
+      "id": "linear_svm_std74_1p0",
+      "family": "linear_svm",
+      "representation": "std74",
+      "C": 1.0,
+      "class_weight": "balanced"
+    },
+    {
+      "id": "rbf_svm_std74_0p1",
+      "family": "rbf_svm",
+      "representation": "std74",
+      "C": 0.1,
+      "class_weight": "balanced"
+    },
+    {
+      "id": "rbf_svm_std74_1p0",
+      "family": "rbf_svm",
+      "representation": "std74",
+      "C": 1.0,
+      "class_weight": "balanced"
+    },
+    {
+      "id": "random_forest_std74",
+      "family": "random_forest",
+      "representation": "std74",
+      "min_samples_leaf": 3,
+      "class_weight": "balanced"
+    },
+    {
+      "id": "extra_trees_std74",
+      "family": "extra_trees",
+      "representation": "std74",
+      "min_samples_leaf": 3,
+      "class_weight": "balanced"
+    },
+    {
+      "id": "mlp_all518",
+      "family": "mlp",
+      "representation": "all518"
+    },
+    {
+      "id": "hist_boosting_all518",
+      "family": "hist_boosting",
+      "representation": "all518"
+    },
+    {
+      "id": "mlp_std74",
+      "family": "mlp",
+      "representation": "std74"
+    },
+    {
+      "id": "hist_boosting_std74",
+      "family": "hist_boosting",
+      "representation": "std74"
+    },
+    {
+      "id": "lr_pca95_0p1",
+      "family": "logistic",
+      "representation": "pca95",
+      "C": 0.1,
+      "class_weight": "balanced"
+    },
+    {
+      "id": "lr_pca95_1p0",
+      "family": "logistic",
+      "representation": "pca95",
+      "C": 1.0,
+      "class_weight": "balanced"
+    }
+  ],
+  "conditional_experiments": "MLP/histogram boosting run only with at least 15 development groups; otherwise recorded as skipped and simple models continue. Small fixed architectures; no row-random early stopping.",
+  "cohort": "year_end_hits_vs_verified_noncharted_2006_2021",
+  "evidence_policy": "public_song_query_v1",
+  "model_profile": "academic_small_sample_v1"
+}

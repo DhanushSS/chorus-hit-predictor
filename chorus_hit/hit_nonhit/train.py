@@ -47,12 +47,15 @@ def candidate_config(cfg, synthetic, groups):
     require(1 <= len(values) <= 32, 'Candidate budget must be 1..32')
     require(len({c['id'] for c in values}) == len(values), 'Duplicate candidate IDs')
     require(any(c['family'] == 'dummy' for c in values), 'Dummy baseline required')
+    if cfg.get('model_profile') == 'academic_small_sample_v1' and len(set(groups)) < 15:
+        values = [c for c in values if c['family'] not in {'mlp', 'hist_boosting'}]
     if not synthetic:
         require({'dummy', 'logistic', 'linear_svm', 'rbf_svm', 'random_forest', 'extra_trees'} <= {c['family'] for c in values}, 'Mandatory baseline families missing')
     for c in values:
         require(c['id'].replace('_', '').isalnum(), 'Unsafe candidate ID')
         if c['family'] in {'mlp', 'hist_boosting'}:
-            require(len(set(groups)) >= 50, 'Conditional neural/boosting models need >=50 development groups')
+            minimum = 15 if cfg.get('model_profile') == 'academic_small_sample_v1' else 50
+            require(len(set(groups)) >= minimum, f'Conditional neural/boosting models need >={minimum} development groups')
         estimator(c, cfg['evaluation']['seed'])
     require(type(cfg['permutation_repeats']) is int and 1 <= cfg['permutation_repeats'] <= 10, 'Permutation budget must be 1..10')
     require(0 < cfg['per_fit_seconds'] <= 60 and 0 < cfg['total_fit_budget_seconds'] <= 28800, 'Compute budget outside supported bounds')
@@ -211,8 +214,10 @@ def train(split, destination, resume=False, dry_run=False):
                   'train_ids': frame.recording_id.tolist(), 'train_groups': sorted(set(groups)),
                   'split_hash': sm['split_hash'], 'dataset_hash': sm['dataset_hash'], 'chart_cutoff': sm['chart_cutoff'],
                   'synthetic': sm['synthetic'], 'pinned_env': environment()}
+        bundle['cohort'] = cfg.get('cohort', 'any_weekly_hit_vs_noncharted')
         joblib.dump(bundle, out / 'model.joblib')
         final = {'synthetic': sm['synthetic'], 'evaluation_status': 'synthetic_test_only' if sm['synthetic'] else 'nested_development',
+                 'skipped_candidates': [c['id'] for c in cfg['candidates'] if c not in cs],
                  'nested_development': nested, 'ci95': cluster_interval(y, oof, groups, e['seed']), 'folds': outer_records,
                  'selected_candidate': selected, 'final_fit_seconds': seconds, 'final_fit_warnings': ws,
                  'test_accessed': False, 'review_flags': diag['review_flags']}
@@ -225,7 +230,7 @@ def train(split, destination, resume=False, dry_run=False):
                    'split_hash': sm['split_hash'], 'split_manifest_hash': sha(split / 'manifest.json'),
                    'dataset_hash': sm['dataset_hash'], 'chart_cutoff': sm['chart_cutoff'], 'code': code_identity(),
                    'pinned_env': environment(), 'config_hash': digest(cfg), 'evaluation_status': final['evaluation_status'], 'train_ids': bundle['train_ids'],
-                   'train_groups': bundle['train_groups'], 'candidate': selected})
+                   'train_groups': bundle['train_groups'], 'candidate': selected, 'cohort': bundle['cohort']})
         return final
     finally:
         if lock.exists():

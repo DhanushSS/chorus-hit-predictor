@@ -1,0 +1,109 @@
+{
+  "accuracy": null,
+  "audio_files_provided": 0,
+  "cohort": "year_end_hits_vs_verified_noncharted_2006_2021",
+  "discovered_recordings": 499,
+  "errors": [
+    {
+      "artist": "Ke$ha",
+      "error": "Artist search is ambiguous or has no exact name/alias match"
+    },
+    {
+      "album": "Days Before Astroworld",
+      "artist": "Travis Scott",
+      "error": "No dated official studio album edition available"
+    }
+  ],
+  "matched_eligible": {
+    "0": 260,
+    "1": 182
+  },
+  "metadata_label_status": {
+    "unknown": 54,
+    "verified_noncharted_in_public_archive": 263,
+    "verified_year_end_hit": 182
+  },
+  "metadata_preflight": {
+    "connected_groups": 34,
+    "development": {
+      "class_counts": {
+        "0": 114,
+        "1": 114
+      },
+      "groups": 27,
+      "groups_per_class": {
+        "0": 27,
+        "1": 27
+      },
+      "rows": 228
+    },
+    "feasible": true,
+    "heldout": {
+      "class_counts": {
+        "0": 25,
+        "1": 25
+      },
+      "groups": 7,
+      "groups_per_class": {
+        "0": 7,
+        "1": 7
+      },
+      "rows": 50
+    },
+    "scope": "Metadata only; audio hashes/signatures and missing recordings may change support. No test was frozen or evaluated."
+  },
+  "pilot_artists": 36,
+  "pilot_class_counts": {
+    "0": 139,
+    "1": 139
+  },
+  "pilot_songs": 278,
+  "requested_artists": [
+    "Taylor Swift",
+    "Drake",
+    "Rihanna",
+    "P!nk",
+    "Ariana Grande",
+    "Katy Perry",
+    "Chris Brown",
+    "Maroon 5",
+    "Beyonce",
+    "Lady Gaga",
+    "Adele",
+    "Britney Spears",
+    "Bruno Mars",
+    "Ed Sheeran",
+    "Luke Combs",
+    "Ne-Yo",
+    "The Weeknd",
+    "Imagine Dragons",
+    "Justin Bieber",
+    "Miley Cyrus",
+    "Billie Eilish",
+    "Justin Timberlake",
+    "Ke$ha",
+    "Nickelback",
+    "Shawn Mendes",
+    "Coldplay",
+    "Daughtry",
+    "Lil Baby",
+    "Meghan Trainor",
+    "Nicki Minaj",
+    "One Direction",
+    "Post Malone",
+    "Alicia Keys",
+    "Cardi B",
+    "Carrie Underwood",
+    "Fergie",
+    "Halsey",
+    "Olivia Rodrigo",
+    "The Fray",
+    "Travis Scott"
+  ],
+  "selection": "same-album then same-artist-within-two-years controls; deterministic identity-hash tie break; round-robin artists; up to 300 songs, before audio or ML outcomes",
+  "unknown_reasons": {
+    "alternate_version_requires_review": 5,
+    "chart_predates_recording_release_review_required": 11,
+    "unresolved_metadata_identity": 38
+  }
+}

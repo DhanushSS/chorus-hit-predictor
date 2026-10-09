@@ -24,6 +24,8 @@ def load(folder, allow_synthetic=False, require_evaluated=False):
     require(m['chart_cutoff'] == cfg['chart_cutoff'] and m['config_hash'] == digest(cfg), 'Model cutoff/config mismatch')
     # joblib is pickle: only locally generated, hash-checked, trusted artifacts.
     b = joblib.load(folder / 'model.joblib')
+    cohort = cfg.get('cohort', 'any_weekly_hit_vs_noncharted')
+    require(b.get('cohort', 'any_weekly_hit_vs_noncharted') == m.get('cohort', 'any_weekly_hit_vs_noncharted') == cohort, 'Model cohort mismatch')
     for k in ['task_id', 'label_definition_version', 'extractor', 'pinned_env', 'candidate', 'dataset_hash', 'split_hash', 'chart_cutoff', 'synthetic', 'train_ids', 'train_groups']:
         require(b[k] == m[k], f'Bundle/manifest mismatch: {k}')
     require(b['task_id'] == TASK and b['feature_columns'] == FEATURE_COLUMNS, 'Cross-task feature bundle')
@@ -43,6 +45,9 @@ def predict_features(bundle, X, extractor):
     require(np.isfinite(X.to_numpy()).all(), 'Nonfinite prediction features')
     predicted = bundle['estimator'].predict(X)
     scores, semantics = score_values(bundle['estimator'], X)
-    return {'task_id': TASK, 'predictions': predicted.tolist(), 'labels': [LABELS[int(p)] for p in predicted],
+    from .academic_evidence import COHORT
+    cohort = bundle.get('cohort', 'any_weekly_hit_vs_noncharted')
+    labels = {0: 'Non-charted in the audited public archive through cutoff', 1: 'Year-end Hot 100 hit'} if cohort == COHORT else LABELS
+    return {'task_id': TASK, 'cohort': cohort, 'predictions': predicted.tolist(), 'labels': [labels[int(p)] for p in predicted],
             'scores': scores.tolist(), 'score_semantics': {**semantics, 'calibrated': False},
             'chart_cutoff': bundle['chart_cutoff'], 'use': 'Retrospective chart-membership classification; not future success probability'}

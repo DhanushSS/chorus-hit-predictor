@@ -1,5 +1,9 @@
 # Chorus Hit Predictor — new research task
 
+> Historical October 8 status/strict-import policy. The October 9 academic revision
+> uses public metadata and a fixed cutoff; see [current workflow](academic_workflow.md).
+> Faculty confirmation is a submission checkpoint. Preserved results below are historical.
+
 **Model availability: none.** Task `hit_nonhit_v1`; training status `blocked_data`.
 The application's existing model remains active with its original year-end/other-charted meanings.
 

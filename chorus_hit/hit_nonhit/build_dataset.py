@@ -39,6 +39,8 @@ def build(archive, candidates, config, audio_root, destination, dry_run=False):
                 continue
             try:
                 require(row['match_level'] != 'unmatched', 'No comparable charted recording in artist/era')
+                if config.get('evidence_policy') == 'public_song_query_v1':
+                    require(row['version_policy'] == 'exact_recording_reviewed', 'Supplied audio must match the reviewed album recording')
                 for key in ['audio_source_type', 'audio_rights_basis', 'audio_permission_evidence', 'audio_rights_reviewer']:
                     require(isinstance(row.get(key), str) and bool(row[key].strip()), f'Missing audio rights: {key}')
                 require(row.get('audio_processing_authorized') is True, 'Audio processing not authorized')

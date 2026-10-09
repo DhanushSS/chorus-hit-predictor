@@ -1,5 +1,9 @@
 # Data feasibility — 2026-10-08
 
+> Historical October 8 status/strict-import policy. The October 9 academic revision
+> uses public metadata and a fixed cutoff; see [current workflow](academic_workflow.md).
+> Faculty confirmation is a submission checkpoint. Preserved results below are historical.
+
 **real_data_training_status = blocked_data**
 
 | Dependency | Observed availability | Permission/coverage status | Consequence |

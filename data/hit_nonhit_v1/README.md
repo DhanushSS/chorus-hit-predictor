@@ -1,5 +1,7 @@
 # New research data contract
 
+For the current mini-project, start with the [simplified academic workflow](../../docs/hit_nonhit/academic_workflow.md) and `audio_intake.csv`. The strict canonical-entry importer below remains an alternative evidence policy.
+
 **No real hit/non-hit dataset is bundled.** `provenance.json` deliberately records zero collected
 candidates and no cutoff. Old `data/chorus_features.csv` labels must not be imported as new truth.
 

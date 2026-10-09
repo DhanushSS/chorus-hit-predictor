@@ -1,5 +1,9 @@
 # New-target results
 
+> Historical October 8 status/strict-import policy. The October 9 academic revision
+> uses public metadata and a fixed cutoff; see [current workflow](academic_workflow.md).
+> Faculty confirmation is a submission checkpoint. Preserved results below are historical.
+
 ## NO VALID TEST RESULT YET
 
 `real_data_training_status: blocked_data`. No genuine charted/non-charted dataset has been collected,

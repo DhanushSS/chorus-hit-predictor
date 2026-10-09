@@ -56,6 +56,9 @@ def protocol(c, allow_pending=False):
     require(c.get('task_id') == TASK and c.get('label_definition_version') == LABEL_VERSION, 'Task/label definition mismatch')
     require(c.get('chart_name') == 'Billboard Hot 100' and c.get('chart_region') == 'US', 'Wrong chart/region')
     require(c.get('minimum_followup_months') == 24, 'This protocol requires 24 months minimum follow-up')
+    if c.get('evidence_policy') == 'public_song_query_v1':
+        from .academic_evidence import COHORT
+        require(c.get('cohort') == COHORT and c.get('chart_cutoff') == '2023-12-30', 'Public evidence cohort/cutoff mismatch')
     cutoff = c.get('chart_cutoff')
     if cutoff is None and allow_pending:
         return c

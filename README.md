@@ -191,35 +191,41 @@ two-page PDF write-up and 12-slide presentation are supplied separately from
 this code repository. Rehearsal, Q&A preparation and further faculty/access
 confirmation remain deferred at the user's request; adaptation approval is
 already recorded. The tested remediation and final experiment were merged into
-main through PR #5 on 7 October 2026. No further accuracy experiments are planned.
+main through PR #5 on 7 October 2026. That completed experiment is historical; the separate academic cohort below follows the later revised request.
 
-## Separate research: charted vs verified non-charted
+## Academic extension: year-end hits vs verified non-charting songs
 
-A new `hit_nonhit_v1` research pipeline follows the requested US weekly Hot 100 target.
-A negative requires complete release-to-cutoff chart coverage and reviewed recording identity.
-This is a different task from the preserved year-end/other-charted model above.
+The October 9 revision reuses the **366 existing positive candidates** and excludes
+all **385 old weekly-chart examples** from the negative class. It audits public
+weekly metadata through **30 December 2023**, then finds same-artist/album controls.
+The first exact-name pass verifies **344** positives; **22** need alias/title review.
+All **1,253** weekly issues in the 2000–2023 audit window pass structural coverage
+checks. The balanced acquisition list now contains **278 songs (139 per class)**
+from 36 artists, with 34 connected metadata groups. Public metadata is available;
+permitted local **audio is still missing**.
 
-**Current status: data blocked; no genuine new-target model or accuracy result.** Authorized complete
-chart history, matched lawful audio, canonical identity/chorus review and separate faculty confirmation
-are still needed. The exact historical cutoff is pending. No existing dataset, configuration, result,
-model, report or presentation was replaced. The default app model remains unchanged.
+No old dataset, model, configuration, result, PDF or presentation is replaced.
+The old **54.61% accuracy** concerns a different target. No new-target accuracy or
+70–75% success claim is made. Features for both classes must be re-extracted together.
 
-Implemented: local evidence import, coverage/label verification, matching, shared 15-second extraction,
-connected artist/work/album/audio groups, immutable holdout, bounded nested model search, one-time test
-access, strict task-specific inference, and an optional Streamlit research section. The section reports
-missing data until a genuine compatible evaluated bundle exists. Synthetic tests validate software only.
+The practical workflow provides a simple audio intake CSV, 15-second extraction,
+27 bounded model candidates, all518/std74/fold-local PCA comparisons, artist/work/
+album/duplicate isolation, nested grouped validation, a one-use final holdout,
+and a Streamlit experimental section. Faculty confirmation is a submission
+checkpoint, not a development gate. No commercial chart subscription is required.
 
-- [Research protocol](docs/hit_nonhit/protocol.md)
-- [Data formats and working CLI commands](data/hit_nonhit_v1/README.md)
-- [Feasibility and exact blockers](docs/hit_nonhit/data_feasibility.md)
-- [Results: no valid new test yet](docs/hit_nonhit/results.md)
-- [Migration and preservation](docs/hit_nonhit/migration.md)
+- [Completion report and phase-by-phase status](docs/hit_nonhit/academic_completion_20261010.md)
+- [Academic workflow, evidence limits, and runnable commands](docs/hit_nonhit/academic_workflow.md)
+- [Current verified progress](data/hit_nonhit_v1/academic_progress.json)
+- [Audio preparation list](data/hit_nonhit_v1/audio_intake.csv)
+- [Original strict importer and data formats](data/hit_nonhit_v1/README.md)
+- [Preservation manifest](docs/hit_nonhit/preservation_manifest.json)
 
 ```bash
-python -m chorus_hit.hit_nonhit.smoke --out output/hit_nonhit/unique_smoke_run
+python -m chorus_hit.hit_nonhit.academic --help
+python -m chorus_hit.hit_nonhit.intake --help
 python -m pytest tests/hit_nonhit -q
 ```
 
-The smoke uses invented chart/feature fixtures and prints no research accuracy. Never relabel old
-weekly-chart songs as non-hits, bypass the locked-test ledger, or compare this changed target to the
-old 54.61% as a like-for-like accuracy improvement.
+The optional synthetic smoke validates software only. It cannot train a deployable
+real-song classifier or provide research accuracy.

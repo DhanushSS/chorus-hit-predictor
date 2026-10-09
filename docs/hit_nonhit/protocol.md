@@ -1,5 +1,9 @@
 # Charted versus verified non-charted protocol
 
+> Historical October 8 status/strict-import policy. The October 9 academic revision
+> uses public metadata and a fixed cutoff; see [current workflow](academic_workflow.md).
+> Faculty confirmation is a submission checkpoint. Preserved results below are historical.
+
 **Task:** `hit_nonhit_v1`. **Label rule:** `us_hot100_release_to_cutoff_v1`.
 Research question: can 15-second chorus audio distinguish US weekly Billboard Hot 100
 charted recordings from comparable recordings absent from every eligible chart issue?
