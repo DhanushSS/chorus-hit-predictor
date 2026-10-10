@@ -1,5 +1,6 @@
 """Convert the simple acquisition CSV into reviewed local-audio extraction inputs."""
 import argparse
+import math
 from collections import Counter
 from pathlib import Path
 import pandas as pd
@@ -41,6 +42,7 @@ def review(intake, candidates, archive, config, audio_root):
             require(path.is_file(), 'Audio file not found')
             require(path.suffix.lower() in {'.wav', '.flac', '.mp3', '.ogg'}, 'Unsupported local audio type')
             start = float(entry['chorus_start_seconds']) if entry['chorus_start_seconds'] else None
+            require(start is None or (math.isfinite(start) and start >= 0), 'Chorus start must be finite and nonnegative')
             annotation = None
             if yes(entry['chorus_confirmed']):
                 require(start is not None, 'Confirmed chorus needs its start time in seconds')
@@ -54,7 +56,7 @@ def review(intake, candidates, archive, config, audio_root):
                           'segment_start_seconds': start, 'chorus_annotation': annotation})
         except (ValueError, OSError) as error:
             errors.append({'recording_id': identity, 'reason': str(error)})
-    # Do not keep a control whose positive never received usable input (or vice versa).
+    # Do not keep a control whose positive never received usable input.
     ready_labels = match_candidates(public_label_all(ready, archive, config))
     good_ids = {r['recording_id'] for r in ready_labels if r['match_level'] != 'unmatched'}
     dropped = [r for r in ready if r['recording_id'] not in good_ids]
@@ -66,6 +68,10 @@ def review(intake, candidates, archive, config, audio_root):
 
 
 def ingest(prepared, discovered, intake, audio_root, destination=None, dry_run=False):
+    # The discovery pool is larger than the approved acquisition cohort.
+    # Enforce scope before reading audio or constructing extraction artifacts.
+    from .acquisition import validate_selected
+    validate_selected(pd.read_csv(intake, dtype=str, keep_default_na=False))
     archive = read(Path(prepared) / 'archive.json'); candidates = read(Path(discovered) / 'candidates.json')
     config = read(ROOT / 'configs/hit_nonhit_academic.json')
     ready, report = review(intake, candidates, archive, config, audio_root)

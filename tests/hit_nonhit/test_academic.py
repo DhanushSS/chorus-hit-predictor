@@ -207,7 +207,8 @@ def test_intake_checks_permissions_version_root_and_chorus(tmp_path):
     pd.DataFrame([fields]).to_csv(path,index=False)
     ready,report=review(path,rows,a,cfg,tmp_path)
     assert len(ready)==1 and ready[0]['audio_sha256']==sha(tmp_path/'example.wav')
-    for key,value,reason in [('permission_basis','','Missing'),('recording_matches','no','named studio'),('audio_path','../outside.wav','escapes'),('chorus_confirmed','yes','start time')]:
+    for key,value,reason in [('permission_basis','','Missing'),('recording_matches','no','named studio'),('audio_path','../outside.wav','escapes'),('chorus_confirmed','yes','start time'),
+                             ('chorus_start_seconds','nan','finite'),('chorus_start_seconds','inf','finite'),('chorus_start_seconds','-1','nonnegative')]:
         pd.DataFrame([{**fields,key:value}]).to_csv(path,index=False)
         ready,report=review(path,rows,a,cfg,tmp_path)
         assert not ready and reason in report['missing_or_invalid'][0]['reason']
