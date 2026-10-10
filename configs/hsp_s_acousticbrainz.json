@@ -1,0 +1,203 @@
+{
+  "task_id": "hsp_s_acousticbrainz_scalar_v1",
+  "source_doi": "10.5281/zenodo.5383858",
+  "source_file": "hsp-s_acousticbrainz.parquet",
+  "source_license": "CC-BY-4.0",
+  "label_policy": "1=valid positive peakPos and weeks; 0=both absent in publisher benchmark; inconsistent rows excluded",
+  "feature_policy": "Only 436 scalar numeric lowlevel/rhythm/tonal descriptors; all other fields excluded from predictors",
+  "group_policy": "Connected recording artist IDs and normalized names, recording MBID, album, title/credit work proxy, encoded MD5, identical feature rows",
+  "evaluation": {
+    "seed": 20261008,
+    "test_fraction": 0.2,
+    "outer_folds": 5,
+    "inner_folds": 3,
+    "minimum_test_groups_per_class": 5
+  },
+  "per_fit_seconds": 60,
+  "total_fit_budget_seconds": 32400,
+  "permutation_repeats": 3,
+  "nuisance_block_threshold": 0.65,
+  "candidates": [
+    {
+      "id": "dummy_prior",
+      "family": "dummy",
+      "representation": "all_scalar"
+    },
+    {
+      "id": "lr_all_scalar_0p1_none",
+      "family": "logistic",
+      "representation": "all_scalar",
+      "C": 0.1,
+      "class_weight": null
+    },
+    {
+      "id": "lr_all_scalar_0p1_balanced",
+      "family": "logistic",
+      "representation": "all_scalar",
+      "C": 0.1,
+      "class_weight": "balanced"
+    },
+    {
+      "id": "lr_all_scalar_1p0_none",
+      "family": "logistic",
+      "representation": "all_scalar",
+      "C": 1.0,
+      "class_weight": null
+    },
+    {
+      "id": "lr_all_scalar_1p0_balanced",
+      "family": "logistic",
+      "representation": "all_scalar",
+      "C": 1.0,
+      "class_weight": "balanced"
+    },
+    {
+      "id": "linear_svm_all_scalar_0p1",
+      "family": "linear_svm",
+      "representation": "all_scalar",
+      "C": 0.1,
+      "class_weight": "balanced"
+    },
+    {
+      "id": "linear_svm_all_scalar_1p0",
+      "family": "linear_svm",
+      "representation": "all_scalar",
+      "C": 1.0,
+      "class_weight": "balanced"
+    },
+    {
+      "id": "rbf_svm_all_scalar_0p1",
+      "family": "rbf_svm",
+      "representation": "all_scalar",
+      "C": 0.1,
+      "class_weight": "balanced"
+    },
+    {
+      "id": "rbf_svm_all_scalar_1p0",
+      "family": "rbf_svm",
+      "representation": "all_scalar",
+      "C": 1.0,
+      "class_weight": "balanced"
+    },
+    {
+      "id": "random_forest_all_scalar",
+      "family": "random_forest",
+      "representation": "all_scalar",
+      "min_samples_leaf": 3,
+      "class_weight": "balanced"
+    },
+    {
+      "id": "extra_trees_all_scalar",
+      "family": "extra_trees",
+      "representation": "all_scalar",
+      "min_samples_leaf": 3,
+      "class_weight": "balanced"
+    },
+    {
+      "id": "lr_summary_scalar_0p1_none",
+      "family": "logistic",
+      "representation": "summary_scalar",
+      "C": 0.1,
+      "class_weight": null
+    },
+    {
+      "id": "lr_summary_scalar_0p1_balanced",
+      "family": "logistic",
+      "representation": "summary_scalar",
+      "C": 0.1,
+      "class_weight": "balanced"
+    },
+    {
+      "id": "lr_summary_scalar_1p0_none",
+      "family": "logistic",
+      "representation": "summary_scalar",
+      "C": 1.0,
+      "class_weight": null
+    },
+    {
+      "id": "lr_summary_scalar_1p0_balanced",
+      "family": "logistic",
+      "representation": "summary_scalar",
+      "C": 1.0,
+      "class_weight": "balanced"
+    },
+    {
+      "id": "linear_svm_summary_scalar_0p1",
+      "family": "linear_svm",
+      "representation": "summary_scalar",
+      "C": 0.1,
+      "class_weight": "balanced"
+    },
+    {
+      "id": "linear_svm_summary_scalar_1p0",
+      "family": "linear_svm",
+      "representation": "summary_scalar",
+      "C": 1.0,
+      "class_weight": "balanced"
+    },
+    {
+      "id": "rbf_svm_summary_scalar_0p1",
+      "family": "rbf_svm",
+      "representation": "summary_scalar",
+      "C": 0.1,
+      "class_weight": "balanced"
+    },
+    {
+      "id": "rbf_svm_summary_scalar_1p0",
+      "family": "rbf_svm",
+      "representation": "summary_scalar",
+      "C": 1.0,
+      "class_weight": "balanced"
+    },
+    {
+      "id": "random_forest_summary_scalar",
+      "family": "random_forest",
+      "representation": "summary_scalar",
+      "min_samples_leaf": 3,
+      "class_weight": "balanced"
+    },
+    {
+      "id": "extra_trees_summary_scalar",
+      "family": "extra_trees",
+      "representation": "summary_scalar",
+      "min_samples_leaf": 3,
+      "class_weight": "balanced"
+    },
+    {
+      "id": "mlp_all_scalar",
+      "family": "mlp",
+      "representation": "all_scalar"
+    },
+    {
+      "id": "hist_boosting_all_scalar",
+      "family": "hist_boosting",
+      "representation": "all_scalar"
+    },
+    {
+      "id": "mlp_summary_scalar",
+      "family": "mlp",
+      "representation": "summary_scalar"
+    },
+    {
+      "id": "hist_boosting_summary_scalar",
+      "family": "hist_boosting",
+      "representation": "summary_scalar"
+    },
+    {
+      "id": "lr_pca95_0p1",
+      "family": "logistic",
+      "representation": "pca95",
+      "C": 0.1,
+      "class_weight": "balanced"
+    },
+    {
+      "id": "lr_pca95_1p0",
+      "family": "logistic",
+      "representation": "pca95",
+      "C": 1.0,
+      "class_weight": "balanced"
+    }
+  ],
+  "threshold_policy": "Native fixed class threshold; never tune on locked test",
+  "notes": "Separate approved dataset/method. Whole-recording Essentia descriptors, not 518 chorus features. 27 analogous model configurations; 5x3 nested group CV. Preregistered before fitting."
+}
