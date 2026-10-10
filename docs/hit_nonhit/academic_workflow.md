@@ -102,6 +102,27 @@ already at `output/hit_nonhit/academic_prepared_final`.
 
 ## Commands
 
+### Fixed 278-song execution update (10 October 2026)
+
+The current production intake is restricted to the checked-in 278-song acquisition
+list. A subset is allowed; expansion to the broader 499 candidates or editing its
+labels requires a separate scope decision. The fixed list is hash-checked before
+reading audio. Re-running discovery below does not authorize importing extra songs.
+
+Create a fresh ignored ledger and local intake copy with:
+
+```bash
+python -m chorus_hit.hit_nonhit.acquisition init --out output/hit_nonhit/acquisition_local
+python -m chorus_hit.hit_nonhit.acquisition probe-features --out output/hit_nonhit/feature_availability
+```
+
+The second command checks whole-recording AcousticBrainz feature availability only;
+it does not download audio, extract chorus features or train a model. See the
+[278-song feasibility report](audio_feasibility_278.md) and
+[current completion status](final_48h_status_278.md).
+
+### Existing preparation and extraction commands
+
 Use the pinned Python 3.12 environment from the project README. Run in the repository.
 Every output name below must be new; source caches can be reused.
 
