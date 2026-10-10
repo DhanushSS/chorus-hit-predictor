@@ -2,6 +2,25 @@
 
 Machine learning mini-project by Dhanush Sai Suprapadha (PES2UG24CS154) and Deepthi V (PES2UG24CS150).
 
+## Approved separate feature study — HSP-S
+
+The `feat/hit-vs-nonhit-v1` branch now includes a completed HSP-S experiment:
+**73.07% accuracy / 73.17% balanced accuracy** on one untouched test of 1,493 songs,
+after grouped model selection on 6,235 development songs. The RBF SVM uses 436
+whole-recording Essentia descriptors and publisher chart-association labels.
+These results do not measure repeated-chorus or future-hit prediction.
+
+[Results and graphs](docs/hit_nonhit/hsp_s_results/README.md) ·
+[Completion report, tests and limits](docs/hit_nonhit/hsp_s_results/handoff.md) ·
+[Reproduction](docs/hit_nonhit/hsp_s_protocol.md)
+
+The separate Streamlit **Hit vs Non-Hit feature study** page accepts matching
+feature CSVs. Its trained model is local and ignored by Git; fresh clones must
+follow the reproduction instructions. The original audio-upload project below
+is preserved. The exact-278-song chorus task remains blocked by permitted audio.
+
+## Original chorus project
+
 We test whether measurements from a 15-second chorus distinguish songs in a Billboard year-end Hot 100 collection from other songs that appeared on weekly Hot 100 charts. Both classes contain charted songs. The dataset has 751 songs and 518 audio features per song.
 
 ## Setup and existing demo
@@ -71,7 +90,7 @@ user's request. This exploratory check does not replace the **54.61% nested Chor
 assessment** or establish new-song accuracy. Code: `scripts/final_accuracy_check.py`;
 protocol and evidence hashes are in [the exposure registry](docs/evaluation_registry.json).
 
-`app.py` and `chorus_hit/` contain the app and ML pipeline. `data/` holds the feature table and provenance; `configs/` holds experiment settings; The saved run contains the sole deployed model, predictions and verification manifests. The frozen split in `results/` identifies historical songs. Reports and slides are kept outside this code repository.
+`app.py` and `chorus_hit/` contain the app and ML pipeline. `data/` holds the feature table and provenance; `configs/` holds experiment settings; The saved chorus run contains its deployed model, predictions and verification manifests. The frozen split in `results/` identifies historical songs. Historical PDF reports and slides are kept outside this code repository; the approved HSP-S experiment publishes Markdown summaries and aggregate figures.
 
 Check the saved models and software with `python -m pytest -q`. For a labelled example, run `python -m chorus_hit.predict --track-id CH0001` and inspect whether that song was in training or held out.
 
@@ -205,8 +224,10 @@ from 36 artists, with 34 connected metadata groups. Public metadata is available
 permitted local **audio is still missing**.
 
 No old dataset, model, configuration, result, PDF or presentation is replaced.
-The old **54.61% accuracy** concerns a different target. No new-target accuracy or
-70–75% success claim is made. Features for both classes must be re-extracted together.
+The old **54.61% accuracy** concerns a different target. No accuracy claim is made
+for this exact-278 chorus cohort. Features for both classes must be re-extracted
+together. The approved HSP-S result at the top of this README is a separate
+whole-recording feature benchmark.
 
 The practical workflow provides a simple audio intake CSV, 15-second extraction,
 27 bounded model candidates, all518/std74/fold-local PCA comparisons, artist/work/
