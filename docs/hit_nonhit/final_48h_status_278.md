@@ -111,14 +111,17 @@ soundfile and does not introduce that fallback.
 
 ## GitHub checks
 
-At report generation the local checks above are complete. Remote CI for the
-publication commit has not yet run; an explicit `workflow_dispatch` is needed
-because push CI covers only `main`/`audit/**` and PR #6 is closed. The workflow
-will be dispatched after this report is committed/pushed, without reopening the PR.
-See [feature-branch workflow runs](https://github.com/DhanushSS/chorus-hit-predictor/actions?query=branch%3Afeat%2Fhit-vs-nonhit-v1)
-for the exact publication SHA and live result. The conversation's final handoff
-records the resulting run URL/status. Earlier successful runs are not credited
-to this publication commit.
+**PASS** on publication commit `047163c27147fe2a4f72678f2878e736098a8a7d`:
+[GitHub Actions run 38024787620](https://github.com/DhanushSS/chorus-hit-predictor/actions/runs/38024787620),
+completed 10 October 2026 at 04:47:06 UTC. Linux CI reports **268 passed, four
+warnings in 393.12 seconds**. Dependency checks, original-model readiness and
+synthetic end-to-end smoke also passed; `research_accuracy` remained null.
+
+The run was explicitly dispatched because push CI covers only `main`/`audit/**`
+and PR #6 is closed. The PR was not reopened. This final documentation-only CI
+receipt follows that tested publication SHA; executable files are unchanged, and
+the receipt itself does not trigger another push workflow. The verified result
+belongs to the exact SHA above, not to an earlier baseline or an untested model.
 
 ## Remaining blockers and next action
 
