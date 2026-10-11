@@ -36,7 +36,7 @@ def test_current_app_displays_team_and_saved_test_metrics():
     install()
     app = AppTest.from_file(str(ROOT / 'app.py'), default_timeout=60).run()
     assert not app.exception
-    assert app.title[0].value == 'Chorus Hit Predictor'
+    assert app.title[0].value == 'Billboard Hit Prediction Using Audio Features'
     assert any('PES2UG24CS154' in c.value and 'PES2UG24CS150' in c.value for c in app.caption)
     assert {m.label: m.value for m in app.metric}['Balanced accuracy'] == '73.17%'
     assert any('MP3' in i.value and 'not supported' in i.value for i in app.info)
