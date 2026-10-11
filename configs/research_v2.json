@@ -1,0 +1,27 @@
+{
+  "experiment": "development_only_v2_001",
+  "seed": 20261008,
+  "outer_folds": 5,
+  "inner_folds": 3,
+  "per_fit_seconds": 90,
+  "max_trial_seconds": 7200,
+  "selection_metric": "balanced_accuracy",
+  "old_test": "prohibited",
+  "candidates": [
+    {"id":"baseline_svm","family":"svm","C":1,"gamma":"scale","scaler":"standard"},
+    {"id":"svm_robust","family":"svm","C":1,"gamma":"scale","scaler":"robust"},
+    {"id":"svm_quantile","family":"svm","C":1,"gamma":"scale","scaler":"quantile"},
+    {"id":"svm_c5","family":"svm","C":5,"gamma":"scale","scaler":"standard"},
+    {"id":"svm_c10","family":"svm","C":10,"gamma":"scale","scaler":"standard"},
+    {"id":"svm_gamma001","family":"svm","C":5,"gamma":0.001,"scaler":"standard"},
+    {"id":"svm_gamma01","family":"svm","C":5,"gamma":0.01,"scaler":"standard"},
+    {"id":"svm_select75","family":"svm","C":1,"gamma":"scale","scaler":"standard","select_percentile":75},
+    {"id":"hist_boost","family":"hist","scaler":"standard"},
+    {"id":"extra_trees","family":"extra","scaler":"standard"},
+    {"id":"hard_voting","family":"voting","scaler":"standard"}
+  ],
+  "diagnostics": ["codec_and_extractor_by_class", "group_size_and_purity", "global_permutation_3x3", "mp3_subset_3fold", "exclude_largest_group_3fold", "feature_family_permutation_3fold"],
+  "promotion": "none; original model remains deployed",
+  "external_test": "NOT_AVAILABLE",
+  "probability_calibration": "not attempted; no probabilities will be displayed"
+}
