@@ -71,3 +71,7 @@ for the exact commit-specific outcome.
 
 No fresh model search or held-out evaluation was performed during cleanup.
 Balanced accuracy remains **73.17%** for the HSP-S test, with the original caveats.
+
+The cleanup implementation at `5e56645cc5c9d698252abca77034c42bc611b68d`
+passed [GitHub run 38151834182](https://github.com/DhanushSS/chorus-hit-predictor/actions/runs/38151834182).
+The live browser upload also returned all four expected prediction rows.
