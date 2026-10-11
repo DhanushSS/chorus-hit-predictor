@@ -45,12 +45,13 @@ def run(split, out, config):
               'environment':environment(),'rows':len(y),'groups':len(set(g)),'features':len(columns),
               'class_counts':dict(Counter(str(v) for v in y)),'old_test_loaded':False}
     write(out/'identity.json',identity);trials=[]
-    def fitting(c,tr,va,scope):
+    def fitting(c,tr,va,scope,labels=None):
+        target=y if labels is None else labels
         if sum(t['seconds'] for t in trials)>cfg['max_trial_seconds']:raise RuntimeError('Declared research fit budget exhausted')
         start=time.monotonic();item={'candidate':c['id'],'scope':scope,'status':'failed'}
         try:
-            model=estimator(c,seed);_,warnings=fit(model,X.iloc[tr],y[tr],cfg['per_fit_seconds'])
-            p=model.predict(X.iloc[va]);item.update(status='complete',metrics=metrics(y[va],p),warnings=warnings)
+            model=estimator(c,seed);_,warnings=fit(model,X.iloc[tr],target[tr],cfg['per_fit_seconds'])
+            p=model.predict(X.iloc[va]);item.update(status='complete',metrics=metrics(target[va],p),warnings=warnings)
         except (ValueError,RuntimeError,TimeoutError) as error:
             item['error']=str(error);model=None;p=None
         item['seconds']=time.monotonic()-start;trials.append(item);write(out/'trials'/f'{len(trials):04d}.json',item)
@@ -96,8 +97,10 @@ def run(split, out, config):
     # Global permutations test the no-association null, NOT an exchangeable within-artist null.
     for repeat in range(3):
         shuffled=rng.permutation(y);p=np.empty(len(y),int)
-        for tr,va in grouped_folds(y,g,3,seed):
-            model=estimator(baseline,seed);_,warn=fit(model,X.iloc[tr],shuffled[tr],cfg['per_fit_seconds']);p[va]=model.predict(X.iloc[va])
+        for j,(tr,va) in enumerate(grouped_folds(y,g,3,seed)):
+            _,pv,record=fitting(baseline,tr,va,f'global_null/{repeat}/{j}',labels=shuffled)
+            if pv is None:raise RuntimeError('Global-null fit failed')
+            p[va]=pv
         nulls.append(metrics(shuffled,p)['balanced_accuracy'])
     diag['global_permutation_balanced_accuracy']=nulls
     for i,(tr,va) in enumerate(grouped_folds(y,g,3,seed)):
