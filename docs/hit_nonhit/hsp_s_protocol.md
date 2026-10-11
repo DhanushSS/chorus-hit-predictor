@@ -1,8 +1,9 @@
 # Approved HSP-S feature experiment
 
-The user approved this separate fallback on 10 October 2026 after the exact-278
-audio acquisition attempt was blocked. It does not replace the original dataset,
-the active Chorus Hit Predictor model or the 278-song metadata project.
+This protocol was fixed before the 10 October 2026 HSP-S experiment. On 11 October,
+the evaluated HSP-S model became the current repository focus. The original chorus
+project and 278-song metadata are preserved in the
+[archive](https://github.com/DhanushSS/chorus-hit-predictor-archive-2026-10-11).
 
 ## Source and attribution
 
@@ -77,20 +78,20 @@ Use the project's pinned Python 3.12 environment from the repository root:
 python -m chorus_hit.hsp_s download --out output/hsp_s/source
 python -m chorus_hit.hsp_s prepare \
   --source output/hsp_s/source/hsp-s_acousticbrainz.parquet \
-  --out output/hsp_s/split_001
+  --out output/hsp_s/reproduction_split
 python -m chorus_hit.hsp_s train \
-  --split output/hsp_s/split_001 --out results/hsp_s/run_001
+  --split output/hsp_s/reproduction_split --out results/hsp_s/reproduction_run
 python -m chorus_hit.hsp_s evaluate \
-  --split output/hsp_s/split_001 --run results/hsp_s/run_001
+  --split output/hsp_s/reproduction_split --run results/hsp_s/reproduction_run
 ```
 
 Use `train --resume` only for an interrupted unfinished run. Completed outputs
 cannot be overwritten. Never remove a test-access ledger to evaluate again.
 
-Streamlit's separate **Hit vs Non-Hit feature study** page displays only a compatible,
-evaluated HSP-S run. It accepts the exact ordered feature CSV schema (1–100 records).
-It cannot use the original librosa upload extractor for this model. The original
-audio-upload model remains on the main page.
+The current **Chorus Hit Predictor** app displays the packaged, evaluated HSP-S run.
+Run `python scripts/setup_model.py` before launching. It accepts the exact ordered
+feature CSV schema (1–100 records). The original audio-upload project is archived.
+The app cannot apply the original librosa extractor to this whole-recording model.
 
 Reported results must identify HSP-S as a separate retrospective benchmark, explain
 its sampling and label limitations, and avoid numerical superiority claims against

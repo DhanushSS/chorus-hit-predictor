@@ -1,5 +1,9 @@
 # HSP-S completion and verification — 10 October 2026
 
+> Research record from 10 October 2026. Packaging and app layout were updated on
+> 11 October; see [the migration record](../../repository_migration.md).
+> The original metrics, split and trained model are unchanged.
+
 ## Summary
 
 The approved fallback is implemented, genuinely trained and evaluated. Its single

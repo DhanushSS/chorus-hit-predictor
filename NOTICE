@@ -1,19 +1,22 @@
-This project includes a transformed version of the feature dataset from:
-AntoniosMalak/Predicting-Hit-Songs-Using-Repeated-Chorus
-https://github.com/AntoniosMalak/Predicting-Hit-Songs-Using-Repeated-Chorus
-Commit: 838e76f96f7aa755a882b4d2581afe1e0ad3f8a9
-Source file: Devolp/Final Data.csv
-Source repository license: Apache License 2.0.
-The complete license is retained in licenses/DATASET_APACHE_2_0.txt.
+Chorus Hit Predictor — academic machine learning project
 
-Changes: source audio paths removed, metadata renamed, stable track IDs added.
-The source's feature naming and extraction conventions inform chorus_hit/audio.py.
-New training, evaluation, demo, tests, and documentation were written for this project.
+Team:
+Dhanush Sai Suprapadha — PES2UG24CS154
+Deepthi V — PES2UG24CS150
 
-The conceptual reference is Eric Liu's 2021 CS229 report:
-Predicting Hit Songs Using Repeated Chorus.
-https://cs229.stanford.edu/proj2021spr/report2/81974051.pdf
+HSP-S source dataset:
+Michael Vötter, Maximilian Mayerl, Günther Specht and Eva Zangerle (2021),
+Novel Datasets for Evaluating Song Popularity Prediction Tasks.
+DOI: 10.5281/zenodo.5383858
+https://zenodo.org/records/5383858
+License: Creative Commons Attribution 4.0 International
+https://creativecommons.org/licenses/by/4.0/
 
-The dataset is a separate public reproduction, not Eric Liu's original 554-song dataset.
-The labels distinguish the source year-end-hit collection from other sampled weekly
-chart entries. They must not be described as verified charted/never-charted labels.
+This project uses a scalar feature subset, excludes documented duplicates and
+conflicts, groups related identities, and trains/evaluates classifiers using the
+published features and chart-association labels. The example CSV is a four-row
+feature-only development subset. The saved trained model and evaluation evidence
+are derived from this dataset. No source recordings are distributed.
+
+Historical chorus datasets and their original notices/licenses are preserved at:
+https://github.com/DhanushSS/chorus-hit-predictor-archive-2026-10-11

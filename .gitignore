@@ -2,52 +2,16 @@
 __pycache__/
 *.py[cod]
 .pytest_cache/
-.ipynb_checkpoints/
 .DS_Store
 .streamlit/secrets.toml
+output/
+results/
+tmp/
 *.wav
 *.mp3
 *.flac
 *.ogg
-work/
-data/raw/
-node_modules/
-embedding_cache/
-
-# Exploratory output is kept locally, outside the code repository.
-docs/
-research/
-results/audit/
-results/archive_review_*/
-results/hf_*/
-results/report_reconciliation_*/
-results/research_*/
-results/stability_*/
-results/v2/v2_quick_*/
-
-# Local exports and submission files stay outside GitHub.
-output/
-tmp/
-
-# Requested remediation and reproduction documentation.
-!docs/
-docs/*
-!docs/*.md
-!docs/*.json
-
-# Separate evidence-gated research: only code/schema/docs are public.
-!docs/hit_nonhit/
-!docs/hit_nonhit/**
-data/hit_nonhit_v1/local/
-results/hit_nonhit/
-results/hsp_s/
 *.m4a
 *.aac
-*.aif
 *.aiff
 *.opus
-*.wma
-
-# Filled acquisition forms can contain local paths and permission evidence.
-audio_intake_filled*.csv
-acquisition_ledger*.csv

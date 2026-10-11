@@ -1,5 +1,9 @@
 # HSP-S results and completion report
 
+> Research record from 10 October 2026. Packaging and app layout were updated on
+> 11 October; see [the migration record](../../repository_migration.md).
+> The original metrics, split and trained model are unchanged.
+
 **Status: TRAINED_AND_LOCKED_TESTED**. Separate experiment approved on 10 October 2026.
 
 ## Dataset and method

@@ -61,7 +61,8 @@ def test_model_family_grid_stays_separate_from_chorus_config():
     for candidate in cfg['candidates']:
         assert isinstance(estimator(candidate, ['lowlevel.energy.mean', 'rhythm.bpm'], 1), Pipeline)
         assert candidate['representation'] in {'all_scalar', 'summary_scalar', 'pca95'}
-    assert read(ROOT / 'configs/hit_nonhit_academic.json')['task_id'] != TASK
+    from chorus_hit.hit_nonhit import TASK as CHORUS_TASK
+    assert CHORUS_TASK != TASK
 
 
 def test_manifest_requires_all_files_and_detects_changed_nested_trials(tmp_path):
@@ -106,7 +107,7 @@ def test_hsp_prediction_rejects_metadata_or_wrong_order(tmp_path, monkeypatch):
 def test_separate_app_discloses_unavailable_model_and_feature_method(tmp_path, monkeypatch):
     from chorus_hit.hsp_s import ui
     monkeypatch.setattr(ui, 'ROOT', tmp_path)
-    app = AppTest.from_file(str(ROOT / 'pages/1_Hit_vs_NonHit_Features.py'), default_timeout=30).run()
+    app = AppTest.from_string('import streamlit as st\nfrom chorus_hit.hsp_s.ui import render\nrender(st)', default_timeout=30).run()
     assert not app.exception
     assert any('whole-recording Essentia' in x.value for x in app.info)
     assert any('not available yet' in x.value for x in app.info)
