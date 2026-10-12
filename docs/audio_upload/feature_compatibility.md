@@ -60,8 +60,9 @@ Create `output/` first if absent. The generated MP3 is temporary and removed on
 success or failure. The probe has a 90-second process-group timeout. This CLI is
 for the generated fixture; the Streamlit app never runs Essentia on uploads.
 The core app uses SoundFile for its bounded MP3 preview and works without Essentia.
-macOS installation/execution is locally verified; Linux has a separate CI probe
-and receipt. Native Windows extraction and supervised MP3 preview are unsupported.
+macOS installation/execution is locally verified. The separate Linux CI probe
+also passed with 381/436 coverage: [Linux receipt](linux_probe.json),
+[verified CI run](https://github.com/DhanushSS/chorus-hit-predictor/actions/runs/38162493625). Native Windows extraction and supervised MP3 preview are unsupported.
 
 ## Future parity gate
 
