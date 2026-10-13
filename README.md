@@ -1,74 +1,115 @@
-# Chorus Hit Predictor
+# Billboard Hit Prediction Using Audio Features
 
-### Audio-feature classification of Billboard chart association
+**A reproducible academic study of Billboard chart association from whole-song sound.**
 
-An academic machine learning project with a reproducible training pipeline,
-a verified trained model, and an interactive Streamlit application.
+[![Project integrity](https://github.com/DhanushSS/chorus-hit-predictor/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/DhanushSS/chorus-hit-predictor/actions/workflows/tests.yml)
+![Python 3.12](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)
+[![Dataset CC BY 4.0](https://img.shields.io/badge/HSP--S-CC_BY_4.0-227C70)](https://zenodo.org/records/5383858)
 
-## Team
+Can acoustic measurements help distinguish recordings with a Billboard entry
+from those without a publisher-matched entry? This project explores that question
+using **436 whole-recording Essentia features**, artist-connected validation, and
+a verified RBF SVM. Its historical name is *Chorus Hit Predictor*; the current
+model does **not** use 15-second chorus features or forecast future success.
 
-| Name | SRN |
-| --- | --- |
-| **Dhanush Sai Suprapadha** | **PES2UG24CS154** |
-| **Deepthi V** | **PES2UG24CS150** |
+| Historical test accuracy | Balanced accuracy | Accepted songs | Audio features |
+| :---: | :---: | :---: | :---: |
+| **73.07%** | **73.17%** | **7,728** | **436** |
 
-## Project overview
+[Get started](#quick-start) · [Results](#results) · [New research](docs/research_v2/model_improvement_report.md) · [Audit status](docs/audit/issue_resolution_matrix.md) · [Team](#team)
 
-The current project classifies songs using **436 whole-recording audio features**
-from the published **HSP-S dataset**. An RBF Support Vector Machine distinguishes
-records with Billboard chart entries from records without entries in that benchmark.
+![Actual Streamlit overview showing whole-recording methodology, preserved metrics and separate CSV and MP3 modes](docs/assets/app_overview.jpg)
 
-**Held-out accuracy: 73.07% · Balanced accuracy: 73.17%**
+*Captured from the running application. No public hosted service is claimed.*
 
-The project title is retained from our original chorus study. The current model
-uses whole-recording Essentia features; it does not analyze 15-second choruses or
-accept MP3 uploads. Missing chart entries are publisher labels, not independently
-verified proof that a song never charted. Predictions describe this retrospective
-benchmark, not future commercial success.
+## What you can do
 
-[Full results and graphs](docs/hit_nonhit/hsp_s_results/README.md) ·
-[Method and reproduction](docs/hit_nonhit/hsp_s_protocol.md) ·
-[Historical project archive](https://github.com/DhanushSS/chorus-hit-predictor-archive-2026-10-11)
+| Mode | Current capability | Important boundary |
+| --- | --- | --- |
+| **Feature CSV** | Validate, classify, inspect margins and download predictions | Exact 436-feature schema; 1–100 rows; 5 MiB |
+| **MP3 upload** | Local playback, waveform envelope and audio measurements | Preview only; 25 MiB, ≤480 seconds; **no classification** |
+| **Model evaluation** | View real confusion matrix, model comparison and saved results | Historical test was consumed once; new work is development-only |
+
+The isolated modern Essentia probe supplies **381/436** expected fields. No
+same-master audio/reference pairs are available, so schema and numeric parity
+are unproven. The app intentionally returns **no hit score for MP3s**. See the
+[compatibility study](docs/audio_upload/feature_compatibility.md) and
+[upload contract](docs/audio_upload/upload_contract.md).
+
+## Workflow
+
+```mermaid
+flowchart LR
+    A[Published HSP-S descriptors] --> B[Identity groups and fixed split]
+    B --> C[Fold-local preprocessing]
+    C --> D[Nested grouped model selection]
+    D --> E[Historical one-use evaluation]
+    E --> F[Verified packaged SVM]
+    G[436-feature CSV] --> H[Strict schema and cell validation]
+    H --> F
+    F --> I[Benchmark class and decision margin]
+    J[Permitted MP3] --> K[Bounded local decode]
+    K --> L[Preview and measurements only]
+```
 
 ## Results
 
-| Metric | Nested development validation | Held-out test |
+| Metric | Original nested development | Historical held-out test |
 | --- | ---: | ---: |
 | Accuracy | 70.97% | **73.07%** |
 | Balanced accuracy | 70.94% | **73.17%** |
-| Hit precision | 70.18% | 70.42% |
-| Hit recall | 74.01% | 75.35% |
-| Hit F1 | 72.04% | 72.80% |
+| Chart-entry precision | 70.18% | 70.42% |
+| Chart-entry recall | 74.01% | 75.35% |
+| Chart-entry F1 | 72.04% | 72.80% |
 | Macro F1 | 70.93% | 73.07% |
 | ROC-AUC | Not recorded | 0.8076 |
 
-The 95% connected-group bootstrap interval for test balanced accuracy is
-**70.20–76.08%**. It reflects uncertainty within this dataset and fixed model,
-not a guarantee for another music collection.
+Test: **1,493 songs / 527 connected groups**. Balanced-accuracy 95% group-bootstrap
+interval: **70.20–76.08%**, conditional on this dataset and fixed model.
+The 79.60% training score is in-sample and is **not** an 80% accuracy achievement.
 
-![Held-out confusion matrix](docs/hit_nonhit/hsp_s_results/confusion_matrix.png)
+| Historical confusion matrix | Original development comparison |
+| --- | --- |
+| ![Historical test confusion matrix: TN 553, FP 226, FN 176, TP 538](docs/hit_nonhit/hsp_s_results/confusion_matrix.png) | ![Original 27-configuration development model comparison](docs/hit_nonhit/hsp_s_results/model_comparison.png) |
 
-## Dataset and evaluation
+The model falsely marked **226** no-entry records as chart entries and missed
+**176** chart-entry records. These are real errors, not removed examples.
+[Historical results](docs/hit_nonhit/hsp_s_results/README.md) retain the original evidence.
 
-- **7,736** published source records; **7,728** retained after duplicate/conflict checks.
-- **3,865** chart-entry records and **3,863** records without chart entries.
-- **6,235** development songs and **1,493** held-out test songs.
-- Artist, recording, album and known duplicate links form connected identity groups;
-  development and test groups are disjoint.
-- **27** fixed configurations compared with **5 outer / 3 inner grouped folds**.
-- Imputation, constant removal, scaling and optional PCA fit within training folds.
-  Chart outcomes, listening counts and artist metadata are excluded from predictors.
-- Selected model: **RBF SVM**, `C=1.0`, `gamma=scale`, balanced class weights.
-- The locked test was accessed **once**, after development selection and bias checks.
+### New development-only research
 
-Dataset/source bias remains a limitation. See the [diagnostics and completion
-report](docs/hit_nonhit/hsp_s_results/handoff.md) for nuisance and permutation
-results. Scores cannot be directly ranked against studies using different labels,
-datasets or splits. Prediction scores are uncalibrated SVM margins, not probabilities.
+The predeclared 11-configuration study completed **226 fits**, with no failures
+or warnings. Nested development accuracy reached **71.69%**, balanced accuracy
+**71.65%** (95% group interval **69.91–73.59%**), compared with original nested
+development BA **70.94%**. Hard voting was selected in final development CV.
+**80% was not reached.** Its
+[complete results and uncertainty](docs/research_v2/model_improvement_report.md)
+are exploratory development estimates. The original test and deployed model
+remain unchanged. **A new untouched external test is NOT AVAILABLE.**
 
-## Run the application
+## Dataset and method
 
-Use **Python 3.12** and the pinned dependencies. No GPU or API token is required.
+- **HSP-S:** 7,736 publisher records; 7,728 retained after eight duplicate/conflict exclusions.
+- **Classes:** 3,865 chart entries; 3,863 records with no publisher-matched entry.
+- **Development:** 6,235 songs / 2,106 connected groups; five outer and three inner folds.
+- Known artist, recording, album, work-proxy and duplicate links stay together.
+- Only scalar low-level, rhythm and tonal descriptors enter the model; chart
+  outcomes, listening counts and artist metadata are excluded from predictors.
+- Imputation, variance filtering, scaling and selection fit within training folds.
+- Packaged model: RBF SVM, `C=1.0`, `gamma=scale`, balanced class weights.
+- Original selection compared 27 fixed configurations before the one-use test.
+
+**Class 0 means “No chart entry in HSP-S benchmark.”** It is not independently
+verified lifetime non-hit status. Source/codec bias remains measurable: the
+historical nuisance-only classifier reached 61.08% balanced accuracy. Unknown
+aliases, recording versions and genre/era gaps remain limitations. Results from
+different datasets or label definitions cannot establish that this project beats
+Eric Liu's study. [Protocol](docs/hit_nonhit/hsp_s_protocol.md) ·
+[Group and confound audit](docs/research_v2/group_leakage_audit.md).
+
+## Quick start
+
+Use **Python 3.12** and the pinned model environment. No GPU or API token is needed.
 
 ```bash
 git clone https://github.com/DhanushSS/chorus-hit-predictor.git
@@ -80,44 +121,27 @@ python scripts/setup_model.py
 python -m streamlit run app.py
 ```
 
-Open `http://localhost:8501`, upload [`data/example_features.csv`](data/example_features.csv),
-and select **Classify records**. The sample contains four development records and
-is for interface demonstration only; its predictions are not new test evidence.
+Open `http://localhost:8501`. In **Predict · CSV**, upload
+[`data/example_features.csv`](data/example_features.csv), then choose
+**Validate and classify CSV**. Download the template for matching descriptors.
+The four sample rows were **seen during training**: they demonstrate functionality,
+not independent accuracy. Positive/negative SVM margins correspond to chart-entry /
+no-entry classes; margin magnitude is **not probability**.
 
-For your own input, use **1–100 feature rows**, at most **5 MB**, with the exact
-436 columns and order provided by the downloadable template. Arbitrary song
-metadata or MP3 files are incompatible with this model.
+[Actual CSV result screenshot](docs/assets/app_csv.jpg) ·
+[Actual generated-MP3 preview screenshot](docs/assets/app_mp3_preview.jpg)
 
-The [model bundle](models/README.md) is included in this repository. Setup verifies
-its archive checksum, original file manifest, code identity and package versions
-before extracting it into ignored local storage. It does not retrain or change the
-reported results. Install dependencies online once; packaged-model prediction
-then works offline. macOS and Linux are supported for the training workflow;
-Windows training is unsupported.
+In **Audio · MP3 preview**, confirm permission, upload an MP3 and choose **Analyze
+MP3**. The screenshot uses a software-generated tone, not a commercially released
+song or an accuracy test. Raw uploads are temporary and are not sent to APIs.
 
-## Reproduce the research experiment
+Setup verifies the bundled model checksum, file manifest, implementation and
+package versions; it does not retrain. Install dependencies online once, then
+run inference offline. **macOS/Linux** are the verified targets. Native Windows
+training/MP3 supervision is unsupported; Windows CSV serving is not verified.
+Essentia is optional and isolated: [installation and profile](docs/audio_upload/feature_compatibility.md).
 
-The published model is ready for prediction after setup. To reproduce training,
-use a fresh destination rather than overwriting the supplied completed run:
-
-```bash
-python -m chorus_hit.hsp_s download --out output/hsp_s/source
-python -m chorus_hit.hsp_s prepare \
-  --source output/hsp_s/source/hsp-s_acousticbrainz.parquet \
-  --out output/hsp_s/reproduction_split
-python -m chorus_hit.hsp_s train \
-  --split output/hsp_s/reproduction_split --out results/hsp_s/reproduction_run
-python -m chorus_hit.hsp_s evaluate \
-  --split output/hsp_s/reproduction_split --run results/hsp_s/reproduction_run
-```
-
-The download verifies the full source checksum. Fixed group splits, per-fit time
-limits and immutable manifests apply. Do not remove an access ledger or change
-seeds to pursue a higher score. See the [protocol](docs/hit_nonhit/hsp_s_protocol.md)
-for the exact rules and interrupted-run handling. Reproduction does not automatically
-replace the app's supplied evaluated model.
-
-## Verification
+## Reproducibility and tests
 
 ```bash
 python -m pip check
@@ -125,48 +149,55 @@ python scripts/setup_model.py
 python -m pytest -q
 ```
 
-Tests cover feature/label contracts, connected groups, fold-local preprocessing,
-one-use evaluation, supervised fit timeouts, model archive integrity, example
-predictions and the current app. The former 285-test suite remains with the
-archived project; it includes tests for retired datasets and interfaces.
+The suite exercises model integrity, saved predictions, connected groups,
+fold-local processing, CSV validation, genuine generated-MP3 decoding, timeouts,
+cleanup, feature mapping, fail-closed audio inference and both Streamlit modes.
+CI runs the core suite on macOS/Linux and a separate Linux Essentia schema probe.
+See [delivery evidence](docs/audit/final_delivery_report.md) for exact counts and SHAs.
 
-[Latest automated checks](https://github.com/DhanushSS/chorus-hit-predictor/actions/workflows/tests.yml)
+Research reproduction commands and data/code hashes are in the
+[new research report](docs/research_v2/model_improvement_report.md).
+Do not reopen the original holdout or remove its access ledger.
+[Current operations](docs/current_operations.md) supersedes the historical
+handoff's old page paths. [Model bundle](models/README.md) documents installation.
 
-## Repository layout
+## Technology and layout
 
-| Folder or file | Purpose |
+Python · Streamlit · pandas/NumPy · scikit-learn · SoundFile · matplotlib.
+Essentia supplies the published source descriptors and the optional isolated probe.
+
+| Path | Purpose |
 | --- | --- |
-| `app.py` | Current Streamlit prediction application |
-| `chorus_hit/hsp_s/` | Source audit, grouped training, evaluation and prediction |
-| `chorus_hit/hit_nonhit/` | Shared training and validation dependencies |
-| `configs/` | Fixed HSP-S model-search configuration |
-| `models/` | Compressed evaluated model and checksum receipt |
-| `data/` | Small licensed feature example for the demo |
-| `scripts/` | Verified model installation and report export |
-| `tests/` | Current pipeline and application regression tests |
-| `docs/` | Results, protocol, figures and archive/migration record |
+| `app.py` | Overview, CSV prediction, MP3 preview, evaluation and attribution |
+| `chorus_hit/hsp_s/` | Frozen original model implementation |
+| `chorus_hit/ui_components/` | Current CSV validation |
+| `chorus_hit/audio_upload/` | Bounded decoding and unvalidated extractor research |
+| `chorus_hit/research_v2/` | Development-only registered comparisons |
+| `models/` | Preserved trained model and checksum receipt |
+| `configs/`, `tests/`, `scripts/` | Reproducibility, regression tests and tools |
+| `docs/` | Real screenshots, results, protocol and issue resolution |
 
-## Historical work
+## Team
 
-The previous chorus datasets, older models, completed experiments, candidate lists
-and earlier branch histories are preserved in a separate public repository:
+| Name | SRN |
+| --- | --- |
+| **Dhanush Sai Suprapadha** | **PES2UG24CS154** |
+| **Deepthi V** | **PES2UG24CS150** |
 
-**[chorus-hit-predictor-archive-2026-10-11](https://github.com/DhanushSS/chorus-hit-predictor-archive-2026-10-11)**
+## Attribution and origins
 
-The unfinished 278-song repeated-chorus experiment is archived with its metadata
-and acquisition findings. It obtained no permitted exact recordings and produced
-no new chorus-feature rows. The current HSP-S result does not resolve that audio
-blocker. See the [migration record](docs/repository_migration.md) for what moved
-and how the backup was verified.
-
-## Attribution
-
-HSP-S: Michael Vötter, Maximilian Mayerl, Günther Specht and Eva Zangerle (2021),
+HSP-S: **Michael Vötter, Maximilian Mayerl, Günther Specht and Eva Zangerle (2021)**,
 *Novel Datasets for Evaluating Song Popularity Prediction Tasks*,
 [DOI 10.5281/zenodo.5383858](https://zenodo.org/records/5383858), **CC BY 4.0**.
-Changes include scalar-feature selection, duplicate/conflict exclusions,
-identity grouping, model fitting and evaluation. Labels reflect the publisher's
-Billboard matching through 6 July 2019. See [NOTICE](NOTICE) and the
-[example-data attribution](data/README.md).
+Labels reflect publisher Billboard matching through 6 July 2019. Our changes
+include scalar selection, duplicate/conflict exclusions, identity grouping,
+model fitting and evaluation. See [NOTICE](NOTICE) and [sample attribution](data/README.md).
 
-No copyrighted recordings, credentials or private local paths are distributed.
+The original repeated-chorus study, inspired by Eric Liu's hit-song research,
+older datasets, models and completed results remain in the
+[public historical archive](https://github.com/DhanushSS/chorus-hit-predictor-archive-2026-10-11).
+The archived 278-song candidate project obtained zero permitted exact recordings;
+this whole-song benchmark does not resolve that acquisition blocker.
+[Archive/migration receipt](docs/repository_migration.md).
+
+No raw commercial recordings, credentials or private filesystem paths are distributed.

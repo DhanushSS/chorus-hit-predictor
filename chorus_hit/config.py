@@ -1,6 +1,9 @@
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+# Historical chorus constants below are retained only for shared/archived imports.
+# The current app uses results/hsp_s/run_001 and its own stored 436-column contract;
+# do not use these legacy paths or labels for current inference.
 DATA_PATH = ROOT / "data" / "chorus_features.csv"
 RESULTS = ROOT / "results"
 MODEL_PATH = ROOT / "results" / "v2" / "v4_std74_001" / "model.joblib"
