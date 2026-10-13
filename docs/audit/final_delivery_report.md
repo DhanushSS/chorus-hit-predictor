@@ -1,4 +1,4 @@
-# Delivery report — 12 October 2026
+# Delivery report — 13 October 2026
 
 ## Scope and branch
 
@@ -60,7 +60,7 @@ was rewritten. A separate package keeps frontend changes outside frozen code has
   (**26 passed**), `python -m pip check` (clean). Used the existing pinned environment;
   this local baseline check was a fresh source clone, not a fresh dependency install.
 - Current checkout: `python scripts/setup_model.py`; `python -m pytest -q`
-  (**71 passed** before final documentation tests); `python -m pip check`; `git diff --check`.
+  (**74 passed**, including final documentation tests); `python -m pip check`; `git diff --check`.
 - `python -m chorus_hit.research_v2.run --split output/hsp_s/split_001 --out output/research_v2/run_002`.
 - `python scripts/summarize_research_v2.py --split output/hsp_s/split_001 --run output/research_v2/run_002 --out docs/research_v2`.
 - Separate Python 3.12 Essentia environment: `pip install -r requirements-audio-probe.txt`;
@@ -71,15 +71,15 @@ was rewritten. A separate package keeps frontend changes outside frozen code has
   on Ubuntu 24.04 and macOS 15; separate Linux Essentia probe successful.
   [Linux probe receipt](../audio_upload/linux_probe.json).
 
-Final delivery commit/PR and final-SHA CI are recorded in the publication section
-once verified. Local generated audio, raw source data and private paths are excluded.
+Publication and fresh-clone evidence are recorded below. Local generated audio,
+raw source data and private paths are excluded.
 
 ## Commit sequence
 
 - [4d028c9](https://github.com/DhanushSS/chorus-hit-predictor/commit/4d028c9): registered bounded research and supplied audit.
 - [fdc0e1f](https://github.com/DhanushSS/chorus-hit-predictor/commit/fdc0e1f): record control-fit warnings/time; preserve interrupted attempt.
 - [7a4bd60](https://github.com/DhanushSS/chorus-hit-predictor/commit/7a4bd60): tested CSV/MP3 interface, optional extractor, safeguards and CI.
-- Documentation/results delivery and publication receipt: see publication section below.
+- [8ea8a43](https://github.com/DhanushSS/chorus-hit-predictor/commit/8ea8a434ca44c70dc7d3394bbf7204a7f1f732de): complete development evidence, all 24 issue statuses, screenshots and README.
 
 ## Remaining input
 
@@ -88,3 +88,31 @@ recording masters plus their original 436-feature vectors and extraction-profile
 provenance**. This is not required to use the completed CSV app or MP3 preview.
 A genuinely untouched compatible labelled evaluation cohort is also required
 before any new independent accuracy claim. No public deployment has been created.
+
+
+## Publication and final verification
+
+The implementation/results delivery commit is
+[`8ea8a434ca44c70dc7d3394bbf7204a7f1f732de`](https://github.com/DhanushSS/chorus-hit-predictor/commit/8ea8a434ca44c70dc7d3394bbf7204a7f1f732de).
+[Its push CI run](https://github.com/DhanushSS/chorus-hit-predictor/actions/runs/38197644847)
+passed all three jobs: **74 tests on Ubuntu (6.23 s)**, **74 on macOS (10.16 s)**,
+and the isolated Linux Essentia probe (**381/436 fields; inference disabled**).
+[PR checks also passed](https://github.com/DhanushSS/chorus-hit-predictor/actions/runs/38213232971).
+
+On 13 October, a fresh source clone of that delivery commit successfully ran
+model setup, **74 tests in 4.75 s**, and pip check, using the pinned local Python
+3.12 environment. Its Streamlit app was started on a temporary local port and
+verified in the browser: correct title/team, original metrics, five tabs and
+separate CSV/MP3 status. Earlier browser uploads and screenshots cover both modes.
+All protected hashes were checked again and matched, including the one-use ledger
+and original locked Parquet. No old test was re-evaluated.
+
+[PR #8](https://github.com/DhanushSS/chorus-hit-predictor/pull/8) was created for
+review, then closed by the repository owner on 12 October without merging.
+It remains closed; it was not reopened or replaced during this continuation.
+The updated branch remains available at
+[feat/mp3-csv-ui-readme-research-v2](https://github.com/DhanushSS/chorus-hit-predictor/tree/feat/mp3-csv-ui-readme-research-v2).
+Main remains `c166ddd`; the repository remains public and the archive unchanged.
+The final documentation receipt is a follow-up commit on that same feature branch;
+[branch CI](https://github.com/DhanushSS/chorus-hit-predictor/actions/workflows/tests.yml?query=branch%3Afeat%2Fmp3-csv-ui-readme-research-v2)
+shows the checks for its current HEAD. No merge was performed.

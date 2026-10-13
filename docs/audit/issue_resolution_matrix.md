@@ -2,11 +2,11 @@
 
 Audit baseline and branch base: `c166dddf3f0e639ba39783edf9b67eb959f6e065`.
 The supplied 24-item plan was reconciled against that exact latest-main commit.
-No baseline model/data evidence was replaced. Status as of 12 October 2026.
+No baseline model/data evidence was replaced. Status as of 13 October 2026.
 
 Commit keys: **R** = `4d028c9` registration + `fdc0e1f` logging correction;
-**A** = `7a4bd60` tested app/audio changes; **D** = documentation/results delivery
-commit, identified in [final delivery report](final_delivery_report.md).
+**A** = `7a4bd60` tested app/audio changes; **D** = `8ea8a43` documentation/results delivery, with the final publication
+receipt in [final delivery report](final_delivery_report.md).
 `FIXED` means the applicable software/documentation acceptance passed; it does
 not turn source-data limitations into solved scientific questions.
 
