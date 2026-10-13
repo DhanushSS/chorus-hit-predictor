@@ -2,7 +2,7 @@
 
 **A reproducible academic study of Billboard chart association from whole-song sound.**
 
-[![Project integrity](https://github.com/DhanushSS/chorus-hit-predictor/actions/workflows/tests.yml/badge.svg?branch=feat%2Fmp3-csv-ui-readme-research-v2)](https://github.com/DhanushSS/chorus-hit-predictor/actions/workflows/tests.yml)
+[![Project integrity](https://github.com/DhanushSS/chorus-hit-predictor/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/DhanushSS/chorus-hit-predictor/actions/workflows/tests.yml)
 ![Python 3.12](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)
 [![Dataset CC BY 4.0](https://img.shields.io/badge/HSP--S-CC_BY_4.0-227C70)](https://zenodo.org/records/5383858)
 
@@ -112,7 +112,7 @@ Eric Liu's study. [Protocol](docs/hit_nonhit/hsp_s_protocol.md) ·
 Use **Python 3.12** and the pinned model environment. No GPU or API token is needed.
 
 ```bash
-git clone --branch feat/mp3-csv-ui-readme-research-v2 https://github.com/DhanushSS/chorus-hit-predictor.git
+git clone https://github.com/DhanushSS/chorus-hit-predictor.git
 cd chorus-hit-predictor
 python3.12 -m venv .venv
 source .venv/bin/activate

@@ -4,7 +4,7 @@
 
 - Base: latest `main` at `c166dddf3f0e639ba39783edf9b67eb959f6e065`, matching audit HEAD.
 - Feature branch: `feat/mp3-csv-ui-readme-research-v2`.
-- Main and the public historical archive remain untouched; no merge authorized or performed.
+- Original delivery left main and the archive untouched. The repository owner subsequently authorized completing the pull request; see the integration update below.
 - All 24 issue statuses: [resolution matrix](issue_resolution_matrix.md).
 
 ## Delivered
@@ -90,7 +90,7 @@ A genuinely untouched compatible labelled evaluation cohort is also required
 before any new independent accuracy claim. No public deployment has been created.
 
 
-## Publication and final verification
+## Publication and final verification (before integration)
 
 The implementation/results delivery commit is
 [`8ea8a434ca44c70dc7d3394bbf7204a7f1f732de`](https://github.com/DhanushSS/chorus-hit-predictor/commit/8ea8a434ca44c70dc7d3394bbf7204a7f1f732de).
@@ -109,10 +109,24 @@ and original locked Parquet. No old test was re-evaluated.
 
 [PR #8](https://github.com/DhanushSS/chorus-hit-predictor/pull/8) was created for
 review, then closed by the repository owner on 12 October without merging.
-It remains closed; it was not reopened or replaced during this continuation.
+It remained closed during that verification continuation.
 The updated branch remains available at
 [feat/mp3-csv-ui-readme-research-v2](https://github.com/DhanushSS/chorus-hit-predictor/tree/feat/mp3-csv-ui-readme-research-v2).
-Main remains `c166ddd`; the repository remains public and the archive unchanged.
+At that verification checkpoint, main remained `c166ddd`; the repository was public and the archive unchanged.
 The final documentation receipt is a follow-up commit on that same feature branch;
 [branch CI](https://github.com/DhanushSS/chorus-hit-predictor/actions/workflows/tests.yml?query=branch%3Afeat%2Fmp3-csv-ui-readme-research-v2)
 shows the checks for its current HEAD. No merge was performed.
+
+
+## Main integration update
+
+On 13 October 2026, the repository owner requested completion of the GitHub pull
+requests. PR #8 is the integration vehicle for the tested application, README
+and development-only research. The README badge and clone instructions now
+target main. The old closed PRs #6 and #7 refer to a branch already contained
+in main history and require no additional merge. The live
+[PR #8 record](https://github.com/DhanushSS/chorus-hit-predictor/pull/8) records
+the merge state and commit; [main CI](https://github.com/DhanushSS/chorus-hit-predictor/actions/workflows/tests.yml?query=branch%3Amain)
+records verification of the integrated version. This authorization changes only
+the publication workflow; model results, test-access evidence, archive and
+MP3-classification restrictions remain unchanged.
